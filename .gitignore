@@ -11,3 +11,8 @@ portfolio-redesign-handoff.md
 # utils
 og-preview-b.html
 export-og.js
+
+# not needed for deploy
+package.json
+package-lock.json
+.npmrc
