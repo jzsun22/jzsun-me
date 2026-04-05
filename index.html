@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Jocelyn Sun | Product Designer</title>
+  <meta name="description" content="Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <link rel="canonical" href="https://jzsun.me/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Jocelyn Sun | Product Designer" />
+  <meta property="og:description" content="Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <meta property="og:url" content="https://jzsun.me/" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jocelyn Sun | Product Designer" />
+  <meta name="twitter:description" content="Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jocelyn Sun",
+    "jobTitle": "Product Designer",
+    "url": "https://jzsun.me",
+    "sameAs": ["https://www.linkedin.com/in/jzsun2"]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 7 (local) -->
+  <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.2.0-web/css/all.min.css" />
+
+  <!-- Tippy.js styles -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/svg-arrow.css" />
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Tippy tooltip theme -->
+  <style>
+    .tippy-box[data-theme~='tipbox'] {
+      background-color: var(--color-tooltip-bg);
+      color: var(--color-tooltip-text);
+    }
+    .tippy-box[data-theme~='tipbox'] > .tippy-svg-arrow {
+      fill: var(--color-tooltip-bg);
+    }
+    .tippy-box[data-theme~='tipbox'][data-placement^='right'] > .tippy-svg-arrow {
+      transform: translateY(-50%) translateY(14px) !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Skip navigation — accessibility -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- =====================
+       NAVIGATION
+       ===================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — Home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn." />
+      </a>
+
+      <!-- Mobile toggle -->
+      <button
+        class="nav__toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html"    class="nav__link nav__link--active" aria-current="page">Home</a></li>
+        <li><a href="projects.html" class="nav__link">Projects</a></li>
+        <li><a href="about.html"    class="nav__link">About</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <!-- =====================
+       MAIN CONTENT
+       ===================== -->
+  <main id="main-content">
+
+    <!-- =====================
+         HERO — TYPED CODE BLOCK
+         ===================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+
+      <!-- Visually hidden heading for screen readers -->
+      <h1 id="hero-heading" class="visually-hidden">Introduction</h1>
+
+      <!-- Mobile hero — editorial layout (≤991px) -->
+      <div class="hero__mobile">
+        <p class="hero__mobile-statement">"everything I build is a vote for what feels <em class="hero__mobile-accent">normal</em> next."</p>
+        <div class="hero__mobile-meta">
+          <span class="hero__mobile-name">Jocelyn Sun</span>
+          <span class="hero__mobile-role">Product Designer</span>
+        </div>
+      </div>
+
+      <div class="hero__inner">
+        <div id="typed-container">
+
+          <!-- Hidden strings for Typed.js — content must be flush left inside <p> -->
+          <div id="typed-strings" aria-hidden="true">
+<p>Jocelyn = class Me extends Human {
+  constructor() {
+    super(),
+    this.name = '<strong>Jocelyn Sun</strong>';
+    this.specialization = ['MVPs', '<strong>0 → 1 thinking</strong>', 'product with UX sense'];
+    this.keywords = ['inventive', 'curious', '<strong>pattern-seeking</strong>'];
+    this.thinkingStyle = ['nonlinear', 'detail-aware', '<strong>root-cause hunter</strong>'];
+    this.rituals = ['coffee', 'natural wine', 'divination frameworks'];
+    this.pronoun = 'she/her';
+  }
+  <strong>// everything I build is a vote for what feels normal next.</strong>
+};
+&#8203;</p>
+          </div>
+
+          <!-- Typed.js renders here -->
+          <span id="typed" aria-hidden="true"></span>
+
+          <!-- Accessible static version for screen readers -->
+          <p class="visually-hidden">
+            Jocelyn Sun. Specializations: MVPs, 0 to 1 thinking, product with UX sense.
+            Keywords: inventive, curious, pattern-seeking.
+            Thinking style: nonlinear, detail-aware, root-cause hunter.
+            Rituals: coffee, natural wine, divination frameworks.
+            Pronouns: she/her.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================
+         FEATURED WORK
+         ===================== -->
+    <section class="featured-work" id="featured-work" aria-labelledby="featured-work-heading">
+      <div class="featured-work__inner">
+
+        <h2 id="featured-work-heading" class="featured-work__heading">Featured Work</h2>
+
+        <div class="featured-work__grid">
+
+          <!-- ---- CASE STUDIES COLUMN ---- -->
+          <div class="featured-work__column">
+            <h3 class="featured-work__column-heading heading--section">Case Studies</h3>
+
+            <!-- Card: AI Companion for Kids -->
+            <article class="card" aria-label="AI Companion for Kids — Case Study">
+              <div class="card__title-row">
+                <a href="https://www.figma.com/deck/ODWN3f0i1LDDRn34NcsllM/PM-assignment?node-id=1-234&t=bpkLz2X7TxfoKllH-1"
+                   class="card__title feature-work-title-external"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-tippy-content="open slide deck"
+                   aria-label="AI Companion for Kids — opens slide deck in new tab">AI Companion for Kids</a>
+                <!-- Icon is decorative — title link is the interactive element -->
+                <span class="card__title-external" aria-hidden="true">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <p class="card__tags" aria-label="Tags: PM Concept, Feature Ideation, MVP Scoping">PM Concept · Feature Ideation · MVP Scoping</p>
+              <p class="card__description">A 48-hour product strategy sprint to design an engaging AI experience for children aged 6-12</p>
+            </article>
+
+            <!-- Card: Library of Congress (internal, no tooltip) -->
+            <article class="card" aria-label="Library of Congress — Case Study">
+              <div class="card__title-row">
+                <a href="loc.html" class="card__title">Library of Congress</a>
+              </div>
+              <p class="card__tags" aria-label="Tags: Discovery UX, IA Redesign, UI Audit">Discovery UX · IA Redesign · UI Audit</p>
+              <p class="card__description">Improving the discovery layer of the library system by reorganizing visual elements and provide appropriate guidance</p>
+            </article>
+          </div><!-- /case studies column -->
+
+
+          <!-- ---- DESIGN WORK COLUMN ---- -->
+          <div class="featured-work__column">
+            <h3 class="featured-work__column-heading heading--section">Design Work</h3>
+
+            <!-- Card: Orvia -->
+            <article class="card" aria-label="Orvia — Design Work">
+              <div class="card__title-row">
+                <a href="https://orvia-demo.vercel.app"
+                   class="card__title feature-work-title-external"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-tippy-content="open demo"
+                   aria-label="Orvia — opens demo in new tab">Orvia</a>
+                <span class="card__title-external" aria-hidden="true">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <p class="card__tags" aria-label="Tags: Interaction Design, Solo Build, Dashboard UI">Interaction Design · Solo Build · Dashboard UI</p>
+              <p class="card__description">Independently designed and built a scheduling app with end-to-end UX flows and UI design</p>
+            </article>
+
+            <!-- Card: Early-Stage LLM Interface -->
+            <article class="card" aria-label="Early-Stage LLM Interface — Design Work">
+              <div class="card__title-row">
+                <a href="https://www.figma.com/proto/SiOUTQjaFxaREdgQsJGcVf/yuse.ai-case-study?node-id=0-1&t=7UmXbaj9aUO2AIVs-1"
+                   class="card__title feature-work-title-external"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-tippy-content="open Figma"
+                   aria-label="Early-Stage LLM Interface — opens Figma in new tab">Early-Stage LLM Interface</a>
+                <span class="card__title-external" aria-hidden="true">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <p class="card__tags" aria-label="Tags: Early LLM Design · Onboarding UX · Interface Concepts">Early LLM Design · Onboarding UX · Interface Concepts</p>
+              <p class="card__description">Shaped product direction and core flows for a multi-function LLM tool, with focus on onboarding and early UX framing</p>
+            </article>
+          </div><!-- /design work column -->
+
+        </div><!-- /featured-work__grid -->
+
+        <!-- View all link -->
+        <div class="featured-work__footer">
+          <a href="projects.html" class="link--cta" aria-label="View all projects">View All Projects ›</a>
+        </div>
+
+      </div><!-- /featured-work__inner -->
+    </section>
+
+  </main>
+
+
+  <!-- =====================
+       FOOTER
+       ===================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <nav class="footer__icons" aria-label="Social links">
+
+        <a href="https://www.linkedin.com/in/jzsun2"
+           class="footer__icon-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="LinkedIn — opens in new tab">
+          <i class="fa-brands fa-linkedin-in footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Linkedin ›</span>
+        </a>
+
+        <a href="mailto:jocelyn.z.sun@gmail.com"
+           class="footer__icon-link"
+           aria-label="Send email to Jocelyn">
+          <i class="fa-regular fa-envelope footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Email ›</span>
+        </a>
+
+        <a href="assets/files/Resume_Jocelyn Sun.pdf"
+           class="footer__icon-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Resume PDF — opens in new tab">
+          <i class="fa-regular fa-file-pdf footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Resume ›</span>
+        </a>
+
+      </nav>
+
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. © 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- =====================
+       SCRIPTS
+       ===================== -->
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    new Typed('#typed', {
+      stringsElement: '#typed-strings',
+      typeSpeed: 6,
+      loop: false,
+      cursorChar: '_',
+    });
+  </script>
+
+  <!-- Typed responsive font sizes -->
+  <style>
+    @media (max-width: 568px) {
+      #typed {
+        font-size: 11px;
+      }
+      #typed-container {
+        padding-left: 20px;
+        padding-bottom: 10px;
+      }
+    }
+    @media (max-width: 479px) {
+      #typed {
+        font-size: 9px;
+      }
+    }
+  </style>
+
+  <!-- Popper + Tippy.js -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script>
+    tippy('.feature-work-title-external', {
+      arrow: tippy.roundArrow,
+      duration: 150,
+      placement: 'right',
+      inlinePositioning: true,
+      offset: [0, 8],
+      inertia: true,
+      theme: 'tipbox',
+    });
+  </script>
+
+  <!-- Mobile nav toggle -->
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const menu   = document.querySelector('.nav__menu');
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
+
+</body>
+</html>

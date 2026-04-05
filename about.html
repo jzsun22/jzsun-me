@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>About | Jocelyn Sun</title>
+  <meta name="description" content="About Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <link rel="canonical" href="https://jzsun.me/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="About | Jocelyn Sun" />
+  <meta property="og:description" content="About Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <meta property="og:url" content="https://jzsun.me/about.html" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About | Jocelyn Sun" />
+  <meta name="twitter:description" content="About Jocelyn Sun — Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jocelyn Sun",
+    "jobTitle": "Product Designer",
+    "url": "https://jzsun.me",
+    "description": "Product Designer specializing in MVPs, 0→1 thinking, and product with UX sense.",
+    "sameAs": ["https://www.linkedin.com/in/jzsun2"]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 7 (local) -->
+  <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.2.0-web/css/all.min.css" />
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- =====================
+       NAVIGATION
+       ===================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — Home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn." />
+      </a>
+
+      <!-- Mobile toggle -->
+      <button
+        class="nav__toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html"    class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link">Projects</a></li>
+        <li><a href="about.html"    class="nav__link nav__link--active" aria-current="page">About</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <!-- =====================
+       MAIN CONTENT
+       ===================== -->
+  <main id="main-content">
+
+    <section class="about-page" aria-labelledby="about-heading">
+      <h1 id="about-heading" class="visually-hidden">About Jocelyn Sun</h1>
+
+      <div class="about-page__inner">
+
+        <!-- Byline — small photo + name + resume -->
+        <header class="about-page__byline">
+          <img
+            src="assets/images/2F0A7831_(5) - Copy.jpg"
+            alt="A picture of Jocelyn"
+            class="about-page__photo" />
+          <div class="about-page__byline-text">
+            <span class="about-page__name">Jocelyn Sun</span>
+            <span class="about-page__role">Product Designer</span>
+            <a
+              href="assets/files/Resume_Jocelyn Sun.pdf"
+              class="link--cta about-page__resume-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Resume — opens PDF in new tab">Resume ›</a>
+          </div>
+        </header>
+
+        <!-- Blocks — full width, staggered -->
+        <div class="about-page__blocks">
+
+          <div class="about-page__block">
+            <span class="about-page__label">on design /</span>
+            <p class="about-page__prose">I design by paying attention to the unspoken — social, cultural, and societal norms — and understanding the why behind the pain points.</p>
+          </div>
+
+          <div class="about-page__block">
+            <span class="about-page__label">on working /</span>
+            <p class="about-page__prose">I don't over-plan. I build and iterate — and I can go from problem to working product without handing it off, because I design and code.</p>
+          </div>
+
+          <div class="about-page__block about-page__block--otherwise">
+            <span class="about-page__label">otherwise /</span>
+            <ul class="about-page__icon-list" role="list">
+              <li class="about-page__icon-item">
+                <img src="assets/icons/fire.svg" alt="Languages" class="about-page__icon" aria-label="Cantonese, Mandarin, English, French, Spanish" />
+                <span>Cantonese, Mandarin, English, French (~B1), Spanish (500 Duolingo days and counting)</span>
+              </li>
+              <li class="about-page__icon-item">
+                <img src="assets/icons/coffee.svg" alt="Coffee" class="about-page__icon" aria-label="SCA Barista certified" />
+                <span>SCA Barista certified because the obsession went that far</span>
+              </li>
+              <li class="about-page__icon-item">
+                <img src="assets/icons/bottle-wine.svg" alt="Wine" class="about-page__icon" aria-label="WSET Level 1 wine certified" />
+                <span>WSET Level 1 so I remember the grapes, regions, and characteristics</span>
+              </li>
+              <li class="about-page__icon-item">
+                <img src="assets/icons/cpu.svg" alt="Keyboard" class="about-page__icon" aria-label="Mechanical keyboard builder" />
+                <span>built multiple mechanical keyboards, all under 70 keys</span>
+              </li>
+              <li class="about-page__icon-item">
+                <img src="assets/icons/heart.svg" alt="Tarot" class="about-page__icon" aria-label="Tarot readings" />
+                <span>people come to me for tarot readings</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div><!-- /about-page__inner -->
+    </section>
+
+  </main>
+
+
+  <!-- =====================
+       FOOTER — copyright only, no icons
+       ===================== -->
+  <footer class="footer footer--minimal" role="contentinfo">
+    <div class="footer__inner footer__inner--minimal">
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. © 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- Mobile nav toggle -->
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const menu   = document.querySelector('.nav__menu');
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
+
+</body>
+</html>

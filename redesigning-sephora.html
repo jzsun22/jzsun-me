@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Redesigning Sephora | Jocelyn Sun</title>
+  <meta name="description" content="A redesign concept for Sephora's digital experience — an impression-driven homepage that lets the brand breathe." />
+  <link rel="canonical" href="https://jzsun.me/redesigning-sephora.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Redesigning Sephora | Jocelyn Sun" />
+  <meta property="og:description" content="A redesign concept for Sephora's digital experience — an impression-driven homepage that lets the brand breathe." />
+  <meta property="og:url" content="https://jzsun.me/redesigning-sephora.html" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Redesigning Sephora | Jocelyn Sun" />
+  <meta name="twitter:description" content="A redesign concept for Sephora's digital experience — an impression-driven homepage that lets the brand breathe." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Redesigning Sephora",
+    "description": "A redesign concept for Sephora's digital experience — an impression-driven homepage that lets the brand breathe.",
+    "url": "https://jzsun.me/redesigning-sephora.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jocelyn Sun",
+      "url": "https://jzsun.me"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.2.0-web/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    .loc-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--color-accent-teal); z-index: 9999; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="loc-progress" id="loc-progress" aria-hidden="true"></div>
+
+  <a href="#main" class="skip-nav">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn Sun">
+      </a>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link nav__link--active" aria-current="page">Projects</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="case-study">
+
+    <header class="case-study__header">
+      <div class="case-study__header-split">
+        <div class="case-study__header-left">
+          <p class="case-study__category">Interface Redesign</p>
+          <h1 class="case-study__title">Redesigning Sephora</h1>
+          <p class="case-study__hook">What happens when you take a product-forward ecommerce site and strip it back to let the brand breathe?</p>
+          <div class="case-study__pills">
+            <span class="case-study__pill">Figma</span>
+          </div>
+        </div>
+        <dl class="case-study__header-right case-study__meta-list">
+            <dt class="visually-hidden">Role</dt><dd>Solo</dd>
+            <dt class="visually-hidden">Timeline</dt><dd>Jan – Mar 2022</dd>
+            <dt class="visually-hidden">Duration</dt><dd>6 weeks</dd>
+            <dt class="visually-hidden">Scope</dt><dd>4 pages redesigned</dd>
+            <dt class="visually-hidden">Platforms</dt><dd>Desktop + mobile</dd>
+          </dl>
+      </div>
+    </header>
+
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Overview</h2>
+      <p class="case-study__body">I picked four pages from the Sephora website — desktop and mobile views, not the app — and redesigned them for a cleaner visual and user experience. This was my first complete Figma project, and my first time building a design system on top of an existing brand language rather than from scratch.</p>
+      <p class="case-study__body">The specific user flow I designed for: Homepage → Quizzes & Buying Guides (via hamburger menu) → My Loves → a specific product page (NARS Light Reflecting Foundation). A narrow flow, but a deliberate one — enough to stress-test the design decisions across different page types.</p>
+    </section>
+
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Prototype</h2>
+
+      <!-- FIGMA EMBED: replace src with your Figma prototype embed URL -->
+      <!-- Format: https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_URL -->
+      <div class="case-study__figma-embed">
+        <iframe
+          src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F4OnxHRha4fVIfD5WqvYpD7%2FSephora-Redesign-Case-Study%3Fpage-id%3D0%253A1%26node-id%3D1%253A42%26viewport%3D728%252C487%252C0.05%26scaling%3Dscale-down"
+          allowfullscreen
+          title="Sephora redesign — interactive Figma prototype"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Design approach</h2>
+      <p class="case-study__body">My main design decision was to lean into a clean, impression-driven homepage — a significant departure from the current Sephora site which is dense with product discovery. The bet was that giving the brand more visual space would create a stronger first impression and let the editorial content lead, rather than overwhelming users with products on arrival.</p>
+
+      <div class="case-study__callout">
+        <p class="case-study__callout-text">Working within an existing brand language is a different muscle than designing from scratch — you're making decisions about what to keep, what to push, and what to quietly fix.</p>
+      </div>
+
+      <p class="case-study__body">From the technical side, this project was where I learned auto layout, component variants, and prototype animations in Figma. Building a design system on top of someone else's brand forced me to think more carefully about tokens, consistency, and what actually constitutes a "system" vs. a loose collection of styles.</p>
+    </section>
+
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Gallery</h2>
+      <p class="case-study__body">Four pages, both desktop and mobile views.</p>
+
+      <div class="case-study__scroll-gallery" role="region" aria-label="Sephora redesign screens — scroll horizontally to view all" tabindex="0">
+        <img src="assets/images/sephora/homepage-desktop.png"
+          alt="Sephora homepage redesign — desktop view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/quizzes-desktop.png"
+          alt="Sephora Quizzes and Buying Guides page redesign — desktop view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/my-loves-desktop.png"
+          alt="Sephora My Loves page redesign — desktop view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/product-desktop.png"
+          alt="Sephora NARS Foundation product page redesign — desktop view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/homepage-mobile.png"
+          alt="Sephora homepage redesign — mobile view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/quizzes-mobile.png"
+          alt="Sephora Quizzes and Buying Guides page redesign — mobile view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/my-loves-mobile.png"
+          alt="Sephora My Loves page redesign — mobile view" class="case-study__scroll-item" loading="lazy">
+        <img src="assets/images/sephora/product-mobile.png"
+          alt="Sephora NARS Foundation product page redesign — mobile view" class="case-study__scroll-item" loading="lazy">
+      </div>
+      <p class="case-study__image-caption">Scroll to see all screens — desktop views followed by mobile</p>
+    </section>
+
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Reflection</h2>
+      <p class="case-study__body">This project had no user research — it was designed entirely from my own experience with the Sephora site, which is both its honest limitation and part of what made it a useful learning exercise. The cleaner homepage felt right to me, but that's not the same as knowing it works. A real next step would be a comparative usability study to test whether the tradeoff actually holds up.</p>
+
+      <div class="case-study__callout">
+        <p class="case-study__callout-text">The question I still wonder about: does a more editorial homepage create a better first impression, or does it just frustrate users who came to shop?</p>
+      </div>
+    </section>
+
+    <nav class="case-study__next-nav" aria-label="Project navigation">
+      <a href="weee.html" class="case-study__next-item case-study__next-item--prev">
+        <span class="case-study__next-dir">← Previous</span>
+        <span class="case-study__next-title">Weee! Usability Study</span>
+      </a>
+      <a href="music-sentiment.html" class="case-study__next-item case-study__next-item--next">
+        <span class="case-study__next-dir">Next →</span>
+        <span class="case-study__next-title">Music Sentiment Study</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="footer--minimal">
+    <div class="footer__inner footer__inner--minimal">
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. © 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+  </script>
+  <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
+</body>
+</html>

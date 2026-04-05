@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Projects | Jocelyn Sun</title>
+  <meta name="description" content="Projects by Jocelyn Sun — Product Designer and Engineer." />
+  <link rel="canonical" href="https://jzsun.me/projects.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects | Jocelyn Sun" />
+  <meta property="og:description" content="Projects by Jocelyn Sun — Product Designer and Engineer." />
+  <meta property="og:url" content="https://jzsun.me/projects.html" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects | Jocelyn Sun" />
+  <meta name="twitter:description" content="Projects by Jocelyn Sun — Product Designer and Engineer." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Projects by Jocelyn Sun",
+    "description": "Projects by Jocelyn Sun — Product Designer and Engineer.",
+    "url": "https://jzsun.me/projects.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jocelyn Sun",
+      "url": "https://jzsun.me"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 7 (local) -->
+  <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.2.0-web/css/all.min.css" />
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ============================================
+       PROJECTS PAGE — LOCAL STYLES
+       ============================================ */
+
+    .projects-page {
+      padding: var(--space-2xl) var(--page-padding-x) var(--space-2xl);
+      cursor: none;
+    }
+
+    .projects-page__inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .projects-page__intro {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: var(--text-base);
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-xl);
+    }
+
+    .footer {
+      cursor: auto;
+    }
+
+    /* Restore pointer on links — parent forces cursor: none */
+    .projects-page a,
+    .nav a {
+      cursor: pointer;
+    }
+
+    /* Custom cursor dot */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent-teal);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 80ms ease, opacity 200ms ease;
+    }
+
+    /* ---- Cursor-following preview card ---- */
+    .preview-card {
+      position: fixed;
+      width: 280px;
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9998;
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 32px rgba(74, 72, 73, 0.15), 0 2px 8px rgba(74, 72, 73, 0.08);
+      transition: opacity 200ms ease;
+    }
+
+    .preview-card.is-visible {
+      opacity: 1;
+    }
+
+    .preview-card__mini-ui {
+      height: 160px;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px; 
+      background: var(--color-bg-card);
+    }
+
+    .preview-card__mini-ui--llm {
+      height: 190px;
+    }
+
+    .preview-card__desc {
+      padding: 14px 16px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .projects-page {
+        cursor: auto;
+      }
+      .projects-page a,
+      .nav a {
+        cursor: auto;
+      }
+      .cursor-dot,
+      .preview-card {
+        display: none !important;
+      }
+    }
+
+    /* ============================================
+       MINI UI — ORVIA (shift grid)
+       ============================================ */
+    .mini-orvia {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mini-orvia__days {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+      margin-bottom: 2px;
+    }
+
+    .mini-orvia__day {
+      font-size: 7px;
+      color: var(--color-text-muted);
+      text-align: center;
+      letter-spacing: 0.5px;
+      font-family: var(--font-body);
+    }
+
+    .mini-orvia__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 3px;
+    }
+
+    .mini-orvia__cell {
+      height: 16px;
+      border-radius: 2px;
+    }
+
+    .cell-teal  { background: #c8dedd; }
+    .cell-rose  { background: #e8c8c8; }
+    .cell-purple { background: #d4c8e8; }
+    .cell-amber { background: #e8dcc8; }
+    .cell-empty { background: #e8e8e6; opacity: 0.4; }
+
+    /* ============================================
+       MINI UI — AI COMPANION (chat bubbles)
+       ============================================ */
+    .mini-chat {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mini-chat__bubble {
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-size: 10px;
+      line-height: 1.4;
+      max-width: 82%;
+      font-family: var(--font-body);
+    }
+
+    .mini-chat__bubble--ai {
+      background: #e8f0ef;
+      color: #284c4c;
+      align-self: flex-start;
+      border-radius: 2px 10px 10px 10px;
+    }
+
+    .mini-chat__bubble--user {
+      background: #fff;
+      color: var(--color-text-primary);
+      align-self: flex-end;
+      border-radius: 10px 2px 10px 10px;
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* ============================================
+       MINI UI — LLM (mid-conversation model switch)
+       ============================================ */
+    .mini-llm {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mini-llm__topbar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-bottom: 6px;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+      margin-bottom: 2px;
+    }
+
+    .mini-llm__model-label {
+      font-size: 7.5px;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+
+    .mini-llm__model-select {
+      font-size: 8px;
+      color: #534ab7;
+      background: #eeedf5;
+      border-radius: 10px;
+      padding: 2px 7px;
+      border: 0.5px solid #c8c6e0;
+      font-family: var(--font-body);
+    }
+
+    .mini-llm__bubble {
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 9px;
+      line-height: 1.4;
+      max-width: 85%;
+      font-family: var(--font-body);
+    }
+
+    .mini-llm__bubble--user {
+      background: #fff;
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      color: var(--color-text-primary);
+      align-self: flex-end;
+    }
+
+    .mini-llm__bubble--ai {
+      background: #eeedf5;
+      color: #3c3089;
+      align-self: flex-start;
+    }
+
+    .mini-llm__bubble--ai-new {
+      background: #e8f0ef;
+      color: #284c4c;
+      align-self: flex-start;
+    }
+
+    .mini-llm__switch {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 0;
+    }
+
+    .mini-llm__switch-line {
+      flex: 1;
+      height: 0.5px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .mini-llm__switch-pill {
+      font-size: 7px;
+      letter-spacing: 0.5px;
+      background: #fff;
+      border: 0.5px solid #c8c6e0;
+      border-radius: 10px;
+      padding: 2px 7px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-family: var(--font-body);
+    }
+
+    .mini-llm__dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-gpt { background: #534ab7; }
+    .dot-dalle { background: #284c4c; }
+
+    /* ============================================
+       MINI UI — LOC (search mismatch)
+       ============================================ */
+    .mini-loc {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .mini-loc__search {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 0.5px solid #c8c8c4;
+      border-radius: 4px;
+      padding: 5px 8px;
+      gap: 5px;
+    }
+
+    .mini-loc__search-icon {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-text-muted);
+      flex-shrink: 0;
+    }
+
+    .mini-loc__search-text {
+      font-size: 9px;
+      color: var(--color-text-primary);
+      flex: 1;
+      font-family: var(--font-body);
+    }
+
+    .mini-loc__search-btn {
+      width: 14px;
+      height: 14px;
+      background: var(--color-accent-teal);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .mini-loc__result {
+      background: #fff;
+      border: 0.5px solid #e0e0da;
+      border-radius: 4px;
+      padding: 8px 10px;
+    }
+
+    .mini-loc__result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .mini-loc__result-source {
+      font-size: 7.5px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+
+    .mini-loc__result-pill {
+      font-size: 7px;
+      background: #fef3f0;
+      color: var(--color-accent-rose);
+      border: 0.5px solid #e8c8c4;
+      border-radius: 10px;
+      padding: 1px 6px;
+      letter-spacing: 0.5px;
+      font-family: var(--font-body);
+    }
+
+    .mini-loc__result-title {
+      font-size: 10px;
+      color: var(--color-text-primary);
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 3px;
+      font-family: var(--font-body);
+    }
+
+    .mini-loc__result-meta {
+      font-size: 8px;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+
+    .mini-loc__more {
+      display: flex;
+      gap: 5px;
+    }
+
+    .mini-loc__more-pill {
+      font-size: 8px;
+      color: var(--color-text-muted);
+      background: #fff;
+      border: 0.5px solid #e0e0da;
+      border-radius: 3px;
+      padding: 3px 7px;
+      font-family: var(--font-body);
+    }
+
+    /* ============================================
+       MINI UI — WEEE! (ignored banner)
+       ============================================ */
+    .mini-weee {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      height: 100%;
+      margin: -16px;
+    }
+
+    .mini-weee__statusbar {
+      background: #fff;
+      padding: 5px 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
+    }
+
+    .mini-weee__search {
+      background: #f4f4f2;
+      border-radius: 3px;
+      padding: 3px 8px;
+      font-size: 8px;
+      color: #aaa;
+      flex: 1;
+      font-family: var(--font-body);
+    }
+
+    .mini-weee__banner {
+      background: #fff3ec;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+      opacity: 0.28;
+    }
+
+    .mini-weee__banner-img {
+      width: 36px;
+      height: 36px;
+      background: #f0c8a8;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .mini-weee__banner-title {
+      font-size: 8px;
+      color: var(--color-text-primary);
+      font-weight: 500;
+      margin-bottom: 2px;
+      font-family: var(--font-body);
+    }
+
+    .mini-weee__banner-sub {
+      font-size: 7px;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+
+    .mini-weee__dots {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      padding: 3px 0;
+      background: #fff3ec;
+      flex-shrink: 0;
+      opacity: 0.28;
+    }
+
+    .mini-weee__dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+
+    .mini-weee__dot--active { background: var(--color-accent-rose); }
+
+    .mini-weee__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 8px 10px;
+      flex: 1;
+    }
+
+    .mini-weee__item {
+      background: var(--color-bg-card);
+      border-radius: 3px;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mini-weee__item-img {
+      height: 28px;
+      background: #e8e8e4;
+      border-radius: 2px;
+    }
+
+    .mini-weee__item-name {
+      font-size: 6.5px;
+      color: var(--color-text-primary);
+      line-height: 1.2;
+      font-family: var(--font-body);
+    }
+
+    .mini-weee__item-price {
+      font-size: 7px;
+      color: var(--color-accent-rose);
+      font-weight: 500;
+      font-family: var(--font-body);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- =====================
+       NAVIGATION
+       ===================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — Home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn." />
+      </a>
+
+      <button
+        class="nav__toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html"    class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link nav__link--active" aria-current="page">Projects</a></li>
+        <li><a href="about.html"    class="nav__link">About</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- Custom cursor — only visible on projects page -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- =====================
+       MAIN CONTENT
+       ===================== -->
+  <main id="main-content">
+
+    <section class="projects-page" aria-labelledby="projects-heading">
+      <h1 id="projects-heading" class="visually-hidden">Projects</h1>
+
+      <div class="projects-page__inner">
+
+        <!-- ---- PROJECT INTRO ---- -->
+        <p class="projects-page__intro">Research, design, and building — or all three at once.</p>
+
+        <!-- ---- PROJECT LIST ---- -->
+        <ul class="project-list" id="projectList" role="list">
+
+          <!-- 01 Orvia -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="orvia"
+              data-desc="My friend was scheduling 50 staff on Google Sheets every week. I kept asking why until I built something better.">
+            <span class="project-entry__num" aria-hidden="true">01</span>
+            <div class="project-entry__content">
+              <a href="https://orvia-demo.vercel.app"
+                 class="project-entry__title"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Orvia — Multi-location Shift Scheduler, opens demo in new tab">
+                Orvia – Multi-location Shift Scheduler
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Interaction Design, Solo Build, Dashboard UI">
+                Interaction Design · Solo Build · Dashboard UI
+              </span>
+            </div>
+          </li>
+
+          <!-- 02 AI Companion for Kids -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="ai-companion"
+              data-desc="Most kids apps optimize for screen time. I spent 48 hours figuring out how to optimize for emotional growth instead.">
+            <span class="project-entry__num" aria-hidden="true">02</span>
+            <div class="project-entry__content">
+              <a href="https://www.figma.com/deck/ODWN3f0i1LDDRn34NcsllM/PM-assignment?node-id=1-234&t=bpkLz2X7TxfoKllH-1"
+                 class="project-entry__title"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="AI Companion for Kids — opens slide deck in new tab">
+                AI Companion for Kids
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: PM Concept, Feature Ideation, MVP Scoping">
+                PM Concept · Feature Ideation · MVP Scoping
+              </span>
+            </div>
+          </li>
+
+          <!-- 03 LLM Interface -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="llm"
+              data-desc="Designed an LLM interface before the industry agreed on what one should look like. Then ChatGPT answered that question for everyone.">
+            <span class="project-entry__num" aria-hidden="true">03</span>
+            <div class="project-entry__content">
+              <a href="https://www.figma.com/proto/SiOUTQjaFxaREdgQsJGcVf/yuse.ai-case-study?node-id=0-1&t=7UmXbaj9aUO2AIVs-1"
+                 class="project-entry__title"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Early-Stage LLM Interface — opens Figma in new tab">
+                Early-Stage LLM Interface
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Early LLM Design, Onboarding UX, Interface Concepts">
+                Early LLM Design · Onboarding UX · Interface Concepts
+              </span>
+            </div>
+          </li>
+
+          <!-- 04 Library of Congress -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="loc"
+              data-desc="The LOC has three front doors and no signs pointing to the right one.">
+            <span class="project-entry__num" aria-hidden="true">04</span>
+            <div class="project-entry__content">
+              <a href="loc.html"
+                 class="project-entry__title"
+                 aria-label="Library of Congress case study">
+                Library of Congress
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Discovery UX, IA Redesign, UI Audit">
+                Discovery UX · IA Redesign · UI Audit
+              </span>
+            </div>
+          </li>
+
+          <!-- 05 Weee! -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="weee"
+              data-desc="Nine tasks, four users, one finding I did not expect.">
+            <span class="project-entry__num" aria-hidden="true">05</span>
+            <div class="project-entry__content">
+              <a href="weee.html"
+                 class="project-entry__title"
+                 aria-label="Weee! Usability Case Study">
+                Weee! Usability Case Study
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Usability Testing, Research">
+                Usability Testing · Research
+              </span>
+            </div>
+          </li>
+
+        </ul><!-- /project-list -->
+
+
+        <!-- ---- SMALLER / OLDER PROJECTS ---- -->
+        <div class="archives" aria-label="Smaller and older projects">
+          <h2 class="archives__heading">Smaller/Older Projects...</h2>
+          <ul class="archives__list" role="list">
+
+            <li class="archives__item" role="listitem">
+              <a href="https://www.figma.com/proto/yaulWWzZ4USRbVJWJwaZdd/Realized-Solutions-Case-Study?node-id=1-2&t=3AfOeLFbDnroup4D-1"
+                 class="archives__link"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Realized Solutions, product research — opens Figma in new tab">
+                Realized Solutions (product research)
+                <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+              </a>
+            </li>
+
+            <li class="archives__item" role="listitem">
+              <a href="redesigning-sephora.html"
+                 class="archives__link"
+                 aria-label="Redesigning Sephora, visual design">
+                Redesigning Sephora (visual design)
+              </a>
+            </li>
+
+            <li class="archives__item" role="listitem">
+              <a href="covid.html"
+                 class="archives__link"
+                 aria-label="Coping W/ Covid, exhibition concept design">
+                Coping W/ Covid (exhibition concept design)
+              </a>
+            </li>
+
+            <li class="archives__item" role="listitem">
+              <a href="music-sentiment.html"
+                 class="archives__link"
+                 aria-label="Music and Public Sentiment, data visualization">
+                Music &amp; Public Sentiment (data visualization)
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /archives -->
+
+      </div><!-- /projects-page__inner -->
+    </section>
+
+  </main>
+
+
+  <!-- =====================
+       CURSOR-FOLLOWING PREVIEW CARD
+       ===================== -->
+  <div class="preview-card" id="previewCard" aria-hidden="true">
+    <div class="preview-card__mini-ui" id="previewMiniUI"></div>
+    <p class="preview-card__desc" id="previewDesc"></p>
+  </div>
+
+
+  <!-- =====================
+       FOOTER
+       ===================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <nav class="footer__icons" aria-label="Social links">
+
+        <a href="https://www.linkedin.com/in/jzsun2"
+           class="footer__icon-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="LinkedIn — opens in new tab">
+          <i class="fa-brands fa-linkedin-in footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Linkedin ›</span>
+        </a>
+
+        <a href="mailto:jocelyn.z.sun@gmail.com"
+           class="footer__icon-link"
+           aria-label="Send email to Jocelyn">
+          <i class="fa-regular fa-envelope footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Email ›</span>
+        </a>
+
+        <a href="assets/files/Resume_Jocelyn Sun.pdf"
+           class="footer__icon-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Resume PDF — opens in new tab">
+          <i class="fa-regular fa-file-pdf footer__icon-fa" aria-hidden="true"></i>
+          <span class="footer__icon-label">Resume ›</span>
+        </a>
+
+      </nav>
+
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. © 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- =====================
+       SCRIPTS
+       ===================== -->
+
+  <!-- Mobile nav toggle -->
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const menu   = document.querySelector('.nav__menu');
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
+
+  <!-- Mini UI templates -->
+  <script>
+    const miniUIs = {
+
+      'orvia': `
+        <div class="mini-orvia">
+          <div class="mini-orvia__days">
+            <span class="mini-orvia__day">MON</span>
+            <span class="mini-orvia__day">TUE</span>
+            <span class="mini-orvia__day">WED</span>
+            <span class="mini-orvia__day">THU</span>
+            <span class="mini-orvia__day">FRI</span>
+          </div>
+          <div class="mini-orvia__grid">
+            <div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-rose"></div><div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-empty"></div><div class="mini-orvia__cell cell-purple"></div>
+            <div class="mini-orvia__cell cell-purple"></div><div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-empty"></div><div class="mini-orvia__cell cell-rose"></div><div class="mini-orvia__cell cell-teal"></div>
+            <div class="mini-orvia__cell cell-rose"></div><div class="mini-orvia__cell cell-empty"></div><div class="mini-orvia__cell cell-amber"></div><div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-rose"></div>
+            <div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-purple"></div><div class="mini-orvia__cell cell-rose"></div><div class="mini-orvia__cell cell-amber"></div><div class="mini-orvia__cell cell-empty"></div>
+            <div class="mini-orvia__cell cell-amber"></div><div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-purple"></div><div class="mini-orvia__cell cell-teal"></div><div class="mini-orvia__cell cell-rose"></div>
+          </div>
+        </div>`,
+
+      'ai-companion': `
+        <div class="mini-chat">
+          <div class="mini-chat__bubble mini-chat__bubble--ai">Hi! How are you feeling today?</div>
+          <div class="mini-chat__bubble mini-chat__bubble--user">a little grumpy...</div>
+          <div class="mini-chat__bubble mini-chat__bubble--ai">Want to take some deep breaths together?</div>
+        </div>`,
+
+      'llm': `
+        <div class="mini-llm">
+          <div class="mini-llm__topbar">
+            <span class="mini-llm__model-label">Model:</span>
+            <span class="mini-llm__model-select">GPT 3.5 ▾</span>
+          </div>
+          <div class="mini-llm__bubble mini-llm__bubble--user">Write me a cover letter</div>
+          <div class="mini-llm__bubble mini-llm__bubble--ai">Here's a draft cover letter...</div>
+          <div class="mini-llm__switch">
+            <div class="mini-llm__switch-line"></div>
+            <div class="mini-llm__switch-pill">
+              <div class="mini-llm__dot dot-gpt"></div>
+              <span style="color:#aaa;">→</span>
+              <div class="mini-llm__dot dot-dalle"></div>
+              switched to DALL·E
+            </div>
+            <div class="mini-llm__switch-line"></div>
+          </div>
+          <div class="mini-llm__bubble mini-llm__bubble--user">now make an image for it</div>
+          <div class="mini-llm__bubble mini-llm__bubble--ai-new">Generating image...</div>
+        </div>`,
+
+      'loc': `
+        <div class="mini-loc">
+          <div class="mini-loc__search">
+            <div class="mini-loc__search-icon"></div>
+            <span class="mini-loc__search-text">folk music recordings 1940s</span>
+            <div class="mini-loc__search-btn"></div>
+          </div>
+          <div class="mini-loc__result">
+            <div class="mini-loc__result-header">
+              <span class="mini-loc__result-source">loc.gov</span>
+              <span class="mini-loc__result-pill">event</span>
+            </div>
+            <div class="mini-loc__result-title">Folk Life Festival — Summer Series</div>
+            <div class="mini-loc__result-meta">June 14, 2023 · Washington D.C.</div>
+          </div>
+          <div class="mini-loc__more">
+            <div class="mini-loc__more-pill">+ catalog results</div>
+            <div class="mini-loc__more-pill">+ stacks results</div>
+          </div>
+        </div>`,
+
+      'weee': `
+        <div class="mini-weee" style="margin: -16px;">
+          <div class="mini-weee__statusbar">
+            <div class="mini-weee__search">Search...</div>
+          </div>
+          <div class="mini-weee__banner">
+            <div class="mini-weee__banner-img"></div>
+            <div>
+              <div class="mini-weee__banner-title">Weekly picks — fresh arrivals</div>
+              <div class="mini-weee__banner-sub">Curated by Weee!</div>
+            </div>
+          </div>
+          <div class="mini-weee__dots">
+            <div class="mini-weee__dot mini-weee__dot--active"></div>
+            <div class="mini-weee__dot"></div>
+            <div class="mini-weee__dot"></div>
+          </div>
+          <div class="mini-weee__grid">
+            <div class="mini-weee__item"><div class="mini-weee__item-img"></div><div class="mini-weee__item-name">Kimchi</div><div class="mini-weee__item-price">$4.99</div></div>
+            <div class="mini-weee__item"><div class="mini-weee__item-img"></div><div class="mini-weee__item-name">Rice cake</div><div class="mini-weee__item-price">$3.49</div></div>
+            <div class="mini-weee__item"><div class="mini-weee__item-img"></div><div class="mini-weee__item-name">Miso</div><div class="mini-weee__item-price">$6.99</div></div>
+          </div>
+        </div>`
+    };
+  </script>
+
+  <!-- Cursor tracking + preview card logic -->
+  <script>
+    const cursorDot  = document.getElementById('cursorDot');
+    const previewCard = document.getElementById('previewCard');
+    const previewMiniUI = document.getElementById('previewMiniUI');
+    const previewDesc   = document.getElementById('previewDesc');
+    const entries = document.querySelectorAll('.project-entry');
+
+    let mouseX = 0, mouseY = 0;
+    let cardX = 0, cardY = 0;
+    const CARD_WIDTH  = 280;
+    const CARD_HEIGHT = 240; /* approx */
+    const OFFSET_Y    = 20;  /* gap between cursor and card bottom */
+
+    /* Track mouse */
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top  = mouseY + 'px';
+    });
+
+    /* Lerp animation loop */
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    (function animate() {
+      cardX = lerp(cardX, mouseX, 0.1);
+      cardY = lerp(cardY, mouseY, 0.1);
+
+      /* Smart vertical flip — appear above cursor, flip below near top of viewport */
+      const spaceAbove = cardY;
+      const preferAbove = spaceAbove > CARD_HEIGHT + OFFSET_Y + 40;
+      const topPos = preferAbove
+        ? cardY - CARD_HEIGHT - OFFSET_Y
+        : cardY + OFFSET_Y + 16;
+
+      /* Horizontal — center on cursor, clamp to viewport */
+      let leftPos = cardX - CARD_WIDTH / 2;
+      leftPos = Math.max(12, Math.min(leftPos, window.innerWidth - CARD_WIDTH - 12));
+
+      previewCard.style.left = leftPos + 'px';
+      previewCard.style.top  = topPos  + 'px';
+
+      requestAnimationFrame(animate);
+    })();
+
+    /* Show/hide on project entry hover */
+    entries.forEach(entry => {
+      entry.addEventListener('mouseenter', () => {
+        const project = entry.dataset.project;
+        const desc    = entry.dataset.desc;
+        previewMiniUI.innerHTML = miniUIs[project] || '';
+        previewDesc.textContent = desc || '';
+        previewCard.classList.add('is-visible');
+
+        // add project-specific class to mini UI
+        previewMiniUI.className = 'preview-card__mini-ui';
+        if (project === 'llm') {
+          previewMiniUI.classList.add('preview-card__mini-ui--llm');
+        }
+      });
+
+      entry.addEventListener('mouseleave', () => {
+        previewCard.classList.remove('is-visible');
+      });
+    });
+
+    /* Hide preview when leaving the project list entirely */
+    document.getElementById('projectList').addEventListener('mouseleave', () => {
+      previewCard.classList.remove('is-visible');
+    });
+
+    /* ---- Footer: hide custom cursor and preview card ---- */
+    const footer = document.querySelector('.footer');
+
+    footer.addEventListener('mouseenter', () => {
+      cursorDot.style.opacity = '0';
+      previewCard.classList.remove('is-visible');
+    });
+
+    footer.addEventListener('mouseleave', () => {
+      cursorDot.style.opacity = '1';
+    });
+
+    /* ---- Links: hide custom cursor dot on hover ---- */
+    const pageLinks = document.querySelectorAll('.projects-page a, .nav a');
+
+    pageLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '0';
+      });
+      link.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '1';
+      });
+    });
+  </script>
+
+</body>
+</html>
