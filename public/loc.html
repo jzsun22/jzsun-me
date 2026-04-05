@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Library of Congress | Jocelyn Sun</title>
+  <meta name="description" content="A 9-month capstone redesigning the Library of Congress discovery layer — improving navigation between loc.gov, the catalog, and Stacks." />
+  <link rel="canonical" href="https://jzsun.me/loc.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Library of Congress | Jocelyn Sun" />
+  <meta property="og:description" content="A 9-month capstone redesigning the Library of Congress discovery layer — improving navigation between loc.gov, the catalog, and Stacks." />
+  <meta property="og:url" content="https://jzsun.me/loc.html" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Library of Congress | Jocelyn Sun" />
+  <meta name="twitter:description" content="A 9-month capstone redesigning the Library of Congress discovery layer — improving navigation between loc.gov, the catalog, and Stacks." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Library of Congress Discovery Layer Redesign",
+    "description": "A 9-month capstone redesigning the Library of Congress discovery layer — improving navigation between loc.gov, the catalog, and Stacks.",
+    "url": "https://jzsun.me/loc.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jocelyn Sun",
+      "url": "https://jzsun.me"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       LOC — PAGE-SPECIFIC STYLES
+       ============================================= */
+
+    /* Scroll progress */
+    .loc-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--color-accent-teal);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .loc-team-trigger {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--color-text-muted);
+      border-bottom: 1px dashed var(--color-text-muted);
+      cursor: default;
+      padding-bottom: 1px;
+      position: relative;
+      display: inline-block;
+      transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
+      user-select: none;
+    }
+
+    .loc-team-trigger:hover {
+      color: var(--color-text-primary);
+      border-bottom-color: var(--color-text-muted);
+    }
+
+    .loc-team-tooltip {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      right: auto;
+      background: var(--color-bg);
+      border: 1px solid var(--color-bg-divider);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      min-width: 250px;
+      max-width: calc(100vw - 2 * var(--page-padding-x));
+      z-index: 200;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      text-align: left;
+    }
+
+    .loc-team-trigger:hover .loc-team-tooltip { display: block; }
+
+    .loc-team-tooltip__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-lg);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--color-bg-divider);
+    }
+
+    .loc-team-tooltip__row:last-child { border-bottom: none; }
+
+    .loc-team-tooltip__name {
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+    }
+
+    .loc-team-tooltip__name--me {
+      color: var(--color-accent-teal);
+      font-weight: 700;
+    }
+
+    .loc-team-tooltip__role {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    .loc-contrib-block {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--color-bg-divider);
+    }
+
+    .loc-contrib-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .loc-contrib-statement {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+      line-height: 1.8;
+    }
+
+    .loc-contrib-statement em {
+      font-style: normal;
+      color: var(--color-accent-teal);
+    }
+
+    /* Sprint layout — content stays at same 860px as all other sections */
+    .loc-sprint-layout {
+      max-width: var(--container-content);
+      margin: 0 auto var(--space-3xl);
+      position: relative;
+    }
+
+    /* Vertical timeline nav — pulled into left margin, never touches content */
+    .loc-tl-nav {
+      position: absolute;
+      right: calc(100% + var(--space-xl));
+      top: 0;
+      bottom: 0;
+      width: 140px;
+    }
+
+    .loc-tl-nav__inner {
+      position: sticky;
+      top: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loc-tl-nav__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-lg);
+      opacity: 0.6;
+    }
+
+    .loc-tl-spine {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding-left: 18px;
+    }
+
+    .loc-tl-spine::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--color-bg-divider);
+    }
+
+    .loc-tl-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      opacity: 0.5;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+      position: relative;
+    }
+
+    .loc-tl-year::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      width: 8px;
+      height: 1px;
+      background: var(--color-bg-divider);
+    }
+
+    .loc-tl-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .loc-tl-node--s1 { padding-bottom: 28px; }
+    .loc-tl-node--s2 { padding-bottom: 22px; }
+    .loc-tl-node--s3 { padding-bottom: 22px; }
+    .loc-tl-node--s4 { padding-bottom: 28px; }
+    .loc-tl-node--s5 { padding-bottom: 0; }
+
+    .loc-tl-node::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-bg-divider);
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .loc-tl-node:hover::before {
+      background: var(--color-text-muted);
+      transform: scale(1.3);
+    }
+
+    .loc-tl-node.is-active::before {
+      background: var(--color-accent-teal);
+      transform: scale(1.4);
+    }
+
+    .loc-tl-node__num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: 0.5px;
+      line-height: 1;
+      transition: color var(--transition-fast);
+    }
+
+    .loc-tl-node__name {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.4;
+      transition: color var(--transition-fast);
+    }
+
+    .loc-tl-node__date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      opacity: 0;
+      line-height: 1;
+      transition: opacity var(--transition-fast);
+    }
+
+    .loc-tl-node:hover .loc-tl-node__name,
+    .loc-tl-node:hover .loc-tl-node__num { color: var(--color-text-primary); }
+
+    .loc-tl-node.is-active .loc-tl-node__num { color: var(--color-accent-teal); }
+    .loc-tl-node.is-active .loc-tl-node__name { color: var(--color-accent-teal); font-weight: 700; }
+    .loc-tl-node.is-active .loc-tl-node__date { opacity: 1; color: var(--color-accent-teal-mid); }
+
+    /* Sprint content */
+    .loc-sprint-content { min-width: 0; }
+
+    .loc-sprint-block {
+      margin-bottom: var(--space-3xl);
+      padding-bottom: var(--space-3xl);
+      border-bottom: 1px solid var(--color-bg-divider);
+    }
+
+    .loc-sprint-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .loc-sprint-sticky {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-bg-divider);
+      margin-bottom: var(--space-xl);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      z-index: 10;
+    }
+
+    .loc-sprint-sticky__num {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+
+    .loc-sprint-sticky__title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .loc-sprint-sticky__date {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* Image grids */
+    .case-study__image-grid--3col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    .loc-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    .loc-comparison__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: var(--space-xs);
+    }
+
+    .loc-findings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+
+    .loc-findings-grid h4 {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-accent-teal);
+      margin-bottom: var(--space-xs);
+    }
+
+    .loc-findings-grid ul {
+      list-style: disc;
+      padding-left: var(--space-md);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      color: var(--color-text-primary);
+    }
+
+    .loc-findings-grid li { margin-bottom: var(--space-xs); }
+    .loc-findings-grid--3col { grid-template-columns: 1fr 1fr 1fr; }
+
+    .loc-solutions { margin: var(--space-md) 0 var(--space-lg); }
+
+    .loc-solutions dt {
+      font-weight: 700;
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .loc-solutions dd {
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      margin: 0 0 var(--space-md) 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .loc-tl-nav { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .loc-tl-nav { display: none; }
+
+      .loc-sprint-sticky { flex-wrap: wrap; gap: var(--space-xs); }
+      .loc-sprint-sticky__date { margin-left: 0; width: 100%; }
+
+      .loc-findings-grid,
+      .loc-findings-grid--3col,
+      .loc-comparison,
+      .case-study__image-grid--3col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loc-progress" id="loc-progress" aria-hidden="true"></div>
+
+  <a href="#main" class="skip-nav">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn Sun">
+      </a>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link nav__link--active" aria-current="page">Projects</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="case-study">
+
+    <header class="case-study__header">
+      <div class="case-study__header-split">
+        <div class="case-study__header-left">
+          <p class="case-study__category">UX Research &amp; Design</p>
+          <h1 class="case-study__title">Library of Congress</h1>
+          <p class="case-study__hook">Improving the discovery experience across loc.gov, the LOC catalog, and Stacks — a 9-month capstone project with the Library of Congress.</p>
+          <div class="case-study__pills">
+            <span class="case-study__pill">Figma</span>
+            <span class="case-study__pill">Miro</span>
+          </div>
+        </div>
+        <dl class="case-study__header-right case-study__meta-list">
+          <dt class="visually-hidden">Role</dt><dd>Interaction Design &amp; UXR</dd>
+          <dt class="visually-hidden">Timeline</dt><dd>Sep 2022 – May 2023</dd>
+          <dt class="visually-hidden">Duration</dt><dd>9 months, 5 sprints</dd>
+          <dt class="visually-hidden">Team</dt><dd>
+            <span class="loc-team-trigger" id="teamTrigger" role="button" aria-expanded="false" tabindex="0">
+              5 members
+              <div class="loc-team-tooltip" role="tooltip">
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Sara Hu</span>
+                  <span class="loc-team-tooltip__role">UX Research</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Shireen Patel</span>
+                  <span class="loc-team-tooltip__role">UX Research</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Tulika Mohanti</span>
+                  <span class="loc-team-tooltip__role">UI &amp; Visual Design</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Rajin Suchdev</span>
+                  <span class="loc-team-tooltip__role">UX Design</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name loc-team-tooltip__name--me">Jocelyn Sun</span>
+                  <span class="loc-team-tooltip__role">Interaction Design &amp; UXR</span>
+                </div>
+              </div>
+            </span>
+          </dd>
+        </dl>
+      </div>
+    </header>
+
+    <!-- Overview -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Overview</h2>
+      <p class="case-study__body">The Library of Congress is embarking on a multi-year project to replace its integrated library system (ILS). Our team was tasked with understanding the user experience that LOC patrons have with the existing ILS — specifically the discovery layer — and developing design concepts based on our findings.</p>
+      <p class="case-study__body">The project was organized into five sprints, each with a different focus area but following the same stages: mapping, sketching, deciding, prototyping, and testing.</p>
+
+      <div class="loc-contrib-block">
+        <p class="loc-contrib-statement">
+          I contributed to <em>sketching</em> and <em>prototyping</em> across all five sprints,
+          and took on <em>study design</em>, <em>contextual interviews</em>,
+          and <em>data analysis</em> alongside the research team.
+        </p>
+      </div>
+    </section>
+
+    <!-- Figma prototype -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Final Prototype</h2>
+      <div class="case-study__figma-embed">
+        <iframe
+          src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW2JkO1G8tJY5ltGFKqOzou%2FLOCxUMD%3Fpage-id%3D1103%253A10525%26type%3Ddesign%26node-id%3D1103-10531%26viewport%3D776%252C34%252C0.04%26scaling%3Dscale-down%26starting-point-node-id%3D1103%253A10531%26show-proto-sidebar%3D1"
+          allowfullscreen
+          title="Library of Congress — interactive Figma prototype"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Problem statement -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Problem Statement</h2>
+      <p class="case-study__body">After our first meeting with the client, we narrowed the problem space down into a more specific and practical long-term goal for the entire project:</p>
+
+      <div class="case-study__callout">
+        <p class="case-study__callout-text">Improve the user's discovery experience between loc.gov, the LOC catalog, and Stacks by improving the presentation of functionalities to guide the user to the correct platform for their needs.</p>
+      </div>
+
+      <p class="case-study__body">We divided our goal into three areas: the Library of Congress homepage, the LOC catalog, and Stacks (at the time, only available on computers on-site). We prioritized the LOC catalog and Stacks because our client expressed interest in learning about the experience of these two platforms and the potential for integrating them.</p>
+      <p class="case-study__body">We chose not to follow the traditional approach of creating designs for all problem areas and iterating on them through every sprint. Instead, we favored workload management and quality. Starting midway through each sprint, we asked our client whether they wanted us to continue working on the current design or shift to a new focus area. We then used this to guide our contextual interviews, which ran concurrently with testing — giving us more context to work with in preparation for the next sprint. As a result, we were better informed to make decisions in each mapping stage.</p>
+    </section>
+
+    <!-- Sprint layout -->
+    <div class="loc-sprint-layout">
+
+      <nav class="loc-tl-nav" aria-label="Sprint navigation">
+        <div class="loc-tl-nav__inner">
+          <span class="loc-tl-nav__label">9 months</span>
+          <div class="loc-tl-spine">
+            <span class="loc-tl-year">2022</span>
+            <a href="#sprint-1" class="loc-tl-node loc-tl-node--s1 is-active" data-sprint="sprint-1">
+              <span class="loc-tl-node__num">S1</span>
+              <span class="loc-tl-node__name">Catalog search</span>
+              <span class="loc-tl-node__date">Sep – Oct</span>
+            </a>
+            <a href="#sprint-2" class="loc-tl-node loc-tl-node--s2" data-sprint="sprint-2">
+              <span class="loc-tl-node__num">S2</span>
+              <span class="loc-tl-node__name">Stacks</span>
+              <span class="loc-tl-node__date">Nov – Dec</span>
+            </a>
+            <span class="loc-tl-year">2023</span>
+            <a href="#sprint-3" class="loc-tl-node loc-tl-node--s3" data-sprint="sprint-3">
+              <span class="loc-tl-node__num">S3</span>
+              <span class="loc-tl-node__name">Catalog landing</span>
+              <span class="loc-tl-node__date">Jan – Feb</span>
+            </a>
+            <a href="#sprint-4" class="loc-tl-node loc-tl-node--s4" data-sprint="sprint-4">
+              <span class="loc-tl-node__num">S4</span>
+              <span class="loc-tl-node__name">Loc.gov</span>
+              <span class="loc-tl-node__date">Feb – Apr</span>
+            </a>
+            <a href="#sprint-5" class="loc-tl-node loc-tl-node--s5" data-sprint="sprint-5">
+              <span class="loc-tl-node__num">S5</span>
+              <span class="loc-tl-node__name">Integration</span>
+              <span class="loc-tl-node__date">Apr – May</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="loc-sprint-content">
+
+        <!-- Sprint 1 -->
+        <div id="sprint-1" class="loc-sprint-block">
+          <div class="loc-sprint-sticky">
+            <span class="loc-sprint-sticky__num">Sprint 1</span>
+            <span class="loc-sprint-sticky__title">Catalog Search</span>
+            <span class="loc-sprint-sticky__date">Sep 19 – Oct 27, 2022</span>
+          </div>
+
+          <p class="case-study__body">The sprint began with the mapping stage, where we aligned our visions and formed a sprint goal by voting on the questions and concerns our team had with the current design of the LOC catalog.</p>
+
+          <img
+            src="https://cdn.prod.website-files.com/62d208b5633c394efed121fd/63d44e2e745acd12e7e7a722_s1%20-%20sprint%20q%27s%20-%20cropped.png"
+            alt="Sprint 1 sprint questions on sticky notes with dot votes"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — sprint questions</p>
+
+          <p class="case-study__body">Combining our top questions with prior knowledge from our client, we brainstormed and voted on How Might We (HMW) questions to inform the focus of the sprint.</p>
+
+          <img
+            src="assets/images/loc/s1-hmws.png"
+            alt="Sprint 1 How Might We questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — How Might We's</p>
+
+          <p class="case-study__body">We also created a user flow to visualize any blocks or overlaps during the discovery (search and browse) phase on the LOC catalog.</p>
+
+          <img
+            src="assets/images/loc/s1-usermap.png"
+            alt="Sprint 1 user flow map with How Might We questions integrated"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — user map with HMW integrated</p>
+
+          <p class="case-study__body">The user flow revealed two pain points:</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item">No clear guidance on which catalog to use (main catalog vs. additional research tools, etc.)</li>
+            <li class="case-study__list-item">Multiple dead ends in steps involving account registration and logging in</li>
+          </ul>
+
+          <p class="case-study__body">Our team decided to focus on the first pain point, which allowed for more design possibilities, since the second one mainly concerned backend logistical issues. Combining insights from our competitive analysis and inspirations from lightning demos, each team member produced one solution sketch addressing our sprint questions and HMW's. We then put all our sketches together and invited our stakeholders to an online critique session, where they commented on our sketches and dot-voted for their favorite ideas.</p>
+
+          <img
+            src="assets/images/loc/s1-sketches.jpg"
+            alt="Sprint 1 solution sketches from all team members"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — sketches</p>
+
+          <p class="case-study__body">Our stakeholder was inspired by (the highlighted ideas are from my sketch):</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item"><strong>"I am… I need…"</strong> — a persona-based search suggestion system that provides guidance to the appropriate search tool based on the user's need and expertise</li>
+            <li class="case-study__list-item"><strong>Welcoming text</strong> — a concise message at the top of the homepage that welcomes the user and clearly explains the purpose and use of the catalog, also improving accessibility for screen reader users</li>
+            <li class="case-study__list-item"><strong>Search facet in the search box</strong> — a feature that provides a "preview" of how search results could be filtered right under the search box, suggesting different search granularity for the user to consider</li>
+            <li class="case-study__list-item"><strong>Differentiated actions on the results page</strong> — a new way to design CTAs that shows allowed actions (borrow vs. ask a librarian, etc.) directly on the results page for convenience and possible next steps</li>
+          </ul>
+
+          <p class="case-study__body">To help us stitch these ideas together into one coherent application, we composed a storyboard to see exactly where they fit in.</p>
+
+          <img
+            src="assets/images/loc/s1-storyboard.png"
+            alt="Sprint 1 storyboard showing the user flow with new features"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — storyboard</p>
+
+          <p class="case-study__body">In one week, we produced a minimum viable prototype for three experts to test.</p>
+
+          <img
+            src="assets/images/loc/s1-prototype.gif"
+            alt="Sprint 1 prototype walkthrough animation"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 1 — prototype walkthrough</p>
+
+          <p class="case-study__body">During testing, we found that users need:</p>
+
+          <div class="loc-findings-grid loc-findings-grid--3col">
+            <div>
+              <h4>Personalization</h4>
+              <ul>
+                <li>A personalized ranking of search results</li>
+                <li>Confirmation of the search query</li>
+                <li>Guidance on how to divide the search facets</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Intuitive Functions</h4>
+              <ul>
+                <li>Prominent filters that won't be overlooked</li>
+                <li>Explanations for niche actions</li>
+                <li>Contextual descriptions for tools</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Functional Filters</h4>
+              <ul>
+                <li>More control and specifications for filters</li>
+                <li>Ability to filter initial results into facets</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="case-study__callout">
+            <p class="case-study__callout-text">The biggest lesson from this sprint: all active CTA buttons and controls on the testing prototype must be obvious and intuitive with signifiers to avoid confusion, even for low-fidelity prototypes. Users tend to expect everything they see to be active — so if it's not ready to be implemented, don't include it in the testing prototype.</p>
+          </div>
+
+          <p class="case-study__body">This rather experimental approach to a persona-based search also got me thinking about categorization in general — how do we sort users into different groups, and are these groups inclusive enough to cover all use cases? We eventually decided not to include this persona search feature in our final product for that reason. But if I were to do this project again, I would bring up this question earlier in the process, and we might have been able to develop a more flexible search scheme better suited for the platform.</p>
+        </div>
+
+        <!-- Sprint 2 -->
+        <div id="sprint-2" class="loc-sprint-block">
+          <div class="loc-sprint-sticky">
+            <span class="loc-sprint-sticky__num">Sprint 2</span>
+            <span class="loc-sprint-sticky__title">Stacks Redesign</span>
+            <span class="loc-sprint-sticky__date">Nov 7 – Dec 9, 2022</span>
+          </div>
+
+          <p class="case-study__body">We shifted our focus to Stacks for this sprint. The first challenge was that due to copyright restrictions, Stacks only existed as software on the on-site computers. To get an adequate understanding of the platform, the sprint started with our client providing a virtual walkthrough via Zoom.</p>
+
+          <p class="case-study__body">With our understanding of the Stacks system, we formed our sprint questions using dot-voting on a collection of potential questions.</p>
+
+          <img
+            src="https://cdn.prod.website-files.com/62d208b5633c394efed121fd/63d44e766980083953e3f5d3_s2%20-%20spring%20q%27s%20-%20cropped.png"
+            alt="Sprint 2 sprint questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 2 — sprint questions</p>
+
+          <p class="case-study__body">We recreated the user flow from the virtual walkthrough, then brainstormed and voted on our HMW questions and incorporated them into the flow.</p>
+
+          <div class="case-study__image-grid--3col">
+            <div>
+              <img src="assets/images/loc/s2-usermap.jpg" alt="Sprint 2 user map" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">User map</p>
+            </div>
+            <div>
+              <img src="assets/images/loc/s2-hmws.png" alt="Sprint 2 How Might We questions" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">How Might We's</p>
+            </div>
+            <div>
+              <img src="assets/images/loc/s2-usermap-integrated.png" alt="Sprint 2 integrated user map with HMW questions" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">Integrated user map with HMW</p>
+            </div>
+          </div>
+
+          <p class="case-study__body">Moving to the sketch stage, we each produced solution sketches. Our stakeholder voted on their favorite ideas using dots with their initials.</p>
+
+          <img
+            src="assets/images/loc/s2-sketches.jpg"
+            alt="Sprint 2 solution sketches from all team members, Jocelyn's sketch boxed"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 2 — sketches (mine is boxed)</p>
+
+          <p class="case-study__body">My solution sketch addressed the HMW question by:</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item">Adding a section on the landing page for recently added items and trending topics, useful for users researching current subjects or just browsing</li>
+            <li class="case-study__list-item">Adding an interactive data visualization alongside the "big numbers" so users can understand what's behind those statistics</li>
+            <li class="case-study__list-item">Suggesting a treemap or heatmap as the visualization structure to enable deep exploration of the Stacks catalog at different levels of granularity through filtering</li>
+          </ul>
+
+          <p class="case-study__body">We combined the strengths of different sketches into a storyboard showing a typical user interacting with the new data visualization:</p>
+
+          <img
+            src="assets/images/loc/s2-storyboard.png"
+            alt="Sprint 2 storyboard showing user interaction with data visualization"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 2 — storyboard</p>
+
+          <p class="case-study__body">And we transformed the storyboard into a mid-fidelity interactive prototype:</p>
+
+          <img
+            src="assets/images/loc/s2-prototype.gif"
+            alt="Sprint 2 prototype walkthrough animation showing Stacks redesign"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 2 — prototype walkthrough</p>
+
+          <p class="case-study__body">Through testing and interviewing, we found that our users fell roughly into two groups:</p>
+
+          <div class="loc-findings-grid">
+            <div>
+              <h4>Professionals want efficiency</h4>
+              <ul>
+                <li>Need to find information under short deadlines</li>
+                <li>Use external resources (Google Scholar, Amazon, etc.) to speed up the search process</li>
+                <li>Know what they're doing — only switch search systems when required by the task or when results are exhausted</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Casual users want differentiation</h4>
+              <ul>
+                <li>Need to understand the difference between loc.gov, the LOC catalog, and Stacks</li>
+                <li>Need a clear discovery layer to guide them to the most appropriate search system</li>
+                <li>Don't want to be confused or overwhelmed by search results</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="case-study__body">Overall, our redesign of the "Stacks at a glance" section received positive feedback from testers, who said the treemap visualization encouraged exploration and added "elements of curiosity to a familiar interface."</p>
+
+          <div class="case-study__callout">
+            <p class="case-study__callout-text">The biggest lesson from this sprint was the value of storyboarding at the end of the deciding stage. We faced the challenge of connecting top ideas from sketches made by different team members, and storyboarding provided the opportunity to picture how all these features could help at different points throughout a typical user flow. I also wonder if the same approach could be applied to conflict resolution within teams — instead of arguing which idea to develop, set up a hypothetical situation and see if both ideas work together.</p>
+          </div>
+        </div>
+
+        <!-- Sprint 3 -->
+        <div id="sprint-3" class="loc-sprint-block">
+          <div class="loc-sprint-sticky">
+            <span class="loc-sprint-sticky__num">Sprint 3</span>
+            <span class="loc-sprint-sticky__title">Catalog Landing Page</span>
+            <span class="loc-sprint-sticky__date">Jan 26 – Feb 23, 2023</span>
+          </div>
+
+          <p class="case-study__body">Sprint 3 continued and built on the work and findings from Sprint 1. The focus was straightforward, and we were more concerned with logistics and limited resources — which, in my opinion, was a good thing to keep in mind at the beginning of a sprint, because it grounded our thinking and made sure we could deliver on anything we promised.</p>
+
+          <img
+            src="https://cdn.prod.website-files.com/62d208b5633c394efed121fd/642e0ca52003e4fcb1bdd536_s3%20-%20sprint%20q%27s.png"
+            alt="Sprint 3 sprint questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 3 — sprint questions</p>
+
+          <p class="case-study__body">We brainstormed How Might We questions referencing the same user flow from Sprint 1, but with more background knowledge of the user and experience working with the design language.</p>
+
+          <img
+            src="assets/images/loc/s3-hmws.png"
+            alt="Sprint 3 How Might We questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 3 — How Might We's</p>
+
+          <p class="case-study__body">At the end of the mapping stage, we had two main questions to tackle:</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item">How might we organize the Catalog page so it is easy to navigate?</li>
+            <li class="case-study__list-item">How might we detangle the different search options and restructure them for ease of understanding and use?</li>
+          </ul>
+
+          <img
+            src="assets/images/loc/s3-sketches.jpg"
+            alt="Sprint 3 solution sketches from all team members, Jocelyn's sketch second from left"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 3 — sketches (mine is second from the left)</p>
+
+          <p class="case-study__body">My sketches focused on two areas:</p>
+          <ol class="case-study__list">
+            <li class="case-study__list-item"><strong>Reorganizing</strong> the content on the site, removing unnecessary or redundant features (e.g., browse and keyword search, which are similar to the main search bar, and the advanced search, which redirects to a new page), and creating more consistency across platforms by incorporating design ideas from the Stacks work in Sprint 2.</li>
+            <li class="case-study__list-item">Designing a new on-page search that <strong>consolidates all three search methods</strong> currently offered by the site, along with a helper text section that provides suggestions for additional catalogs based on the user's dropdown selections.</li>
+          </ol>
+
+          <p class="case-study__body">During storyboarding, we collectively felt that the advanced search function had potential to be more friendly to general users. I took the lead in designing this feature.</p>
+          <p class="case-study__body">Inspired by natural language patterns, I designed an advanced search function that mimics the logic of how people think. I structured the input fields so that the search query flows and reads like a natural English sentence, making it easier to understand and increasing search accuracy.</p>
+
+          <img
+            src="assets/images/loc/s3-advanced-search-sketch.png"
+            alt="Sprint 3 advanced search sketch showing natural language query structure"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 3 — advanced search sketch</p>
+
+          <p class="case-study__body">And this is what the feature looks like prototyped:</p>
+
+          <img
+            src="assets/images/loc/s3-prototype.png"
+            alt="Sprint 3 prototype screenshot of the catalog redesign"
+            class="case-study__image"
+            loading="lazy"
+          >
+
+          <p class="case-study__body">We received constructive feedback during testing. We annotated the prototype screenshots with user feedback on sticky notes, making it easy to understand and present to stakeholders.</p>
+
+          <img
+            src="assets/images/loc/s3-uxr-findings.jpg"
+            alt="Sprint 3 prototype screenshot annotated with user research findings on sticky notes"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 3 — UX findings annotated on prototype screenshots</p>
+
+          <p class="case-study__body">Based on the feedback, before delivering our final design, we would:</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item">Improve <strong>accessibility</strong> by adding a differentiating factor beyond color</li>
+            <li class="case-study__list-item">Use words users are most familiar with to <strong>maintain consistency</strong> across platforms</li>
+            <li class="case-study__list-item">Help users understand proactively by <strong>providing context and explanations</strong> for features</li>
+          </ul>
+
+          <div class="case-study__callout">
+            <p class="case-study__callout-text">This sprint highlighted the importance of UX writing — how it can become a setback in the user experience, even if the language is technically accurate but misaligned with the user's mental model. As a non-native English speaker, this is something I continue to think about in every project.</p>
+          </div>
+
+          <p class="case-study__body">I also learned more about designing for accessibility in practice. Colors should always be used in conjunction with other signifying elements to accommodate color-blind users, in addition to passing WCAG guidelines for contrast.</p>
+        </div>
+
+        <!-- Sprint 4 -->
+        <div id="sprint-4" class="loc-sprint-block">
+          <div class="loc-sprint-sticky">
+            <span class="loc-sprint-sticky__num">Sprint 4</span>
+            <span class="loc-sprint-sticky__title">Loc.gov Landing Page</span>
+            <span class="loc-sprint-sticky__date">Feb 27 – Apr 3, 2023</span>
+          </div>
+
+          <p class="case-study__body">In our second-to-last sprint, we turned our focus to the loc.gov landing page — the entry point for the library's different systems: the digital collection (hosted on loc.gov), the main catalog and links to additional catalogs, and Stacks (to be available remotely in the future).</p>
+
+          <p class="case-study__body">At the beginning of the sprint, I suggested splitting into two groups of two after the decide stage. One group would focus on designing and prototyping, while the other would focus on user research to guide and validate design decisions. I worked between the two groups to track progress, serve as a point of contact, and offer extra help where needed.</p>
+
+          <img
+            src="assets/images/loc/s4-sprint-questions.png"
+            alt="Sprint 4 sprint questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 4 — sprint questions</p>
+
+          <p class="case-study__body">To focus on a specific goal, we decided to differentiate users based on the accuracy of their mental models. Our objective was to ensure the correct information was displayed and that users were guided to the appropriate search platform, even if their mental model of the site and system was not entirely accurate.</p>
+
+          <p class="case-study__body">We mapped out the flow for two types of users:</p>
+
+          <img
+            src="assets/images/loc/s4-userflow.png"
+            alt="Sprint 4 user flow maps for users with accurate vs. inaccurate mental models"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 4 — user maps</p>
+
+          <p class="case-study__body">Based on the user flow maps, we brainstormed HMW questions to help mitigate the problems users face.</p>
+
+          <img
+            src="assets/images/loc/s4-hmws.png"
+            alt="Sprint 4 How Might We questions"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 4 — How Might We's</p>
+
+          <img
+            src="assets/images/loc/s4-sketches.jpg"
+            alt="Sprint 4 solution sketches, Jocelyn's is second from left"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 4 — sketches (mine is second from the left)</p>
+
+          <p class="case-study__body">Two trends emerged across all our sketches:</p>
+          <ol class="case-study__list">
+            <li class="case-study__list-item">None of the sketches contained actual content — I even annotated my sketch with a list of potential contents for each section.</li>
+            <li class="case-study__list-item">Three out of four sketches included a top navigation bar, which the current live site doesn't have.</li>
+          </ol>
+
+          <p class="case-study__body">To address the questions arising from these trends, I worked with the research group to design our first round of user testing. Each session consisted of a series of tasks evaluating the content and layout of the current site, a card-sorting activity to inform the design of the top navigation bar, and questions based on a preliminary version of the landing page.</p>
+
+          <div class="case-study__image-grid--2col">
+            <div>
+              <img src="assets/images/loc/s4-uxr-tasks.jpg" alt="Sprint 4 user testing task results" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">UXR findings — tasks</p>
+            </div>
+            <div>
+              <img src="assets/images/loc/s4-uxr-card-sorting.jpg" alt="Sprint 4 card sorting results" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">UXR findings — card sorting</p>
+            </div>
+          </div>
+
+          <p class="case-study__body">Based on the task results, we concluded that the preliminary navigation bar design was successful — all five testers were able to complete the relevant discovery tasks using it, and the overall experience was further improved with a bottom navigation footer acting as a site map.</p>
+
+          <p class="case-study__body">With a site map at the bottom, we had more flexibility in choosing what to display on the top bar. Our idea was to place the most important and most frequently accessed information on top for convenience. The card-sorting data, computed using MaxDiff analysis, helped us understand the priority of contents based on tester preferences.</p>
+
+          <p class="case-study__body">Using these insights, I designed both navigation systems while my teammates worked on the landing page and prepared for testing.</p>
+
+          <div class="case-study__image-grid--2col">
+            <div>
+              <img src="assets/images/loc/s4-top-nav.png" alt="Sprint 4 top navigation bar design" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">Top navigation bar</p>
+            </div>
+            <div>
+              <img src="assets/images/loc/s4-footer-nav.png" alt="Sprint 4 footer navigation section design" class="case-study__image" loading="lazy">
+              <p class="case-study__image-caption">Footer navigation section</p>
+            </div>
+          </div>
+
+          <p class="case-study__body">And here is the landing page prototype:</p>
+
+          <img
+            src="assets/images/loc/s4-prototype.gif"
+            alt="Sprint 4 landing page prototype walkthrough animation"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Sprint 4 — prototype walkthrough</p>
+
+          <p class="case-study__body">During testing, we received positive feedback on the navigation systems but also found areas for improvement. Creating a complete navigation section for a site as vast as the Library of Congress was difficult due to the sheer number of pages and subpages, some of which overlap. During a weekly meeting, our client explained that they typically prefer creating new pages instead of modifying existing ones for convenience. As a result of this and organizational constraints, the bottom navigation includes the most popular pages, some necessary pages, and an overview of all categories that serve as entry points.</p>
+
+          <div class="case-study__callout">
+            <p class="case-study__callout-text">Up until Sprint 3, we had been using placeholder text for ease of prototyping. Working with the real architecture of the site was a valuable lesson in handling practical constraints. I realized that placeholder text gives more creative freedom, but since we were working on an existing site, we were deferring practical constraints until later sprints — a trade-off we made for the sake of time. This experience taught me the importance of good information architecture and how it can enhance or hinder design efforts.</p>
+          </div>
+        </div>
+
+        <!-- Sprint 5 -->
+        <div id="sprint-5" class="loc-sprint-block">
+          <div class="loc-sprint-sticky">
+            <span class="loc-sprint-sticky__num">Sprint 5</span>
+            <span class="loc-sprint-sticky__title">Connecting the Pieces</span>
+            <span class="loc-sprint-sticky__date">Apr 7 – May 12, 2023</span>
+          </div>
+
+          <p class="case-study__body">We used the remaining four weeks to connect all the pieces together. Our game plan had three steps:</p>
+          <ol class="case-study__list">
+            <li class="case-study__list-item">Using our divide-and-conquer strategy, we assigned team members to the three areas (Catalog, Stacks, and loc.gov landing page) and edited the current prototypes based on feedback from their respective sprints.</li>
+            <li class="case-study__list-item">Meet with two UX experts from the Library of Congress to get feedback on the edited prototypes — pushing our design through another informal iteration.</li>
+            <li class="case-study__list-item">Incorporate expert feedback and finalize the prototype by linking everything together.</li>
+          </ol>
+
+          <p class="case-study__body">I took charge of editing the loc.gov landing page from Sprint 4. The comments from testing mostly concerned the top half of the page — the navigation bar and the search bar.</p>
+
+          <dl class="loc-solutions">
+            <dt>The navigation bar and search bar were not differentiated enough</dt>
+            <dd>I separated them by moving up the hero image carousel and redesigned the search bar to take up two rows for increased visual prominence.</dd>
+
+            <dt>Users expect a search bar at the top right of the page for general information</dt>
+            <dd>I designed a small search bar on the top right specifically for library information (services, programs, etc.), with a helper tooltip below to clarify its purpose.</dd>
+
+            <dt>The purpose of some sections was unclear, partly due to placeholder content</dt>
+            <dd>I incorporated actual images and writing from the current site.</dd>
+          </dl>
+
+          <p class="case-study__body">I also introduced two additional changes:</p>
+          <ul class="case-study__list case-study__list--bullet">
+            <li class="case-study__list-item"><strong>Uncollapsed the first tab</strong> of the navigation bar ("Catalog &amp; Collections") so the Main Catalog and Digital Collection are easier to access directly, while congress.gov and copyright.gov remain accessible from the bottom navigation.</li>
+            <li class="case-study__list-item"><strong>Reintroduced the grid layout</strong> from the current design for "Featured at loc.gov" — compared to the simple three-column grid from the first iteration, the original grids showcase more content with their own visual hierarchy, which echoes our client's goal of showing the "richness" of the Library of Congress.</li>
+          </ul>
+
+          <p class="case-study__body">After these edits, the design was shown to two UX experts for evaluation. We addressed their key concern about accessibility with form fields by noting this as a design assumption to be handled on the development side with HTML <code>&lt;label&gt;</code> tags. The experts also pointed out a minor oversight — not including an option to see all programs &amp; services under that tab — and suggested adding reading rooms as a frequent destination for some users.</p>
+
+          <p class="case-study__body">Before and after:</p>
+
+          <div class="loc-comparison">
+            <div>
+              <img src="assets/images/loc/s5-before.png" alt="Loc.gov landing page initial design before Sprint 5 edits" class="case-study__image" loading="lazy">
+              <p class="loc-comparison__label">Before edits</p>
+            </div>
+            <div>
+              <img src="assets/images/loc/s5-after.png" alt="Loc.gov landing page final design after Sprint 5 edits" class="case-study__image" loading="lazy">
+              <p class="loc-comparison__label">After edits</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /loc-sprint-content -->
+    </div><!-- /loc-sprint-layout -->
+
+    <!-- Final words -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Final Words</h2>
+      <p class="case-study__body">Beyond the design-related activities, I took part in planning, editing user testing tasks, and proofreading the scripts used in testing sessions for all sprints. In Sprint 4, I also took on the role of facilitating work between the research and design teams — making sure questions from the design team were answered by the research team, and that all findings were translated into actionable ideas. This role required me to stay up-to-date with the progress and tasks of both teams while ensuring we met all deadlines set by our client and the capstone course.</p>
+      <p class="case-study__body">I'd like to thank my team for trusting my judgment in making most of the internal decisions (supported by logical reasoning, of course). I'd also like to thank our client for being approachable and responsive. It has been a valuable experience taking part in this big mission by the Library of Congress, and I hope that some elements from our design will be live on the real site one day.</p>
+    </section>
+
+    <nav class="case-study__next-nav" aria-label="Project navigation">
+      <a href="covid.html" class="case-study__next-item case-study__next-item--prev">
+        <span class="case-study__next-dir">&larr; Previous</span>
+        <span class="case-study__next-title">Coping w/ Covid</span>
+      </a>
+      <a href="projects.html" class="case-study__next-item case-study__next-item--next">
+        <span class="case-study__next-dir">All Projects &rarr;</span>
+        <span class="case-study__next-title">View All</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="footer--minimal">
+    <div class="footer__inner footer__inner--minimal">
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. &copy; 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll progress
+    var bar = document.getElementById('loc-progress');
+    function updateProgress() {
+      var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      bar.style.width = Math.min(pct, 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // Active sprint tracking via IntersectionObserver
+    var nodes  = document.querySelectorAll('.loc-tl-node[data-sprint]');
+    var blocks = document.querySelectorAll('.loc-sprint-block[id]');
+
+    if ('IntersectionObserver' in window && nodes.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            nodes.forEach(function(n) {
+              n.classList.toggle('is-active', n.dataset.sprint === id);
+            });
+          }
+        });
+      }, { rootMargin: '-15% 0px -75% 0px' });
+      blocks.forEach(function(b) { observer.observe(b); });
+    }
+  </script>
+  <script>
+    var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+  </script>
+
+</body>
+</html>
