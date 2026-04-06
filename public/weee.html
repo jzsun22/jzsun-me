@@ -79,13 +79,13 @@
           <h1 class="case-study__title">Weee! Usability Study</h1>
           <p class="case-study__hook">How does search hold up when the product you want doesn't have an obvious English name?</p>
         </div>
-        <div class="case-study__header-right">
-          Solo UXR<br>
-          June – July 2022<br>
-          6 weeks<br>
-          4 participants<br>
-          9 tasks
-        </div>
+        <dl class="case-study__header-right case-study__meta-list">
+          <dt class="visually-hidden">Role</dt><dd>Solo UXR</dd>
+          <dt class="visually-hidden">Timeline</dt><dd>June – July 2022</dd>
+          <dt class="visually-hidden">Duration</dt><dd>6 weeks</dd>
+          <dt class="visually-hidden">Participants</dt><dd>4 participants</dd>
+          <dt class="visually-hidden">Tasks</dt><dd>9 tasks</dd>
+        </dl>
       </div>
     </header>
 
@@ -191,7 +191,7 @@
 
   <script>
     var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
-    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
   </script>
   <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
 </body>

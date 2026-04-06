@@ -135,10 +135,10 @@
 
     <section class="case-study__section">
       <h2 class="case-study__section-heading">Archives</h2>
-      <ul class="case-study__link-list">
-        <li><a href="https://yasvi-patel.wixsite.com/music-visualization" target="_blank" rel="noopener">The website hosting our full application <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
-        <li><a href="https://docs.google.com/presentation/d/1HIWUXx-aYu21DT0Uv5CdzOFFDmiSdSZc42gK5YNb_vY/present?slide=id.p" target="_blank" rel="noopener">Presentation with demo video <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
-        <li><a href="https://medium.com/visumd/see-the-world-through-a-musical-lens-682391f53efe" target="_blank" rel="noopener">Detailed documentation on our design process <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
+      <ul class="case-study__body-list">
+        <li><a href="https://yasvi-patel.wixsite.com/music-visualization" class="link--arrow" target="_blank" rel="noopener">The website hosting our full application <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
+        <li><a href="https://docs.google.com/presentation/d/1HIWUXx-aYu21DT0Uv5CdzOFFDmiSdSZc42gK5YNb_vY/present?slide=id.p" class="link--arrow" target="_blank" rel="noopener">Presentation with demo video <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
+        <li><a href="https://medium.com/visumd/see-the-world-through-a-musical-lens-682391f53efe" class="link--arrow" target="_blank" rel="noopener">Detailed documentation on our design process <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></li>
       </ul>
     </section>
 
@@ -162,7 +162,7 @@
 
   <script>
     var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
-    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
   </script>
   <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
 </body>

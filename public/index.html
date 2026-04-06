@@ -115,9 +115,10 @@
 
       <!-- Mobile hero — editorial layout (≤991px) -->
       <div class="hero__mobile">
-        <p class="hero__mobile-statement">"everything I build is a vote for what feels <em class="hero__mobile-accent">normal</em> next."</p>
+        <p class="hero__mobile-statement">"Everything I build is a vote for what feels <em class="hero__mobile-accent">normal</em> next."</p>
         <div class="hero__mobile-meta">
           <span class="hero__mobile-name">Jocelyn Sun</span>
+          <span class="hero__mobile-divider" aria-hidden="true"></span>
           <span class="hero__mobile-role">Product Designer</span>
         </div>
       </div>
@@ -315,18 +316,13 @@
 
   <!-- Typed responsive font sizes -->
   <style>
-    @media (max-width: 568px) {
+    @media (max-width: 640px) {
       #typed {
-        font-size: 11px;
+        font-size: 10px;
       }
       #typed-container {
         padding-left: 20px;
         padding-bottom: 10px;
-      }
-    }
-    @media (max-width: 479px) {
-      #typed {
-        font-size: 9px;
       }
     }
   </style>
@@ -352,6 +348,7 @@
     const menu   = document.querySelector('.nav__menu');
     toggle.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', isOpen);
       toggle.setAttribute('aria-expanded', isOpen);
     });
   </script>

@@ -181,7 +181,7 @@
 
   <script>
     var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
-    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
   </script>
   <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
 </body>

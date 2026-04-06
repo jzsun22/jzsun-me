@@ -95,7 +95,10 @@
       text-align: left;
     }
 
-    .loc-team-trigger:hover .loc-team-tooltip { display: block; }
+    @media (hover: hover) {
+      .loc-team-trigger:hover .loc-team-tooltip { display: block; }
+    }
+    .loc-team-trigger.is-open .loc-team-tooltip { display: block; }
 
     .loc-team-tooltip__row {
       display: flex;
@@ -299,6 +302,14 @@
       margin-bottom: var(--space-3xl);
       padding-bottom: var(--space-3xl);
       border-bottom: 1px solid var(--color-bg-divider);
+      scroll-margin-top: var(--space-md);
+    }
+
+    @media (max-width: 1280px) {
+      .loc-sprint-block {
+        /* Account for sticky sprint nav bar (~44px) */
+        scroll-margin-top: 52px;
+      }
     }
 
     .loc-sprint-block:last-child { border-bottom: none; margin-bottom: 0; }
@@ -314,7 +325,7 @@
       margin-bottom: var(--space-xl);
       display: flex;
       align-items: baseline;
-      gap: var(--space-md);
+      gap: var(--space-xl);
       z-index: 10;
     }
 
@@ -408,14 +419,72 @@
       margin: 0 0 var(--space-md) 0;
     }
 
+    /* ---- Horizontal sprint nav — shown on tablets & phones ---- */
+    .loc-sprint-nav-bar {
+      display: none;              /* hidden on wide desktop */
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-bg-divider);
+      /* Break out of parent's page padding so bar is edge-to-edge */
+      margin-left: calc(-1 * var(--page-padding-x));
+      margin-right: calc(-1 * var(--page-padding-x));
+      padding: var(--space-sm) var(--page-padding-x);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .loc-sprint-nav-bar::-webkit-scrollbar { display: none; }
+
+    .loc-sprint-nav-bar__inner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      white-space: nowrap;
+    }
+
+    .loc-sprint-nav-bar__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .loc-sprint-nav-bar__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: 100px;
+      transition: color var(--transition-fast), background var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .loc-sprint-nav-bar__link:hover {
+      color: var(--color-text-primary);
+      background: var(--color-bg-card);
+    }
+
+    .loc-sprint-nav-bar__link.is-active {
+      color: var(--color-accent-teal);
+      background: var(--color-bg-card);
+      font-weight: 700;
+    }
+
     /* Responsive */
-    @media (max-width: 1100px) {
+    @media (max-width: 1280px) {
       .loc-tl-nav { display: none; }
+      .loc-sprint-nav-bar { display: block; }
     }
 
     @media (max-width: 768px) {
-      .loc-tl-nav { display: none; }
-
       .loc-sprint-sticky { flex-wrap: wrap; gap: var(--space-xs); }
       .loc-sprint-sticky__date { margin-left: 0; width: 100%; }
 
@@ -537,6 +606,18 @@
       <p class="case-study__body">We divided our goal into three areas: the Library of Congress homepage, the LOC catalog, and Stacks (at the time, only available on computers on-site). We prioritized the LOC catalog and Stacks because our client expressed interest in learning about the experience of these two platforms and the potential for integrating them.</p>
       <p class="case-study__body">We chose not to follow the traditional approach of creating designs for all problem areas and iterating on them through every sprint. Instead, we favored workload management and quality. Starting midway through each sprint, we asked our client whether they wanted us to continue working on the current design or shift to a new focus area. We then used this to guide our contextual interviews, which ran concurrently with testing — giving us more context to work with in preparation for the next sprint. As a result, we were better informed to make decisions in each mapping stage.</p>
     </section>
+
+    <!-- Horizontal sprint nav — tablets & phones -->
+    <nav class="loc-sprint-nav-bar" aria-label="Sprint navigation (compact)">
+      <div class="loc-sprint-nav-bar__inner">
+        <span class="loc-sprint-nav-bar__label">Sprints</span>
+        <a href="#sprint-1" class="loc-sprint-nav-bar__link is-active" data-sprint="sprint-1">S1 Catalog</a>
+        <a href="#sprint-2" class="loc-sprint-nav-bar__link" data-sprint="sprint-2">S2 Stacks</a>
+        <a href="#sprint-3" class="loc-sprint-nav-bar__link" data-sprint="sprint-3">S3 Landing</a>
+        <a href="#sprint-4" class="loc-sprint-nav-bar__link" data-sprint="sprint-4">S4 Loc.gov</a>
+        <a href="#sprint-5" class="loc-sprint-nav-bar__link" data-sprint="sprint-5">S5 Integration</a>
+      </div>
+    </nav>
 
     <!-- Sprint layout -->
     <div class="loc-sprint-layout">
@@ -1085,16 +1166,20 @@
     updateProgress();
 
     // Active sprint tracking via IntersectionObserver
-    var nodes  = document.querySelectorAll('.loc-tl-node[data-sprint]');
-    var blocks = document.querySelectorAll('.loc-sprint-block[id]');
+    var nodes    = document.querySelectorAll('.loc-tl-node[data-sprint]');
+    var barLinks = document.querySelectorAll('.loc-sprint-nav-bar__link[data-sprint]');
+    var blocks   = document.querySelectorAll('.loc-sprint-block[id]');
 
-    if ('IntersectionObserver' in window && nodes.length) {
+    if ('IntersectionObserver' in window && (nodes.length || barLinks.length)) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             var id = entry.target.id;
             nodes.forEach(function(n) {
               n.classList.toggle('is-active', n.dataset.sprint === id);
+            });
+            barLinks.forEach(function(l) {
+              l.classList.toggle('is-active', l.dataset.sprint === id);
             });
           }
         });
@@ -1104,7 +1189,29 @@
   </script>
   <script>
     var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
-    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',o);});
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
+
+    // Team tooltip — click/keyboard toggle for touch + a11y
+    var teamTrigger = document.getElementById('teamTrigger');
+    if (teamTrigger) {
+      teamTrigger.addEventListener('click', function() {
+        var isOpen = teamTrigger.classList.toggle('is-open');
+        teamTrigger.setAttribute('aria-expanded', isOpen);
+      });
+      teamTrigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          teamTrigger.click();
+        }
+      });
+      // Close when tapping outside
+      document.addEventListener('click', function(e) {
+        if (!teamTrigger.contains(e.target)) {
+          teamTrigger.classList.remove('is-open');
+          teamTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
   </script>
 
 </body>

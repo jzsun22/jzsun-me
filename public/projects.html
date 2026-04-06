@@ -153,6 +153,17 @@
       .preview-card {
         display: none !important;
       }
+
+      /* Make entire row tappable on mobile for entries with a single link */
+      .project-entry {
+        position: relative;
+      }
+      a.project-entry__title::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
     }
 
     /* ============================================
@@ -554,6 +565,47 @@
       font-weight: 500;
       font-family: var(--font-body);
     }
+
+    /* ---- Project entry dual links ---- */
+    .project-entry__title--plain {
+      font-family: var(--font-body);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .project-entry__links {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-left: 6px;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3px;
+    }
+
+    .project-entry__links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .project-entry__links a i {
+      font-size: 0.75em;
+      vertical-align: 0.05em;
+      margin-left: 2px;
+    }
+
+    .project-entry__links a:hover {
+      color: var(--color-accent-teal);
+    }
+
+    .project-entry__links-sep {
+      color: var(--color-bg-divider);
+      user-select: none;
+    }
   </style>
 </head>
 
@@ -617,13 +669,20 @@
               data-desc="My friend was scheduling 50 staff on Google Sheets every week. I kept asking why until I built something better.">
             <span class="project-entry__num" aria-hidden="true">01</span>
             <div class="project-entry__content">
-              <a href="https://orvia-demo.vercel.app"
-                 class="project-entry__title"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 aria-label="Orvia — Multi-location Shift Scheduler, opens demo in new tab">
+              <span class="project-entry__title project-entry__title--plain">
                 Orvia – Multi-location Shift Scheduler
-              </a>
+              </span>
+              <span class="project-entry__links">
+                <a href="https://orvia-demo.vercel.app"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Orvia demo, opens in new tab">demo <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <span class="project-entry__links-sep" aria-hidden="true">|</span>
+                <a href="https://github.com/jzsun22/orvia-demo"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Orvia source code on GitHub, opens in new tab">github <i class="fa-brands fa-github" aria-hidden="true"></i></a>
+              </span>
               <span class="project-entry__tags" aria-label="Tags: Interaction Design, Solo Build, Dashboard UI">
                 Interaction Design · Solo Build · Dashboard UI
               </span>
@@ -643,6 +702,7 @@
                  rel="noopener noreferrer"
                  aria-label="AI Companion for Kids — opens slide deck in new tab">
                 AI Companion for Kids
+                <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
               </a>
               <span class="project-entry__tags" aria-label="Tags: PM Concept, Feature Ideation, MVP Scoping">
                 PM Concept · Feature Ideation · MVP Scoping
@@ -663,6 +723,7 @@
                  rel="noopener noreferrer"
                  aria-label="Early-Stage LLM Interface — opens Figma in new tab">
                 Early-Stage LLM Interface
+                <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
               </a>
               <span class="project-entry__tags" aria-label="Tags: Early LLM Design, Onboarding UX, Interface Concepts">
                 Early LLM Design · Onboarding UX · Interface Concepts
@@ -821,6 +882,7 @@
     const menu   = document.querySelector('.nav__menu');
     toggle.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', isOpen);
       toggle.setAttribute('aria-expanded', isOpen);
     });
   </script>
@@ -931,8 +993,12 @@
     const previewDesc   = document.getElementById('previewDesc');
     const entries = document.querySelectorAll('.project-entry');
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let mouseX = 0, mouseY = 0;
     let cardX = 0, cardY = 0;
+    let isCardVisible = false;
+    let rafId = null;
     const CARD_WIDTH  = 280;
     const CARD_HEIGHT = 240; /* approx */
     const OFFSET_Y    = 20;  /* gap between cursor and card bottom */
@@ -945,10 +1011,10 @@
       cursorDot.style.top  = mouseY + 'px';
     });
 
-    /* Lerp animation loop */
+    /* Lerp animation loop — only runs while preview card is visible */
     function lerp(a, b, t) { return a + (b - a) * t; }
 
-    (function animate() {
+    function animate() {
       cardX = lerp(cardX, mouseX, 0.1);
       cardY = lerp(cardY, mouseY, 0.1);
 
@@ -966,34 +1032,70 @@
       previewCard.style.left = leftPos + 'px';
       previewCard.style.top  = topPos  + 'px';
 
-      requestAnimationFrame(animate);
-    })();
+      if (isCardVisible) rafId = requestAnimationFrame(animate);
+    }
 
-    /* Show/hide on project entry hover */
-    entries.forEach(entry => {
-      entry.addEventListener('mouseenter', () => {
-        const project = entry.dataset.project;
-        const desc    = entry.dataset.desc;
-        previewMiniUI.innerHTML = miniUIs[project] || '';
-        previewDesc.textContent = desc || '';
-        previewCard.classList.add('is-visible');
+    function startAnimation() {
+      if (!isCardVisible) {
+        isCardVisible = true;
+        cardX = mouseX;
+        cardY = mouseY;
+        rafId = requestAnimationFrame(animate);
+      }
+    }
 
-        // add project-specific class to mini UI
-        previewMiniUI.className = 'preview-card__mini-ui';
-        if (project === 'llm') {
-          previewMiniUI.classList.add('preview-card__mini-ui--llm');
-        }
+    function stopAnimation() {
+      isCardVisible = false;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    }
+
+    /* Show/hide on project entry hover — skip under reduced motion */
+    const projectList = document.getElementById('projectList');
+
+    if (!prefersReducedMotion) {
+      projectList.addEventListener('mouseenter', () => {
+        projectList.classList.add('is-hovering');
       });
-
-      entry.addEventListener('mouseleave', () => {
+      projectList.addEventListener('mouseleave', () => {
+        projectList.classList.remove('is-hovering');
+        entries.forEach(e => e.classList.remove('is-hovered'));
         previewCard.classList.remove('is-visible');
+        stopAnimation();
       });
-    });
 
-    /* Hide preview when leaving the project list entirely */
-    document.getElementById('projectList').addEventListener('mouseleave', () => {
-      previewCard.classList.remove('is-visible');
-    });
+      entries.forEach(entry => {
+        entry.addEventListener('mouseenter', () => {
+          entries.forEach(e => e.classList.remove('is-hovered'));
+          entry.classList.add('is-hovered');
+
+          const project = entry.dataset.project;
+          const desc    = entry.dataset.desc;
+          previewMiniUI.innerHTML = miniUIs[project] || '';
+          previewDesc.textContent = desc || '';
+
+          previewCard.classList.add('is-visible');
+          startAnimation();
+
+          // add project-specific class to mini UI
+          previewMiniUI.className = 'preview-card__mini-ui';
+          if (project === 'llm') {
+            previewMiniUI.classList.add('preview-card__mini-ui--llm');
+          }
+        });
+
+        entry.addEventListener('mouseleave', () => {
+          entry.classList.remove('is-hovered');
+          previewCard.classList.remove('is-visible');
+          stopAnimation();
+        });
+      });
+    }
+
+    /* ---- Hide cursor dot + preview under reduced motion ---- */
+    if (prefersReducedMotion) {
+      cursorDot.style.display = 'none';
+      previewCard.style.display = 'none';
+    }
 
     /* ---- Footer: hide custom cursor and preview card ---- */
     const footer = document.querySelector('.footer');
@@ -1001,6 +1103,7 @@
     footer.addEventListener('mouseenter', () => {
       cursorDot.style.opacity = '0';
       previewCard.classList.remove('is-visible');
+      stopAnimation();
     });
 
     footer.addEventListener('mouseleave', () => {
@@ -1017,6 +1120,16 @@
       link.addEventListener('mouseleave', () => {
         cursorDot.style.opacity = '1';
       });
+    });
+
+    /* Reset dimming when returning via back gesture (bfcache) */
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) {
+        projectList.classList.remove('is-hovering');
+        entries.forEach(function(el) { el.classList.remove('is-hovered'); });
+        previewCard.classList.remove('is-visible');
+        stopAnimation();
+      }
     });
   </script>
 
