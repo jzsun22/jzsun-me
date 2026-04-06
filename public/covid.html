@@ -45,31 +45,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------- dark hero ---------- */
+    /* ---------- dark hero (scroll-fade approach) ---------- */
     .covid-hero {
-      position: relative;
-      min-height: 100vh;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: var(--space-3xl) var(--page-padding-x);
+      padding-bottom: 10vh;
       background: #0a0a0a;
       overflow: hidden;
+      will-change: opacity;
     }
 
-    /* subtle radial glow behind the text */
+    /* ambient glow — layered radial gradients */
     .covid-hero::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 600px;
-      height: 600px;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(40, 76, 76, 0.15) 0%, transparent 70%);
+      inset: 0;
+      background:
+        radial-gradient(ellipse 1100px 800px at 30% 35%, rgba(40, 76, 76, 0.4) 0%, rgba(40, 76, 76, 0.15) 35%, rgba(40, 76, 76, 0) 60%),
+        radial-gradient(ellipse 800px 600px at 72% 55%, rgba(164, 94, 95, 0.28) 0%, rgba(164, 94, 95, 0.1) 35%, rgba(164, 94, 95, 0) 60%),
+        radial-gradient(ellipse 600px 500px at 50% 80%, rgba(40, 76, 76, 0.15) 0%, rgba(40, 76, 76, 0) 55%);
       pointer-events: none;
+      animation: glow-breathe 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes glow-breathe {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 1; }
+    }
+
+    /* case study sits on top with white bg */
+    .covid-page .case-study {
+      position: relative;
+      background: var(--color-bg, #ffffff);
+      z-index: 2;
     }
 
     .covid-hero__line {
@@ -77,6 +94,7 @@
       opacity: 0;
       transform: translateY(24px);
       animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      z-index: 2;
     }
 
     .covid-hero__line--1 {
@@ -84,20 +102,20 @@
       font-size: clamp(18px, 2.4vw, 28px);
       font-weight: 400;
       color: rgba(255, 255, 255, 0.5);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       margin-bottom: var(--space-2xl);
       animation-delay: 0.3s;
     }
 
     .covid-hero__line--2 {
-      font-family: var(--font-body);
-      font-size: clamp(24px, 3.6vw, 44px);
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 4vw, 50px);
       font-weight: 400;
       font-style: italic;
       color: var(--color-accent-teal-mid);
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-      max-width: 720px;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      max-width: 740px;
       margin-bottom: var(--space-2xl);
       animation-delay: 0.8s;
     }
@@ -107,25 +125,27 @@
       font-size: clamp(18px, 2.4vw, 28px);
       font-weight: 400;
       color: rgba(255, 255, 255, 0.5);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       animation-delay: 1.3s;
     }
 
     .covid-hero__scroll-hint {
       position: absolute;
-      bottom: var(--space-xl);
+      bottom: 15vh;
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
       animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 2s forwards;
+      z-index: 2;
     }
 
     .covid-hero__scroll-hint span {
       display: block;
       width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
       margin: 0 auto;
+      animation: scroll-pulse 2.4s ease-in-out 2.6s infinite;
     }
 
     @keyframes hero-rise {
@@ -135,28 +155,11 @@
       }
     }
 
-    /* ---------- gradient dissolve ---------- */
-    .covid-hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40vh;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(255,255,255,0.03) 20%,
-        rgba(255,255,255,0.08) 35%,
-        rgba(255,255,255,0.18) 48%,
-        rgba(255,255,255,0.35) 60%,
-        rgba(255,255,255,0.58) 72%,
-        rgba(255,255,255,0.80) 84%,
-        rgba(255,255,255,0.94) 92%,
-        var(--color-bg) 100%
-      );
-      pointer-events: none;
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50%      { opacity: 0.4; transform: scaleY(0.7); }
     }
+
 
     /* ---------- nav override on dark bg ---------- */
     .covid-page .nav {
@@ -186,14 +189,38 @@
     /* ---------- responsive ---------- */
     @media (max-width: 768px) {
       .covid-hero {
-        min-height: 85vh;
+        height: 85vh;
         padding: var(--space-2xl) var(--page-padding-x);
+        padding-bottom: 12vh;
       }
 
       .covid-hero__line--2 {
         max-width: 90%;
       }
+
+      .covid-hero::before {
+        background:
+          radial-gradient(ellipse 400px 400px at 50% 45%, rgba(40, 76, 76, 0.35) 0%, rgba(40, 76, 76, 0.12) 35%, rgba(40, 76, 76, 0) 65%),
+          radial-gradient(ellipse 300px 250px at 58% 38%, rgba(164, 94, 95, 0.18) 0%, rgba(164, 94, 95, 0.06) 40%, rgba(164, 94, 95, 0) 65%);
+      }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .covid-hero {
+        will-change: auto;
+      }
+      .covid-hero::before {
+        animation: none;
+        opacity: 0.8;
+      }
+      .covid-hero__scroll-hint span {
+        animation: none;
+      }
+      .covid-hero__line {
+        animation-duration: 0.01ms;
+      }
+    }
+
     .loc-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--color-accent-teal); z-index: 9999; pointer-events: none; }
   </style>
 </head>
@@ -313,6 +340,38 @@
   <script>
     var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
     toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
+  </script>
+  <script>
+  (function(){
+    var hero = document.querySelector('.covid-hero');
+    var hint = document.querySelector('.covid-hero__scroll-hint');
+    var lines = document.querySelectorAll('.covid-hero__line');
+
+    function onScroll(){
+      var scrollY = window.scrollY;
+      var heroH = hero.offsetHeight;
+
+      /* fade hero as you scroll through last 40% of it */
+      var fadeStart = heroH * 0.55;
+      var fadeEnd = heroH * 0.95;
+      var opacity = 1;
+      if(scrollY > fadeStart){
+        opacity = 1 - Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
+      }
+      hero.style.opacity = opacity;
+
+      /* scroll hint fades out quickly */
+      if(hint) hint.style.opacity = Math.max(1 - scrollY / (heroH * 0.12), 0);
+
+      /* parallax: text drifts up gently */
+      var drift = Math.min(scrollY * 0.2, heroH * 0.25);
+      for(var i = 0; i < lines.length; i++){
+        lines[i].style.transform = 'translateY(-' + drift + 'px)';
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
   </script>
   <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
 </body>
