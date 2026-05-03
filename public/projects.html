@@ -15,6 +15,7 @@
   <meta property="og:description" content="Projects by Jocelyn Sun — Product Designer and Engineer." />
   <meta property="og:url" content="https://jzsun.me/projects.html" />
   <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -48,6 +49,10 @@
 
   <!-- Shared styles -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Tippy.js styles -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/svg-arrow.css" />
 
   <style>
     /* ============================================
@@ -133,12 +138,11 @@
 
     .preview-card__desc {
       padding: 14px 16px;
-      font-family: var(--font-serif);
-      font-style: italic;
+      font-family: var(--font-body);
       font-size: 12px;
       color: var(--color-text-primary);
       line-height: 1.6;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.2px;
     }
 
     @media (hover: none), screen and (max-width: 1024px) {
@@ -666,7 +670,7 @@
       <div class="projects-page__inner">
 
         <!-- ---- PROJECT INTRO ---- -->
-        <p class="projects-page__intro">Research, design, and building — or all three at once.</p>
+        <p class="projects-page__intro">Technology should feel good to use. Most of it doesn't.</p>
 
         <!-- ---- PROJECT LIST ---- -->
         <ul class="project-list" id="projectList" role="list">
@@ -678,9 +682,11 @@
               data-desc="My friend was scheduling 50 staff on Google Sheets every week. I kept asking why until I built something better.">
             <span class="project-entry__num" aria-hidden="true">01</span>
             <div class="project-entry__content">
-              <span class="project-entry__title project-entry__title--plain">
+              <a href="orvia.html"
+                 class="project-entry__title"
+                 aria-label="Orvia — Multi-location Shift Scheduler">
                 Orvia – Multi-location Shift Scheduler
-              </span>
+              </a>
               <span class="project-entry__links">
                 <a href="https://orvia-demo.vercel.app"
                    target="_blank"
@@ -692,18 +698,36 @@
                    rel="noopener noreferrer"
                    aria-label="Orvia source code on GitHub, opens in new tab">github <i class="fa-brands fa-github" aria-hidden="true"></i></a>
               </span>
-              <span class="project-entry__tags" aria-label="Tags: Interaction Design, Solo Build, Dashboard UI">
-                Interaction Design · Solo Build · Dashboard UI
+              <span class="project-entry__tags" aria-label="Tags: Product Build, Next.js, Supabase, Solo Build">
+                Product Build · Next.js + Supabase · Solo Build
               </span>
             </div>
           </li>
 
-          <!-- 02 AI Companion for Kids -->
+          <!-- 02 Library of Congress -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="loc"
+              data-desc="The LOC has three front doors and no signs pointing to the right one.">
+            <span class="project-entry__num" aria-hidden="true">02</span>
+            <div class="project-entry__content">
+              <a href="loc.html"
+                 class="project-entry__title"
+                 aria-label="Library of Congress case study">
+                Library of Congress
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Discovery UX, IA Redesign, UI Audit">
+                Discovery UX · IA Redesign · UI Audit
+              </span>
+            </div>
+          </li>
+
+          <!-- 03 AI Companion for Kids -->
           <li class="project-entry"
               role="listitem"
               data-project="ai-companion"
               data-desc="Most kids apps optimize for screen time. I spent 48 hours figuring out how to optimize for emotional growth instead.">
-            <span class="project-entry__num" aria-hidden="true">02</span>
+            <span class="project-entry__num" aria-hidden="true">03</span>
             <div class="project-entry__content">
               <a href="https://www.figma.com/deck/ODWN3f0i1LDDRn34NcsllM/PM-assignment?node-id=1-234&t=bpkLz2X7TxfoKllH-1"
                  class="project-entry__title"
@@ -719,12 +743,12 @@
             </div>
           </li>
 
-          <!-- 03 LLM Interface -->
+          <!-- 04 Early-Stage LLM Interface -->
           <li class="project-entry"
               role="listitem"
               data-project="llm"
               data-desc="Designed an LLM interface before the industry agreed on what one should look like. Then ChatGPT answered that question for everyone.">
-            <span class="project-entry__num" aria-hidden="true">03</span>
+            <span class="project-entry__num" aria-hidden="true">04</span>
             <div class="project-entry__content">
               <a href="https://www.figma.com/proto/SiOUTQjaFxaREdgQsJGcVf/yuse.ai-case-study?node-id=0-1&t=7UmXbaj9aUO2AIVs-1"
                  class="project-entry__title"
@@ -736,24 +760,6 @@
               </a>
               <span class="project-entry__tags" aria-label="Tags: Early LLM Design, Onboarding UX, Interface Concepts">
                 Early LLM Design · Onboarding UX · Interface Concepts
-              </span>
-            </div>
-          </li>
-
-          <!-- 04 Library of Congress -->
-          <li class="project-entry"
-              role="listitem"
-              data-project="loc"
-              data-desc="The LOC has three front doors and no signs pointing to the right one.">
-            <span class="project-entry__num" aria-hidden="true">04</span>
-            <div class="project-entry__content">
-              <a href="loc.html"
-                 class="project-entry__title"
-                 aria-label="Library of Congress case study">
-                Library of Congress
-              </a>
-              <span class="project-entry__tags" aria-label="Tags: Discovery UX, IA Redesign, UI Audit">
-                Discovery UX · IA Redesign · UI Audit
               </span>
             </div>
           </li>
@@ -780,15 +786,16 @@
 
 
         <!-- ---- SMALLER / OLDER PROJECTS ---- -->
-        <div class="archives" aria-label="Smaller and older projects">
-          <h2 class="archives__heading">Smaller/Older Projects...</h2>
+        <div class="archives" aria-label="Earlier work">
+          <h2 class="archives__heading">Earlier Work</h2>
           <ul class="archives__list" role="list">
 
             <li class="archives__item" role="listitem">
               <a href="https://www.figma.com/proto/yaulWWzZ4USRbVJWJwaZdd/Realized-Solutions-Case-Study?node-id=1-2&t=3AfOeLFbDnroup4D-1"
-                 class="archives__link"
+                 class="archives__link archives__link--external"
                  target="_blank"
                  rel="noopener noreferrer"
+                 data-tippy-content="open in Figma"
                  aria-label="Realized Solutions, product research — opens Figma in new tab">
                 Realized Solutions (product research)
                 <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
@@ -894,6 +901,13 @@
       toggle.classList.toggle('is-open', isOpen);
       toggle.setAttribute('aria-expanded', isOpen);
     });
+  </script>
+
+  <!-- Console easter egg -->
+  <script>
+    console.log('%c✦ Jocelyn Sun', 'font-family:monospace;font-size:15px;font-weight:bold;color:#284c4c;');
+    console.log('%cproduct designer  ·  root-cause hunter  ·  occasional reader of tarot cards', 'font-family:monospace;font-size:11px;color:#666c6b;');
+    console.log('%c\nYou opened DevTools. I respect the instinct.\n\n→ jocelyn.z.sun@gmail.com', 'font-family:monospace;font-size:11px;color:#4a4849;');
   </script>
 
   <!-- Mini UI templates -->
@@ -1139,6 +1153,19 @@
         previewCard.classList.remove('is-visible');
         stopAnimation();
       }
+    });
+  </script>
+
+  <!-- Popper + Tippy.js -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script>
+    tippy('.archives__link--external', {
+      arrow: tippy.roundArrow,
+      duration: 150,
+      placement: 'right',
+      offset: [0, 8],
+      theme: 'tipbox',
     });
   </script>
 

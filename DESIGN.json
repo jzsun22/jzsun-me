@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-02T00:00:00Z",
+  "title": "Design System: Jocelyn Sun Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "deep-still-water": {
+        "role": "primary",
+        "displayName": "Deep Still Water",
+        "canonical": "oklch(28% 0.056 196)",
+        "tonalRamp": [
+          "oklch(12% 0.03 196)",
+          "oklch(18% 0.042 196)",
+          "oklch(28% 0.056 196)",
+          "oklch(38% 0.062 196)",
+          "oklch(50% 0.065 196)",
+          "oklch(62% 0.055 196)",
+          "oklch(75% 0.038 196)",
+          "oklch(90% 0.018 196)"
+        ]
+      },
+      "coastal-teal": {
+        "role": "primary",
+        "displayName": "Coastal Teal",
+        "canonical": "oklch(48% 0.072 196)",
+        "tonalRamp": [
+          "oklch(15% 0.04 196)",
+          "oklch(24% 0.052 196)",
+          "oklch(36% 0.065 196)",
+          "oklch(48% 0.072 196)",
+          "oklch(60% 0.068 196)",
+          "oklch(72% 0.055 196)",
+          "oklch(83% 0.035 196)",
+          "oklch(93% 0.015 196)"
+        ]
+      },
+      "storm-haze": {
+        "role": "tertiary",
+        "displayName": "Storm Haze",
+        "canonical": "oklch(63% 0.044 219)",
+        "tonalRamp": [
+          "oklch(18% 0.025 219)",
+          "oklch(30% 0.036 219)",
+          "oklch(44% 0.043 219)",
+          "oklch(63% 0.044 219)",
+          "oklch(74% 0.038 219)",
+          "oklch(83% 0.028 219)",
+          "oklch(90% 0.016 219)",
+          "oklch(96% 0.007 219)"
+        ]
+      },
+      "dried-rose": {
+        "role": "secondary",
+        "displayName": "Dried Rose",
+        "canonical": "oklch(49% 0.076 20)",
+        "tonalRamp": [
+          "oklch(16% 0.04 20)",
+          "oklch(26% 0.056 20)",
+          "oklch(37% 0.068 20)",
+          "oklch(49% 0.076 20)",
+          "oklch(61% 0.072 20)",
+          "oklch(72% 0.058 20)",
+          "oklch(83% 0.038 20)",
+          "oklch(93% 0.016 20)"
+        ]
+      },
+      "warm-graphite": {
+        "role": "neutral",
+        "displayName": "Warm Graphite",
+        "canonical": "oklch(35% 0.005 335)",
+        "tonalRamp": [
+          "oklch(12% 0.003 335)",
+          "oklch(22% 0.004 335)",
+          "oklch(35% 0.005 335)",
+          "oklch(48% 0.005 335)",
+          "oklch(61% 0.004 335)",
+          "oklch(73% 0.003 335)",
+          "oklch(84% 0.002 335)",
+          "oklch(93% 0.001 335)"
+        ]
+      },
+      "dim-sage": {
+        "role": "neutral",
+        "displayName": "Dim Sage",
+        "canonical": "oklch(46% 0.009 178)",
+        "tonalRamp": [
+          "oklch(16% 0.005 178)",
+          "oklch(26% 0.007 178)",
+          "oklch(38% 0.009 178)",
+          "oklch(46% 0.009 178)",
+          "oklch(58% 0.008 178)",
+          "oklch(70% 0.006 178)",
+          "oklch(81% 0.004 178)",
+          "oklch(92% 0.002 178)"
+        ]
+      },
+      "stone-mist": {
+        "role": "neutral",
+        "displayName": "Stone Mist",
+        "canonical": "oklch(53% 0.003 0)",
+        "tonalRamp": [
+          "oklch(18% 0.002 0)",
+          "oklch(30% 0.002 0)",
+          "oklch(43% 0.003 0)",
+          "oklch(53% 0.003 0)",
+          "oklch(64% 0.002 0)",
+          "oklch(75% 0.002 0)",
+          "oklch(85% 0.001 0)",
+          "oklch(94% 0.001 0)"
+        ]
+      },
+      "warm-ash": {
+        "role": "neutral",
+        "displayName": "Warm Ash",
+        "canonical": "oklch(98% 0.004 120)",
+        "tonalRamp": [
+          "oklch(60% 0.004 120)",
+          "oklch(70% 0.004 120)",
+          "oklch(78% 0.004 120)",
+          "oklch(85% 0.004 120)",
+          "oklch(90% 0.004 120)",
+          "oklch(94% 0.004 120)",
+          "oklch(97% 0.004 120)",
+          "oklch(98% 0.004 120)"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(50% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(97% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Mobile hero statement only. Instrument Serif italic — the human, warm voice at the top of the page on small screens. Never used for UI chrome or headings."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles and case study titles. Instrument Sans 700 — decisive, structural. Tighter line-height (1.3) for short title strings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project entry titles, section headings, featured work labels. Weight 400 keeps them subordinate to Headline; negative tracking tightens display at wider sizes."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose content. Comfortable reading at 15–17px with 1.6–1.7 line-height. Case study text constrained to 860px max-width for comfortable measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Category labels, section headers, uppercase tag lines. Uppercase + 1.5px tracking gives visual weight at small size. Do not apply to running text."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Typed.js hero terminal (desktop), structured metadata (dates, skill labels, case study credits, prev/next labels). High line-height (1.8) for breathing room at small sizes."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 2px 8px rgba(0, 0, 0, 0.08)",
+        "purpose": "Resting state for featured work cards. Whisper-level depth. Separates card from page without decorative intent."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 4px 16px rgba(0, 0, 0, 0.12)",
+        "purpose": "Hover state for cards, paired with translateY(-3px). Reveals more presence in response to interaction."
+      },
+      {
+        "name": "nav",
+        "value": "0 1px 0 rgba(0, 0, 0, 0.06)",
+        "purpose": "Mobile nav dropdown bottom edge hairline. Structural boundary marker, not decoration."
+      },
+      {
+        "name": "section",
+        "value": "0 -10px 20px -10px rgba(0, 0, 0, 0.06)",
+        "purpose": "Inward top shadow separating featured work section from hero on desktop. Used once; negative spread collapses its reach."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-fast",
+        "value": "150ms ease",
+        "purpose": "Color-only transitions: link hover, icon color change. Snap-fast to feel responsive."
+      },
+      {
+        "name": "transition-base",
+        "value": "250ms ease",
+        "purpose": "State-change transitions: nav menu open/close, opacity shifts, transform transitions. Standard interaction rhythm."
+      },
+      {
+        "name": "ease-card-hover",
+        "value": "cubic-bezier(0.25, 0, 0.2, 1)",
+        "purpose": "Card lift and shadow change on hover. Fast exit, gradual entry."
+      },
+      {
+        "name": "ease-reveal",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Content reveals and entrance animations. Used on case study header entrance (cs-header-enter) and image hover scale."
+      },
+      {
+        "name": "ease-indicator",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Project entry hover indicator (scaleY spring). The only spring curve in the system — do not generalize."
+      }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "1024px", "purpose": "Hero switches from typed.js terminal to mobile statement. Featured grid collapses to single column. Nav logo reduces." },
+      { "name": "mobile", "value": "768px", "purpose": "Nav becomes hamburger dropdown with staggered item reveal." },
+      { "name": "small-mobile", "value": "640px", "purpose": "Tight spacing adjustments for smallest viewports." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Featured Work Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Case study / project card in the homepage featured work grid. Lifts on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\">\n  <div class=\"ds-card__title-row\">\n    <span class=\"ds-card__title\">Redesigning Sephora's Search</span>\n  </div>\n  <div class=\"ds-card__tags\">UX RESEARCH · INTERACTION DESIGN</div>\n  <p class=\"ds-card__description\">How might a better search experience help customers find the right product without being overwhelmed by choice?</p>\n</a>",
+      "css": ".ds-card { display: flex; flex-direction: column; gap: 8px; background-color: #f8f9f7; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-decoration: none; transition: transform 200ms cubic-bezier(0.25, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.25, 0, 0.2, 1); } .ds-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); } .ds-card__title { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 16px; font-weight: 400; color: #4a4849; text-decoration: underline; text-underline-offset: 2px; transition: color 150ms ease; } .ds-card:hover .ds-card__title { color: #284c4c; } .ds-card__tags { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: #a45e5f; line-height: 1.5; } .ds-card__description { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 15px; color: #4a4849; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Desktop nav link in default and active states.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\">\n  <ul class=\"ds-nav__menu\">\n    <li><a class=\"ds-nav__link\" href=\"#\">Work</a></li>\n    <li><a class=\"ds-nav__link ds-nav__link--active\" href=\"#\" aria-current=\"page\">About</a></li>\n  </ul>\n</nav>",
+      "css": ".ds-nav__menu { display: flex; align-items: center; gap: 0; list-style: none; padding: 0; margin: 0; } .ds-nav__link { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 15px; color: #4a4849; text-decoration: none; padding: 4px 16px; letter-spacing: 0.25px; line-height: 1.5; transition: color 150ms ease; display: block; } .ds-nav__link:hover { color: #666c6b; text-decoration: underline; text-underline-offset: 2px; } .ds-nav__link--active { color: #284c4c; font-weight: 700; } .ds-nav__link:focus-visible { outline: 2px solid #284c4c; outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Project Entry",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Numbered project list row on the projects page. Dims siblings on hover; reveals teal left indicator.",
+      "html": "<ul class=\"ds-project-list ds-project-list--hovering\">\n  <li class=\"ds-project-entry ds-project-entry--hovered\">\n    <span class=\"ds-project-entry__num\" aria-hidden=\"true\">01</span>\n    <div class=\"ds-project-entry__content\">\n      <a class=\"ds-project-entry__title\" href=\"#\">Weee! Usability Study</a>\n      <span class=\"ds-project-entry__tags\">UX RESEARCH</span>\n    </div>\n  </li>\n  <li class=\"ds-project-entry\">\n    <span class=\"ds-project-entry__num\" aria-hidden=\"true\">02</span>\n    <div class=\"ds-project-entry__content\">\n      <a class=\"ds-project-entry__title\" href=\"#\">Redesigning Sephora</a>\n      <span class=\"ds-project-entry__tags\">INTERACTION DESIGN</span>\n    </div>\n  </li>\n</ul>",
+      "css": ".ds-project-list { list-style: none; padding: 0; margin: 0; } .ds-project-list--hovering .ds-project-entry { opacity: 0.2; } .ds-project-list--hovering .ds-project-entry--hovered { opacity: 1; } .ds-project-entry { border-bottom: 1px solid #e5e5e5; padding: 40px 0 40px 24px; display: flex; align-items: center; gap: 24px; transition: opacity 300ms ease; position: relative; } .ds-project-entry:first-child { border-top: 1px solid #e5e5e5; } .ds-project-entry::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #284c4c; transform: scaleY(0); transform-origin: center; transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1); border-radius: 2px; } .ds-project-entry--hovered::before { transform: scaleY(1); } .ds-project-entry__num { font-family: 'Inconsolata', 'Courier New', monospace; font-size: 60px; font-weight: 400; color: #4a4849; opacity: 0.06; line-height: 1; flex-shrink: 0; width: 80px; letter-spacing: -1px; user-select: none; } .ds-project-entry__content { flex: 1; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; } .ds-project-entry__title { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 20px; font-weight: 400; color: #4a4849; text-decoration: none; transition: color 150ms ease; letter-spacing: -0.2px; } .ds-project-entry--hovered .ds-project-entry__title { color: #284c4c; } .ds-project-entry__tags { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #a45e5f; flex-shrink: 0; }"
+    },
+    {
+      "name": "Case Study Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Skill and method tags in case study headers. Mono, lightweight, no background fill.",
+      "html": "<div class=\"ds-pill-group\">\n  <span class=\"ds-pill\">User Research</span>\n  <span class=\"ds-pill\">Figma</span>\n  <span class=\"ds-pill\">Usability Testing</span>\n</div>",
+      "css": ".ds-pill-group { display: flex; flex-wrap: wrap; gap: 4px; } .ds-pill { font-family: 'Inconsolata', 'Courier New', monospace; font-size: 12px; color: #666c6b; border: 1px solid #e5e5e5; border-radius: 20px; padding: 3px 10px; letter-spacing: 0.5px; line-height: 1.5; display: inline-block; }"
+    },
+    {
+      "name": "Tag Label",
+      "kind": "chip",
+      "refersTo": "tag-label",
+      "description": "Uppercase category / discipline tag in Dried Rose. Used on cards, project entries, and case study headers.",
+      "html": "<span class=\"ds-tag\">PM CONCEPT · FEATURE IDEATION</span>",
+      "css": ".ds-tag { font-family: 'Instrument Sans', Arial, sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: #a45e5f; line-height: 1.5; }"
+    },
+    {
+      "name": "Tooltip",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Tippy.js 'tipbox' theme for homepage external link hover previews.",
+      "html": "<div class=\"ds-tooltip\" role=\"tooltip\">\n  A real-time grocery delivery app with a loyal following in Asian-American communities\n</div>",
+      "css": ".ds-tooltip { background-color: #efefec; color: #4a4a4a; font-family: 'Instrument Sans', Arial, sans-serif; font-size: 13px; border-radius: 4px; padding: 8px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 220px; line-height: 1.5; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Archive",
+    "overview": "This is a designer's accumulated work — each piece chosen, never padded. The system does not compete with the case studies inside it; it creates the conditions for them to land. The aesthetic logic is restraint as confidence: generous whitespace, a near-invisible neutral ground, and two carefully rationed accents that appear precisely when they're needed and nowhere else.\n\nThe type hierarchy is built on a single sans family (Instrument Sans) for structural clarity, with Instrument Serif reserved for moments that need a human touch — italic hero statements on mobile, bylines, and the odd section heading that benefits from warmth. Inconsolata handles structured meta: the typed.js terminal hero on desktop, date ranges, skill labels in case studies. Three families, each with a clear lane.\n\nThis system explicitly rejects the visual language of the existing Webflow site, overproduced SaaS landing pages, and the default portfolio template — the one with gradient hero text, glassmorphism cards, and identical icon-title-description rows.",
+    "keyCharacteristics": [
+      "Two-accent restrained palette; teal is voice, rose is categorization signal",
+      "Fluid typography with a 15px–34px scale range; no flat steps",
+      "Cards rest flat; elevation appears only in response to interaction",
+      "Transitions are fast and directional (150ms–250ms, ease-out); no bounce",
+      "Accessibility-first: skip nav, focus rings, aria labels, reduced-motion support built into base styles"
+    ],
+    "rules": [
+      {
+        "name": "The Still Water Rule",
+        "body": "Deep Still Water (#284c4c) appears on 10% or less of any given screen. It is an accent, not a theme color. Never use it as a background fill for content areas, section blocks, or card surfaces.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Accent Rule",
+        "body": "Dried Rose is categorization; Deep Still Water is emphasis. They do not swap roles. A tag is never teal; an active nav link is never rose.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif as Whisper Rule",
+        "body": "Instrument Serif appears when a surface needs to feel inhabited, not designed. It is never used for UI chrome (buttons, labels, nav). If adding serif feels like decoration rather than warmth, use sans instead.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono as Structure Rule",
+        "body": "Inconsolata signals precision and meta-information, not personality. Do not use it for headings, CTAs, or marketing language. It belongs on data, dates, and the terminal aesthetic of the hero.",
+        "section": "typography"
+      },
+      {
+        "name": "The Whisper Lift Rule",
+        "body": "Shadows appear only in response to state (hover, overlay) or to mark a structural boundary between page zones. A surface at rest is flat. Never add shadow to reinforce visual hierarchy that spacing and color difference already establish.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Deep Still Water (#284c4c) only for interactive emphasis: active nav, link hover, focus rings, the project entry hover indicator.",
+      "Do use Dried Rose (#a45e5f) exclusively as a category and tag signal.",
+      "Do constrain case study body prose to the 860px content container for comfortable reading measure.",
+      "Do use the 250ms ease transition for state-change animations and 150ms for color-only transitions.",
+      "Do apply the focus ring on every interactive element: 2px solid Deep Still Water, outline-offset 3px, border-radius radius-sm.",
+      "Do let spacing carry hierarchy before reaching for type weight.",
+      "Do use Inconsolata for structured meta and Instrument Serif for editorial warmth — each family has a lane."
+    ],
+    "donts": [
+      "Don't replicate the current Webflow site at jzsun.me — the new system is a deliberate evolution beyond that visual language.",
+      "Don't introduce gradient text (background-clip + gradient background). Solid color only.",
+      "Don't use glassmorphism (backdrop-filter, blur) as decorative treatment.",
+      "Don't add bounce easing or elastic springs outside the projects page entry indicator.",
+      "Don't use border-left or border-right greater than 1px as a colored accent stripe on cards, callouts, or list items.",
+      "Don't nest cards.",
+      "Don't reach for Storm Haze (#749eaf) as a default choice for new components.",
+      "Don't use all-caps body copy — uppercase is reserved for short labels and category tags at 12–13px."
+    ]
+  }
+}

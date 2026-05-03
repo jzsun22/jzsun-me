@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <title>Orvia | Jocelyn Sun</title>
+  <meta name="description" content="Orvia — a smart shift scheduling system for multi-location retail. Designed and built by Jocelyn Sun." />
+  <link rel="canonical" href="https://jzsun.me/orvia.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Orvia | Jocelyn Sun" />
+  <meta property="og:description" content="A smart shift scheduling system for multi-location retail. The algorithm generates the schedule; the manager adjusts." />
+  <meta property="og:url" content="https://jzsun.me/orvia.html" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orvia | Jocelyn Sun" />
+  <meta name="twitter:description" content="A smart shift scheduling system for multi-location retail. The algorithm generates the schedule; the manager adjusts." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Orvia — Smart Shift Scheduling for Multi-Location Retail",
+    "description": "A smart shift scheduling system for multi-location retail. The algorithm generates the schedule; the manager adjusts.",
+    "url": "https://jzsun.me/orvia.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jocelyn Sun",
+      "url": "https://jzsun.me"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Scroll progress bar */
+    #orvia-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--color-accent-teal);
+      width: 0%;
+      z-index: 9999;
+      transition: width 80ms linear;
+    }
+
+    /* Next nav: hide phantom spacer at mobile (global rule collapses to 1-col) */
+    @media (max-width: 768px) {
+      .case-study__next-nav > span[aria-hidden] {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="orvia-progress" role="progressbar" aria-hidden="true"></div>
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- =====================
+       NAVIGATION
+       ===================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — Home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn." />
+      </a>
+
+      <!-- Mobile toggle -->
+      <button
+        class="nav__toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html"    class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link">Projects</a></li>
+        <li><a href="about.html"    class="nav__link">About</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <!-- =====================
+       MAIN CONTENT
+       ===================== -->
+  <main id="main-content">
+    <article class="case-study" aria-labelledby="cs-title">
+
+      <!-- ---- HEADER ---- -->
+      <header class="case-study__header">
+        <div class="content-wrapper">
+          <div class="case-study__header-split">
+
+            <div>
+              <p class="case-study__category">PRODUCT BUILD</p>
+              <h1 class="case-study__title" id="cs-title">Orvia</h1>
+              <p class="case-study__hook">A week of retail shifts is a constraint-satisfaction problem. Most scheduling software gives you a better spreadsheet. Orvia generates the answer.</p>
+
+              <div class="case-study__pills">
+                <span class="case-study__pill">Next.js</span>
+                <span class="case-study__pill">TypeScript</span>
+                <span class="case-study__pill">Supabase</span>
+                <span class="case-study__pill">Full Stack</span>
+                <span class="case-study__pill">Solo Build</span>
+              </div>
+
+            </div>
+
+            <div class="case-study__header-right" aria-label="Project metadata">
+              <dl class="case-study__meta-list">
+                <dt class="visually-hidden">Role</dt>
+                <dd>Design + Engineering</dd>
+                <dt class="visually-hidden">Stack</dt>
+                <dd>Next.js, TypeScript, Supabase</dd>
+                <dt class="visually-hidden">Type</dt>
+                <dd>Solo build</dd>
+                <dt class="visually-hidden">Year</dt>
+                <dd>2025</dd>
+                <dt class="visually-hidden">Links</dt>
+                <dd>
+                  <a href="https://orvia-demo.vercel.app"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="link--inline-teal"
+                     aria-label="View Orvia live demo — opens in new tab">demo ↗</a>
+                  <span aria-hidden="true" style="margin: 0 6px; opacity: 0.4;">|</span>
+                  <a href="https://github.com/jzsun22/orvia-demo"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="link--inline-teal"
+                     aria-label="Orvia source code on GitHub — opens in new tab">github ↗</a>
+                </dd>
+              </dl>
+            </div>
+
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ---- SECTION: THE PROBLEM ---- -->
+      <section class="case-study__section" aria-labelledby="section-problem">
+        <h2 class="case-study__section-heading" id="section-problem">The problem</h2>
+
+        <p class="case-study__body">Retail managers at small and mid-size shops spend hours each week building shift schedules by hand — cross-referencing employee availability, role requirements, contractual hour caps, and fairness across the roster. Every week, from scratch. It is a solved problem that is still being solved manually because the tools available are either a spreadsheet or an enterprise system with a five-figure annual contract.</p>
+
+        <p class="case-study__body">Orvia is a shift scheduling system built for regional managers overseeing multiple locations. The interface is simple. The scheduling logic runs entirely in the browser.</p>
+      </section>
+
+
+      <!-- ---- DASHBOARD SCREENSHOT ---- -->
+      <div class="case-study__section">
+        <div class="content-wrapper">
+          <img
+            src="assets/images/orvia/orvia-dashboard.png"
+            alt="Orvia dashboard showing three retail locations — Avenlo, Cedar Loop, and Solmere — with staffing coverage and a weekly glance panel"
+            class="case-study__image"
+            loading="lazy"
+          />
+          <p class="case-study__image-caption">Regional manager dashboard — three locations, current-week staffing coverage at a glance</p>
+        </div>
+      </div>
+
+
+      <!-- ---- SECTION: THE DECISION ---- -->
+      <section class="case-study__section" aria-labelledby="section-decision">
+        <h2 class="case-study__section-heading" id="section-decision">The decision that mattered</h2>
+
+        <p class="case-study__body">The obvious product is a grid you fill in manually — click a slot, assign a worker, move to the next cell. Familiar, learnable, and still completely manual, which means it inherits every error the manager was already making.</p>
+
+        <p class="case-study__body">Orvia does both: "Generate New Schedule" runs the constraint algorithm in the browser and fills the entire week at once. Individual slots can still be edited afterward — click a cell, a dialog opens to reassign the worker or adjust the time window. But the default path starts from a complete schedule, not a blank one. The manager's job becomes reviewing and correcting, not building from scratch.</p>
+      </section>
+
+
+      <!-- ---- SCHEDULE SCREENSHOT ---- -->
+      <div class="case-study__section">
+        <div class="content-wrapper">
+          <img
+            src="assets/images/orvia/orvia-schedule.png"
+            alt="Orvia schedule view for Cedar Loop, week of April 27 — a generated weekly shift grid by role and time slot, with a success toast confirming the schedule was generated"
+            class="case-study__image"
+            loading="lazy"
+          />
+          <p class="case-study__image-caption">Cedar Loop — generated weekly schedule by role, with the success notification confirming one-click generation</p>
+        </div>
+      </div>
+
+
+      <!-- ---- SECTION: WHAT I BUILT ---- -->
+      <section class="case-study__section" aria-labelledby="section-build">
+        <h2 class="case-study__section-heading" id="section-build">What I built</h2>
+
+        <p class="case-study__body">Designed and engineered end-to-end. Frontend in Next.js and TypeScript, data and auth in Supabase (PostgreSQL + Edge Functions + RLS). The scheduling algorithm itself runs in the browser — constraint logic in JavaScript, no server round-trip required for generation.</p>
+
+        <ul class="case-study__list case-study__list--bullet">
+          <li class="case-study__list-item"><strong>Multi-location dashboard:</strong> regional managers see all their stores at a glance, with current staffing percentages and active worker counts per location</li>
+          <li class="case-study__list-item"><strong>Per-location schedule view:</strong> a weekly grid by role and shift type, navigable across weeks with prev/next controls</li>
+          <li class="case-study__list-item"><strong>Employee and role management:</strong> roster management with availability windows, role assignments, and hour constraints that feed directly into the generation algorithm</li>
+          <li class="case-study__list-item"><strong>Weekly context panel:</strong> staffing coverage percentages by location, plus upcoming employee birthdays — a small detail that matters in small teams where managers track this manually today</li>
+        </ul>
+
+      </section>
+
+
+      <!-- ---- NEXT NAV ---- -->
+      <nav class="case-study__next-nav" aria-label="More case studies">
+
+        <span aria-hidden="true"></span>
+        <a href="loc.html" class="case-study__next-item case-study__next-item--next">
+          <span class="case-study__next-dir">Next ›</span>
+          <span class="case-study__next-title">Library of Congress</span>
+        </a>
+
+      </nav>
+
+    </article>
+  </main>
+
+
+  <!-- =====================
+       FOOTER — copyright only
+       ===================== -->
+  <footer class="footer footer--minimal" role="contentinfo">
+    <div class="footer__inner footer__inner--minimal">
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. © 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure ✦</span>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- Mobile nav toggle -->
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const menu   = document.querySelector('.nav__menu');
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
+
+  <!-- Scroll progress bar -->
+  <script>
+    (function() {
+      var bar = document.getElementById('orvia-progress');
+      function update() {
+        var doc = document.documentElement;
+        var scrolled = doc.scrollTop || document.body.scrollTop;
+        var total = doc.scrollHeight - doc.clientHeight;
+        bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+  </script>
+
+</body>
+</html>
