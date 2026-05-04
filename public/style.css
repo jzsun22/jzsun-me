@@ -300,6 +300,13 @@ button {
   text-underline-offset: 2px;
 }
 
+.link--cta::after {
+  content: '›';
+  display: inline-block;
+  transform: translateY(-1px);
+  margin-left: 6px;
+}
+
 
 /* ============================================
    4. LAYOUT UTILITIES
@@ -467,6 +474,10 @@ button {
 .nav__link--active {
   color: var(--color-nav-active);
   font-weight: 700;
+}
+
+.nav__link--active:focus-visible {
+  outline-color: var(--color-accent-rose);
 }
 
 /* Mobile hamburger — hidden on desktop */
@@ -896,6 +907,36 @@ button {
   padding: var(--space-3xl) var(--page-padding-x) var(--space-2xl);
 }
 
+.case-study__back-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: var(--container-content);
+  margin: 0 auto var(--space-xl);
+  font-family: var(--font-body);
+  font-size: var(--text-sm-md);
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.case-study__back-link::before {
+  content: '‹';
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.case-study__back-link:hover {
+  color: var(--color-accent-teal);
+}
+
+.case-study__back-link:focus-visible {
+  outline: 2px solid var(--color-accent-teal);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
 .case-study__header {
   max-width: var(--container-content);
   margin: 0 auto var(--space-3xl);
@@ -1017,6 +1058,32 @@ button {
   border: none;
 }
 
+.case-study__figma-fallback {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: calc(-1 * var(--space-md));
+  margin-bottom: var(--space-xl);
+}
+
+.case-study__figma-fallback a {
+  color: var(--color-accent-teal-mid);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.case-study__figma-fallback a::after {
+  content: '›';
+  display: inline-block;
+  transform: translateY(-1px);
+  margin-left: 6px;
+}
+
+.case-study__figma-fallback a:hover {
+  color: var(--color-accent-teal);
+}
+
 .case-study__scroll-gallery {
   display: flex;
   gap: var(--space-md);
@@ -1096,6 +1163,20 @@ button {
 
 .case-study__next-item--next:hover .case-study__next-dir {
   transform: translateX(4px);
+}
+
+.case-study__next-item--prev .case-study__next-dir::before {
+  content: '‹';
+  display: inline-block;
+  transform: translateY(-1px);
+  margin-right: 6px;
+}
+
+.case-study__next-item--next .case-study__next-dir::after {
+  content: '›';
+  display: inline-block;
+  transform: translateY(-1px);
+  margin-left: 6px;
 }
 
 .case-study__next-title {
@@ -1447,6 +1528,13 @@ button {
   font-size: clamp(11px, 0.6rem + 0.5vw, 15px);
   color: inherit;
   line-height: 1.5;
+}
+
+.footer__icon-label::after {
+  content: '›';
+  display: inline-block;
+  transform: translateY(-1px);
+  margin-left: 6px;
 }
 
 .footer__copyright {
