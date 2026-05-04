@@ -872,16 +872,16 @@ button {
 
 .archives__item {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-xs);
+  align-items: center;
+  gap: 6px;
 }
 
 .archives__item::before {
   content: '›';
   color: var(--color-text-muted);
   font-size: var(--text-base);
-  position: relative;
-  top: -1px;
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 .archives__link {
