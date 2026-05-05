@@ -136,6 +136,10 @@
       height: 190px;
     }
 
+    .preview-card__mini-ui--justgrow {
+      height: 200px;
+    }
+
     .preview-card__desc {
       padding: 14px 16px;
       font-family: var(--font-body);
@@ -175,6 +179,100 @@
       .projects-page {
         padding-bottom: var(--space-lg);
       }
+    }
+
+    /* ============================================
+       MINI UI — JUSTGROW (dark chat)
+       ============================================ */
+    .mini-justgrow {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .mini-justgrow__card {
+      background: #e8f0ef;
+      border-radius: 8px;
+      padding: 14px 11px 10px;
+    }
+    .mini-justgrow__label {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #427e7e;
+      margin-bottom: 5px;
+    }
+    .mini-justgrow__hero {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .mini-justgrow__num {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1;
+      color: #284c4c;
+      font-family: var(--font-body);
+    }
+    .mini-justgrow__sub {
+      font-size: 8px;
+      color: #427e7e;
+      font-family: var(--font-body);
+    }
+    .mini-justgrow__rows {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .mini-justgrow__row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      color: #4a4849;
+      font-family: var(--font-body);
+    }
+    .mini-justgrow__bar-wrap {
+      flex: 1;
+      height: 3px;
+      background: rgba(40,76,76,0.10);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .mini-justgrow__bar-fill {
+      height: 100%;
+      background: #427e7e;
+      border-radius: 2px;
+    }
+    .mini-justgrow__private {
+      background: #fff;
+      border: 0.5px solid rgba(0,0,0,0.07);
+      border-radius: 6px;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mini-justgrow__private-label {
+      font-size: 8px;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+    .mini-justgrow__private-count {
+      font-size: 11px;
+      font-weight: 700;
+      color: #284c4c;
+      font-family: var(--font-body);
+    }
+    .mini-justgrow__only-you {
+      font-size: 7px;
+      background: #e8f0ef;
+      color: #284c4c;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: var(--font-body);
     }
 
     /* ============================================
@@ -675,12 +773,30 @@
         <!-- ---- PROJECT LIST ---- -->
         <ul class="project-list" id="projectList" role="list">
 
-          <!-- 01 Orvia -->
+          <!-- 01 JustGrow -->
+          <li class="project-entry"
+              role="listitem"
+              data-project="justgrow"
+              data-desc="I built a four-tap handoff feature. Near-zero adoption. Then replaced it with a passive system that infers who did what from data already in the app.">
+            <span class="project-entry__num" aria-hidden="true">01</span>
+            <div class="project-entry__content">
+              <a href="justgrow.html"
+                 class="project-entry__title"
+                 aria-label="JustGrow — AI Parenting Companion">
+                JustGrow – AI Parenting Companion
+              </a>
+              <span class="project-entry__tags" aria-label="Tags: Consumer, Multi-Agent, Founding Designer">
+                Consumer · Multi-Agent · Founding Designer
+              </span>
+            </div>
+          </li>
+
+          <!-- 02 Orvia -->
           <li class="project-entry"
               role="listitem"
               data-project="orvia"
               data-desc="My friend was scheduling 50 staff on Google Sheets every week. I kept asking why until I built something better.">
-            <span class="project-entry__num" aria-hidden="true">01</span>
+            <span class="project-entry__num" aria-hidden="true">02</span>
             <div class="project-entry__content">
               <a href="orvia.html"
                  class="project-entry__title"
@@ -704,12 +820,12 @@
             </div>
           </li>
 
-          <!-- 02 Library of Congress -->
+          <!-- 03 Library of Congress -->
           <li class="project-entry"
               role="listitem"
               data-project="loc"
               data-desc="The LOC has three front doors and no signs pointing to the right one.">
-            <span class="project-entry__num" aria-hidden="true">02</span>
+            <span class="project-entry__num" aria-hidden="true">03</span>
             <div class="project-entry__content">
               <a href="loc.html"
                  class="project-entry__title"
@@ -718,27 +834,6 @@
               </a>
               <span class="project-entry__tags" aria-label="Tags: UXR, IA Redesign, UI Audit">
                 UXR · IA Redesign · UI Audit
-              </span>
-            </div>
-          </li>
-
-          <!-- 03 AI Companion for Kids -->
-          <li class="project-entry"
-              role="listitem"
-              data-project="ai-companion"
-              data-desc="Most kids apps optimize for screen time. I spent 48 hours figuring out how to optimize for emotional growth instead.">
-            <span class="project-entry__num" aria-hidden="true">03</span>
-            <div class="project-entry__content">
-              <a href="https://www.figma.com/deck/ODWN3f0i1LDDRn34NcsllM/PM-assignment?node-id=1-234&t=bpkLz2X7TxfoKllH-1"
-                 class="project-entry__title"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 aria-label="AI Companion for Kids — opens slide deck in new tab">
-                AI Companion for Kids
-                <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-              </a>
-              <span class="project-entry__tags" aria-label="Tags: PM Concept, Feature Ideation, MVP Scoping">
-                PM Concept · Feature Ideation · MVP Scoping
               </span>
             </div>
           </li>
@@ -789,6 +884,18 @@
         <div class="archives" aria-label="Earlier work">
           <h2 class="archives__heading">Earlier Work</h2>
           <ul class="archives__list" role="list">
+
+            <li class="archives__item" role="listitem">
+              <a href="https://www.figma.com/deck/ODWN3f0i1LDDRn34NcsllM/PM-assignment?node-id=1-234&t=bpkLz2X7TxfoKllH-1"
+                 class="archives__link archives__link--external"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 data-tippy-content="open in Figma"
+                 aria-label="AI Companion for Kids, PM concept — opens Figma in new tab">
+                AI Companion for Kids (PM concept)
+                <span class="card__title-external" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+              </a>
+            </li>
 
             <li class="archives__item" role="listitem">
               <a href="https://www.figma.com/proto/yaulWWzZ4USRbVJWJwaZdd/Realized-Solutions-Case-Study?node-id=1-2&t=3AfOeLFbDnroup4D-1"
@@ -913,6 +1020,43 @@
   <!-- Mini UI templates -->
   <script>
     const miniUIs = {
+
+      'justgrow': `
+        <div class="mini-justgrow">
+          <div class="mini-justgrow__card">
+            <div class="mini-justgrow__label">Your family's week</div>
+            <div class="mini-justgrow__hero">
+              <span class="mini-justgrow__num">70</span>
+              <span class="mini-justgrow__sub">things handled</span>
+            </div>
+            <div class="mini-justgrow__rows">
+              <div class="mini-justgrow__row">
+                <span>👶</span>
+                <span>30 baby care</span>
+                <div class="mini-justgrow__bar-wrap"><div class="mini-justgrow__bar-fill" style="width:86%"></div></div>
+              </div>
+              <div class="mini-justgrow__row">
+                <span>🍳</span>
+                <span>7 meals</span>
+                <div class="mini-justgrow__bar-wrap"><div class="mini-justgrow__bar-fill" style="width:20%"></div></div>
+              </div>
+              <div class="mini-justgrow__row">
+                <span>🧹</span>
+                <span>6 tidying</span>
+                <div class="mini-justgrow__bar-wrap"><div class="mini-justgrow__bar-fill" style="width:17%"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="mini-justgrow__private">
+            <div>
+              <div class="mini-justgrow__private-label">Your contributions</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <span class="mini-justgrow__only-you">only you</span>
+              <span class="mini-justgrow__private-count">41</span>
+            </div>
+          </div>
+        </div>`,
 
       'orvia': `
         <div class="mini-orvia">
@@ -1103,6 +1247,9 @@
           previewMiniUI.className = 'preview-card__mini-ui';
           if (project === 'llm') {
             previewMiniUI.classList.add('preview-card__mini-ui--llm');
+          }
+          if (project === 'justgrow') {
+            previewMiniUI.classList.add('preview-card__mini-ui--justgrow');
           }
         });
 
