@@ -1214,7 +1214,7 @@ button {
 
 .case-study__section-heading {
   font-family: var(--font-body);
-  font-size: var(--text-lg);
+  font-size: var(--text-2xl);
   font-weight: 700;
   color: var(--color-text-primary);
   line-height: 1.5;
@@ -1223,9 +1223,9 @@ button {
 
 .case-study__subsection-heading {
   font-family: var(--font-body);
-  font-size: var(--text-md);
-  font-weight: 700;
-  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-secondary);
   line-height: 1.5;
   margin-bottom: var(--space-sm);
   margin-top: var(--space-xl);
