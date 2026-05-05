@@ -494,6 +494,24 @@
       .loc-comparison,
       .case-study__image-grid--3col { grid-template-columns: 1fr; }
     }
+
+    /* Callout inside Overview — tighter top so it reads as continuation, bottom handled by section margin */
+    .case-study__section .case-study__callout:last-child {
+      margin-top: var(--space-lg);
+      margin-bottom: 0;
+    }
+
+    /* Research contributions callout */
+    .case-study__callout h3 {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-accent-teal);
+      margin-bottom: var(--space-sm);
+    }
+    .case-study__callout .case-study__list { gap: var(--space-xs); margin-bottom: 0; }
+    .loc-contrib-tag { font-size: var(--text-sm); color: var(--color-text-muted); }
   </style>
 </head>
 <body>
@@ -576,14 +594,19 @@
       <p class="case-study__body">The Library of Congress is embarking on a multi-year project to replace its integrated library system (ILS). Our team was tasked with understanding the user experience that LOC patrons have with the existing ILS — specifically the discovery layer — and developing design concepts based on our findings.</p>
       <p class="case-study__body">The project was organized into five sprints, each with a different focus area but following the same stages: mapping, sketching, deciding, prototyping, and testing.</p>
 
-      <div class="loc-contrib-block">
-        <p class="loc-contrib-statement">
-          I contributed to <em>sketching</em> and <em>prototyping</em> across all five sprints,
-          and took on <em>study design</em>, <em>contextual interviews</em>,
-          and <em>data analysis</em> alongside the research team.
-        </p>
+      <div class="case-study__callout">
+        <h3>Research Contributions</h3>
+        <ul class="case-study__list case-study__list--bullet">
+          <li class="case-study__list-item">Study design across 5 sprints</li>
+          <li class="case-study__list-item">Contextual interviews and data analysis</li>
+          <li class="case-study__list-item">Competitive analysis and lightning demos <span class="loc-contrib-tag">(Sprint 1)</span></li>
+          <li class="case-study__list-item">Card sorting with MaxDiff analysis <span class="loc-contrib-tag">(Sprint 4)</span></li>
+          <li class="case-study__list-item">Coordinated research and design teams <span class="loc-contrib-tag">(Sprint 4)</span></li>
+          <li class="case-study__list-item">Edited testing tasks and proofread scripts across all sprints</li>
+        </ul>
       </div>
     </section>
+
 
     <!-- Figma prototype -->
     <section class="case-study__section">

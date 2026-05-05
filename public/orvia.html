@@ -180,6 +180,14 @@
       </section>
 
 
+      <!-- ---- SECTION: BUILT FOR ---- -->
+      <section class="case-study__section" aria-labelledby="section-built-for">
+        <h2 class="case-study__section-heading" id="section-built-for">Built for</h2>
+
+        <p class="case-study__body">A friend managing three retail locations who was spending around three hours a week hand-editing schedules in Google Sheets. Orvia generates a full seven-day schedule across her stores in a couple of seconds, and scales to any roster size and any number of locations she configures in Supabase.</p>
+      </section>
+
+
       <!-- ---- DASHBOARD SCREENSHOT ---- -->
       <div class="case-study__section">
         <div class="content-wrapper">
@@ -196,11 +204,15 @@
 
       <!-- ---- SECTION: THE DECISION ---- -->
       <section class="case-study__section" aria-labelledby="section-decision">
-        <h2 class="case-study__section-heading" id="section-decision">The decision that mattered</h2>
+        <h2 class="case-study__section-heading" id="section-decision">Decisions that mattered</h2>
 
-        <p class="case-study__body">The obvious product is a grid you fill in manually — click a slot, assign a worker, move to the next cell. Familiar, learnable, and still completely manual, which means it inherits every error the manager was already making.</p>
+        <p class="case-study__body">The obvious product is a grid you fill in manually. Click a slot, assign a worker, move to the next cell. It's familiar, learnable, and completely manual.</p>
 
-        <p class="case-study__body">Orvia does both: "Generate New Schedule" runs the constraint algorithm in the browser and fills the entire week at once. Individual slots can still be edited afterward — click a cell, a dialog opens to reassign the worker or adjust the time window. But the default path starts from a complete schedule, not a blank one. The manager's job becomes reviewing and correcting, not building from scratch.</p>
+        <p class="case-study__body">Orvia does more. "Generate New Schedule" runs the constraint algorithm in the browser and fills the entire week at once. Individual slots stay editable afterward: click a cell, a dialog opens to reassign the worker or adjust the time window. The default path starts from a complete schedule rather than a blank one, and the manager's job becomes reviewing and correcting instead of building from scratch.</p>
+
+        <p class="case-study__body">For manual edits, the default pattern is drag-and-drop. A tray of employee name pills sits on one side, slots on the other, and you drag the right person into the right cell. It's direct and tactile, and it breaks the moment the roster grows past a dozen people. With fifty employees, finding the right name pill becomes its own cognitive load, and the manager ends up scanning a wall of names to swap a single shift.</p>
+
+        <p class="case-study__body">Orvia uses a modal instead. Click a slot, a dialog opens with a search field, type two letters of a name. The modal adds a layer of interface complexity, and it's still the right call. Typing two letters always beats scanning fifty pills.</p>
       </section>
 
 
@@ -216,6 +228,20 @@
           <p class="case-study__image-caption">Cedar Loop — generated weekly schedule by role, with the success notification confirming one-click generation</p>
         </div>
       </div>
+
+
+      <!-- ---- SECTION: HOW I BUILT THIS ---- -->
+      <section class="case-study__section" aria-labelledby="section-how">
+        <h2 class="case-study__section-heading" id="section-how">How I built this</h2>
+
+        <p class="case-study__body">Started with a half-formed idea: automate the boring half of shift scheduling and leave the human half to the human. Stack came first. I talked through options with Cursor before writing any code, and picked Supabase because one platform handling auth, database, and row-level security meant fewer integration points to manage as a solo dev.</p>
+
+        <p class="case-study__body">Schema design was where AI helped the most. Multi-location scheduling has a lot of connected tables — employees, locations, role assignments, shift templates, availability windows, generated schedules — and getting the relationships right matters, because a wrong foreign key two weeks in becomes painful to migrate around. I described the requirements and the scenarios I needed to support, and the model returned schema proposals I could iterate on faster than I'd have built from scratch. That's the part of solo full-stack work that scales least with experience, and the place AI compressed it the most.</p>
+
+        <p class="case-study__body">The scheduling logic was the opposite story. I wrote out every rule in plain text — hour caps, role coverage, fairness, contractual constraints — and the model translated it into Supabase edge functions and browser scripts. It took weeks to fine-tune, because business rules and people rules don't generalize cleanly. Every manager has a "this employee can't open on Tuesdays because of school pickup" exception, and trying to encode all of it produced brittle logic that broke in new ways each time I added a constraint. The call I made was to stop coding for every corner case and unload some of the work to the manager. More manual editing than a perfect generator would require, and a lot less than untangling a confidently wrong schedule. Better to be obviously partial than confidently wrong.</p>
+
+        <p class="case-study__body">The frontend moved fastest. I sketched a mid-fidelity layout, screenshotted it to the model, and went straight to implementation. No handoff, no spec, just self-iteration on the design as I built it. AI didn't help with the small visual things that still need a human eye: padding, shadow weight, alignment quirks, and the motion details that make an interface feel good rather than functional. None of that is necessary for the tool to work. All of it is necessary for it to feel like something a manager would actually want to open on a Sunday night.</p>
+      </section>
 
 
       <!-- ---- SECTION: WHAT I BUILT ---- -->
