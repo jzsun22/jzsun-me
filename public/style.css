@@ -629,10 +629,9 @@ button {
   margin-bottom: var(--space-xl);
 }
 
-/* Two-column grid: Case Studies | Design Work */
 .featured-work__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0 var(--space-xl);
 }
 
