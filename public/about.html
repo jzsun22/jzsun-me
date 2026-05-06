@@ -47,6 +47,9 @@
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
 
+  <!-- DotLottie player (for headshot easter egg) -->
+  <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+
   <!-- Shared styles -->
   <link rel="stylesheet" href="style.css" />
 
@@ -97,6 +100,32 @@
         transform: none;
         transition: none;
       }
+    }
+
+    /* Headshot firework easter egg */
+    .about-page__photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    #headshot-firework-wrap {
+      position: fixed;
+      width: 110px;
+      height: 110px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 999;
+      top: 0;
+      left: 0;
+    }
+
+    #headshot-firework-wrap dotlottie-player {
+      width: 100%;
+      height: 100%;
+    }
+
+    .about-page__photo {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -149,12 +178,14 @@
 
         <!-- Byline — small photo + name + resume -->
         <header class="about-page__byline">
-          <img
-            src="assets/images/2F0A7831_(5) - Copy.jpg"
-            alt="A picture of Jocelyn"
-            class="about-page__photo"
-            width="140"
-            height="140" />
+          <div class="about-page__photo-wrap">
+            <img
+              src="assets/images/2F0A7831_(5) - Copy.jpg"
+              alt="A picture of Jocelyn"
+              class="about-page__photo"
+              width="140"
+              height="140" />
+          </div>
           <div class="about-page__byline-text">
             <span class="about-page__name">Jocelyn Sun</span>
             <span class="about-page__role">Product Designer</span>
@@ -256,6 +287,35 @@
         observer.observe(item);
       });
     }
+  </script>
+
+  <!-- Headshot firework easter egg -->
+  <div id="headshot-firework-wrap" aria-hidden="true">
+    <dotlottie-player
+      id="headshot-firework"
+      src="assets/animations/FireworkC.lottie"
+      speed="2.5">
+    </dotlottie-player>
+  </div>
+
+  <script>
+    (function () {
+      const photo   = document.querySelector('.about-page__photo');
+      const wrap    = document.getElementById('headshot-firework-wrap');
+      const firework = document.getElementById('headshot-firework');
+      const size    = 110;
+
+      photo.addEventListener('click', (e) => {
+        wrap.style.left = (e.clientX - size / 2) + 'px';
+        wrap.style.top  = (e.clientY - size / 2) + 'px';
+        firework.stop();
+        wrap.style.opacity = '1';
+        firework.play();
+        firework.addEventListener('complete', () => {
+          wrap.style.opacity = '0';
+        }, { once: true });
+      });
+    })();
   </script>
 
   <!-- Console easter egg -->
