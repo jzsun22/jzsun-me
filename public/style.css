@@ -147,7 +147,7 @@ button {
 
   /* — Shadows — */
   --shadow-card:       0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.10);
   --shadow-nav:        0 1px 0 rgba(0, 0, 0, 0.06);
   --shadow-section:    0 -10px 20px -10px rgba(0, 0, 0, 0.06);
 
@@ -303,8 +303,13 @@ button {
 .link--cta::after {
   content: '›';
   display: inline-block;
-  transform: translateY(-1px);
+  transform: translateY(-1px) translateX(0);
   margin-left: 6px;
+  transition: transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.link--cta:hover::after {
+  transform: translateY(-1px) translateX(6px);
 }
 
 
@@ -440,11 +445,9 @@ button {
   transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1), opacity 150ms ease;
 }
 
-@media (hover: hover) {
-  .nav__logo:hover img {
-    transform: scale(1.04);
-    opacity: 0.85;
-  }
+.nav__logo:hover img {
+  transform: scale(1.04);
+  opacity: 0.85;
 }
 
 .nav__menu {
@@ -686,13 +689,13 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  transition: transform 200ms cubic-bezier(0.25, 0, 0.2, 1);
+  transition: transform 200ms cubic-bezier(0.25, 0, 0.2, 1),
+              box-shadow 200ms cubic-bezier(0.25, 0, 0.2, 1);
 }
 
-@media (hover: hover) {
-  .card:hover {
-    transform: translateY(-3px);
-  }
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* Title row: text + external icon */
@@ -1850,8 +1853,9 @@ button {
 [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 550ms cubic-bezier(0.25, 1, 0.5, 1),
-              transform 550ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 500ms cubic-bezier(0.25, 1, 0.5, 1),
+              transform 220ms cubic-bezier(0.25, 0, 0.2, 1),
+              box-shadow 220ms cubic-bezier(0.25, 0, 0.2, 1);
 }
 
 [data-reveal].is-visible {
@@ -1859,8 +1863,8 @@ button {
   transform: translateY(0);
 }
 
-[data-reveal]:nth-child(2) {
-  transition-delay: 100ms;
+.card[data-reveal].is-visible:hover {
+  transform: translateY(-3px);
 }
 
 

@@ -170,7 +170,7 @@
     <section class="featured-work" id="featured-work" aria-labelledby="featured-work-heading">
       <div class="featured-work__inner">
 
-        <h2 id="featured-work-heading" class="featured-work__heading">Featured Work</h2>
+        <h2 id="featured-work-heading" class="featured-work__heading" data-reveal>Featured Work</h2>
 
         <div class="featured-work__grid">
 
@@ -329,18 +329,34 @@
     });
   </script>
 
-  <!-- Scroll reveal — featured work cards -->
+  <!-- Scroll reveal — featured work cards + heading (staggered) -->
   <script>
     const revealEls = document.querySelectorAll('[data-reveal]');
     if (revealEls.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const observer = new IntersectionObserver(
         entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } }),
-        { threshold: 0.12 }
+        { threshold: 0.1 }
       );
-      revealEls.forEach(el => observer.observe(el));
+      revealEls.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 90}ms`;
+        observer.observe(el);
+      });
     } else {
       revealEls.forEach(el => el.classList.add('is-visible'));
     }
+  </script>
+
+  <!-- Whole-card clickability -->
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      const link = card.querySelector('.card__title');
+      if (!link) return;
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', e => {
+        if (e.target.closest('a')) return;
+        link.click();
+      });
+    });
   </script>
 
   <!-- Console easter egg -->
