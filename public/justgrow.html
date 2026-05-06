@@ -174,7 +174,9 @@
       font-size: 11px;
       font-weight: 700;
       color: var(--jg-green);
-      line-height: 1.9;
+      line-height: 1;
+      align-self: start;
+      padding-top: 8px;
       font-family: var(--font-mono);
     }
     .jg-takeaway-item p { margin-bottom: 0; }
@@ -344,6 +346,42 @@
     }
     .jg-status-note p { margin-bottom: 12px; }
     .jg-status-note p:last-child { margin-bottom: 0; }
+
+    /* ── Prototype tab switcher ── */
+    .jg-proto-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: var(--space-lg);
+    }
+    .jg-proto-tab {
+      padding: 7px 18px;
+      border-radius: 100px;
+      border: 1px solid var(--color-bg-divider);
+      background: transparent;
+      font-size: var(--text-sm);
+      font-family: var(--font-body);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: background 320ms, color 320ms, border-color 320ms;
+    }
+    .jg-proto-tab.is-active {
+      background: var(--color-text-primary);
+      color: #fff;
+      border-color: var(--color-text-primary);
+    }
+    .jg-proto-tab:hover:not(.is-active) {
+      border-color: var(--color-text-secondary);
+      color: var(--color-text-primary);
+    }
+    .jg-proto-panel { display: none; }
+    .jg-proto-panel.is-active {
+      display: block;
+      animation: jg-fadein 400ms ease-out;
+    }
+    @keyframes jg-fadein {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -412,9 +450,8 @@
     <!-- In brief -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">In brief</h2>
-      <p class="case-study__body jg-lead">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, asked co-parents to perform a four-tap handoff ceremony to log who was on duty. It worked. Adoption was near zero.</p>
-      <p class="case-study__body jg-lead">The replacement is passive: existing tracking events become the contribution record, a Sunday digest replaces the handoff, and the whole thing happens inside the chat surface that was already there. No new screens. No new agents. No new logging primitives for the user.</p>
-      <p class="case-study__body jg-lead">Most of the work happened upstream of the surface.</p>
+      <p class="case-study__body jg-lead">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, asked co-parents to perform a four-tap handoff ceremony to log who was on duty. It worked. Adoption was low.</p>
+      <p class="case-study__body jg-lead">The replacement is passive: existing tracking events become the contribution record, a Sunday digest replaces the handoff, and the whole thing happens inside the chat surface that was already there. No new screens. No new agents. No new logging primitives for the user. Most of the work happened upstream of the surface.</p>
     </section>
 
 
@@ -432,10 +469,12 @@
       <h2 class="case-study__section-heading">What I got wrong with baton passing</h2>
       <p class="case-study__body">The original feature looked like this. Tap an icon. Pick your partner. Write an optional handoff note. Tap "Send Handoff." The receiver gets a notification, opens the app, reads the summary, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
       <p class="case-study__body">Five-plus taps for a single status change. Both parents had to be engaged simultaneously. The receiver had two hours to respond before the handoff expired.</p>
-      <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was near zero.</p>
+      <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was low.</p>
       <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that I designed for the user as a value-holder rather than the user mid-task. Parents articulating the invisible-labor problem in calm reflection were the people we built for. Parents on two seconds of attention with a screaming baby were the people who actually had to use it. They share a name and they are different people. I read the aspirational undercurrent and missed the operational one, which is depletion.</p>
+      <h3 class="case-study__subsection-heading">Where the feature did land</h3>
+      <p class="case-study__body">Two App Store reviews specifically praised the handoff feature. A postpartum night nurse wrote that she recommends JustGrow to every family she works with because the handoff is "perfect for overnight care." A parent wrote that the handoff "saved our marriage" by ending daily morning arguments about who did what overnight. Both fit the values-vs-state framework rather than break it. A professional caregiver's operational state already includes shift documentation; for her, declaring state is not effort, it is the work. A household where memory disputes cause daily fights has an operational pain that exceeds the operational cost of four taps. The average parent's state does not match their value-holder self, but specific segments whose states do match are real.</p>
+      <p class="case-study__body">The new design does not close those use cases off. Passive attribution still records every event with a user_id, so the data both reviewers valued is still captured automatically. They reach it through chat instead of a handoff form. The parent who was fighting about who fed the baby at 2am can ask "what happened overnight?" and get a summary. The night nurse can ask the agent to recap her shift and the parents see it when they wake up. One extra sentence to type instead of a four-tap ceremony, and the majority of parents who never wanted baton passing no longer pay for it.</p>
       <p class="case-study__body">The cost was concrete. The shift model carried more state and more transition logic than any other feature, and most of it became dead weight when we deprecated.</p>
-      <p class="case-study__body">I want to be careful with the lesson. This is not a "good intentions, bad execution" story, and the fix is not "do more user research." The change in how I scope is structural: the gap between someone's stated values and their state mid-task is now a primary scoping question for me, not a downstream finding. I name that gap before I scope a feature, not after.</p>
     </section>
 
 
@@ -527,191 +566,195 @@
     </section>
 
 
-    <!-- Mockup A: Weekly Digest -->
+    <!-- Prototypes: tabbed switcher -->
     <section class="case-study__section">
       <p class="jg-prototype-kicker">Prototype</p>
-      <h2 class="case-study__section-heading">Weekly digest, in chat</h2>
-      <p class="jg-mockup-caption">Sunday evening, the agent posts a recap card. Two stacked bubbles: a shared family-wide total with no per-person names, then a private "Only you" mirror with the individual's count and category breakdown. Hierarchy is deliberate. The headline number carries weight; the category breakdown is supporting; the closing line reframes effort as recognition rather than scorekeeping.</p>
+      <h2 class="case-study__section-heading">The redesign, in two moments</h2>
 
-      <div class="jg-mockup-row">
-        <div class="jg-mockup-tile">
-          <div class="jg-phone">
-            <div class="jg-island"></div>
-            <div class="jg-screen">
-              <div class="jg-status">
-                <span>8:15</span>
-                <span class="jg-status-right">
-                  <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                  <span>WiFi</span>
-                  <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                </span>
-              </div>
-              <div class="jg-appbar">
-                <div class="jg-appbar-menu">☰</div>
-                <span class="jg-appbar-title">JustGrow</span>
-                <div class="jg-appbar-actions"></div>
-              </div>
-              <div class="jg-messages">
-                <div class="jg-bubble jg-bot" style="max-width: 92%;">
-                  <div class="jg-procard" style="background: rgba(143,168,255,0.05); border-color: rgba(143,168,255,0.12);">
-                    <div class="jg-procard-title" style="color: #8FA8FF;">Your Family's Week</div>
-                    <div style="font-size: 11px; color: rgba(193,202,216,0.5); margin-bottom: 8px;">Mar 17 – Mar 23</div>
-                    <div style="text-align: center; margin: 8px 0 12px;">
-                      <div style="font-size: 26px; font-weight: 700; color: #E8E8ED;">70</div>
-                      <div style="font-size: 11px; color: rgba(193,202,216,0.5);">things handled this week</div>
-                    </div>
-                    <div style="font-size: 12.5px; color: #C1CAD8; line-height: 1.7; letter-spacing: -0.32px;">
-                      <div style="margin-bottom: 4px;">👶 <strong style="color: #E8E8ED;">30 baby care events</strong></div>
-                      <div style="margin-bottom: 4px;">🍳 <strong style="color: #E8E8ED;">7 meals cooked</strong></div>
-                      <div style="margin-bottom: 4px;">🧹 <strong style="color: #E8E8ED;">6 tidying sessions</strong></div>
-                      <div style="margin-bottom: 4px;">🛒 <strong style="color: #E8E8ED;">3 errands run</strong></div>
-                      <div>🧘 <strong style="color: #E8E8ED;">2 self-care moments</strong></div>
-                    </div>
-                    <div style="margin-top: 12px; padding-top: 10px; border-top: 0.5px solid rgba(143,168,255,0.08); font-size: 12.5px; color: #E8E8ED; letter-spacing: -0.32px; line-height: 1.4;">
-                      A busy week for the family. That's a lot of invisible work, well done.
+      <div class="jg-proto-tabs" role="tablist" aria-label="Prototype scenarios">
+        <button class="jg-proto-tab is-active" role="tab" aria-selected="true" aria-controls="proto-panel-1">Weekly Digest</button>
+        <button class="jg-proto-tab" role="tab" aria-selected="false" aria-controls="proto-panel-2">Catch-up &amp; Queries</button>
+      </div>
+
+      <div id="proto-panel-1" class="jg-proto-panel is-active" role="tabpanel">
+        <p class="jg-mockup-caption">Sunday evening, the agent posts a recap card. Two stacked bubbles: a shared family-wide total with no per-person names, then a private "Only you" mirror with the individual's count and category breakdown. Hierarchy is deliberate. The headline number carries weight; the category breakdown is supporting; the closing line reframes effort as recognition rather than scorekeeping.</p>
+
+        <div class="jg-mockup-row">
+          <div class="jg-mockup-tile">
+            <div class="jg-phone">
+              <div class="jg-island"></div>
+              <div class="jg-screen">
+                <div class="jg-status">
+                  <span>8:15</span>
+                  <span class="jg-status-right">
+                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
+                    <span>WiFi</span>
+                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
+                  </span>
+                </div>
+                <div class="jg-appbar">
+                  <div class="jg-appbar-menu">☰</div>
+                  <span class="jg-appbar-title">JustGrow</span>
+                  <div class="jg-appbar-actions"></div>
+                </div>
+                <div class="jg-messages">
+                  <div style="max-width: 92%; margin-bottom: 10px;">
+                    <div class="jg-procard" style="background: rgba(143,168,255,0.05); border-color: rgba(143,168,255,0.12);">
+                      <div class="jg-procard-title" style="color: #8FA8FF;">Your Family's Week</div>
+                      <div style="font-size: 11px; color: rgba(193,202,216,0.5); margin-bottom: 8px;">Mar 17 – Mar 23</div>
+                      <div style="text-align: center; margin: 8px 0 12px;">
+                        <div style="font-size: 26px; font-weight: 700; color: #E8E8ED;">70</div>
+                        <div style="font-size: 11px; color: rgba(193,202,216,0.5);">things handled this week</div>
+                      </div>
+                      <div style="font-size: 12.5px; color: #C1CAD8; line-height: 1.7; letter-spacing: -0.32px;">
+                        <div style="margin-bottom: 4px;">👶 <strong style="color: #E8E8ED;">30 baby care events</strong></div>
+                        <div style="margin-bottom: 4px;">🍳 <strong style="color: #E8E8ED;">7 meals cooked</strong></div>
+                        <div style="margin-bottom: 4px;">🧹 <strong style="color: #E8E8ED;">6 tidying sessions</strong></div>
+                        <div style="margin-bottom: 4px;">🛒 <strong style="color: #E8E8ED;">3 errands run</strong></div>
+                        <div>🧘 <strong style="color: #E8E8ED;">2 self-care moments</strong></div>
+                      </div>
+                      <div style="margin-top: 12px; padding-top: 10px; border-top: 0.5px solid rgba(143,168,255,0.08); font-size: 12.5px; color: #E8E8ED; letter-spacing: -0.32px; line-height: 1.4;">
+                        A busy week for the family. That's a lot of invisible work, well done.
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="jg-bubble jg-bot" style="max-width: 92%;">
-                  <div class="jg-procard" style="background: rgba(158,234,106,0.04);">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                      <span style="font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(158,234,106,0.10); color: #9EEA6A; font-weight: 600;">Only you</span>
-                    </div>
-                    <div style="font-size: 13px; color: #E8E8ED; font-weight: 500; margin-bottom: 4px;">Your contributions</div>
-                    <div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px;">
-                      <span style="font-size: 20px; font-weight: 700; color: #E8E8ED;">41</span>
-                      <span style="font-size: 11px; color: rgba(193,202,216,0.5);">of 70 family total</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: rgba(193,202,216,0.6); line-height: 1.6;">
-                      15 diapers · 8 feedings · 5 meals · 3 tidying · 3 errands · 2 self-care
+                  <div style="max-width: 92%; margin-bottom: 10px;">
+                    <div class="jg-procard" style="background: rgba(158,234,106,0.04);">
+                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                        <span style="font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(158,234,106,0.10); color: #9EEA6A; font-weight: 600;">Only you</span>
+                      </div>
+                      <div style="font-size: 13px; color: #E8E8ED; font-weight: 500; margin-bottom: 4px;">Your contributions</div>
+                      <div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px;">
+                        <span style="font-size: 20px; font-weight: 700; color: #E8E8ED;">41</span>
+                        <span style="font-size: 11px; color: rgba(193,202,216,0.5);">of 70 family total</span>
+                      </div>
+                      <div style="font-size: 11.5px; color: rgba(193,202,216,0.6); line-height: 1.6;">
+                        15 diapers · 8 feedings · 5 meals · 3 tidying · 3 errands · 2 self-care
+                      </div>
                     </div>
                   </div>
+                  <div class="jg-bubble jg-user">What did my partner handle at night this week?</div>
+                  <div class="jg-bubble jg-bot">
+                    This week there were 10 night wake-ups (10pm–6am). Dad handled 7 of them, his most consistent stretch yet. Want me to break down any other category?
+                  </div>
                 </div>
-                <div class="jg-bubble jg-user">What did my partner handle at night this week?</div>
-                <div class="jg-bubble jg-bot">
-                  This week there were 10 night wake-ups (10pm–6am). Dad handled 7 of them, his most consistent stretch yet. Want me to break down any other category?
+                <div class="jg-composer">
+                  <div class="jg-input">Hold to talk</div>
+                  <div class="jg-send">↑</div>
                 </div>
+                <div class="jg-home-bar"></div>
               </div>
-              <div class="jg-composer">
-                <div class="jg-input">Hold to talk</div>
-                <div class="jg-send">↑</div>
-              </div>
-              <div class="jg-home-bar"></div>
             </div>
+            <p class="jg-label">Weekly digest as agent-posted recap</p>
           </div>
-          <p class="jg-label">Weekly digest as agent-posted recap</p>
         </div>
       </div>
-    </section>
 
+      <div id="proto-panel-2" class="jg-proto-panel" role="tabpanel">
+        <p class="jg-mockup-caption">When a parent opens the app after several hours away, the agent posts a "since you were last here" card. The same chat surface handles task creation through conversation and contribution queries on demand. Every piece of contribution data a per-person profile screen would show is answerable conversationally, with a proportion bar where comparison is requested but never volunteered.</p>
 
-    <!-- Mockup B + C: Catch-up + Queries -->
-    <section class="case-study__section">
-      <p class="jg-prototype-kicker">Prototype</p>
-      <h2 class="case-study__section-heading">Catch-up cards and chat-native queries</h2>
-      <p class="jg-mockup-caption">When a parent opens the app after several hours away, the agent posts a "since you were last here" card. The same chat surface handles task creation through conversation and contribution queries on demand. Every piece of contribution data a per-person profile screen would show is answerable conversationally, with a proportion bar where comparison is requested but never volunteered.</p>
-
-      <div class="jg-mockup-row">
-        <div class="jg-mockup-tile">
-          <div class="jg-phone">
-            <div class="jg-island"></div>
-            <div class="jg-screen">
-              <div class="jg-status">
-                <span>2:15</span>
-                <span class="jg-status-right">
-                  <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                  <span>WiFi</span>
-                  <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                </span>
-              </div>
-              <div class="jg-appbar">
-                <div class="jg-appbar-menu">☰</div>
-                <span class="jg-appbar-title">JustGrow</span>
-                <div class="jg-appbar-actions"></div>
-              </div>
-              <div class="jg-messages">
-                <div class="jg-bubble jg-bot" style="max-width: 92%;">
-                  <div class="jg-procard">
-                    <div class="jg-procard-title">Since you were last here (4h ago)</div>
-                    <div class="jg-procard-row"><span>🍼</span> Dad gave 4oz formula at 11:30am</div>
-                    <div class="jg-procard-row"><span>🧷</span> Dad changed diaper (wet) at 12:15pm</div>
-                    <div class="jg-procard-row"><span>💤</span> Emma napped 45min in stroller (12:30–1:15pm)</div>
-                    <div class="jg-procard-row" style="color: #FF9F0A;"><span>💊</span> Vitamin D drops, not yet given today</div>
-                  </div>
+        <div class="jg-mockup-row">
+          <div class="jg-mockup-tile">
+            <div class="jg-phone">
+              <div class="jg-island"></div>
+              <div class="jg-screen">
+                <div class="jg-status">
+                  <span>2:15</span>
+                  <span class="jg-status-right">
+                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
+                    <span>WiFi</span>
+                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
+                  </span>
                 </div>
-                <div class="jg-bubble jg-user">Thanks. Can you add "buy more wipes" to our list?</div>
-                <div class="jg-bubble jg-bot">
-                  Added <strong style="color: #E8E8ED;">"Buy more wipes"</strong> to your family's list. Want me to mention Dad so he sees it?
-                  <div style="margin-top: 10px; display: flex; gap: 8px;">
+                <div class="jg-appbar">
+                  <div class="jg-appbar-menu">☰</div>
+                  <span class="jg-appbar-title">JustGrow</span>
+                  <div class="jg-appbar-actions"></div>
+                </div>
+                <div class="jg-messages">
+                  <div style="max-width: 92%; margin-bottom: 10px;">
+                    <div class="jg-procard">
+                      <div class="jg-procard-title">Since you were last here (4h ago)</div>
+                      <div class="jg-procard-row"><span>🍼</span> Dad gave 4oz formula at 11:30am</div>
+                      <div class="jg-procard-row"><span>🧷</span> Dad changed diaper (wet) at 12:15pm</div>
+                      <div class="jg-procard-row"><span>💤</span> Emma napped 45min in stroller (12:30–1:15pm)</div>
+                      <div class="jg-procard-row" style="color: #FF9F0A;"><span>💊</span> Vitamin D drops, not yet given today</div>
+                    </div>
+                  </div>
+                  <div class="jg-bubble jg-user">Thanks. Can you add "buy more wipes" to our list?</div>
+                  <div class="jg-bubble jg-bot">
+                    Added <strong style="color: #E8E8ED;">"Buy more wipes"</strong> to your family's list. Want me to mention Dad so he sees it?
+                  </div>
+                  <div style="display: flex; gap: 8px; margin: 6px 0 10px;">
                     <span style="padding: 5px 12px; background: rgba(158,234,106,0.08); border: 0.5px solid rgba(158,234,106,0.22); border-radius: 100px; font-size: 12px; font-weight: 500; color: #9EEA6A;">Mention Dad</span>
                     <span style="padding: 5px 12px; background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 100px; font-size: 12px; font-weight: 500; color: rgba(193,202,216,0.7);">That's ok</span>
                   </div>
                 </div>
+                <div class="jg-composer">
+                  <div class="jg-input">Hold to talk</div>
+                  <div class="jg-send">↑</div>
+                </div>
+                <div class="jg-home-bar"></div>
               </div>
-              <div class="jg-composer">
-                <div class="jg-input">Hold to talk</div>
-                <div class="jg-send">↑</div>
-              </div>
-              <div class="jg-home-bar"></div>
             </div>
+            <p class="jg-label">Catch-up card and task creation through conversation</p>
           </div>
-          <p class="jg-label">Catch-up card and task creation through conversation</p>
-        </div>
 
-        <div class="jg-mockup-tile">
-          <div class="jg-phone">
-            <div class="jg-island"></div>
-            <div class="jg-screen">
-              <div class="jg-status">
-                <span>8:30</span>
-                <span class="jg-status-right">
-                  <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                  <span>WiFi</span>
-                  <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                </span>
-              </div>
-              <div class="jg-appbar">
-                <div class="jg-appbar-menu">☰</div>
-                <span class="jg-appbar-title">JustGrow</span>
-                <div class="jg-appbar-actions"></div>
-              </div>
-              <div class="jg-messages">
-                <div class="jg-bubble jg-user">Who's been doing more night feeds this week?</div>
-                <div class="jg-bubble jg-bot">
-                  <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Night feeds this week (10pm–6am)</div>
-                  <div style="font-size: 12.5px; margin-bottom: 10px; letter-spacing: -0.32px;">
-                    <div style="margin-bottom: 3px;"><span style="color: #9EEA6A;">Dad</span>, 7 feeds</div>
-                    <div><span style="color: #8FA8FF;">Mom</span>, 3 feeds</div>
+          <div class="jg-mockup-tile">
+            <div class="jg-phone">
+              <div class="jg-island"></div>
+              <div class="jg-screen">
+                <div class="jg-status">
+                  <span>8:30</span>
+                  <span class="jg-status-right">
+                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
+                    <span>WiFi</span>
+                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
+                  </span>
+                </div>
+                <div class="jg-appbar">
+                  <div class="jg-appbar-menu">☰</div>
+                  <span class="jg-appbar-title">JustGrow</span>
+                  <div class="jg-appbar-actions"></div>
+                </div>
+                <div class="jg-messages">
+                  <div class="jg-bubble jg-user">Who's been doing more night feeds this week?</div>
+                  <div class="jg-bubble jg-bot">
+                    <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Night feeds this week (10pm–6am)</div>
+                    <div style="font-size: 12.5px; margin-bottom: 10px; letter-spacing: -0.32px;">
+                      <div style="margin-bottom: 3px;"><span style="color: #9EEA6A;">Dad</span>, 7 feeds</div>
+                      <div><span style="color: #8FA8FF;">Mom</span>, 3 feeds</div>
+                    </div>
+                    <div class="jg-contrib-bar" style="margin-bottom: 10px;">
+                      <div class="jg-contrib-seg" style="width: 70%; background: #9EEA6A;"></div>
+                      <div class="jg-contrib-seg" style="width: 30%; background: #8FA8FF;"></div>
+                    </div>
+                    <div style="font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
+                      Dad's been covering most nights. Mom handles more during the day with 24 events versus Dad's 17.
+                    </div>
                   </div>
-                  <div class="jg-contrib-bar" style="margin-bottom: 10px;">
-                    <div class="jg-contrib-seg" style="width: 70%; background: #9EEA6A;"></div>
-                    <div class="jg-contrib-seg" style="width: 30%; background: #8FA8FF;"></div>
-                  </div>
-                  <div style="font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
-                    Dad's been covering most nights. Mom handles more during the day with 24 events versus Dad's 17.
+                  <div class="jg-bubble jg-user">What's on our plate for tomorrow?</div>
+                  <div class="jg-bubble jg-bot">
+                    <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Tomorrow (Sunday)</div>
+                    <div style="font-size: 12.5px; line-height: 1.7; letter-spacing: -0.32px;">
+                      <div>📋 Meal prep, week batch <span style="color: #9EEA6A;">(Dad)</span></div>
+                      <div>💊 Vitamin D drops <span style="color: rgba(193,202,216,0.5);">(daily)</span></div>
+                      <div>🧺 Buy more wipes <span style="color: rgba(193,202,216,0.5);">(on the list)</span></div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
+                      No appointments. Want to add anything?
+                    </div>
                   </div>
                 </div>
-                <div class="jg-bubble jg-user">What's on our plate for tomorrow?</div>
-                <div class="jg-bubble jg-bot">
-                  <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Tomorrow (Sunday)</div>
-                  <div style="font-size: 12.5px; line-height: 1.7; letter-spacing: -0.32px;">
-                    <div>📋 Meal prep, week batch <span style="color: #9EEA6A;">(Dad)</span></div>
-                    <div>💊 Vitamin D drops <span style="color: rgba(193,202,216,0.5);">(daily)</span></div>
-                    <div>🧺 Buy more wipes <span style="color: rgba(193,202,216,0.5);">(on the list)</span></div>
-                  </div>
-                  <div style="margin-top: 10px; font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
-                    No appointments. Want to add anything?
-                  </div>
+                <div class="jg-composer">
+                  <div class="jg-input">Hold to talk</div>
+                  <div class="jg-send">↑</div>
                 </div>
+                <div class="jg-home-bar"></div>
               </div>
-              <div class="jg-composer">
-                <div class="jg-input">Hold to talk</div>
-                <div class="jg-send">↑</div>
-              </div>
-              <div class="jg-home-bar"></div>
             </div>
+            <p class="jg-label">Chat-native contribution and planning queries</p>
           </div>
-          <p class="jg-label">Chat-native contribution and planning queries</p>
         </div>
       </div>
     </section>
@@ -785,14 +828,14 @@
         </div>
         <div class="jg-takeaway-item">
           <span class="jg-num">05</span>
-          <p><strong>Default patterns are expensive to ship.</strong> Leaderboard, per-person profile, comparison view, task assignment model: the templated answers any brainstorm would surface first. The work was naming why each was wrong for this product. The discrimination is the same one I apply to catching AI-generated UI in other work.</p>
+          <p><strong>The default isn't always the right answer.</strong> Leaderboard, per-person profile, comparison view, task assignment model: the templated answers any brainstorm would surface first. The work was naming why each was wrong for this product. The discrimination is the same one I apply to catching AI-generated UI in other work.</p>
         </div>
       </div>
 
       <div class="jg-status-note" style="margin-top: var(--space-2xl);">
         <p class="case-study__category" style="margin-bottom: var(--space-sm);">Status</p>
         <p>Diagnosis, design graveyard, product model, taxonomy, achievement redesign, and technical architecture are complete. Implementation is phased and in progress at the time of writing.</p>
-        <p>The mockups above are not Figma comps. The shipping app is Flutter and Dart; the mockups are HTML and CSS because I wanted the spec, the rationale, and the visual to live in one document with no Figma round-trip. Color tokens, typography, and spacing are pulled from the JustGrow codebase, so what renders above matches the production design system.</p>
+        <p>The mockups above are not Figma comps. The shipping app is Flutter and Dart; the mockups are HTML and CSS because I wanted the spec (in .html for rich content which .md could not handle), the rationale, and the visual to live in one document with no Figma round-trip. Color tokens, typography, and spacing are pulled from the JustGrow codebase, so what renders above matches the production design system.</p>
       </div>
     </section>
 
@@ -833,3 +876,21 @@
     window.addEventListener('scroll', u, { passive: true });
     u();
   </script>
+  <script>
+    var tabs = document.querySelectorAll('.jg-proto-tab'), panels = document.querySelectorAll('.jg-proto-panel');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var selectedId = tab.getAttribute('aria-controls');
+        tabs.forEach(function(t) {
+          var selected = t === tab;
+          t.classList.toggle('is-active', selected);
+          t.setAttribute('aria-selected', selected);
+        });
+        panels.forEach(function(panel) {
+          panel.classList.toggle('is-active', panel.id === selectedId);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
