@@ -1656,6 +1656,7 @@ button {
 
   .case-study__header-right {
     text-align: left;
+    white-space: normal;
   }
 
   .project-entry__content {

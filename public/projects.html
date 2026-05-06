@@ -1167,7 +1167,6 @@
     let isCardVisible = false;
     let rafId = null;
     const CARD_WIDTH  = 280;
-    const CARD_HEIGHT = 240; /* approx */
     const OFFSET_Y    = 20;  /* gap between cursor and card bottom */
 
     /* Track mouse */
@@ -1185,11 +1184,12 @@
       cardX = lerp(cardX, mouseX, 0.1);
       cardY = lerp(cardY, mouseY, 0.1);
 
-      /* Smart vertical flip — appear above cursor, flip below near top of viewport */
+      /* Smart vertical flip — use actual rendered height, not a hardcoded guess */
+      const cardH = previewCard.offsetHeight;
       const spaceAbove = cardY;
-      const preferAbove = spaceAbove > CARD_HEIGHT + OFFSET_Y + 40;
+      const preferAbove = spaceAbove > cardH + OFFSET_Y + 40;
       const topPos = preferAbove
-        ? cardY - CARD_HEIGHT - OFFSET_Y
+        ? cardY - cardH - OFFSET_Y
         : cardY + OFFSET_Y + 16;
 
       /* Horizontal — center on cursor, clamp to viewport */

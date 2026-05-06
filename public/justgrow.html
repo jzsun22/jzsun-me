@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <title>JustGrow — Contribution Tracking Redesign | Jocelyn Sun</title>
+  <title>JustGrow: Contribution Tracking Redesign | Jocelyn Sun</title>
   <meta name="description" content="Replacing a four-tap handoff ceremony with a passive, ambient contribution tracking system. Zero new screens, zero new agents." />
   <link rel="canonical" href="https://jzsun.me/justgrow.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="JustGrow — Contribution Tracking Redesign | Jocelyn Sun" />
+  <meta property="og:title" content="JustGrow: Contribution Tracking Redesign | Jocelyn Sun" />
   <meta property="og:description" content="Replacing a four-tap handoff ceremony with a passive, ambient system. Zero new screens, zero new agents." />
   <meta property="og:url" content="https://jzsun.me/justgrow.html" />
   <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
@@ -19,7 +19,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JustGrow — Contribution Tracking Redesign | Jocelyn Sun" />
+  <meta name="twitter:title" content="JustGrow: Contribution Tracking Redesign | Jocelyn Sun" />
   <meta name="twitter:description" content="Replacing a four-tap handoff ceremony with a passive, ambient system. Zero new screens, zero new agents." />
   <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
 
@@ -28,7 +28,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "JustGrow — Contribution Tracking Redesign",
+    "headline": "JustGrow: Contribution Tracking Redesign",
     "description": "Replacing a four-tap handoff ceremony with a passive, ambient contribution tracking system.",
     "url": "https://jzsun.me/justgrow.html",
     "author": {
@@ -326,7 +326,11 @@
       margin: 0 auto; position: relative; top: -22px; z-index: 2;
     }
     @media (max-width: 600px) {
-      .jg-phone { width: 280px; }
+      .jg-phone { width: min(280px, 100%); }
+      .jg-mockup-tile { max-width: 100%; }
+      .jg-mockup-row { overflow-x: hidden; }
+      .jg-tier-row { grid-template-columns: 44px 1fr 1fr; padding: 8px 12px; font-size: 12px; }
+      .jg-tier-row.jg-tier-head { font-size: 10px; }
     }
 
     /* ── Status footer note ── */
@@ -393,7 +397,7 @@
 
           <div class="case-study__header-right" aria-label="Project metadata">
             <dl class="case-study__meta-list">
-              <dt class="visually-hidden">Role</dt><dd>Founding Designer-Engineer</dd>
+              <dt class="visually-hidden">Role</dt><dd>Founding Product Engineer</dd>
               <dt class="visually-hidden">Period</dt><dd>Aug 2025 – May 2026</dd>
               <dt class="visually-hidden">Stack</dt><dd>Flutter, FastAPI, Google ADK</dd>
               <dt class="visually-hidden">Status</dt><dd>Spec complete; impl. in progress</dd>
@@ -410,16 +414,16 @@
       <h2 class="case-study__section-heading">In brief</h2>
       <p class="case-study__body jg-lead">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, asked co-parents to perform a four-tap handoff ceremony to log who was on duty. It worked. Adoption was near zero.</p>
       <p class="case-study__body jg-lead">The replacement is passive: existing tracking events become the contribution record, a Sunday digest replaces the handoff, and the whole thing happens inside the chat surface that was already there. No new screens. No new agents. No new logging primitives for the user.</p>
-      <p class="case-study__body jg-lead">The interesting work was the diagnosis, not the surface.</p>
+      <p class="case-study__body jg-lead">Most of the work happened upstream of the surface.</p>
     </section>
 
 
     <!-- Context -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">The product and my role</h2>
-      <p class="case-study__body">JustGrow is a chat-first AI parenting companion built on a stack of agents (Google ADK) behind a Flutter frontend and Python backend. Parents log baby tracking events in plain language, get personalized bedtime stories, share albums with family, and increasingly use chat as the universal entry point for everything. The product runs on Flutter, FastAPI, Google ADK, and Gemini, and reached 200+ signups and ~50 monthly active users on word-of-mouth alone.</p>
+      <p class="case-study__body">JustGrow is a chat-first AI parenting companion built on a stack of agents (Google ADK) behind a Flutter frontend and Python backend. Parents log baby tracking events in plain language, get personalized bedtime stories, share albums with family, and increasingly use chat as the universal entry point for everything. The product runs on Flutter, FastAPI, and Google ADK, and reached 200+ signups and ~50 monthly active users on word-of-mouth alone.</p>
       <p class="case-study__body">The constraint that shapes every product decision: parents are usually holding a baby. One free hand at best. Attention measured in seconds.</p>
-      <p class="case-study__body">I joined as the founding designer-engineer. My boss owned product direction and the major strategic calls; I owned execution end-to-end across UX, Flutter, Python, and the AI agent prompts. This case study covers one feature I owned during my eight months on the team. It is the work I am most willing to be measured on.</p>
+      <p class="case-study__body">I joined as the founding designer-engineer. My boss owned product direction and the major strategic calls; I owned execution end-to-end across UX, Flutter, and some backend pathes (Python and AI agent prompts). This case study covers one feature I owned during my nine months on the team, and it is one of the more interesting ones to tell. </p>
     </section>
 
 
@@ -428,7 +432,7 @@
       <h2 class="case-study__section-heading">What I got wrong with baton passing</h2>
       <p class="case-study__body">The original feature looked like this. Tap an icon. Pick your partner. Write an optional handoff note. Tap "Send Handoff." The receiver gets a notification, opens the app, reads the summary, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
       <p class="case-study__body">Five-plus taps for a single status change. Both parents had to be engaged simultaneously. The receiver had two hours to respond before the handoff expired.</p>
-      <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked. Adoption was near zero.</p>
+      <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was near zero.</p>
       <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that I designed for the user as a value-holder rather than the user mid-task. Parents articulating the invisible-labor problem in calm reflection were the people we built for. Parents on two seconds of attention with a screaming baby were the people who actually had to use it. They share a name and they are different people. I read the aspirational undercurrent and missed the operational one, which is depletion.</p>
       <p class="case-study__body">The cost was concrete. The shift model carried more state and more transition logic than any other feature, and most of it became dead weight when we deprecated.</p>
       <p class="case-study__body">I want to be careful with the lesson. This is not a "good intentions, bad execution" story, and the fix is not "do more user research." The change in how I scope is structural: the gap between someone's stated values and their state mid-task is now a primary scoping question for me, not a downstream finding. I name that gap before I scope a feature, not after.</p>
@@ -439,7 +443,7 @@
     <section class="case-study__section">
       <h2 class="case-study__section-heading">The redesign brief</h2>
       <p class="case-study__body">The team made the call to deprecate baton passing. My job was the replacement.</p>
-      <p class="case-study__body">The temptation was to iterate on the surface. Fewer taps, better animation, a more discoverable entry point. That approach would have reproduced the same product mistake at a slightly lower cost.</p>
+      <p class="case-study__body">The temptation was to iterate on the surface. Prefilled slots, better animation, a more discoverable entry point. That approach would have reproduced the same product mistake at a slightly lower cost.</p>
       <p class="case-study__body">The actual insight: the data about who did what already existed in the app. Every tracking event has a <code>user_id</code>. Every calendar event has an owner. The system did not need a handoff ceremony. It needed to read the data that was already being written and surface it intelligently.</p>
 
       <div class="case-study__callout">
@@ -452,6 +456,7 @@
     <section class="case-study__section">
       <h2 class="case-study__section-heading">Design graveyard</h2>
       <p class="case-study__body">Most of the work was ruling things out. I ran ten alternative directions to mockup or written-spec stage and rejected each for a specific reason. Every rejection was a product reason, not a resource one.</p>
+      <p class="case-study__body">Several of these options came out of brainstorming with AI. The work is not the brainstorm. It is the rejection with a reason.</p>
 
       <div class="jg-graveyard">
         <div class="jg-grave-card">
@@ -477,7 +482,7 @@
         <div class="jg-grave-card">
           <span class="jg-killed">Killed</span>
           <h4>Dedicated Activity screen with three tabs</h4>
-          <p>Log tab and Tasks tab duplicate Calendar. Only Contributions is genuinely new — a single tab does not justify a screen with two redundant ones.</p>
+          <p>Log tab and Tasks tab duplicate Calendar. Only Contributions is genuinely new. A single tab does not justify a screen with two redundant ones.</p>
         </div>
         <div class="jg-grave-card">
           <span class="jg-killed">Killed</span>
@@ -509,7 +514,7 @@
       <p class="case-study__body">Existing tracking events already carry <code>user_id</code>. No new logging primitives for the user. If they would not have logged it before, they do not log it now.</p>
 
       <h3 class="case-study__subsection-heading">Past-tense logging via existing agents</h3>
-      <p class="case-study__body">"I went to get groceries at 2pm" said at 4pm currently falls to casual chat because it matches no tracking keyword and no calendar keyword. Two prompt expansions to existing agents close the gap; the backend already accepts past timestamps. Past-tense chore events are stored as calendar events with a source tag so the frontend filters them out of the calendar view — they exist only for contribution counting.</p>
+      <p class="case-study__body">"I went to get groceries at 2pm" said at 4pm currently falls to casual chat because it matches no tracking keyword and no calendar keyword. Two prompt expansions to existing agents close the gap; the backend already accepts past timestamps. Past-tense chore events are stored as calendar events with a source tag so the frontend filters them out of the calendar view; they exist only for contribution counting.</p>
 
       <h3 class="case-study__subsection-heading">Weekly digest in chat</h3>
       <p class="case-study__body">A Sunday cron generates a digest message and injects it into each user's chat stream as an assistant message. Two layers: a shared family-wide total with no names ("70 things handled this week") and a private mirror only the individual sees ("you logged 41 of 70"). The app provides both numbers. <strong>It never does the subtraction.</strong></p>
@@ -518,7 +523,7 @@
         <p class="case-study__callout-text"><strong>The "no subtraction" rule is the product boundary.</strong> JustGrow helps families see the work. It does not referee the argument. The product is built for collaborative families that lack visibility, not for adversarial ones. Designing for the adversarial case would make the product worse for the healthy majority.</p>
       </div>
 
-      <p class="case-study__body">The same restraint shapes how the feature shows up in someone's day. Participation is optional. There is no button on the home screen waiting to be tapped, no streak to keep alive, no pressure to log everything. The feature surfaces when you reach for it and stays quiet otherwise. And because contribution counts include any household work — not just baby care — the feature has reason to live well beyond the infant stage.</p>
+      <p class="case-study__body">The same restraint shapes how the feature shows up in someone's day. Participation is optional. There is no button on the home screen waiting to be tapped, no streak to keep alive, no pressure to log everything. The feature surfaces when you reach for it and stays quiet otherwise. And because contribution counts include any household work, not just baby care, the feature has reason to live well beyond the infant stage.</p>
     </section>
 
 
@@ -604,7 +609,7 @@
     <section class="case-study__section">
       <p class="jg-prototype-kicker">Prototype</p>
       <h2 class="case-study__section-heading">Catch-up cards and chat-native queries</h2>
-      <p class="jg-mockup-caption">When a parent opens the app after several hours away, the agent posts a "since you were last here" card. The same chat surface handles task creation through conversation and contribution queries on demand. Every piece of contribution data a per-person profile screen would show is answerable conversationally — with a proportion bar where comparison is requested, but never volunteered.</p>
+      <p class="jg-mockup-caption">When a parent opens the app after several hours away, the agent posts a "since you were last here" card. The same chat surface handles task creation through conversation and contribution queries on demand. Every piece of contribution data a per-person profile screen would show is answerable conversationally, with a proportion bar where comparison is requested but never volunteered.</p>
 
       <div class="jg-mockup-row">
         <div class="jg-mockup-tile">
@@ -759,7 +764,7 @@
     <!-- What this work taught me -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">What this work taught me</h2>
-      <p class="case-study__body">Four things I now hold more carefully because of this work.</p>
+      <p class="case-study__body">Five things I now hold more carefully because of this work.</p>
 
       <div class="jg-takeaway">
         <div class="jg-takeaway-item">
@@ -768,7 +773,7 @@
         </div>
         <div class="jg-takeaway-item">
           <span class="jg-num">02</span>
-          <p><strong>Reuse over new construction.</strong> "No new screens, no new agents" was the call that fell out of every alternative being worse than reusing the existing chat surface. The constraint was the answer, not a shortcut to it.</p>
+          <p><strong>Reuse over new construction.</strong> "No new screens, no new agents" was the call that fell out of every alternative being worse than reusing the existing chat surface. The constraint emerged from the work; every alternative I ran reinforced it.</p>
         </div>
         <div class="jg-takeaway-item">
           <span class="jg-num">03</span>
@@ -777,6 +782,10 @@
         <div class="jg-takeaway-item">
           <span class="jg-num">04</span>
           <p><strong>Make intent legible.</strong> Every option I ruled out got a written reason next to it. The graveyard is there for future me, for teammates picking up the work, and for AI agents working in the codebase who would otherwise re-litigate calls that were already settled. The rejection note is the artifact, not the rejected mockup.</p>
+        </div>
+        <div class="jg-takeaway-item">
+          <span class="jg-num">05</span>
+          <p><strong>Default patterns are expensive to ship.</strong> Leaderboard, per-person profile, comparison view, task assignment model: the templated answers any brainstorm would surface first. The work was naming why each was wrong for this product. The discrimination is the same one I apply to catching AI-generated UI in other work.</p>
         </div>
       </div>
 
@@ -824,6 +833,3 @@
     window.addEventListener('scroll', u, { passive: true });
     u();
   </script>
-
-</body>
-</html>
