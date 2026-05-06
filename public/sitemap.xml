@@ -5,31 +5,39 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/projects.html</loc>
+    <loc>https://jzsun.me/projects</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/about.html</loc>
+    <loc>https://jzsun.me/about</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/loc.html</loc>
+    <loc>https://jzsun.me/loc</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/redesigning-sephora.html</loc>
+    <loc>https://jzsun.me/justgrow</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/weee.html</loc>
+    <loc>https://jzsun.me/orvia</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/music-sentiment.html</loc>
+    <loc>https://jzsun.me/redesigning-sephora</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jzsun.me/covid.html</loc>
+    <loc>https://jzsun.me/weee</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jzsun.me/music-sentiment</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jzsun.me/covid</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
