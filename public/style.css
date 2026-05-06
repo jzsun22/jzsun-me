@@ -1353,6 +1353,7 @@ button {
   border-radius: 50%;
   display: block;
   border: 2.5px solid rgba(164, 94, 95, 0.35);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .about-page__byline-text {
