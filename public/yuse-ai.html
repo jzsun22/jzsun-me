@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon-192x192.png" sizes="192x192" type="image/png" />
+  <link rel="icon" href="assets/favicon-512x512.png" sizes="512x512" type="image/png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon-192x192.png" />
+  <title>yuse.ai — Early LLM Interface | Jocelyn Sun</title>
+  <meta name="description" content="A complete consumer LLM interface, designed in Figma during the period when chat interfaces were still being figured out. 14-month engagement, team of six." />
+  <link rel="canonical" href="https://jzsun.me/yuse-ai" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="yuse.ai — Early LLM Interface | Jocelyn Sun" />
+  <meta property="og:description" content="A complete consumer LLM interface, designed in Figma during the period when chat interfaces were still being figured out. 14-month engagement, team of six." />
+  <meta property="og:url" content="https://jzsun.me/yuse-ai" />
+  <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="yuse.ai — Early LLM Interface | Jocelyn Sun" />
+  <meta name="twitter:description" content="A complete consumer LLM interface, designed in Figma during the period when chat interfaces were still being figured out. 14-month engagement, team of six." />
+  <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "yuse.ai — An Early LLM Interface",
+    "description": "A complete consumer LLM interface, designed in Figma during the period when chat interfaces were still being figured out. 14-month engagement, team of six.",
+    "url": "https://jzsun.me/yuse-ai.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jocelyn Sun",
+      "url": "https://jzsun.me"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       YUSE.AI — PAGE-SPECIFIC STYLES
+       ============================================= */
+
+    /* Temporary notice banner */
+    .yuse-notice {
+      background: var(--color-bg-card);
+      border-bottom: 1px solid var(--color-bg-divider);
+      text-align: center;
+      padding: 10px var(--page-padding-x);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .yuse-notice__icon {
+      margin-right: 6px;
+      color: var(--color-accent-teal);
+    }
+
+    /* Scroll progress (matches other case studies) */
+    .loc-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--color-accent-teal);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* Image placeholder — shown when a screenshot file isn't on disk yet.
+       Renders a tasteful diagonal-stripe box labeled with the filename. */
+    .yuse-img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 280px;
+      width: 100%;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          #fafaf9 0,
+          #fafaf9 12px,
+          #f4f4f2 12px,
+          #f4f4f2 24px
+        );
+      border: 1px dashed var(--color-bg-divider);
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: var(--space-lg);
+      letter-spacing: 0.3px;
+    }
+
+    .yuse-img-placeholder__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      opacity: 0.7;
+    }
+
+    .yuse-img-placeholder__path {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+    }
+
+    /* Inline pull-aside for design observations */
+    .yuse-aside {
+      background-color: var(--color-bg-card);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-xl) 0;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+    }
+
+    .yuse-aside small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-accent-teal);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Compact two-image side-by-side for the closing section */
+    .yuse-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .yuse-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Break composite screenshots out of the 860px column so the browser
+       downscales less — keeps fine UI details sharper. */
+    .case-study__image {
+      width: min(calc(100vw - 2 * var(--page-padding-x)), 1200px);
+      margin-left: 50%;
+      transform: translateX(-50%);
+      cursor: zoom-in;
+    }
+
+    /* Lightbox overlay */
+    .yuse-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 15, 0.88);
+      z-index: 10000;
+      overflow-y: auto;
+      padding: 60px var(--space-lg) var(--space-lg);
+      cursor: zoom-out;
+    }
+    .yuse-lightbox img {
+      display: block;
+      width: min(90vw, 1400px);
+      height: auto;
+      margin: 0 auto;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      cursor: default;
+    }
+    .yuse-lightbox__close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 4px 8px;
+    }
+    .yuse-lightbox__close:hover { opacity: 1; }
+
+    .loc-team-trigger {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--color-text-muted);
+      border-bottom: 1px dashed var(--color-text-muted);
+      cursor: default;
+      padding-bottom: 1px;
+      position: relative;
+      display: inline-block;
+      transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
+      user-select: none;
+    }
+
+    .loc-team-trigger:hover {
+      color: var(--color-text-primary);
+      border-bottom-color: var(--color-text-muted);
+    }
+
+    .loc-team-tooltip {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      left: auto;
+      background: var(--color-bg);
+      border: 1px solid var(--color-bg-divider);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      min-width: 260px;
+      z-index: 200;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      text-align: left;
+    }
+
+    @media (hover: hover) {
+      .loc-team-trigger:hover .loc-team-tooltip { display: block; }
+    }
+    .loc-team-trigger.is-open .loc-team-tooltip { display: block; }
+
+    .loc-team-tooltip__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-lg);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--color-bg-divider);
+    }
+
+    .loc-team-tooltip__row:last-child { border-bottom: none; }
+
+    .loc-team-tooltip__name {
+      font-size: var(--text-sm);
+      color: var(--color-text-primary);
+    }
+
+    .loc-team-tooltip__name--me {
+      color: var(--color-accent-teal);
+      font-weight: 700;
+    }
+
+    .loc-team-tooltip__role {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="loc-progress" id="loc-progress" aria-hidden="true"></div>
+
+  <a href="#main" class="skip-nav">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Jocelyn Sun — home">
+        <img src="assets/images/logo_v4.png" alt="Jocelyn Sun">
+      </a>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="projects.html" class="nav__link nav__link--active">Projects</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="yuse-notice" role="status">
+    <span class="yuse-notice__icon" aria-hidden="true">&#9888;</span>
+    Images for this case study are temporarily unavailable &mdash; they&rsquo;ll be up shortly.
+  </div>
+
+  <main id="main" class="case-study">
+
+    <a href="projects.html" class="case-study__back-link">All work</a>
+
+    <header class="case-study__header">
+      <div class="case-study__header-split">
+        <div class="case-study__header-left">
+          <p class="case-study__category">Product Design</p>
+          <h1 class="case-study__title">yuse.ai</h1>
+          <p class="case-study__hook">A complete consumer LLM interface, designed during the period when the field was still working out what one should look like.</p>
+          <div class="case-study__pills">
+            <span class="case-study__pill">Figma</span>
+          </div>
+        </div>
+        <dl class="case-study__header-right case-study__meta-list">
+          <dt class="visually-hidden">Role</dt><dd>Founding Product Designer</dd>
+          <dt class="visually-hidden">Timeline</dt><dd>Apr 2023 &ndash; Jun 2024</dd>
+          <dt class="visually-hidden">Team</dt><dd>
+            <span class="loc-team-trigger" id="teamTrigger" role="button" aria-expanded="false" tabindex="0">
+              6 members
+              <div class="loc-team-tooltip" role="tooltip">
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Product Manager</span>
+                  <span class="loc-team-tooltip__role">&times;1</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Backend Engineers</span>
+                  <span class="loc-team-tooltip__role">&times;3</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name">Frontend Engineer</span>
+                  <span class="loc-team-tooltip__role">&times;1</span>
+                </div>
+                <div class="loc-team-tooltip__row">
+                  <span class="loc-team-tooltip__name loc-team-tooltip__name--me">Product Design</span>
+                  <span class="loc-team-tooltip__role">Jocelyn Sun</span>
+                </div>
+              </div>
+            </span>
+          </dd>
+        </dl>
+      </div>
+    </header>
+
+    <!-- =====================
+         CONTEXT
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Context</h2>
+      <p class="case-study__body">When we started in April 2023, ChatGPT had been public for five months and dominated the consumer-LLM conversation. Bard had launched only weeks earlier and was still nascent; Claude was API-only with no consumer surface; Gemini wouldn't ship for another eight months. The patterns we now take for granted weren't yet standardized: how an LLM product onboards a new user, how it shows an error, where it puts model selection, how it organizes history. Each team building in this space was making its own decisions.</p>
+      <p class="case-study__body">yuse.ai was our team's bet on a specific gap: making LLMs accessible and approachable for general consumers who weren't already comfortable with the technology. The product was a web app that wrapped multiple models (GPT, DALL&middot;E, Stable Diffusion, Midjourney) behind a single chat interface, with prompt suggestions and a hand-held onboarding flow that didn't assume users already knew what to ask. The design covered six interconnected flows: chat, error handling, onboarding, settings, auth, and password reset. A complete consumer surface, not a hero-flow demo. Engineering built what design specified.</p>
+      <p class="case-study__body">A note on the artifact: this case study lives as static Figma screens because in 2023&ndash;2024, that's what design output was. Designers shipped pixels; engineers shipped code. This was the pre-vibe-coding era, when a designer couldn't generate a working prototype the way one can today. What you're looking at below is the actual deliverable.</p>
+    </section>
+
+    <!-- =====================
+         TL;DR
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">TL;DR</h2>
+      <p class="case-study__body">14 months. Six flows. A team of six: one PM, three backend engineers, one frontend engineer, and me as the sole designer. PM scoped what to build; I owned how it looked and worked; engineering shipped it.</p>
+      <p class="case-study__body">Four of the flows have design decisions worth talking about: <strong>the chat surface, error handling, onboarding, and settings</strong>. The other two (auth and password reset) are included as evidence that this was a real product with all the connective tissue intact, but they follow well-established conventions and don't need narration.</p>
+
+      <p class="case-study__body">One honest limit before diving in: we shut down before launch, so none of the screens below were tested with real users. The design decisions are reasoned, not validated.</p>
+
+      <div class="case-study__callout">
+        <p class="case-study__callout-text">Below: a walk through the four substantive flows, then a brief look at the auth + password reset surfaces that close the system.</p>
+      </div>
+    </section>
+
+    <!-- =====================
+         01 — THE CHAT SURFACE
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">01 &middot; The chat surface</h2>
+      <p class="case-study__body">The main canvas, designed across several states: empty, in-conversation with formatting, conversation with tags, destructive confirmation, and favorited messages. The goal was a chat surface that scaled gracefully from a brand-new user's first prompt to a power user organizing months of history.</p>
+
+      <img
+        src="assets/images/yuse-ai/chat-explorations.png"
+        alt="Five states of the chat interface: empty-state numbered guidance, prompt suggestions, an active conversation with formatting toolbar, multi-select tag dropdown, delete confirmation modal, and favorited-message highlight"
+        class="case-study__image"
+        loading="lazy"
+      >
+      <p class="case-study__image-caption">From empty state to favorited messages &mdash; the chat surface in five states</p>
+
+      <h3 class="case-study__subsection-heading">Non-intrusive empty-state guidance</h3>
+      <p class="case-study__body">A numbered card in the canvas shows new users what to do first: pick a model, write a message. Once a conversation exists, a softer "getting stuck? try one of these prompts" card surfaces sample prompts for both text and text-to-image models. The guidance never overlays the input box, so a user who already knows what they want isn't interrupted.</p>
+      <p class="case-study__body">Prompt libraries were one of the defining patterns of 2023&ndash;2024 LLM design. The assumption was that general consumers didn't yet know how to prompt, and needed worked examples to get started. The assumption fit our target user. It has aged out: by 2026 most users have internalized prompting, and the pattern has quietly disappeared from mainstream chat interfaces.</p>
+
+      <h3 class="case-study__subsection-heading">Tags as multi-select</h3>
+      <p class="case-study__body">Conversations can hold multiple tags. The tag picker is a small checkbox menu, not a single-select dropdown. The structure of the data is legible from the affordance itself. You can see, without trying it, that a conversation can belong to more than one bucket.</p>
+
+      <h3 class="case-study__subsection-heading">Destructive confirmation</h3>
+      <p class="case-study__body">Deleting a conversation surfaces a modal with the conversation name and a red "Delete" button. Red because the convention reads as danger; modal because the action is irreversible. The interface should slow you down here.</p>
+
+      <h3 class="case-study__subsection-heading">Favorited messages</h3>
+      <p class="case-study__body">Messages can be starred from the message itself. Favorited messages get a tinted background. Not a separate view to dig through, just a visual lift on the same surface where the conversation lives, so it's easy to scroll back and spot.</p>
+
+      <div class="yuse-aside">
+        <small>What the field standardized on instead</small>
+        Major chat products kept the empty-state pattern (suggested prompts) but mostly skipped per-conversation tagging and per-message favorites. The mass-market answer to organizing chat history turned out to be linear history plus search. Whether that's "right" depends on how a user actually relates to their conversations.
+      </div>
+    </section>
+
+    <!-- =====================
+         02 — ERROR HANDLING
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">02 &middot; Error handling</h2>
+      <p class="case-study__body">The work I'm proudest of in this project, because it's where I pushed back on the brief.</p>
+      <p class="case-study__body">The PM came to me with a specific ask: a pink banner at the top of the canvas for trial-limit errors, with the prompt suggestions beneath it dimmed to discourage further use. I worked through it and surfaced two problems: the dimming wasn't visually strong enough to read as "disabled," and the pattern only made sense for this one error. A network failure couldn't reuse it; there was nothing to dim, no trial limit to explain. What I proposed instead was a system of three patterns used <em>together</em>, each scoped to a different kind of error, so the product had one coherent error vocabulary rather than a custom treatment for every case.</p>
+
+      <img
+        src="assets/images/yuse-ai/error-handling.png"
+        alt="Four error-handling explorations: the PM's banner with dimmed suggestions, a partial-disable modal, a full-disable modal, and a non-intrusive toast"
+        class="case-study__image"
+        loading="lazy"
+      >
+      <p class="case-study__image-caption">The PM's original banner, plus the three patterns I proposed in its place</p>
+
+      <h3 class="case-study__subsection-heading">The brief: pink banner</h3>
+      <p class="case-study__body">The starting point I inherited. It worked for the one scenario it was designed for (trial limit reached), but couldn't carry the weight of a general error system. The dimming was too subtle; the layout assumed there was always something to "dim beneath." Both assumptions broke as soon as you tried to apply it to anything else.</p>
+
+      <h3 class="case-study__subsection-heading">Toast: non-blocking warnings</h3>
+      <p class="case-study__body">A floating toast in the upper-right names the issue and lets the user dismiss it. The canvas stays fully usable. This is the pattern for anything informational: rate-limit nudges, save warnings, anything where the product itself still works and the user just needs to be told.</p>
+
+      <h3 class="case-study__subsection-heading">Partial-disable modal: a context frame for the error</h3>
+      <p class="case-study__body">An over-the-canvas dialog scoped to the surface that's erroring. The framing matters more than the visual: "this conversation is erroring, not the whole site." The user can still navigate the rest of the product, start a new conversation, change settings. The error is contained to one context, and the modal tells them where the boundary is.</p>
+
+      <h3 class="case-study__subsection-heading">Full-disable modal: errors you can't get around</h3>
+      <p class="case-study__body">Same modal, harder enforcement: no interaction allowed until the issue resolves. Reserved for errors with no path around them: offline, auth expired, model down, account locked. Letting the user keep typing would only frustrate them; better to be explicit that the product itself is blocked.</p>
+
+      <div class="case-study__callout">
+        <p class="case-study__callout-text">The system, in one sentence: three patterns used together as a vocabulary, not as alternatives to choose between. Each one handles a different scope of error: informational, contained, or total. The PM's banner got cut because it tried to do all three jobs at once and didn't do any of them well.</p>
+      </div>
+    </section>
+
+    <!-- =====================
+         03 — ONBOARDING
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">03 &middot; Onboarding</h2>
+      <p class="case-study__body">A four-step flow that aimed to do three things, in order: welcome the user, surface the marketing points (tags, model switching), and set up their first conversation. Every screen has a "previous" link so a user who clicked too fast can back out.</p>
+
+      <img
+        src="assets/images/yuse-ai/onboarding.png"
+        alt="The yuse.ai onboarding flow: a welcome card, a feature explainer, a setup-mode chooser, and a finalize step, plus a branched three-step illustrated walkthrough for users supplying their own API keys"
+        class="case-study__image"
+        loading="lazy"
+      >
+      <p class="case-study__image-caption">Four onboarding screens, plus a branched API-key walkthrough for users supplying their own keys</p>
+
+      <p class="case-study__body">The third step is the most interesting. yuse.ai offered two ways in: use the platform's hosted API access (free trial, with a usage cap) or bring your own API key. The setup step explains both, then lets the user choose. Choosing "I'll use my own keys" routes to a tiny illustrated walkthrough that points to exactly where in Settings to paste them. Choosing "let you take care of it" skips ahead to the finalize step.</p>
+
+      <div class="yuse-aside">
+        <small>What I'd do differently now</small>
+        Onboarding is too long by 2026 standards. Four screens to start chatting is a lot. But in 2023&ndash;2024 the concept of "chat with an AI" still needed explaining for non-early-adopters, and the API-key path needed hand-holding because users weren't yet familiar with pasting credentials into a consumer-feeling product. Today both can be assumed; the welcome and feature screens would collapse into the first message of the conversation itself.
+      </div>
+    </section>
+
+    <!-- =====================
+         04 — SETTINGS
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">04 &middot; Settings</h2>
+      <p class="case-study__body">Tabbed settings covering Account, API Keys, Display, and Usage. The two flows worth walking through are password change (because it shares the validation system with signup) and API keys (because it's the surface the onboarding flow points to).</p>
+
+      <img
+        src="assets/images/yuse-ai/settings.png"
+        alt="The yuse.ai settings panel across three states: password change with current-password verification, per-model API key entry, and a usage-stats panel with a donut chart"
+        class="case-study__image"
+        loading="lazy"
+      >
+      <p class="case-study__image-caption">Settings &mdash; password change, per-model API key management, and a usage dashboard</p>
+
+      <h3 class="case-study__subsection-heading">Password change</h3>
+      <p class="case-study__body">Requires the current password before allowing a new one. Standard security pattern. The same live-validation strip from signup carries over, so the rules a user is being held to are visible while typing, not after submit.</p>
+
+      <h3 class="case-study__subsection-heading">API keys, per model</h3>
+      <p class="case-study__body">Each supported model (GPT, DALL&middot;E, Stable Diffusion, etc.) has its own row with its own "Save" button. Saving one key doesn't affect the others. The right pattern for a product that lets users mix self-hosted and platform-hosted access across models.</p>
+
+      <h3 class="case-study__subsection-heading">Usage</h3>
+      <p class="case-study__body">A donut chart broken down by model, plus a free-message counter and a token spend total. Sized to leave room for additional data viz blocks depending on what the user is paying attention to: trial users care about free messages remaining, paying users care about token spend by model.</p>
+    </section>
+
+    <!-- =====================
+         05 — CLOSING THE SYSTEM
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">05 &middot; Closing the system: auth &amp; password reset</h2>
+      <p class="case-study__body">Both of these flows are included for completeness rather than novelty. They follow established conventions: inline password validation, captcha-protected signup, send-an-email reset with a separate set-new-password screen. The interesting work was making sure the conventions matched the rest of the product's visual language and reused the same validation strip across signup, password reset, and password change in settings.</p>
+
+      <div class="yuse-pair">
+        <div>
+          <img
+            src="assets/images/yuse-ai/auth.png"
+            alt="Side-by-side login and signup screens for yuse.ai, with the chat interface dimmed in the background"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Login + signup</p>
+        </div>
+        <div>
+          <img
+            src="assets/images/yuse-ai/password-reset.png"
+            alt="Four password-reset states: initial request, email-sent confirmation, account-not-found error, and new-password entry"
+            class="case-study__image"
+            loading="lazy"
+          >
+          <p class="case-study__image-caption">Password reset &mdash; four states</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================
+         REFLECTION
+         ===================== -->
+    <section class="case-study__section">
+      <h2 class="case-study__section-heading">Reflection</h2>
+      <p class="case-study__body">The interesting thing about designing in a space that's actively standardizing is that you get to see, in retrospect, which of your decisions were ahead of the convention and which were idiosyncratic.</p>
+
+      <p class="case-study__body">Decisions that have aged well: the three-tier error system (toast / partial-disable modal / full-disable modal), the inline validation strip shared across signup, settings, and reset, the per-model API key surface, and the destructive-action confirmation pattern. These all became more conventional as the field matured.</p>
+
+      <p class="case-study__body">Decisions I'd still defend even though they didn't become standard: multi-tag organization of conversations, and mid-conversation model switching as a first-class action with a visual transition. Both assume a user who treats the LLM as a workshop of different tools rather than a single conversational entity.</p>
+
+      <p class="case-study__body">Decisions I'd cut on a redo: the prompt library (a 2023&ndash;2024 staple that assumed users couldn't prompt, an assumption that aged out faster than expected), the four-step onboarding flow (too long by current standards), and the original pink-banner error pattern, which is why it lives in this case study as a &ldquo;before&rdquo; image rather than a final design.</p>
+
+      <h3 class="case-study__subsection-heading">What happened to yuse.ai</h3>
+      <p class="case-study__body">We were close to launching when ChatGPT closed the gap yuse.ai was built to fill: the accessible, hand-held entry point for general consumers. By mid-2024 ChatGPT had a free tier with image generation, suggested prompts, and a consumer-friendly onboarding of its own. The team pivoted, couldn't outpace OpenAI's release cadence, and shut the project down. It's a familiar story for products built in the AI wrapper layer in 2023&ndash;2024.</p>
+
+      <h3 class="case-study__subsection-heading">What it taught me</h3>
+      <p class="case-study__body">yuse.ai was my pivot point as a designer, from UI/UX as visual craft toward product design as a discipline. The 14 months taught me to think about features in both purpose and execution: not just what a screen should look like, but why a feature exists, who it serves, and what business model it fits inside.</p>
+      <p class="case-study__body">The harder lesson was about moat. If a foundation-model lab can ship the same feature in its next release, building on top of its API is a race you can't win. The work I want to do next lives in spaces that large foundation-model companies can't or won't move into in the next two-to-three years: where a product has room to stabilize, where the value is real and sustainable, and where the moat isn't a thin UX layer over someone else's model.</p>
+    </section>
+
+    <nav class="case-study__next-nav" aria-label="Project navigation">
+      <a href="loc.html" class="case-study__next-item case-study__next-item--prev">
+        <span class="case-study__next-dir">Previous</span>
+        <span class="case-study__next-title">Library of Congress</span>
+      </a>
+      <a href="weee.html" class="case-study__next-item case-study__next-item--next">
+        <span class="case-study__next-dir">Next</span>
+        <span class="case-study__next-title">Weee! Usability Study</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="footer--minimal">
+    <div class="footer__inner footer__inner--minimal">
+      <p class="footer__copyright">
+        <span class="footer__copyright--default">jocelyn. &copy; 2026</span>
+        <span class="footer__copyright--hover">currently manifesting her next adventure &#10024;</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    var toggle=document.querySelector('.nav__toggle'),menu=document.querySelector('.nav__menu');
+    toggle.addEventListener('click',function(){var o=menu.classList.toggle('is-open');toggle.classList.toggle('is-open',o);toggle.setAttribute('aria-expanded',o);});
+
+    var teamTrigger = document.getElementById('teamTrigger');
+    if (teamTrigger) {
+      teamTrigger.addEventListener('click', function() {
+        var isOpen = teamTrigger.classList.toggle('is-open');
+        teamTrigger.setAttribute('aria-expanded', isOpen);
+      });
+      teamTrigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          teamTrigger.click();
+        }
+      });
+      document.addEventListener('click', function(e) {
+        if (!teamTrigger.contains(e.target)) {
+          teamTrigger.classList.remove('is-open');
+          teamTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
+  <script>var b=document.getElementById('loc-progress');function u(){b.style.width=Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});u();</script>
+
+  <!-- Click-to-zoom lightbox for case study images -->
+  <script>
+    (function() {
+      var lb = null;
+      function openLightbox(img) {
+        lb = document.createElement('div');
+        lb.className = 'yuse-lightbox';
+        lb.setAttribute('role', 'dialog');
+        lb.setAttribute('aria-modal', 'true');
+        lb.setAttribute('aria-label', 'Image zoom');
+        var fullImg = document.createElement('img');
+        fullImg.src = img.src;
+        fullImg.alt = img.alt;
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'yuse-lightbox__close';
+        closeBtn.setAttribute('aria-label', 'Close');
+        closeBtn.textContent = '×';
+        lb.appendChild(fullImg);
+        lb.appendChild(closeBtn);
+        document.body.appendChild(lb);
+        document.body.style.overflow = 'hidden';
+        function closeLightbox() {
+          lb.remove();
+          document.body.style.overflow = '';
+          lb = null;
+        }
+        lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+        closeBtn.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function onKey(e) {
+          if (e.key === 'Escape') { closeLightbox(); document.removeEventListener('keydown', onKey); }
+        });
+      }
+      document.querySelectorAll('main.case-study img.case-study__image').forEach(function(img) {
+        img.addEventListener('click', function() { openLightbox(img); });
+      });
+    })();
+  </script>
+
+  <!-- Image placeholders: if a screenshot file isn't on disk yet,
+       swap the broken-image tag for a labeled stripe-pattern box. -->
+  <script>
+    document.querySelectorAll('main.case-study img.case-study__image').forEach(function(img){
+      img.addEventListener('error', function(){
+        var path = img.getAttribute('src') || '';
+        var ph = document.createElement('div');
+        ph.className = 'yuse-img-placeholder';
+        ph.setAttribute('role', 'img');
+        ph.setAttribute('aria-label', img.getAttribute('alt') || 'screenshot placeholder');
+        ph.innerHTML =
+          '<span class="yuse-img-placeholder__label">screenshot pending</span>' +
+          '<span class="yuse-img-placeholder__path">' + path + '</span>';
+        img.replaceWith(ph);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -46,6 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
@@ -71,6 +72,192 @@
       .case-study__next-nav > span[aria-hidden] {
         display: none;
       }
+    }
+
+    /* ── Design System section ──────────────────────────── */
+    .ds-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Color full-width row 1; Spacing left col rows 2-3; Typography upper-right; Radius lower-right */
+    .ds-block:nth-child(1) { grid-column: 1 / -1; grid-row: 1; }
+    .ds-block:nth-child(2) { grid-column: 2;      grid-row: 2; }
+    .ds-block:nth-child(3) { grid-column: 1;      grid-row: 2 / span 2; }
+    .ds-block:nth-child(4) { grid-column: 2;      grid-row: 3; }
+
+    .ds-block {
+      background: #fff;
+      border: 1px solid #DCD4CD;
+      border-radius: 10px;
+      padding: 1.375rem 1.5rem;
+    }
+
+    .ds-block-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #B48883;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #F2EBE8;
+    }
+
+    .ds-subgroup-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #847A75;
+      margin-top: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Color — fixed columns so every row aligns */
+    .ds-color-row {
+      display: grid;
+      grid-template-columns: 36px 13rem 5rem 1fr;
+      align-items: center;
+      column-gap: 12px;
+      padding: 5px 0;
+      border-bottom: 1px solid #F2EBE8;
+    }
+    .ds-color-row:last-child { border-bottom: none; }
+
+    .ds-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+    }
+    .ds-swatch--bordered { box-shadow: inset 0 0 0 1px #DCD4CD; }
+
+    /* Typography */
+    .ds-type-note {
+      font-size: 0.7rem;
+      color: #847A75;
+      font-style: normal;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.625rem;
+      border-bottom: 1px solid #F2EBE8;
+    }
+
+    .ds-type-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      align-items: center;
+      column-gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F2EBE8;
+    }
+    .ds-type-row:last-child { border-bottom: none; }
+
+    .ds-type-specimen {
+      font-family: 'Manrope', sans-serif;
+      color: #2E2B29;
+    }
+
+    .ds-type-info { display: flex; flex-direction: column; gap: 3px; }
+
+    /* Spacing — grid keeps meta column at a fixed X; justify-self: start
+       stops the grid from stretching the bar over its inline width */
+    .ds-spacing-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: center;
+      column-gap: 16px;
+      padding: 6px 0;
+      border-bottom: 1px solid #F2EBE8;
+    }
+    .ds-spacing-row:last-child { border-bottom: none; }
+
+    .ds-spacing-bar {
+      justify-self: start;
+      height: 18px;
+      background: rgba(180, 136, 131, 0.25);
+      border-radius: 3px;
+    }
+
+    .ds-spacing-meta { display: flex; flex-direction: column; gap: 2px; }
+
+    /* Radius */
+    .ds-radius-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F2EBE8;
+    }
+    .ds-radius-row:last-child { border-bottom: none; }
+
+    .ds-radius-swatch {
+      width: 60px;
+      height: 60px;
+      background: #F2EBE8;
+      box-shadow: inset 0 0 0 1px #DCD4CD;
+      flex-shrink: 0;
+    }
+
+    .ds-radius-info { display: flex; flex-direction: column; gap: 3px; }
+
+    /* Shared token text */
+    .ds-token-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.775rem;
+      color: #2E2B29;
+      white-space: nowrap;
+    }
+
+    .ds-token-value {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      color: #847A75;
+    }
+
+    .ds-token-usage {
+      font-size: 0.725rem;
+      color: #847A75;
+      line-height: 1.4;
+    }
+
+    /* Diagram / ASCII art blocks */
+    .case-study__diagram {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      background: #FAF7F5;
+      border: 1px solid #F2EBE8;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: var(--space-xl);
+      margin-bottom: 0.375rem;
+      white-space: pre;
+    }
+
+    /* Tablet: stack all blocks */
+    @media (max-width: 768px) {
+      .ds-blocks { display: flex; flex-direction: column; }
+    }
+
+    /* Phone: simplify color rows, shrink bar track */
+    @media (max-width: 480px) {
+      .ds-block { padding: 1rem; }
+      .ds-color-row {
+        grid-template-columns: 32px 1fr;
+        grid-template-rows: auto auto;
+        row-gap: 2px;
+      }
+      .ds-color-row .ds-token-value { display: none; }
+      .ds-color-row .ds-token-usage { grid-column: 2 / -1; font-size: 0.7rem; }
+      .ds-spacing-row { grid-template-columns: 80px 1fr; }
+      .ds-type-row { grid-template-columns: 1fr; gap: 4px; }
     }
   </style>
 </head>
@@ -135,8 +322,6 @@
                 <span class="case-study__pill">Next.js</span>
                 <span class="case-study__pill">TypeScript</span>
                 <span class="case-study__pill">Supabase</span>
-                <span class="case-study__pill">Full Stack</span>
-                <span class="case-study__pill">Solo Build</span>
               </div>
 
             </div>
@@ -239,11 +424,283 @@
 
         <p class="case-study__body">Started with a half-formed idea: automate the boring half of shift scheduling and leave the human half to the human. Stack came first. I talked through options with Cursor before writing any code, and picked Supabase because one platform handling auth, database, and row-level security meant fewer integration points to manage as a solo dev.</p>
 
-        <p class="case-study__body">Schema design was where AI helped the most. Multi-location scheduling has a lot of connected tables — employees, locations, role assignments, shift templates, availability windows, generated schedules — and getting the relationships right matters, because a wrong foreign key two weeks in becomes painful to migrate around. I described the requirements and the scenarios I needed to support, and the model returned schema proposals I could iterate on faster than I'd have built from scratch. That's the part of solo full-stack work that scales least with experience, and the place AI compressed it the most.</p>
+        <p class="case-study__body">Schema design was where AI helped the most. Multi-location scheduling has a lot of connected tables: employees, locations, role assignments, shift templates, availability windows, generated schedules. Getting the relationships right matters, because a wrong foreign key two weeks in becomes painful to migrate around. I described the requirements and the scenarios I needed to support, and the model returned schema proposals I could iterate on faster than I'd have built from scratch. That's the part of solo full-stack work that scales least with experience, and the place AI compressed it the most.</p>
 
-        <p class="case-study__body">The scheduling logic was the opposite story. I wrote out every rule in plain text — hour caps, role coverage, fairness, contractual constraints — and the model translated it into Supabase edge functions and browser scripts. It took weeks to fine-tune, because business rules and people rules don't generalize cleanly. Every manager has a "this employee can't open on Tuesdays because of school pickup" exception, and trying to encode all of it produced brittle logic that broke in new ways each time I added a constraint. The call I made was to stop coding for every corner case and unload some of the work to the manager. More manual editing than a perfect generator would require, and a lot less than untangling a confidently wrong schedule. Better to be obviously partial than confidently wrong.</p>
+        <p class="case-study__body">The scheduling logic was the opposite story. I wrote out every rule in plain text, including hour caps, role coverage, fairness, contractual constraints; and the model translated it into Supabase edge functions and browser scripts. It took weeks to fine-tune, because business rules and people rules don't generalize cleanly. Every manager has a "this employee can't open on Tuesdays because of school pickup" exception, and trying to encode all of it produced brittle logic that broke in new ways each time I added a constraint. The call I made was to stop coding for every corner case and unload some of the work to the manager. More manual editing than a perfect generator would require, and a lot less than untangling a confidently wrong schedule. Better to be obviously partial than confidently wrong.</p>
 
-        <p class="case-study__body">The frontend moved fastest. I sketched a mid-fidelity layout, screenshotted it to the model, and went straight to implementation. No handoff, no spec, just self-iteration on the design as I built it. AI didn't help with the small visual things that still need a human eye: padding, shadow weight, alignment quirks, and the motion details that make an interface feel good rather than functional. None of that is necessary for the tool to work. All of it is necessary for it to feel like something a manager would actually want to open on a Sunday night.</p>
+        <pre class="case-study__diagram">
+ 1–3  setup + state init
+      workers, templates, recurring assignments, hours
+      → exclude manager + inactive
+      → keep cross-location shifts  (conflict guard)
+      → new ScheduleGenerationState
+
+  4   processRecurringAssignments()   ← highest priority
+      stable weekly patterns placed first, slots locked
+
+  5   processPairedPrepBaristaShifts()   ← specific location only
+      prep + barista paired together
+
+  6   assignLeads()
+      open: start &lt; 12:00  ·  close: end ≥ 21:00
+      tie-break: prior week → fewest hours → highest job_level
+
+  7   assignDynamicShifts()
+      remaining unfilled slots
+      tie-break: fewest hours → highest job_level → unassigned ⚠
+
+  8   saveSchedule()
+      → scheduled_shifts (write to Supabase)
+      → shift_assignments (write to Supabase)</pre>
+        <p class="case-study__image-caption">Generation pipeline. Setup in 1&#x2013;3, assignment phases in 4&#x2013;8.</p>
+
+
+        <p class="case-study__body">The frontend moved fastest. Color and type were settled before I wrote a screen, because those decisions compound too fast to fix later. From there I sketched a mid-fidelity layout, screenshotted it to the model, and went straight to implementation, with spacing, shadows, and motion consolidating as I built. No handoff, no spec, just self-iteration on the design as I built it. The small visual things — padding, shadow weight, alignment quirks, motion — aren't necessary for the tool to work. They're necessary for it to feel like something a manager would actually want to open on a Thursday night.</p>
+      </section>
+
+
+      <!-- ---- SECTION: THE DESIGN SYSTEM ---- -->
+      <section class="case-study__section" aria-labelledby="section-design-system">
+        <h2 class="case-study__section-heading" id="section-design-system">The design system</h2>
+
+        <p class="case-study__body">The system is documented in markdown and mirrored in a single :root block. Every color, type role, spacing value, and corner radius is named once and referenced from there. Without that layer, designing in code drifts into AI default aesthetics: Inter on white, a purple gradient hero, and a primary button in safe blue.</p>
+
+        <div class="content-wrapper">
+          <div class="ds-blocks">
+
+            <!-- Color tokens -->
+            <div class="ds-block">
+              <p class="ds-block-label">Color tokens</p>
+
+              <p class="ds-subgroup-label" style="margin-top:0;">Primary</p>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#B48883;"></div>
+                <span class="ds-token-name">color-deep-rose</span>
+                <span class="ds-token-value">#B48883</span>
+                <span class="ds-token-usage">Primary buttons (Generate Schedule, Save, Add Employee, login submit). The single action color on every screen.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#9E736E;"></div>
+                <span class="ds-token-name">color-deep-rose-active</span>
+                <span class="ds-token-value">#9E736E</span>
+                <span class="ds-token-usage">Primary button hover and pressed state only. Not used on any other element.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#CBA6A2;"></div>
+                <span class="ds-token-name">color-rose-blush</span>
+                <span class="ds-token-value">#CBA6A2</span>
+                <span class="ds-token-usage">Active nav item background, availability toggle selected state, button outline border, dashboard "View Schedule" button.</span>
+              </div>
+
+              <p class="ds-subgroup-label">Categorical</p>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#D7CDEA;"></div>
+                <span class="ds-token-name">color-lavender-cream</span>
+                <span class="ds-token-value">#D7CDEA</span>
+                <span class="ds-token-usage">Nav item hover fill, dropdown menu item focus highlight, secondary badge background, sidebar user icon tint.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#A597CE;"></div>
+                <span class="ds-token-name">color-lavender-mid</span>
+                <span class="ds-token-value">#A597CE</span>
+                <span class="ds-token-usage">Active text for selected location sub-items in sidebar navigation.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#D3E3D8;"></div>
+                <span class="ds-token-name">color-pistachio-mist</span>
+                <span class="ds-token-value">#D3E3D8</span>
+                <span class="ds-token-usage">Success toast notifications, tooltip background, fully-assigned shift badge, login info box.</span>
+              </div>
+
+              <p class="ds-subgroup-label">Neutral</p>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#2E2B29;"></div>
+                <span class="ds-token-name">color-charcoal-cocoa</span>
+                <span class="ds-token-value">#2E2B29</span>
+                <span class="ds-token-usage">All body text, headings, nav labels, table column headers, modal titles, icon strokes.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#847A75;"></div>
+                <span class="ds-token-name">color-ash-mocha</span>
+                <span class="ds-token-value">#847A75</span>
+                <span class="ds-token-usage">Shift time text in schedule grid, form field descriptions, placeholder text, section accordion triggers, secondary dashboard stats.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch ds-swatch--bordered" style="background:#FEFCFB;"></div>
+                <span class="ds-token-name">color-blush-cream</span>
+                <span class="ds-token-value">#FEFCFB</span>
+                <span class="ds-token-usage">Full-page background across dashboard, schedule, and employee views.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch ds-swatch--bordered" style="background:#FAF7F5;"></div>
+                <span class="ds-token-name">color-card-ivory</span>
+                <span class="ds-token-value">#FAF7F5</span>
+                <span class="ds-token-usage">Assigned shift cells, employee table rows, modal content surface, dashboard stat cards, skeleton base.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch ds-swatch--bordered" style="background:#F2EBE8;"></div>
+                <span class="ds-token-name">color-oat-beige</span>
+                <span class="ds-token-value">#F2EBE8</span>
+                <span class="ds-token-usage">Schedule grid and employee table column headers, default badge fill, WeekNavigator button hover.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch ds-swatch--bordered" style="background:#DCD4CD;"></div>
+                <span class="ds-token-name">color-very-light-beige</span>
+                <span class="ds-token-value">#DCD4CD</span>
+                <span class="ds-token-usage">All modal borders, sidebar footer separator, schedule grid dividers, unassigned shift dashed border.</span>
+              </div>
+              <div class="ds-color-row">
+                <div class="ds-swatch ds-swatch--bordered" style="background:#DFD2C4;"></div>
+                <span class="ds-token-name">color-input-border</span>
+                <span class="ds-token-value">#DFD2C4</span>
+                <span class="ds-token-usage">Default 2px border on all form inputs and filter dropdowns. Lighter than very-light-beige to reduce visual weight inside forms.</span>
+              </div>
+
+              <p class="ds-subgroup-label">Semantic</p>
+              <div class="ds-color-row">
+                <div class="ds-swatch" style="background:#C34E46;"></div>
+                <span class="ds-token-name">color-error-red</span>
+                <span class="ds-token-value">#C34E46</span>
+                <span class="ds-token-usage">Form validation messages, error state text, conflict border on shift cells, destructive action confirmation.</span>
+              </div>
+            </div>
+
+            <!-- Typography tokens -->
+            <div class="ds-block">
+              <p class="ds-block-label">Typography tokens</p>
+              <p class="ds-type-note">Manrope. A geometric sans-serif with slightly rounded strokes and open apertures. Designed to stay readable at small sizes without feeling cold.</p>
+              <div class="ds-type-row">
+                <div class="ds-type-specimen" style="font-size:18px;font-weight:600;line-height:1.4;">Title</div>
+                <div class="ds-type-info">
+                  <span class="ds-token-name">type-title</span>
+                  <span class="ds-token-value">18px / 600 / 1.4</span>
+                  <span class="ds-token-usage">Page headers, modal titles, section names.</span>
+                </div>
+              </div>
+              <div class="ds-type-row">
+                <div class="ds-type-specimen" style="font-size:14px;font-weight:400;line-height:1.5;">Body</div>
+                <div class="ds-type-info">
+                  <span class="ds-token-name">type-body</span>
+                  <span class="ds-token-value">14px / 400 / 1.5</span>
+                  <span class="ds-token-usage">Reading text, table cells, form descriptions.</span>
+                </div>
+              </div>
+              <div class="ds-type-row">
+                <div class="ds-type-specimen" style="font-size:12px;font-weight:600;line-height:1.4;letter-spacing:0.01em;">Label</div>
+                <div class="ds-type-info">
+                  <span class="ds-token-name">type-label</span>
+                  <span class="ds-token-value">12px / 600 / 1.4 / 0.01em</span>
+                  <span class="ds-token-usage">Nav items, button text, form labels, column headers.</span>
+                </div>
+              </div>
+              <div class="ds-type-row">
+                <div class="ds-type-specimen" style="font-size:11px;font-weight:500;line-height:1.4;">Caption</div>
+                <div class="ds-type-info">
+                  <span class="ds-token-name">type-caption</span>
+                  <span class="ds-token-value">11px / 500 / 1.4</span>
+                  <span class="ds-token-usage">Sidebar footer, timestamps, secondary metadata.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spacing tokens -->
+            <div class="ds-block">
+              <p class="ds-block-label">Spacing tokens</p>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:8px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-name">spacing-xs</span>
+                  <span class="ds-token-value">8px</span>
+                  <span class="ds-token-usage">Icon gaps, tight internal padding.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:12px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-name">spacing-sm</span>
+                  <span class="ds-token-value">12px</span>
+                  <span class="ds-token-usage">Compact fields, badge padding.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:16px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-name">spacing-md</span>
+                  <span class="ds-token-value">16px</span>
+                  <span class="ds-token-usage">Button padding, card internal padding.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:24px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-name">spacing-lg</span>
+                  <span class="ds-token-value">24px</span>
+                  <span class="ds-token-usage">Section gaps, nav vertical spacing.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:32px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-name">spacing-xl</span>
+                  <span class="ds-token-value">32px</span>
+                  <span class="ds-token-usage">Page section margins, sidebar padding.</span>
+                </div>
+              </div>
+              <p class="ds-subgroup-label">Layout, used directly</p>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:48px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-value">48px</span>
+                  <span class="ds-token-usage">Generous section separation.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:64px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-value">64px</span>
+                  <span class="ds-token-usage">Major layout separations.</span>
+                </div>
+              </div>
+              <div class="ds-spacing-row">
+                <div class="ds-spacing-bar" style="width:96px;"></div>
+                <div class="ds-spacing-meta">
+                  <span class="ds-token-value">96px</span>
+                  <span class="ds-token-usage">Sidebar logo top offset, full-page top margin.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Border radius tokens -->
+            <div class="ds-block">
+              <p class="ds-block-label">Border radius tokens</p>
+              <div class="ds-radius-row">
+                <div class="ds-radius-swatch" style="border-radius:8px;"></div>
+                <div class="ds-radius-info">
+                  <span class="ds-token-name">radius-sm</span>
+                  <span class="ds-token-value">8px</span>
+                  <span class="ds-token-usage">Small chips, scrollbar thumbs.</span>
+                </div>
+              </div>
+              <div class="ds-radius-row">
+                <div class="ds-radius-swatch" style="border-radius:10px;"></div>
+                <div class="ds-radius-info">
+                  <span class="ds-token-name">radius-md</span>
+                  <span class="ds-token-value">10px</span>
+                  <span class="ds-token-usage">Buttons, inputs, form fields.</span>
+                </div>
+              </div>
+              <div class="ds-radius-row">
+                <div class="ds-radius-swatch" style="border-radius:12px;"></div>
+                <div class="ds-radius-info">
+                  <span class="ds-token-name">radius-lg</span>
+                  <span class="ds-token-value">12px</span>
+                  <span class="ds-token-usage">Cards, nav items, modals, panels.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </section>
 
 
@@ -251,7 +708,7 @@
       <section class="case-study__section" aria-labelledby="section-build">
         <h2 class="case-study__section-heading" id="section-build">What I built</h2>
 
-        <p class="case-study__body">Designed and engineered end-to-end. Frontend in Next.js and TypeScript, data and auth in Supabase (PostgreSQL + Edge Functions + RLS). The scheduling algorithm itself runs in the browser — constraint logic in JavaScript, no server round-trip required for generation.</p>
+        <p class="case-study__body">Designed and engineered end-to-end. Frontend in Next.js and TypeScript, data and auth in Supabase (PostgreSQL + Edge Functions + RLS). The scheduling algorithm itself runs in the browser (JavaScript), no server round-trip required for generation.</p>
 
         <ul class="case-study__list case-study__list--bullet">
           <li class="case-study__list-item"><strong>Multi-location dashboard:</strong> regional managers see all their stores at a glance, with current staffing percentages and active worker counts per location</li>

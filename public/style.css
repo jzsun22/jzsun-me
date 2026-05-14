@@ -738,6 +738,10 @@ button {
   transform: translateX(2px) translateY(-2px);
 }
 
+.tag-arrow {
+  vertical-align: 0.05em;
+}
+
 /* Tag line */
 .card__tags {
   font-family: var(--font-body);
