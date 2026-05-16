@@ -44,6 +44,7 @@
   </script>
 
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/panzoom@9.4.3/dist/panzoom.min.js"></script>
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,20 +55,6 @@
        YUSE.AI — PAGE-SPECIFIC STYLES
        ============================================= */
 
-    /* Temporary notice banner */
-    .yuse-notice {
-      background: var(--color-bg-card);
-      border-bottom: 1px solid var(--color-bg-divider);
-      text-align: center;
-      padding: 10px var(--page-padding-x);
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-    }
-    .yuse-notice__icon {
-      margin-right: 6px;
-      color: var(--color-accent-teal);
-    }
 
     /* Scroll progress (matches other case studies) */
     .loc-progress {
@@ -266,6 +253,193 @@
       font-size: var(--text-xs);
       color: var(--color-text-muted);
     }
+
+    /* Reference-only images — plain display, no hover effect */
+    .yuse-ref-img {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-sm);
+      cursor: default;
+    }
+    .yuse-ref-img--wide {
+      width: min(calc(100vw - 2 * var(--page-padding-x)), 1200px);
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ── Pan-and-zoom viewer ─────────────────────────── */
+    .yuse-panzoom {
+      margin: var(--space-xl) 0;
+    }
+    .yuse-panzoom__canvas {
+      position: relative;
+      height: min(72vh, 780px);
+      overflow: hidden;
+      border: 1px solid var(--color-bg-divider);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-card);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+    .yuse-panzoom__canvas:active { cursor: grabbing; }
+    .yuse-panzoom__inner {
+      position: absolute;
+      top: 0; left: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+    .yuse-panzoom__inner img {
+      display: block;
+      max-width: none;
+      height: auto;
+    }
+    .yuse-panzoom__badge {
+      position: absolute;
+      bottom: var(--space-sm);
+      right: var(--space-sm);
+      background: rgba(15, 15, 15, 0.55);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      padding: 4px 9px;
+      border-radius: var(--radius-sm);
+      z-index: 10;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    .yuse-panzoom__controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    .yuse-panzoom__btn {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-bg-divider);
+      border-radius: var(--radius-sm);
+      padding: 4px 13px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      cursor: pointer;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+      transition: background var(--transition-fast);
+    }
+    .yuse-panzoom__btn:hover { background: var(--color-bg-divider); }
+    .yuse-panzoom__scale {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      min-width: 36px;
+    }
+    .yuse-panzoom__minimap {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      width: 120px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+      z-index: 20;
+      cursor: crosshair;
+      display: none;
+      opacity: 1;
+      background: rgba(15, 15, 15, 0.2);
+    }
+    .yuse-panzoom__canvas--sm { height: min(50vh, 520px); }
+
+    @media (max-width: 768px) {
+      .yuse-panzoom__canvas { height: 420px; }
+      .yuse-panzoom__canvas--sm { height: 320px; }
+      .yuse-panzoom__minimap { width: 90px; }
+    }
+
+    /* ── Lightbox ────────────────────────────────────── */
+    .yuse-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 32px;
+      cursor: zoom-out;
+    }
+    .yuse-lightbox.is-open { display: flex; }
+    .yuse-lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      background: #fff;
+      padding: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+      cursor: default;
+    }
+    @media (max-width: 768px) {
+      .yuse-lightbox {
+        padding: 20px;
+      }
+    }
+    .yuse-lightbox__close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .yuse-lightbox__close:hover { background: rgba(255, 255, 255, 0.22); }
+
+    /* ── Horizontal scroll strip ─────────────────────── */
+    .yuse-hscroll {
+      margin: var(--space-xl) 0;
+    }
+    .yuse-hscroll__track {
+      display: flex;
+      gap: var(--space-lg);
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-bg-divider) transparent;
+      padding-bottom: var(--space-sm);
+      cursor: grab;
+    }
+    .yuse-hscroll__track:active { cursor: grabbing; }
+    .yuse-hscroll__item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: min(74vw, 620px);
+    }
+    .yuse-hscroll__item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-bg-divider);
+    }
+    .yuse-hscroll__item figcaption {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-top: var(--space-xs);
+      font-family: var(--font-body);
+    }
+    .yuse-hscroll__hint {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-sm);
+    }
   </style>
 </head>
 <body>
@@ -291,10 +465,7 @@
     </div>
   </nav>
 
-  <div class="yuse-notice" role="status">
-    <span class="yuse-notice__icon" aria-hidden="true">&#9888;</span>
-    Images for this case study are temporarily unavailable &mdash; they&rsquo;ll be up shortly.
-  </div>
+
 
   <main id="main" class="case-study">
 
@@ -372,13 +543,26 @@
       <h2 class="case-study__section-heading">01 &middot; The chat surface</h2>
       <p class="case-study__body">The main canvas, designed across several states: empty, in-conversation with formatting, conversation with tags, destructive confirmation, and favorited messages. The goal was a chat surface that scaled gracefully from a brand-new user's first prompt to a power user organizing months of history.</p>
 
-      <img
-        src="assets/images/yuse-ai/chat-explorations.png"
-        alt="Five states of the chat interface: empty-state numbered guidance, prompt suggestions, an active conversation with formatting toolbar, multi-select tag dropdown, delete confirmation modal, and favorited-message highlight"
-        class="case-study__image"
-        loading="lazy"
-      >
-      <p class="case-study__image-caption">From empty state to favorited messages &mdash; the chat surface in five states</p>
+      <div class="yuse-panzoom">
+        <div class="yuse-panzoom__canvas">
+          <span class="yuse-panzoom__badge">drag &middot; scroll to zoom</span>
+          <div class="yuse-panzoom__inner">
+            <img
+              src="assets/images/yuse-ai/chat-explorations.png"
+              alt="Five states of the chat interface: empty-state numbered guidance, prompt suggestions, an active conversation with formatting toolbar, multi-select tag dropdown, delete confirmation modal, and favorited-message highlight"
+              class="yuse-panzoom__img"
+              loading="lazy"
+            >
+          </div>
+        </div>
+        <div class="yuse-panzoom__controls">
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--in">+</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--out">&minus;</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--reset">reset</button>
+          <span class="yuse-panzoom__scale"></span>
+        </div>
+        <p class="case-study__image-caption">From empty state to favorited messages &mdash; the chat surface in five states</p>
+      </div>
 
       <h3 class="case-study__subsection-heading">Non-intrusive empty-state guidance</h3>
       <p class="case-study__body">A numbered card in the canvas shows new users what to do first: pick a model, write a message. Once a conversation exists, a softer "getting stuck? try one of these prompts" card surfaces sample prompts for both text and text-to-image models. The guidance never overlays the input box, so a user who already knows what they want isn't interrupted.</p>
@@ -407,13 +591,26 @@
       <p class="case-study__body">The work I'm proudest of in this project, because it's where I pushed back on the brief.</p>
       <p class="case-study__body">The PM came to me with a specific ask: a pink banner at the top of the canvas for trial-limit errors, with the prompt suggestions beneath it dimmed to discourage further use. I worked through it and surfaced two problems: the dimming wasn't visually strong enough to read as "disabled," and the pattern only made sense for this one error. A network failure couldn't reuse it; there was nothing to dim, no trial limit to explain. What I proposed instead was a system of three patterns used <em>together</em>, each scoped to a different kind of error, so the product had one coherent error vocabulary rather than a custom treatment for every case.</p>
 
-      <img
-        src="assets/images/yuse-ai/error-handling.png"
-        alt="Four error-handling explorations: the PM's banner with dimmed suggestions, a partial-disable modal, a full-disable modal, and a non-intrusive toast"
-        class="case-study__image"
-        loading="lazy"
-      >
-      <p class="case-study__image-caption">The PM's original banner, plus the three patterns I proposed in its place</p>
+      <div class="yuse-panzoom">
+        <div class="yuse-panzoom__canvas">
+          <span class="yuse-panzoom__badge">drag &middot; scroll to zoom</span>
+          <div class="yuse-panzoom__inner">
+            <img
+              src="assets/images/yuse-ai/error-handling.png"
+              alt="Four error-handling explorations: the PM's banner with dimmed suggestions, a partial-disable modal, a full-disable modal, and a non-intrusive toast"
+              class="yuse-panzoom__img"
+              loading="lazy"
+            >
+          </div>
+        </div>
+        <div class="yuse-panzoom__controls">
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--in">+</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--out">&minus;</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--reset">reset</button>
+          <span class="yuse-panzoom__scale"></span>
+        </div>
+        <p class="case-study__image-caption">The PM&rsquo;s original banner, plus the three patterns I proposed in its place</p>
+      </div>
 
       <h3 class="case-study__subsection-heading">The brief: pink banner</h3>
       <p class="case-study__body">The starting point I inherited. It worked for the one scenario it was designed for (trial limit reached), but couldn't carry the weight of a general error system. The dimming was too subtle; the layout assumed there was always something to "dim beneath." Both assumptions broke as soon as you tried to apply it to anything else.</p>
@@ -439,13 +636,26 @@
       <h2 class="case-study__section-heading">03 &middot; Onboarding</h2>
       <p class="case-study__body">A four-step flow that aimed to do three things, in order: welcome the user, surface the marketing points (tags, model switching), and set up their first conversation. Every screen has a "previous" link so a user who clicked too fast can back out.</p>
 
-      <img
-        src="assets/images/yuse-ai/onboarding.png"
-        alt="The yuse.ai onboarding flow: a welcome card, a feature explainer, a setup-mode chooser, and a finalize step, plus a branched three-step illustrated walkthrough for users supplying their own API keys"
-        class="case-study__image"
-        loading="lazy"
-      >
-      <p class="case-study__image-caption">Four onboarding screens, plus a branched API-key walkthrough for users supplying their own keys</p>
+      <div class="yuse-panzoom">
+        <div class="yuse-panzoom__canvas yuse-panzoom__canvas--sm">
+          <span class="yuse-panzoom__badge">drag &middot; scroll to zoom</span>
+          <div class="yuse-panzoom__inner">
+            <img
+              src="assets/images/yuse-ai/onboarding.png"
+              alt="The yuse.ai onboarding flow: a welcome card, a feature explainer, a setup-mode chooser, and a finalize step, plus a branched three-step illustrated walkthrough for users supplying their own API keys"
+              class="yuse-panzoom__img"
+              loading="lazy"
+            >
+          </div>
+        </div>
+        <div class="yuse-panzoom__controls">
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--in">+</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--out">&minus;</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--reset">reset</button>
+          <span class="yuse-panzoom__scale"></span>
+        </div>
+        <p class="case-study__image-caption">Four onboarding screens, plus a branched API-key walkthrough for users supplying their own keys</p>
+      </div>
 
       <p class="case-study__body">The third step is the most interesting. yuse.ai offered two ways in: use the platform's hosted API access (free trial, with a usage cap) or bring your own API key. The setup step explains both, then lets the user choose. Choosing "I'll use my own keys" routes to a tiny illustrated walkthrough that points to exactly where in Settings to paste them. Choosing "let you take care of it" skips ahead to the finalize step.</p>
 
@@ -462,13 +672,26 @@
       <h2 class="case-study__section-heading">04 &middot; Settings</h2>
       <p class="case-study__body">Tabbed settings covering Account, API Keys, Display, and Usage. The two flows worth walking through are password change (because it shares the validation system with signup) and API keys (because it's the surface the onboarding flow points to).</p>
 
-      <img
-        src="assets/images/yuse-ai/settings.png"
-        alt="The yuse.ai settings panel across three states: password change with current-password verification, per-model API key entry, and a usage-stats panel with a donut chart"
-        class="case-study__image"
-        loading="lazy"
-      >
-      <p class="case-study__image-caption">Settings &mdash; password change, per-model API key management, and a usage dashboard</p>
+      <div class="yuse-panzoom">
+        <div class="yuse-panzoom__canvas yuse-panzoom__canvas--sm">
+          <span class="yuse-panzoom__badge">drag &middot; scroll to zoom</span>
+          <div class="yuse-panzoom__inner">
+            <img
+              src="assets/images/yuse-ai/settings-credentials.png"
+              alt="Settings credential-management composite showing password change and per-model API key entry"
+              class="yuse-panzoom__img"
+              loading="lazy"
+            >
+          </div>
+        </div>
+        <div class="yuse-panzoom__controls">
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--in">+</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--out">&minus;</button>
+          <button class="yuse-panzoom__btn yuse-panzoom__btn--reset">reset</button>
+          <span class="yuse-panzoom__scale"></span>
+        </div>
+        <p class="case-study__image-caption">Credentials management &mdash; password change and per-model API key management</p>
+      </div>
 
       <h3 class="case-study__subsection-heading">Password change</h3>
       <p class="case-study__body">Requires the current password before allowing a new one. Standard security pattern. The same live-validation strip from signup carries over, so the rules a user is being held to are visible while typing, not after submit.</p>
@@ -477,6 +700,15 @@
       <p class="case-study__body">Each supported model (GPT, DALL&middot;E, Stable Diffusion, etc.) has its own row with its own "Save" button. Saving one key doesn't affect the others. The right pattern for a product that lets users mix self-hosted and platform-hosted access across models.</p>
 
       <h3 class="case-study__subsection-heading">Usage</h3>
+      <figure class="case-study__figure">
+        <img
+          src="assets/images/yuse-ai/settings-usage.png"
+          alt="Settings usage screen with model breakdown, free-message counter, and token-spend summary"
+          class="yuse-ref-img yuse-ref-img--wide"
+          loading="lazy"
+        >
+        <figcaption class="case-study__image-caption">Usage dashboard &mdash; model breakdown, free-message counter, and token spend</figcaption>
+      </figure>
       <p class="case-study__body">A donut chart broken down by model, plus a free-message counter and a token spend total. Sized to leave room for additional data viz blocks depending on what the user is paying attention to: trial users care about free messages remaining, paying users care about token spend by model.</p>
     </section>
 
@@ -487,26 +719,25 @@
       <h2 class="case-study__section-heading">05 &middot; Closing the system: auth &amp; password reset</h2>
       <p class="case-study__body">Both of these flows are included for completeness rather than novelty. They follow established conventions: inline password validation, captcha-protected signup, send-an-email reset with a separate set-new-password screen. The interesting work was making sure the conventions matched the rest of the product's visual language and reused the same validation strip across signup, password reset, and password change in settings.</p>
 
-      <div class="yuse-pair">
-        <div>
-          <img
-            src="assets/images/yuse-ai/auth.png"
-            alt="Side-by-side login and signup screens for yuse.ai, with the chat interface dimmed in the background"
-            class="case-study__image"
-            loading="lazy"
-          >
-          <p class="case-study__image-caption">Login + signup</p>
-        </div>
-        <div>
-          <img
-            src="assets/images/yuse-ai/password-reset.png"
-            alt="Four password-reset states: initial request, email-sent confirmation, account-not-found error, and new-password entry"
-            class="case-study__image"
-            loading="lazy"
-          >
-          <p class="case-study__image-caption">Password reset &mdash; four states</p>
-        </div>
-      </div>
+      <figure class="case-study__figure">
+        <img
+          src="assets/images/yuse-ai/auth.png"
+          alt="Side-by-side login and signup screens for yuse.ai, with the chat interface dimmed in the background"
+          class="yuse-ref-img"
+          loading="lazy"
+        >
+        <figcaption class="case-study__image-caption">Login + signup</figcaption>
+      </figure>
+
+      <figure class="case-study__figure">
+        <img
+          src="assets/images/yuse-ai/password-reset.png"
+          alt="Four password-reset screens in a horizontal row"
+          class="yuse-ref-img"
+          loading="lazy"
+        >
+        <figcaption class="case-study__image-caption">Password reset &mdash; 4 screens</figcaption>
+      </figure>
     </section>
 
     <!-- =====================
@@ -619,7 +850,8 @@
   <!-- Image placeholders: if a screenshot file isn't on disk yet,
        swap the broken-image tag for a labeled stripe-pattern box. -->
   <script>
-    document.querySelectorAll('main.case-study img.case-study__image').forEach(function(img){
+    var allCaseImgs = 'main.case-study img.case-study__image, main.case-study .yuse-panzoom__img, main.case-study .yuse-hscroll__item img';
+    document.querySelectorAll(allCaseImgs).forEach(function(img){
       img.addEventListener('error', function(){
         var path = img.getAttribute('src') || '';
         var ph = document.createElement('div');
@@ -632,6 +864,314 @@
         img.replaceWith(ph);
       });
     });
+  </script>
+
+  <!-- Pan-and-zoom viewer — anvaka/panzoom for core mechanics -->
+  <script>
+    (function() {
+      var MM_W = 120;
+
+      function initPanzoom(root) {
+        var canvas = root.querySelector('.yuse-panzoom__canvas');
+        var inner  = root.querySelector('.yuse-panzoom__inner');
+        var img    = root.querySelector('.yuse-panzoom__img');
+        var badge  = root.querySelector('.yuse-panzoom__badge');
+        var label  = root.querySelector('.yuse-panzoom__scale');
+        var btnIn  = root.querySelector('.yuse-panzoom__btn--in');
+        var btnOut = root.querySelector('.yuse-panzoom__btn--out');
+        var btnRst = root.querySelector('.yuse-panzoom__btn--reset');
+
+        var defScale = 1, pz = null, mmVisible = null;
+        var wTarget = null, wMx = 0, wMy = 0, cachedRect = null, wFrame = 0;
+        var mmPending = false, mmH = 0;
+        var wGestureActive = false, wGestureTimer = null, wheelInside = false;
+        window.addEventListener('scroll', function() { cachedRect = null; }, { passive: true });
+        window.addEventListener('resize', function() { cachedRect = null; });
+
+        var mm = document.createElement('canvas');
+        mm.className = 'yuse-panzoom__minimap';
+        mm.setAttribute('aria-hidden', 'true');
+        canvas.appendChild(mm);
+        var mmCtx = mm.getContext('2d');
+
+        var dimCache = document.createElement('canvas');
+        var dimCtx = dimCache.getContext('2d');
+
+        function buildCache() {
+          var iw = img.naturalWidth, ih = img.naturalHeight;
+          if (!iw || !ih) return;
+          mmH = Math.round(ih * MM_W / iw);
+          dimCache.width = MM_W;
+          dimCache.height = mmH;
+          dimCtx.clearRect(0, 0, MM_W, mmH);
+          dimCtx.globalAlpha = 0.45;
+          dimCtx.drawImage(img, 0, 0, MM_W, mmH);
+          dimCtx.globalAlpha = 1;
+          mm.width = MM_W;
+          mm.height = mmH;
+          mm.style.height = mmH + 'px';
+          mm.style.display = 'block';
+        }
+
+        function renderMinimap() {
+          if (!mmCtx || !mmH || !pz) return;
+          var iw = img.naturalWidth, ih = img.naturalHeight;
+          var cw = canvas.offsetWidth, ch = canvas.offsetHeight;
+          var t = pz.getTransform();
+          var tx = t.x, ty = t.y, sc = t.scale;
+          var mmScale = MM_W / iw;
+
+          mmCtx.clearRect(0, 0, MM_W, mmH);
+          mmCtx.drawImage(dimCache, 0, 0);
+
+          var vx = -tx / sc, vy = -ty / sc;
+          var vw = cw / sc, vh = ch / sc;
+          var rx = Math.max(0, vx) * mmScale;
+          var ry = Math.max(0, vy) * mmScale;
+          var rw = Math.min(iw, vx + vw) * mmScale - rx;
+          var rh = Math.min(ih, vy + vh) * mmScale - ry;
+
+          if (rw > 0 && rh > 0) {
+            mmCtx.save();
+            mmCtx.beginPath();
+            mmCtx.rect(rx, ry, rw, rh);
+            mmCtx.clip();
+            mmCtx.drawImage(dimCache, 0, 0);
+            mmCtx.globalAlpha = 0.55;
+            mmCtx.fillStyle = '#fff';
+            mmCtx.fillRect(rx, ry, rw, rh);
+            mmCtx.globalAlpha = 1;
+            mmCtx.restore();
+            mmCtx.strokeStyle = 'rgba(255,255,255,0.9)';
+            mmCtx.lineWidth = 1.5;
+            mmCtx.strokeRect(rx + 0.75, ry + 0.75, rw - 1.5, rh - 1.5);
+          }
+
+          var fullyVisible = (vx <= 0 && vy <= 0 && vx + vw >= iw && vy + vh >= ih);
+          if (fullyVisible !== mmVisible) {
+            mmVisible = fullyVisible;
+            mm.style.opacity = fullyVisible ? '0' : '1';
+            mm.style.pointerEvents = fullyVisible ? 'none' : 'auto';
+          }
+        }
+
+        function scheduleRenderMinimap() {
+          if (mmPending) return;
+          mmPending = true;
+          requestAnimationFrame(function() {
+            mmPending = false;
+            renderMinimap();
+          });
+        }
+
+        function cancelWheelFrame() {
+          if (!wFrame) return;
+          cancelAnimationFrame(wFrame);
+          wFrame = 0;
+        }
+
+        function clearWheelGesture() {
+          wGestureActive = false;
+          wTarget = null;
+          cachedRect = null;
+          clearTimeout(wGestureTimer);
+          cancelWheelFrame();
+        }
+
+        function flushWheelZoom() {
+          wFrame = 0;
+          if (!pz || wTarget === null) return;
+          pz.zoomAbs(wMx, wMy, wTarget);
+        }
+
+        /* initialise or re-initialise panzoom, reading the current CSS transform */
+        function initPz() {
+          cancelWheelFrame();
+          if (pz) { pz.dispose(); pz = null; }
+          pz = panzoom(inner, {
+            minZoom: defScale * 0.8,
+            maxZoom: 4,
+            smoothScroll: false,
+            zoomDoubleClickSpeed: 1,
+            filterKey: function() { return true; },
+            /* intercept wheel input and collapse rapid bursts into
+               a single absolute zoom update per animation frame */
+            beforeWheel: function(e) {
+              if (!cachedRect) cachedRect = canvas.getBoundingClientRect();
+              if (!wheelInside) {
+                clearWheelGesture();
+                return true;
+              }
+              /* lock focal point for the duration of a scroll gesture;
+                 reset 300ms after the last event so the next gesture
+                 picks up a fresh cursor position */
+              if (!wGestureActive) {
+                wMx = e.clientX - cachedRect.left;
+                wMy = e.clientY - cachedRect.top;
+                wGestureActive = true;
+              }
+              clearTimeout(wGestureTimer);
+              wGestureTimer = setTimeout(function() {
+                clearWheelGesture();
+                if (pz && label) label.textContent = Math.round(pz.getTransform().scale * 100) + '%';
+                scheduleRenderMinimap();
+              }, 300);
+              var abs = Math.abs(e.deltaY);
+              var delta = (abs > 50
+                ? Math.min(0.12, abs * 0.001)
+                : Math.min(0.12, abs * 0.008)
+              ) * (e.deltaY < 0 ? 1 : -1);
+              var base = wTarget !== null ? wTarget : pz.getTransform().scale;
+              wTarget = Math.max(defScale * 0.8, Math.min(4, base * (1 + delta)));
+              if (!wFrame) wFrame = requestAnimationFrame(flushWheelZoom);
+              return true;
+            }
+          });
+          pz.on('transform', function() {
+            var t = pz.getTransform();
+            if (label && !wGestureActive) label.textContent = Math.round(t.scale * 100) + '%';
+            scheduleRenderMinimap();
+          });
+        }
+
+        canvas.addEventListener('pointerenter', function() { wheelInside = true; });
+        canvas.addEventListener('pointerleave', function() {
+          wheelInside = false;
+          clearWheelGesture();
+          if (pz && label) label.textContent = Math.round(pz.getTransform().scale * 100) + '%';
+          scheduleRenderMinimap();
+        });
+
+        /* prevent page scroll only while the pointer is over the canvas */
+        canvas.addEventListener('wheel', function(e) {
+          if (!wheelInside) return;
+          e.preventDefault();
+        }, { passive: false });
+
+        function resetToFit() {
+          if (!pz) return;
+          var cw = canvas.offsetWidth, ch = canvas.offsetHeight;
+          var iw = img.naturalWidth,   ih = img.naturalHeight;
+          var tx = Math.max(0, (cw - iw * defScale) / 2);
+          var ty = Math.max(0, (ch - ih * defScale) / 2);
+          /* zoomTo multiplies current scale — divide by current to reach defScale */
+          pz.zoomTo(0, 0, defScale / pz.getTransform().scale);
+          pz.moveTo(tx, ty);
+        }
+
+        function fit() {
+          var cw = canvas.offsetWidth, ch = canvas.offsetHeight;
+          if (!cw || !ch) { requestAnimationFrame(fit); return; }
+          var iw = img.naturalWidth, ih = img.naturalHeight;
+          if (!iw || !ih) return;
+          defScale = Math.min(cw / iw, ch / ih);
+          var tx = Math.max(0, (cw - iw * defScale) / 2);
+          var ty = Math.max(0, (ch - ih * defScale) / 2);
+          clearWheelGesture();
+          initPz(); /* starts at scale=1, x=0, y=0 */
+          pz.zoomTo(0, 0, defScale); /* instant zoom to defScale around (0,0) */
+          pz.moveTo(tx, ty);         /* center the image */
+          buildCache();
+          if (label) label.textContent = Math.round(defScale * 100) + '%';
+          scheduleRenderMinimap();
+        }
+
+        if (img) {
+          if (img.complete && img.naturalWidth) { requestAnimationFrame(fit); }
+          else { img.addEventListener('load', fit); }
+        }
+
+        /* buttons */
+        if (btnIn)  btnIn.addEventListener('click', function() {
+          if (!pz) return;
+          pz.smoothZoom(canvas.offsetWidth / 2, canvas.offsetHeight / 2, 1.25);
+        });
+        if (btnOut) btnOut.addEventListener('click', function() {
+          if (!pz) return;
+          pz.smoothZoom(canvas.offsetWidth / 2, canvas.offsetHeight / 2, 0.8);
+        });
+        if (btnRst) btnRst.addEventListener('click', resetToFit);
+
+        mm.addEventListener('mousedown', function(e) { e.stopPropagation(); navMM(e); });
+        mm.addEventListener('mousemove', function(e) {
+          if (e.buttons === 1) {
+            e.stopPropagation();
+            navMM(e);
+          }
+        });
+        function navMM(e) {
+          if (!pz || !img.naturalWidth) return;
+          var r = mm.getBoundingClientRect();
+          var sc = pz.getTransform().scale;
+          var imgX = (e.clientX - r.left) / (MM_W / img.naturalWidth);
+          var imgY = (e.clientY - r.top) / (MM_W / img.naturalWidth);
+          pz.moveTo(canvas.offsetWidth / 2 - imgX * sc, canvas.offsetHeight / 2 - imgY * sc);
+          scheduleRenderMinimap();
+        }
+
+        /* fade badge */
+        canvas.addEventListener('mousedown', function() { if (badge) badge.style.opacity = '0'; }, { once: true });
+        canvas.addEventListener('touchstart', function() { if (badge) badge.style.opacity = '0'; }, { once: true, passive: true });
+      }
+
+      document.querySelectorAll('.yuse-panzoom').forEach(initPanzoom);
+    })();
+  </script>
+
+  <!-- Horizontal scroll — drag to scroll on desktop -->
+  <script>
+    (function() {
+      document.querySelectorAll('.yuse-hscroll__track').forEach(function(track) {
+        var down = false, sx, sl;
+        track.addEventListener('mousedown', function(e) { down = true; sx = e.pageX - track.offsetLeft; sl = track.scrollLeft; });
+        track.addEventListener('mouseleave', function() { down = false; });
+        track.addEventListener('mouseup',    function() { down = false; });
+        track.addEventListener('mousemove',  function(e) {
+          if (!down) return; e.preventDefault();
+          track.scrollLeft = sl - (e.pageX - track.offsetLeft - sx);
+        });
+      });
+    })();
+  </script>
+
+  <!-- Lightbox for reference images -->
+  <div class="yuse-lightbox" id="yuse-lightbox" role="dialog" aria-modal="true" aria-label="Full-size image viewer">
+    <img id="yuse-lb-img" src="" alt="">
+    <button class="yuse-lightbox__close" id="yuse-lb-close" aria-label="Close">&times;</button>
+  </div>
+
+  <script>
+    (function () {
+      var lb       = document.getElementById('yuse-lightbox');
+      var img      = document.getElementById('yuse-lb-img');
+      var closeBtn = document.getElementById('yuse-lb-close');
+
+      function openLb(src, alt) {
+        img.src = src;
+        img.alt = alt;
+        img.removeAttribute('style');
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLb() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        img.src = '';
+        img.removeAttribute('style');
+      }
+
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeLb(); });
+      lb.addEventListener('click', closeLb);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+      });
+
+      document.querySelectorAll('.yuse-ref-img').forEach(function (refImg) {
+        refImg.style.cursor = 'zoom-in';
+        refImg.addEventListener('click', function () { openLb(refImg.src, refImg.alt); });
+      });
+    })();
   </script>
 </body>
 </html>
