@@ -202,7 +202,8 @@
       margin-bottom: var(--space-md);
     }
     .jg-mockup-tile { display: flex; flex-direction: column; align-items: center; }
-    .jg-mockup-tile .jg-label {
+    .jg-mockup-tile .jg-label,
+    .baton-demo-split__phone .jg-label {
       font-size: var(--text-sm);
       color: var(--color-text-muted);
       margin-top: 14px;
@@ -386,6 +387,236 @@
       from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── Baton passing interactive demo ── */
+    .baton-demo-split {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 36px;
+      align-items: start;
+      margin: var(--space-xl) 0;
+    }
+    .baton-demo-split__text { display: flex; flex-direction: column; }
+    .baton-demo-split__phone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .baton-demo-split__stage {
+      background: linear-gradient(155deg, #f0ebff 0%, #e8f2ff 100%);
+      border-radius: 20px;
+      padding: 12px 12px 10px;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .baton-demo-split { grid-template-columns: 1fr; }
+    }
+    .phone {
+      width: 100%;
+      max-width: 375px;
+      zoom: 0.7;
+      background: #1c1c1e;
+      border-radius: 50px;
+      border: 6px solid #2c2c2e;
+      outline: 1px solid rgba(0,0,0,0.35);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      -webkit-user-select: none;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .phone-island {
+      width: 110px; height: 32px;
+      background: #000;
+      border-radius: 20px;
+      margin: 12px auto 4px;
+      flex-shrink: 0;
+    }
+    .phone-status {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 22px 6px;
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      flex-shrink: 0;
+    }
+    .phone-status-icons { display: flex; align-items: center; gap: 5px; }
+    .phone-signal { display: flex; gap: 1.5px; align-items: flex-end; }
+    .phone-signal span { width: 3px; background: rgba(255,255,255,0.9); border-radius: 1px; }
+    .phone-battery {
+      width: 22px; height: 11px; border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1.5px;
+    }
+    .phone-battery::after {
+      content: ''; position: absolute; right: -4px; top: 3px;
+      width: 2px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 0 1px 1px 0;
+    }
+    .phone-battery-fill { width: 75%; height: 100%; background: rgba(255,255,255,0.9); border-radius: 1.5px; }
+    .phone-home-bar {
+      height: 4px; width: 110px;
+      background: rgba(255,255,255,0.28);
+      border-radius: 2px;
+      margin: 8px auto 12px;
+      flex-shrink: 0;
+    }
+    .chat-bg { background: #1c1c1e; padding: 0; flex-shrink: 0; }
+    .app-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 18px 10px;
+    }
+    .app-logo {
+      font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700;
+      color: #fff; letter-spacing: 0.3px; line-height: 1;
+    }
+    .app-bar-icon {
+      color: rgba(255,255,255,0.85); font-size: 20px; cursor: pointer;
+      line-height: 1; position: relative; padding: 4px;
+    }
+    .heart-icon-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; position: relative;
+    }
+    .heart-icon-btn svg { width: 28px; height: 28px; filter: drop-shadow(0 0 4px rgba(229,57,53,0.5)); }
+    .sheet {
+      background: #fff; border-radius: 20px 20px 0 0;
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
+    }
+    .sheet-scroll {
+      padding: 0 20px 28px; overflow-y: auto; flex: 1;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .sheet-scroll::-webkit-scrollbar { display: none; }
+    .drag-handle {
+      width: 36px; height: 4px; background: #d1d1d6; border-radius: 2px;
+      margin: 10px auto 18px; flex-shrink: 0;
+    }
+    .sheet-title {
+      font-size: 22px; font-weight: 700; color: #1c1c1e;
+      line-height: 1.25; margin-bottom: 20px; min-height: 56px;
+    }
+    .section-label {
+      font-size: 16px; font-weight: 700; color: #1c1c1e;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .section-count { font-size: 14px; font-weight: 400; color: #8e8e93; }
+    .chips-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      border-radius: 50px; padding: 8px 14px;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer; border: 2px solid transparent;
+      transition: all 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chip-icon {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+    .chip.child-on  { border-color: #7c3aed; color: #7c3aed; background: #fff; }
+    .chip.child-on .chip-icon { background: #7c3aed; color: #fff; }
+    .chip.child-off { border-color: #c7c7cc; color: #8e8e93; background: #fff; }
+    .chip.child-off .chip-icon { border: 2px solid #c7c7cc; background: transparent; }
+    .chip.member-off { border-color: #c7c7cc; color: #1c1c1e; background: #fff; font-weight: 500; }
+    .chip.member-on  { border-color: #3b9eff; color: #3b9eff; background: #fff; }
+    .during-row {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 10px;
+    }
+    .during-label { font-size: 16px; font-weight: 700; color: #1c1c1e; }
+    .during-badge {
+      display: flex; align-items: center; gap: 5px;
+      background: #ede9fe; border: 1.5px solid #7c3aed;
+      border-radius: 20px; padding: 3px 10px;
+      font-size: 13px; font-weight: 600; color: #7c3aed;
+    }
+    .pagination-dots { display: flex; gap: 4px; align-items: center; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; transition: background 0.2s; }
+    .dot.on  { background: #7c3aed; }
+    .dot.off { background: #d1d1d6; }
+    .activity-card {
+      border: 1px solid #e5e5ea; border-radius: 14px;
+      overflow: hidden; margin-bottom: 16px;
+    }
+    .activity-child-header {
+      background: #ede9fe; padding: 11px 14px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 16px; font-weight: 700; color: #7c3aed;
+    }
+    .swipe-viewport { overflow: hidden; touch-action: pan-y; cursor: grab; }
+    .swipe-viewport:active { cursor: grabbing; }
+    .swipe-track { display: flex; transition: transform 0.3s ease; }
+    .swipe-slide { min-width: 100%; flex-shrink: 0; }
+    .event-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 11px 14px; background: #fff;
+      border-top: 0.5px solid #e5e5ea;
+    }
+    .event-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .event-content { flex: 1; }
+    .event-title { font-size: 15px; font-weight: 600; color: #1c1c1e; margin-bottom: 2px; }
+    .event-detail { font-size: 13px; color: #8e8e93; line-height: 1.3; }
+    .event-time { font-size: 13px; color: #8e8e93; flex-shrink: 0; padding-top: 2px; }
+    .notes-field {
+      width: 100%; border: 1.5px solid #e5e5ea; border-radius: 14px;
+      padding: 12px 14px; font-size: 15px; color: #1c1c1e;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      resize: none; outline: none; box-sizing: border-box;
+      min-height: 52px; margin-bottom: 16px; line-height: 1.4;
+      transition: border-color 0.15s;
+    }
+    .notes-field:focus { border-color: #7c3aed; }
+    .notes-field::placeholder { color: #c7c7cc; }
+    .btn-row { display: flex; gap: 12px; }
+    .btn {
+      border: none; border-radius: 50px;
+      padding: 15px 20px; font-size: 16px; font-weight: 600;
+      cursor: pointer; text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      transition: opacity 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-end { flex: 1; background: #fff; border: 1.5px solid #d1d1d6; color: #34c759; }
+    .btn-handover-off { flex: 1; background: #f0f0f0; color: #34c759; opacity: 0.8; cursor: default; }
+    .btn-handover-off:active { transform: none; }
+    .btn-handover-on { flex: 1; background: #2d5016; color: #fff; }
+    .success-overlay {
+      position: absolute; inset: 0; background: #fff;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      border-radius: 20px 20px 0 0;
+      z-index: 100; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .success-overlay.visible { opacity: 1; pointer-events: all; }
+    .heart-big {
+      font-size: 100px; line-height: 1;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      margin-bottom: 24px;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      14%      { transform: scale(1.28); }
+      28%      { transform: scale(1.0); }
+      42%      { transform: scale(1.18); }
+      70%      { transform: scale(1.0); }
+    }
+    .success-title {
+      font-size: 20px; font-weight: 700; color: #1c1c1e;
+      text-align: center; margin-bottom: 6px; padding: 0 24px;
+    }
+    .success-sub {
+      font-size: 15px; color: #8e8e93;
+      text-align: center; padding: 0 32px; line-height: 1.5;
+    }
   </style>
 </head>
 
@@ -478,8 +709,145 @@
     <!-- What I got wrong -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">What I got wrong with baton passing</h2>
-      <p class="case-study__body">The original feature looked like this. Tap an icon. Pick your partner. Write an optional handoff note. Tap "Send Handoff." The receiver gets a notification, opens the app, reads the summary, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
-      <p class="case-study__body">Five-plus taps for a single status change. Both parents had to be engaged simultaneously. The receiver had two hours to respond before the handoff expired.</p>
+      <div class="baton-demo-split">
+        <div class="baton-demo-split__text">
+          <p class="case-study__body">The original feature looked like this. Tap the heart in the top right to open the handoff sheet. Pick which children. Pick your partner. Optionally add a note. Tap Hand Over. The receiver gets a notification, opens the app, reviews the recent events, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
+          <p class="case-study__body">The cost wasn't just the form, it was also about getting to the form. Both parents had to be engaged simultaneously, and the receiver had two hours to respond before the handoff expired.</p>
+        </div>
+        <div class="baton-demo-split__phone">
+          <div class="baton-demo-split__stage" aria-label="Interactive prototype of the original baton passing feature">
+          <div class="phone">
+            <div class="phone-island"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="phone-status-icons">
+                <div class="phone-signal">
+                  <span style="height:4px"></span><span style="height:6px"></span><span style="height:8px"></span><span style="height:10px"></span>
+                </div>
+                <span style="font-size:10px">WiFi</span>
+                <div class="phone-battery"><div class="phone-battery-fill"></div></div>
+              </div>
+            </div>
+            <div class="chat-bg">
+              <div class="app-bar">
+                <span class="app-bar-icon">☰</span>
+                <span class="app-logo">JustGrow</span>
+                <div class="heart-icon-btn">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#e53935"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="sheet">
+              <div class="drag-handle"></div>
+              <div class="success-overlay" id="successOverlay">
+                <div class="heart-big">❤️</div>
+                <div class="success-title">Care session complete. Great work!</div>
+                <div class="success-sub" id="successSub">You're now caring for taurus &amp; libra.</div>
+              </div>
+              <div class="sheet-scroll" id="sheetScroll">
+                <div class="sheet-title" id="sheetTitle">I'm passing the care of 2 children to Dad.</div>
+                <div class="section-label">
+                  Select children
+                  <span class="section-count" id="childCount">(2 selected)</span>
+                </div>
+                <div class="chips-row" id="childChips">
+                  <div class="chip child-on" data-child="taurus" onclick="toggleChild(this)">
+                    <div class="chip-icon">✓</div>taurus
+                  </div>
+                  <div class="chip child-on" data-child="libra" onclick="toggleChild(this)">
+                    <div class="chip-icon">✓</div>libra
+                  </div>
+                </div>
+                <div class="section-label">Select family member</div>
+                <div class="chips-row" id="memberChips">
+                  <div class="chip member-off" data-member="Grandma" onclick="toggleMember(this)">Grandma</div>
+                  <div class="chip member-on"  data-member="Dad"     onclick="toggleMember(this)">Dad</div>
+                </div>
+                <div class="during-row">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <div class="during-label">During my turn</div>
+                    <div class="during-badge">⏱ 2h 36m</div>
+                  </div>
+                  <div class="pagination-dots" id="dots">
+                    <div class="dot on"></div>
+                    <div class="dot off"></div>
+                  </div>
+                </div>
+                <div class="activity-card">
+                  <div class="activity-child-header" id="activityChildHeader">😊 taurus</div>
+                  <div class="swipe-viewport" id="swipeViewport">
+                    <div class="swipe-track" id="swipeTrack">
+                      <div class="swipe-slide" id="slide-taurus">
+                        <div class="event-row">
+                          <div class="event-emoji">🍼</div>
+                          <div class="event-content">
+                            <div class="event-title">Diaper (Dirty)</div>
+                            <div class="event-detail">Dirty | Yellow | Normal</div>
+                          </div>
+                          <div class="event-time">25m ago</div>
+                        </div>
+                        <div class="event-row">
+                          <div class="event-emoji">🍼</div>
+                          <div class="event-content">
+                            <div class="event-title">Feeding (Bottle)</div>
+                            <div class="event-detail">Bottle | Formula | Enfamil NeuroPro</div>
+                          </div>
+                          <div class="event-time">1h ago</div>
+                        </div>
+                        <div class="event-row">
+                          <div class="event-emoji">😴</div>
+                          <div class="event-content">
+                            <div class="event-title">Sleep (Nap)</div>
+                            <div class="event-detail">9h 10m | Crib | Excellent | 1 wake-up</div>
+                          </div>
+                          <div class="event-time">2h ago</div>
+                        </div>
+                      </div>
+                      <div class="swipe-slide" id="slide-libra">
+                        <div class="event-row">
+                          <div class="event-emoji">🤱</div>
+                          <div class="event-content">
+                            <div class="event-title">Feeding (Breast)</div>
+                            <div class="event-detail">Left | 18 min | Good latch</div>
+                          </div>
+                          <div class="event-time">45m ago</div>
+                        </div>
+                        <div class="event-row">
+                          <div class="event-emoji">💧</div>
+                          <div class="event-content">
+                            <div class="event-title">Diaper (Wet)</div>
+                            <div class="event-detail">Wet | Normal</div>
+                          </div>
+                          <div class="event-time">1h 30m ago</div>
+                        </div>
+                        <div class="event-row">
+                          <div class="event-emoji">😴</div>
+                          <div class="event-content">
+                            <div class="event-title">Sleep (Nap)</div>
+                            <div class="event-detail">45m | Contact nap | 0 wake-ups</div>
+                          </div>
+                          <div class="event-time">2h 20m ago</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <textarea class="notes-field" id="notesField" placeholder="Anything worth noting? Words of encouragement works too 😊" rows="2"></textarea>
+                <div class="btn-row">
+                  <button class="btn btn-end" onclick="handleEnd()">End My Turn</button>
+                  <button class="btn btn-handover-on" id="handoverBtn" onclick="handleHandover()">Hand Over</button>
+                </div>
+              </div>
+            </div>
+            <div class="phone-home-bar"></div>
+          </div>
+          </div>
+          <p class="jg-label" style="margin-top:14px;margin-bottom:0;">Interactive — Try the flow</p>
+        </div>
+      </div>
+
       <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was low.</p>
       <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that I designed for the user as a value-holder rather than the user mid-task. Parents articulating the invisible-labor problem in calm reflection were the people we built for. Parents on two seconds of attention with a screaming baby were the people who actually had to use it. They share a name and they are different people. I read the aspirational undercurrent and missed the operational one, which is depletion.</p>
       <h3 class="case-study__subsection-heading">Where the feature did land</h3>
@@ -873,6 +1241,139 @@
   </footer>
 
 
+  <script>
+    /* ── Baton passing demo ── */
+    (function() {
+      var children = {
+        taurus: { selected: true, name: 'taurus' },
+        libra:  { selected: true, name: 'libra'  }
+      };
+      var selectedMember = 'Dad';
+      var currentSlide = 0;
+
+      function selectedChildren() {
+        return Object.values(children).filter(function(c) { return c.selected; });
+      }
+
+      function updateTitle() {
+        var sel = selectedChildren();
+        var childStr = sel.length === 0 ? '...' : sel.length === 1 ? sel[0].name : sel.length + ' children';
+        document.getElementById('sheetTitle').textContent = "I'm passing the care of " + childStr + ' to ' + (selectedMember || '....') + '.';
+      }
+
+      function updateChildCount() {
+        document.getElementById('childCount').textContent = '(' + selectedChildren().length + ' selected)';
+      }
+
+      function updateHandoverBtn() {
+        var btn = document.getElementById('handoverBtn');
+        var can = selectedChildren().length > 0 && selectedMember;
+        btn.className = 'btn ' + (can ? 'btn-handover-on' : 'btn-handover-off');
+      }
+
+      function rebuildSwipeSlides() {
+        var sel = selectedChildren();
+        var track = document.getElementById('swipeTrack');
+        var dots  = document.getElementById('dots');
+        var header = document.getElementById('activityChildHeader');
+        if (currentSlide >= sel.length) currentSlide = Math.max(0, sel.length - 1);
+        var slideOrder = sel.map(function(c) { return document.getElementById('slide-' + c.name); });
+        var unselected = Object.keys(children).filter(function(k) { return !children[k].selected; }).map(function(k) { return document.getElementById('slide-' + k); });
+        slideOrder.concat(unselected).forEach(function(s) { if (s) track.appendChild(s); });
+        track.style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+        dots.innerHTML = '';
+        if (sel.length > 1) {
+          dots.style.display = 'flex';
+          for (var i = 0; i < sel.length; i++) {
+            var d = document.createElement('div');
+            d.className = 'dot ' + (i === currentSlide ? 'on' : 'off');
+            dots.appendChild(d);
+          }
+        } else {
+          dots.style.display = 'none';
+        }
+        if (sel.length > 0) header.textContent = '😊 ' + sel[currentSlide].name;
+      }
+
+      function goToSlide(idx) {
+        var sel = selectedChildren();
+        if (idx < 0 || idx >= sel.length) return;
+        currentSlide = idx;
+        document.getElementById('swipeTrack').style.transform = 'translateX(' + (-idx * 100) + '%)';
+        document.querySelectorAll('#dots .dot').forEach(function(d, i) { d.className = 'dot ' + (i === idx ? 'on' : 'off'); });
+        document.getElementById('activityChildHeader').textContent = '😊 ' + sel[idx].name;
+      }
+
+      (function() {
+        var vp = document.getElementById('swipeViewport');
+        var startX = 0, dragging = false;
+        vp.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+        vp.addEventListener('touchend',   function(e) {
+          if (!dragging) return; dragging = false;
+          var dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) < 30) return;
+          var sel = selectedChildren();
+          if (dx < 0 && currentSlide < sel.length - 1) goToSlide(currentSlide + 1);
+          else if (dx > 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+        });
+        vp.addEventListener('mousedown', function(e) { startX = e.clientX; dragging = true; });
+        vp.addEventListener('mouseup',   function(e) {
+          if (!dragging) return; dragging = false;
+          var dx = e.clientX - startX;
+          if (Math.abs(dx) < 30) return;
+          var sel = selectedChildren();
+          if (dx < 0 && currentSlide < sel.length - 1) goToSlide(currentSlide + 1);
+          else if (dx > 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+        });
+      })();
+
+      window.toggleChild = function(el) {
+        var name = el.dataset.child;
+        var sel = selectedChildren();
+        if (children[name].selected && sel.length === 1) return;
+        children[name].selected = !children[name].selected;
+        if (children[name].selected) {
+          el.className = 'chip child-on';
+          el.querySelector('.chip-icon').textContent = '✓';
+        } else {
+          el.className = 'chip child-off';
+          el.querySelector('.chip-icon').textContent = '';
+          if (currentSlide > 0) currentSlide = 0;
+        }
+        updateChildCount(); rebuildSwipeSlides(); updateTitle(); updateHandoverBtn();
+      };
+
+      window.toggleMember = function(el) {
+        var name = el.dataset.member;
+        document.querySelectorAll('#memberChips .chip').forEach(function(c) { c.className = 'chip member-off'; });
+        selectedMember = (selectedMember === name) ? null : name;
+        if (selectedMember) el.className = 'chip member-on';
+        updateTitle(); updateHandoverBtn();
+      };
+
+      function showSuccess(sub) {
+        document.getElementById('successSub').innerHTML = sub;
+        var overlay = document.getElementById('successOverlay');
+        overlay.classList.add('visible');
+        setTimeout(function() {
+          overlay.classList.remove('visible');
+          document.getElementById('notesField').value = '';
+        }, 3000);
+      }
+
+      window.handleHandover = function() {
+        var sel = selectedChildren();
+        if (!sel.length || !selectedMember) return;
+        showSuccess('Handoff request sent to ' + selectedMember + '.');
+      };
+
+      window.handleEnd = function() {
+        showSuccess('Your shift has ended. Thanks for caring!');
+      };
+
+      rebuildSwipeSlides(); updateTitle(); updateHandoverBtn();
+    })();
+  </script>
   <script>
     var toggle = document.querySelector('.nav__toggle'), menu = document.querySelector('.nav__menu');
     toggle.addEventListener('click', function() {
