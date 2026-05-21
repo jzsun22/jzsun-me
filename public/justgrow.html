@@ -703,6 +703,7 @@
       <p class="case-study__body">JustGrow is a chat-first AI parenting companion built on a stack of agents (Google ADK) behind a Flutter frontend and Python backend. Parents log baby tracking events in plain language, get personalized bedtime stories, share albums with family, and increasingly use chat as the universal entry point for everything. The product reached 200+ signups and ~50 monthly active users without paid marketing.</p>
       <p class="case-study__body">The constraint that shapes every product decision: parents are usually holding a baby. One free hand at best. Attention measured in seconds.</p>
       <p class="case-study__body">I joined as the founding product designer/engineer. My boss owned product direction and the major strategic calls; I owned execution end-to-end across UX, frontend, and some backend paths (including AI agent prompts). This case study covers one feature I owned during my nine months on the team, and it is one of the more interesting ones to tell. </p>
+      <p class="case-study__body">The team was four. No PM, no other designers, no research ops. The founder owned product direction and was the only other engineer in product-frontend conversations. I owned design and frontend, and built backend for some features in this case study including the shift model. User research was opportunistic. App Store reviews and occasional conversations, no reliable panel. The decisions below were made in that environment: high ownership, high judgment-load, low infrastructure for validation.</p>
     </section>
 
 
@@ -849,11 +850,12 @@
       </div>
 
       <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was low.</p>
+      <p class="case-study__body">The handoff felt heavy at spec. I could not yet name what was wrong with it, only that something was. A feeling is not a case, so I shipped. What follows is the argument I did not have then.</p>
       <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that I designed for the user as a value-holder rather than the user mid-task. Parents articulating the invisible-labor problem in calm reflection were the people we built for. Parents on two seconds of attention with a screaming baby were the people who actually had to use it. They share a name and they are different people. I read the aspirational undercurrent and missed the operational one, which is depletion.</p>
       <h3 class="case-study__subsection-heading">Where the feature did land</h3>
       <p class="case-study__body">Two App Store reviews specifically praised the handoff feature. A postpartum night nurse wrote that she recommends JustGrow to every family she works with because the handoff is "perfect for overnight care." A parent wrote that the handoff "saved our marriage" by ending daily morning arguments about who did what overnight. Both fit the values-vs-state framework rather than break it. A professional caregiver's operational state already includes shift documentation; for her, declaring state is not effort, it is the work. A household where memory disputes cause daily fights has an operational pain that exceeds the operational cost of four taps. The average parent's state does not match their value-holder self, but specific segments whose states do match are real.</p>
       <p class="case-study__body">The new design does not close those use cases off. Passive attribution still records every event with a user_id, so the data both reviewers valued is still captured automatically. They reach it through chat instead of a handoff form. The parent who was fighting about who fed the baby at 2am can ask "what happened overnight?" and get a summary. The night nurse can ask the agent to recap her shift and the parents see it when they wake up. One extra sentence to type instead of a four-tap ceremony, and the majority of parents who never wanted baton passing no longer pay for it.</p>
-      <p class="case-study__body">The cost was concrete. The shift model carried more state and more transition logic than any other feature, and most of it became dead weight when we deprecated.</p>
+      <p class="case-study__body">The cost was concrete. Most of the shift model became dead weight when we deprecated, and the code I was throwing away was my own.</p>
     </section>
 
 
@@ -875,7 +877,6 @@
       <h2 class="case-study__section-heading">Design graveyard</h2>
       <p class="case-study__body">Most of the work was ruling things out. I ran ten alternative directions to mockup or written-spec stage and rejected each for a specific reason. Every rejection was a product reason, not a resource one.</p>
       <p class="case-study__body">Several of these options came out of brainstorming with AI. The work is not the brainstorm. It is the rejection with a reason.</p>
-
       <div class="jg-graveyard">
         <div class="jg-grave-card">
           <span class="jg-killed">Killed</span>
@@ -1142,8 +1143,9 @@
     <!-- Sub-story: leaderboard -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">Sub-story: retiring the leaderboard</h2>
-      <p class="case-study__body">While I was redesigning contribution tracking, I argued for retiring the achievement system's leaderboard category at the same time.</p>
-      <p class="case-study__body">Twelve achievements were live: "Top Caregiver," streak rankings, weekly winners. They were technically working. Users were earning them. The problem: in a two-parent family, "most active caregiver for 5 days" unavoidably reads as "you did more than your partner for 5 days." The easy fix was to keep the twelve and soften the titles. I argued that did not work.</p>
+      <p class="case-study__body">The achievement system was originally my pitch. Why? Streak achievements bring parents back. Unlocking an achievement is a small celebratory moment, and parenting an infant has few of those. The leaderboard category was part of that pitch.</p>
+      <p class="case-study__body">While I was redesigning contribution tracking, the achievement system's leaderboard category came up for review. It was a by-product of the same competitive model the new design was replacing, so it had to go. The contested call was how.</p>
+      <p class="case-study__body">Twelve achievements were live: "Top Caregiver," streak rankings, weekly winners. They were technically working. Users were earning them. The problem: in a two-parent family, "most active caregiver for 5 days" unavoidably reads as "you did more than your partner for 5 days." The easy fix was to keep the twelve and soften the titles. In my opinion, that would not work.</p>
 
       <div class="case-study__callout">
         <p class="case-study__callout-text">Any positional criterion in a two-parent family is inherently a comparison. Soft titles do not change the math.</p>
