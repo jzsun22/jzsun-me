@@ -761,6 +761,10 @@ button {
   line-height: 1.6;
 }
 
+.card__description + .card__description {
+  margin-top: 0.65em;
+}
+
 
 /* ============================================
    10. PROJECTS PAGE
