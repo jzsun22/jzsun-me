@@ -399,7 +399,7 @@
 
         <p class="case-study__body">Orvia does more. "Generate New Schedule" runs the constraint algorithm in the browser and fills the entire week at once. Individual slots stay editable afterward: click a cell, a dialog opens to reassign the worker or adjust the time window. The default path starts from a complete schedule rather than a blank one, and the manager's job becomes reviewing and correcting instead of building from scratch.</p>
 
-        <p class="case-study__body">For manual edits, the default pattern is drag-and-drop. A tray of employee name pills sits on one side, slots on the other, and you drag the right person into the right cell. It's direct and tactile, and it breaks the moment the roster grows past a dozen people. With fifty employees, finding the right name pill becomes its own cognitive load, and the manager ends up scanning a wall of names to swap a single shift.</p>
+        <p class="case-study__body">For manual edits, the obvious pattern is drag-and-drop. A tray of employee name pills sits on one side, slots on the other, and you drag the right person into the right cell. It's direct and tactile, and it breaks the moment the roster grows past a dozen people. With fifty employees, finding the right name pill becomes its own cognitive load, and the manager ends up scanning a wall of names to swap a single shift.</p>
 
         <p class="case-study__body">Orvia uses a modal instead. Click a slot, a dialog opens with an alphabetically sorted employee list. The modal adds a layer of interface complexity, and it's still the right call. Scrolling a sorted list of fifty names is faster than scanning fifty unsorted pills with no structure.</p>
       </section>
@@ -731,6 +731,14 @@
           <li class="case-study__list-item"><strong>Employee and role management:</strong> roster management with availability windows, role assignments, and hour constraints that feed directly into the generation algorithm</li>
           <li class="case-study__list-item"><strong>Weekly context panel:</strong> staffing coverage percentages by location, plus upcoming employee birthdays — a small detail that matters in small teams where managers track this manually today</li>
         </ul>
+
+      </section>
+
+      <!-- ---- SECTION: FUTURE DIRECTIONS ---- -->
+       <section class="case-study__section" aria-labelledby="section-future">
+        <h2 class="case-study__section-heading" id="section-future">Future Directions</h2>
+
+        <p class="case-study__body">The generation logic is intentionally rule-based and stays that way. The next layer worth exploring is entry, not generation: a manager typing "Maria can't open Tuesdays anymore, she started a class" and having that map to an availability update. Unstructured, natural language input into structured fields sounds like a good case for the addition of an LLM to further maximize efficiency.</p>
 
       </section>
 
