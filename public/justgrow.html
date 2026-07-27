@@ -10,13 +10,13 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/favicon-192x192.png" />
   <title>JustGrow: Contribution Tracking Redesign | Jocelyn Sun</title>
-  <meta name="description" content="Replacing a four-tap handoff ceremony with a passive, ambient contribution tracking system. Zero new screens, zero new agents." />
+  <meta name="description" content="Replacing a four-tap explicit handoff with a passive, ambient contribution tracking system. Zero new screens, zero new agents." />
   <link rel="canonical" href="https://jzsun.me/justgrow" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="JustGrow: Contribution Tracking Redesign | Jocelyn Sun" />
-  <meta property="og:description" content="Replacing a four-tap handoff ceremony with a passive, ambient system. Zero new screens, zero new agents." />
+  <meta property="og:description" content="Replacing a four-tap explicit handoff with a passive, ambient system. Zero new screens, zero new agents." />
   <meta property="og:url" content="https://jzsun.me/justgrow.html" />
   <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
   <meta property="og:locale" content="en_US" />
@@ -24,7 +24,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="JustGrow: Contribution Tracking Redesign | Jocelyn Sun" />
-  <meta name="twitter:description" content="Replacing a four-tap handoff ceremony with a passive, ambient system. Zero new screens, zero new agents." />
+  <meta name="twitter:description" content="Replacing a four-tap explicit handoff with a passive, ambient system. Zero new screens, zero new agents." />
   <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
 
   <!-- JSON-LD: Article -->
@@ -33,7 +33,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "JustGrow: Contribution Tracking Redesign",
-    "description": "Replacing a four-tap handoff ceremony with a passive, ambient contribution tracking system.",
+    "description": "Replacing a four-tap explicit handoff with a passive, ambient contribution tracking system.",
     "url": "https://jzsun.me/justgrow.html",
     "author": {
       "@type": "Person",
@@ -657,7 +657,7 @@
           <div>
             <p class="case-study__category">CASE STUDY</p>
             <h1 class="case-study__title" id="cs-title">JustGrow: Contribution Tracking Redesign</h1>
-            <p class="case-study__hook">Replacing a four-tap handoff ceremony with a passive, ambient system. Zero new screens, zero new agents.</p>
+            <p class="case-study__hook">Replacing a four-tap explicit handoff with a passive, ambient system. Zero new screens, zero new agents.</p>
 
             <div class="case-study__pills">
               <span class="case-study__pill">Flutter</span>
@@ -692,7 +692,7 @@
     <!-- In brief -->
     <section class="case-study__section">
       <h2 class="case-study__section-heading">In brief</h2>
-      <p class="case-study__body">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, asked co-parents to perform a four-tap handoff ceremony to log who was on duty. It worked. Adoption was low.</p>
+      <p class="case-study__body">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, came from my founder as an explicit, proactive handoff; I designed and built what it became, which asked co-parents to perform a four-tap handoff to log who was on duty. It worked. Adoption was low.</p>
       <p class="case-study__body">The replacement is passive: existing tracking events become the contribution record, a Sunday digest replaces the handoff, and the whole thing happens inside the chat surface that was already there. No new screens. No new agents. No new logging primitives for the user. Most of the work happened upstream of the surface.</p>
     </section>
 
@@ -708,12 +708,12 @@
 
 
     <!-- What I got wrong -->
-    <section class="case-study__section">
+    <section class="case-study__section" id="baton-demo">
       <h2 class="case-study__section-heading">What I got wrong with baton passing</h2>
       <div class="baton-demo-split">
         <div class="baton-demo-split__text">
           <p class="case-study__body">The original feature looked like this. Tap the heart in the top right to open the handoff sheet. Pick which children. Pick your partner. Optionally add a note. Tap Hand Over. The receiver gets a notification, opens the app, reviews the recent events, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
-          <p class="case-study__body">The cost wasn't just the form, it was also about getting to the form. Both parents had to be engaged simultaneously, and the receiver had two hours to respond before the handoff expired.</p>
+          <p class="case-study__body">The cost wasn't really the form. It was having to remember to do it at all, at the moment of transition. On top of that, both parents had to be engaged simultaneously, and the receiver had two hours to respond before the handoff expired.</p>
         </div>
         <div class="baton-demo-split__phone">
           <div class="baton-demo-split__stage" aria-label="Interactive prototype of the original baton passing feature">
@@ -851,10 +851,10 @@
 
       <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer. It worked, but adoption was low.</p>
       <p class="case-study__body">The handoff felt heavy at spec. I could not yet name what was wrong with it, only that something was. A feeling is not a case, so I shipped. What follows is the argument I did not have then.</p>
-      <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that I designed for the user as a value-holder rather than the user mid-task. Parents articulating the invisible-labor problem in calm reflection were the people we built for. Parents on two seconds of attention with a screaming baby were the people who actually had to use it. They share a name and they are different people. I read the aspirational undercurrent and missed the operational one, which is depletion.</p>
+      <p class="case-study__body">The diagnosis is not "the UI was too heavy." It is that wanting an outcome is not the same as being willing to pay for it. Parents told us clearly that invisible labor was a real problem, and I never weighed what my solution asked of them against what they would actually spend at the moment it asked. The parent describing the problem in calm reflection was the person we built for. The parent on two seconds of attention with a screaming baby was the person who had to use it. Same name, different people.</p>
       <h3 class="case-study__subsection-heading">Where the feature did land</h3>
-      <p class="case-study__body">Two App Store reviews specifically praised the handoff feature. A postpartum night nurse wrote that she recommends JustGrow to every family she works with because the handoff is "perfect for overnight care." A parent wrote that the handoff "saved our marriage" by ending daily morning arguments about who did what overnight. Both fit the values-vs-state framework rather than break it. A professional caregiver's operational state already includes shift documentation; for her, declaring state is not effort, it is the work. A household where memory disputes cause daily fights has an operational pain that exceeds the operational cost of four taps. The average parent's state does not match their value-holder self, but specific segments whose states do match are real.</p>
-      <p class="case-study__body">The new design does not close those use cases off. Passive attribution still records every event with a user_id, so the data both reviewers valued is still captured automatically. They reach it through chat instead of a handoff form. The parent who was fighting about who fed the baby at 2am can ask "what happened overnight?" and get a summary. The night nurse can ask the agent to recap her shift and the parents see it when they wake up. One extra sentence to type instead of a four-tap ceremony, and the majority of parents who never wanted baton passing no longer pay for it.</p>
+      <p class="case-study__body">Two App Store reviews specifically praised the handoff feature. A postpartum night nurse wrote that she recommends JustGrow to every family she works with because the handoff is "perfect for overnight care." A parent wrote that the handoff "saved our marriage" by ending daily morning arguments about who did what overnight. Neither is a counterexample. A night nurse never has to remember the handoff, because documenting a shift is already the shape of her work. A household fighting every morning was paying more for the argument than the handoff cost to perform. Both were willing to spend what it asked. Most parents were not, and I had not priced that.</p>
+      <p class="case-study__body">The new design does not close those use cases off. Passive attribution still records every event with a user_id, so the data both reviewers valued is still captured automatically. They reach it through chat instead of a handoff form. The parent who was fighting about who fed the baby at 2am can ask "what happened overnight?" and get a summary. The night nurse can ask the agent to recap her shift and the parents see it when they wake up. One extra sentence to type instead of a four-tap handoff, and the majority of parents who never wanted baton passing no longer pay for it.</p>
       <p class="case-study__body">The cost was concrete. Most of the shift model became dead weight when we deprecated, and the code I was throwing away was my own.</p>
     </section>
 
@@ -864,7 +864,7 @@
       <h2 class="case-study__section-heading">The redesign brief</h2>
       <p class="case-study__body">The founder ultimately made the call to deprecate baton passing. My job was the replacement.</p>
       <p class="case-study__body">The temptation was to iterate on the surface. Prefilled slots, better animation, a more discoverable entry point. That approach would have reproduced the same product mistake at a slightly lower cost.</p>
-      <p class="case-study__body">The actual insight: the data about who did what already existed in the app. Every tracking event has a <code>user_id</code>. Every calendar event has an owner. The system did not need a handoff ceremony. It needed to read the data that was already being written and surface it intelligently.</p>
+      <p class="case-study__body">The actual insight: the data about who did what already existed in the app. Every tracking event has a <code>user_id</code>. Every calendar event has an owner. The system did not need an explicit handoff at all. It needed to read the data that was already being written and surface it intelligently.</p>
 
       <div class="case-study__callout">
         <p class="case-study__callout-text">Parents do things. They do not declare that they are doing things. Any product model that asks them to declare state will lose to one that infers it.</p>
@@ -1193,7 +1193,7 @@
       <div class="jg-takeaway">
         <div class="jg-takeaway-item">
           <span class="jg-num">01</span>
-          <p><strong>Values-vs-state as a primary scoping question.</strong> The user articulating the problem and the user mid-task share a name and are different people. I name that gap before I scope a feature, not after.</p>
+          <p><strong>Price what the path asks before scoping it.</strong> Wanting an outcome is not the same as being willing to pay for it. The user describing a problem and the user mid-task share a name and are different people, so I weigh what a solution demands against what they will actually spend, before I scope rather than after.</p>
         </div>
         <div class="jg-takeaway-item">
           <span class="jg-num">02</span>
@@ -1347,9 +1347,13 @@
 
       window.toggleMember = function(el) {
         var name = el.dataset.member;
+        /* Single-select: tapping the chosen partner is a no-op. Moving the
+           selection is what tapping a different pill is for, so the row can
+           never be emptied. */
+        if (selectedMember === name) return;
         document.querySelectorAll('#memberChips .chip').forEach(function(c) { c.className = 'chip member-off'; });
-        selectedMember = (selectedMember === name) ? null : name;
-        if (selectedMember) el.className = 'chip member-on';
+        selectedMember = name;
+        el.className = 'chip member-on';
         updateTitle(); updateHandoverBtn();
       };
 
