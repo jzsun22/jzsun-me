@@ -617,6 +617,7 @@
       font-size: 15px; color: #8e8e93;
       text-align: center; padding: 0 32px; line-height: 1.5;
     }
+
   </style>
 </head>
 
@@ -656,7 +657,15 @@
 
           <div>
             <p class="case-study__category">CASE STUDY</p>
-            <h1 class="case-study__title" id="cs-title">JustGrow: Contribution Tracking Redesign</h1>
+            <h1 class="case-study__title" id="cs-title">JustGrow: an AI-empowered parenting companion</h1>
+            <p class="case-study__hook">One chat for the whole job of early parenting: tracking, stories, albums, and keeping the family in the loop.</p>
+            <div class="case-study__pills">
+              <span class="case-study__pill">Flutter</span>
+              <span class="case-study__pill">FastAPI</span>
+              <span class="case-study__pill">Google ADK</span>
+            </div>
+
+            <!-- HIDDEN WHILE IN REVISION
             <p class="case-study__hook">Replacing a four-tap explicit handoff with a passive, ambient system. Zero new screens, zero new agents.</p>
 
             <div class="case-study__pills">
@@ -665,14 +674,13 @@
               <span class="case-study__pill">HTML</span>
               <span class="case-study__pill">Python</span>
             </div>
+            -->
           </div>
 
           <div class="case-study__header-right" aria-label="Project metadata">
             <dl class="case-study__meta-list">
               <dt class="visually-hidden">Role</dt><dd>Founding Product Engineer</dd>
               <dt class="visually-hidden">Period</dt><dd>Aug 2025 – May 2026</dd>
-              <dt class="visually-hidden">Stack</dt><dd>Flutter, FastAPI, Google ADK</dd>
-              <dt class="visually-hidden">Status</dt><dd>Spec complete; impl. in progress</dd>
               <dt class="visually-hidden">Links</dt>
               <dd>
                 <a href="https://apps.apple.com/us/app/justgrow-family-album-ai/id6754575180"
@@ -683,13 +691,18 @@
               </dd>
             </dl>
           </div>
-
         </div>
       </div>
     </header>
 
+    <section class="case-study__section" aria-labelledby="section-in-progress">
+      <h2 class="case-study__section-heading" id="section-in-progress">Case study in progress</h2>
+      <p class="case-study__body">I’m currently revisiting this case study and will be publishing an updated version soon.</p>
+    </section>
 
-    <!-- In brief -->
+
+    <!-- HIDDEN CASE STUDY: in revision. Delete this line and the matching END line to restore.
+    == In brief ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">In brief</h2>
       <p class="case-study__body">I shipped a feature, then redesigned it from scratch a few months later with the team's blessing. The original feature, baton passing, came from my founder as an explicit, proactive handoff; I designed and built what it became, which asked co-parents to perform a four-tap handoff to log who was on duty. It worked. Adoption was low.</p>
@@ -697,7 +710,7 @@
     </section>
 
 
-    <!-- Context -->
+    == Context ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">The product and my role</h2>
       <p class="case-study__body">JustGrow is a chat-first AI parenting companion built on a stack of agents (Google ADK) behind a Flutter frontend and Python backend. Parents log baby tracking events in plain language, get personalized bedtime stories, share albums with family, and increasingly use chat as the universal entry point for everything. The product reached 200+ signups and ~50 monthly active users without paid marketing.</p>
@@ -707,7 +720,7 @@
     </section>
 
 
-    <!-- What I got wrong -->
+    == What I got wrong ==
     <section class="case-study__section" id="baton-demo">
       <h2 class="case-study__section-heading">What I got wrong with baton passing</h2>
       <div class="baton-demo-split">
@@ -859,7 +872,7 @@
     </section>
 
 
-    <!-- Redesign brief -->
+    == Redesign brief ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">The redesign brief</h2>
       <p class="case-study__body">The founder ultimately made the call to deprecate baton passing. My job was the replacement.</p>
@@ -872,7 +885,7 @@
     </section>
 
 
-    <!-- Design graveyard -->
+    == Design graveyard ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">Design graveyard</h2>
       <p class="case-study__body">Most of the work was ruling things out. I ran ten alternative directions to mockup or written-spec stage and rejected each for a specific reason. Every rejection was a product reason, not a resource one.</p>
@@ -924,7 +937,7 @@
     </section>
 
 
-    <!-- What replaced it -->
+    == What replaced it ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">What replaced it</h2>
       <p class="case-study__body">Three pieces, all in chat.</p>
@@ -946,7 +959,7 @@
     </section>
 
 
-    <!-- Prototypes: tabbed switcher -->
+    == Prototypes: tabbed switcher ==
     <section class="case-study__section">
       <p class="jg-prototype-kicker">Prototype</p>
       <h2 class="case-study__section-heading">The redesign, in two moments</h2>
@@ -1140,7 +1153,7 @@
     </section>
 
 
-    <!-- Sub-story: leaderboard -->
+    == Sub-story: leaderboard ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">Sub-story: retiring the leaderboard</h2>
       <p class="case-study__body">The achievement system was originally my pitch. Why? Streak achievements bring parents back. Unlocking an achievement is a small celebratory moment, and parenting an infant has few of those. The leaderboard category was part of that pitch.</p>
@@ -1185,7 +1198,7 @@
     </section>
 
 
-    <!-- What this work taught me -->
+    == What this work taught me ==
     <section class="case-study__section">
       <h2 class="case-study__section-heading">What this work taught me</h2>
       <p class="case-study__body">Five things I now hold more carefully because of this work.</p>
@@ -1219,6 +1232,7 @@
         <p>The mockups above are not Figma comps. The shipping app is Flutter and Dart; the mockups are HTML and CSS because I wanted the spec (in .html for rich content which .md could not handle), the rationale, and the visual to live in one document with no Figma round-trip. Color tokens, typography, and spacing are pulled from the JustGrow codebase, so what renders above matches the production design system.</p>
       </div>
     </section>
+    END HIDDEN CASE STUDY -->
 
 
     <nav class="case-study__next-nav" aria-label="Project navigation">
@@ -1243,6 +1257,7 @@
   </footer>
 
 
+  <!-- HIDDEN BATON DEMO SCRIPT (case study in revision; restore with the sections above)
   <script>
     /* ── Baton passing demo ── */
     (function() {
@@ -1380,6 +1395,7 @@
       rebuildSwipeSlides(); updateTitle(); updateHandoverBtn();
     })();
   </script>
+  END HIDDEN BATON DEMO SCRIPT -->
   <script>
     var toggle = document.querySelector('.nav__toggle'), menu = document.querySelector('.nav__menu');
     toggle.addEventListener('click', function() {
