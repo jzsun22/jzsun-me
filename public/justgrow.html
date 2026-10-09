@@ -108,13 +108,19 @@
     }
     .jg-tag {
       display: inline-block;
-      margin-right: 6px;
+      margin-right: 8px;
+      padding: 1px 7px;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--color-accent-rose) 12%, transparent);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       font-style: normal;
+      line-height: 1.6;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      color: var(--color-accent-rose);
+      vertical-align: 0.1em;
+      /* Darkened rose keeps AA contrast on the tinted fill */
+      color: color-mix(in srgb, var(--color-accent-rose) 85%, black);
     }
     .jg-pair {
       display: flex;
