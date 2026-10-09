@@ -9,22 +9,22 @@
   <link rel="icon" href="assets/favicon-512x512.png" sizes="512x512" type="image/png" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/favicon-192x192.png" />
-  <title>JustGrow: Contribution Tracking | Jocelyn Sun</title>
-  <meta name="description" content="How a handoff feature that asked too much of parents became contribution tracking that asks nothing." />
+  <title>JustGrow: Zero to One | Jocelyn Sun</title>
+  <meta name="description" content="Designing JustGrow from idea to App Store: one AI chat that takes the mental load of early parenting off parents, instead of adding to it." />
   <link rel="canonical" href="https://jzsun.me/justgrow" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="JustGrow: Contribution Tracking | Jocelyn Sun" />
-  <meta property="og:description" content="How a handoff feature that asked too much of parents became contribution tracking that asks nothing." />
+  <meta property="og:title" content="JustGrow: Zero to One | Jocelyn Sun" />
+  <meta property="og:description" content="Designing JustGrow from idea to App Store: one AI chat that takes the mental load of early parenting off parents, instead of adding to it." />
   <meta property="og:url" content="https://jzsun.me/justgrow" />
   <meta property="og:image" content="https://jzsun.me/assets/images/og-default.png" />
   <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JustGrow: Contribution Tracking | Jocelyn Sun" />
-  <meta name="twitter:description" content="How a handoff feature that asked too much of parents became contribution tracking that asks nothing." />
+  <meta name="twitter:title" content="JustGrow: Zero to One | Jocelyn Sun" />
+  <meta name="twitter:description" content="Designing JustGrow from idea to App Store: one AI chat that takes the mental load of early parenting off parents, instead of adding to it." />
   <meta name="twitter:image" content="https://jzsun.me/assets/images/og-default.png" />
 
   <!-- JSON-LD: Article -->
@@ -32,8 +32,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "JustGrow: Contribution Tracking",
-    "description": "How a handoff feature that asked too much of parents became contribution tracking that asks nothing.",
+    "headline": "JustGrow: Zero to One",
+    "description": "Designing JustGrow from idea to App Store: one AI chat that takes the mental load of early parenting off parents, instead of adding to it.",
     "url": "https://jzsun.me/justgrow",
     "author": {
       "@type": "Person",
@@ -46,7 +46,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
@@ -64,425 +64,572 @@
       transition: width 80ms linear;
     }
 
-    /* ── JustGrow brand accent (used sparingly) ── */
-    :root { --jg-green: #3B8526; }
-
-    /* ── Lead paragraphs (intro / TL;DR) ── */
-    .jg-lead {
-      font-size: var(--text-md);
-      line-height: 1.65;
-      color: var(--color-text-primary);
-    }
-
-
-
-    /* ── Design graveyard ── */
-    .jg-graveyard {
+    /* ── App Store reviews (real screenshots, reviewer names removed) ── */
+    .jg-review { margin: var(--space-lg) 0 var(--space-xl); max-width: 520px; }
+    .jg-review img, .jg-reviews img { width: 100%; height: auto; border-radius: 16px; }
+    .jg-reviews {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: var(--space-md);
       margin-top: var(--space-lg);
     }
-    @media (max-width: 640px) { .jg-graveyard { grid-template-columns: 1fr; } }
-    .jg-grave-card {
-      background: var(--color-bg-card);
-      border: 1px solid var(--color-bg-divider);
-      border-radius: 8px;
-      padding: 18px 20px;
-    }
-    .jg-grave-card h4 {
-      font-size: var(--text-sm-md);
-      font-weight: 600;
-      color: var(--color-text-primary);
-      margin-bottom: 6px;
-    }
-    .jg-grave-card .jg-killed {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.9px;
-      color: #b91c1c;
-      background: rgba(185,28,28,0.07);
-      padding: 2px 10px;
-      border-radius: 100px;
-      margin-bottom: 10px;
-    }
-    .jg-grave-card p {
-      font-size: var(--text-sm);
-      line-height: 1.55;
-      color: var(--color-text-secondary);
-      margin-bottom: 0;
-    }
-
-    /* ── Surface map (same pattern as justgrow-work-summary.html) ── */
-    .jg-map {
+    /* Chinese review spans the row; its translation fills the second column */
+    .jg-review-zh {
+      grid-column: 1 / -1;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: var(--space-lg);
-    }
-    @media (max-width: 640px) { .jg-map { grid-template-columns: 1fr; } }
-    .jg-map-card {
-      background: var(--color-bg-card);
-      border: 1px solid var(--color-bg-divider);
-      border-radius: 8px;
-      padding: 18px 20px;
-    }
-    .jg-map-card--wide { grid-column: 1 / -1; }
-    .jg-map-card h4 {
-      font-size: var(--text-sm-md);
-      font-weight: 600;
-      color: var(--color-text-primary);
-      margin-bottom: 6px;
-    }
-    .jg-map-card p {
-      font-size: var(--text-sm);
-      line-height: 1.55;
-      color: var(--color-text-secondary);
-      margin-bottom: 0;
-    }
-    .jg-map-tag {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.9px;
-      color: var(--jg-green);
-      background: rgba(59,133,38,0.07);
-      padding: 2px 9px;
-      border-radius: 100px;
-      margin-bottom: 10px;
-    }
-    .jg-map-card--visual {
-      display: flex;
-      flex-direction: column;
-      padding-bottom: var(--space-lg);
-    }
-    .jg-map-card--visual .jg-map-tag { align-self: flex-start; }
-    .jg-map-card--visual p { margin-bottom: var(--space-lg); }
-    .jg-map-shot {
-      margin: auto auto 0;
-      width: 180px;
-      max-width: 100%;
-      overflow: hidden;
-      border: 1px solid var(--color-bg-divider);
-      border-radius: 18px;
-      box-shadow: var(--shadow-card);
-    }
-    .jg-map-shot img { display: block; width: 100%; height: auto; }
-
-    /* ── Collapsible design graveyard (same pattern as justgrow-work-summary.html) ── */
-    .jg-collapse { margin-top: var(--space-xl); }
-    .jg-collapse summary {
-      cursor: pointer;
-      list-style: none;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: var(--text-md);
-      font-weight: 500;
-      line-height: 1.5;
-      color: var(--color-text-primary);
-      transition: color 200ms;
-    }
-    .jg-collapse summary::-webkit-details-marker { display: none; }
-    .jg-collapse summary::before {
-      content: '▶';
-      font-size: 10px;
-      display: inline-block;
-      transition: transform 220ms ease;
-      line-height: 1;
-      flex-shrink: 0;
-      color: var(--color-accent-teal);
-    }
-    .jg-collapse[open] summary::before { transform: rotate(90deg); }
-    .jg-collapse summary:hover { color: var(--color-accent-teal); }
-    .jg-collapse summary:focus-visible {
-      outline: 2px solid var(--color-accent-teal);
-      outline-offset: 4px;
-      border-radius: 4px;
-    }
-    .jg-collapse > *:not(summary) { margin-top: var(--space-md); }
-
-    /* ── Closing takeaway ── */
-    .jg-takeaway {
-      border-top: 1px solid var(--color-bg-divider);
-      padding-top: var(--space-xl);
-      margin-top: var(--space-lg);
-      font-size: var(--text-md);
-      line-height: 1.65;
-      color: var(--color-text-secondary);
-    }
-    .jg-takeaway p { margin-bottom: 0; }
-    .jg-takeaway strong { color: var(--color-text-primary); }
-
-    /* ── Mockup caption ── */
-    .jg-mockup-caption {
-      font-size: var(--text-sm-md);
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-      margin: var(--space-sm) 0 var(--space-lg);
-    }
-
-    /* ── Mockup row ── */
-    .jg-mockup-row {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      margin-bottom: var(--space-md);
-    }
-    .jg-mockup-tile { display: flex; flex-direction: column; align-items: center; }
-    .jg-mockup-tile .jg-label,
-    .baton-demo-split__phone .jg-label {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      margin-top: 14px;
-      font-style: italic;
-      text-align: center;
-      max-width: 320px;
-    }
-
-    /* ── Phone frame ── */
-    .jg-phone {
-      width: 320px;
-      border-radius: 44px;
-      border: 4px solid #2A2A2E;
-      background: #191827;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
-    }
-    .jg-phone::before {
-      content: '';
-      position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 200px 200px at 85% 8%, rgba(255,138,101,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 180px 180px at 10% 30%, rgba(255,213,79,0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 190px 190px at 90% 55%, rgba(110,214,193,0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 170px 170px at 15% 80%, rgba(143,168,255,0.10) 0%, transparent 70%);
-    }
-    .jg-island {
-      width: 108px; height: 30px;
-      margin: 10px auto 0;
-      background: #000;
-      border-radius: 18px;
-      position: relative; z-index: 2;
-    }
-    .jg-screen { padding: 0; position: relative; z-index: 1; }
-    .jg-status {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 24px 2px;
-      font-size: 13px; font-weight: 600; color: #E8E8ED;
-    }
-    .jg-status-right { display: flex; align-items: center; gap: 5px; font-size: 11px; }
-    .jg-status-right .jg-signal { display: flex; gap: 1.5px; align-items: flex-end; }
-    .jg-status-right .jg-signal span { width: 3px; background: #E8E8ED; border-radius: 1px; }
-    .jg-status-right .jg-battery {
-      width: 22px; height: 11px; border: 1.5px solid rgba(255,255,255,0.4);
-      border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1.5px;
-    }
-    .jg-status-right .jg-battery::after {
-      content: ''; position: absolute; right: -4px; top: 3px;
-      width: 2px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 0 1px 1px 0;
-    }
-    .jg-battery-fill { width: 80%; height: 100%; background: #E8E8ED; border-radius: 1.5px; }
-    .jg-appbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 4px 16px 8px; position: relative; z-index: 1;
-    }
-    .jg-appbar-menu {
-      width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      color: #E8E8ED; font-size: 18px;
-    }
-    .jg-appbar-title {
-      font-family: 'Caveat', cursive;
-      font-size: 26px; font-weight: 700;
-      color: #E8E8ED; letter-spacing: -0.4px;
-    }
-    .jg-appbar-actions { width: 32px; }
-    .jg-messages {
-      padding: 8px 14px; position: relative; z-index: 1; min-height: 380px;
-    }
-    .jg-bubble {
-      max-width: 78%; padding: 11px 15px; margin-bottom: 10px;
-      border-radius: 18px; font-size: 13.5px; line-height: 1.4; letter-spacing: -0.32px;
-    }
-    .jg-bubble.jg-bot {
-      background: rgba(31,38,53,0.94);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      color: #C1CAD8; border-bottom-left-radius: 6px;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    }
-    .jg-bubble.jg-user {
-      background: rgba(158,234,106,0.12);
-      border: 0.5px solid rgba(158,234,106,0.20);
-      color: #E8E8ED; margin-left: auto; border-bottom-right-radius: 6px;
-    }
-    .jg-procard {
-      margin: 4px 0; padding: 12px 14px;
-      background: rgba(158,234,106,0.05);
-      border: 0.5px solid rgba(158,234,106,0.12);
-      border-radius: 14px; font-size: 12.5px;
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    }
-    .jg-procard-title {
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.6px;
-      color: #9EEA6A; margin-bottom: 8px;
-    }
-    .jg-procard-row {
-      display: flex; align-items: center; gap: 8px; padding: 4px 0;
-      color: #C1CAD8; font-size: 12.5px; line-height: 1.35; letter-spacing: -0.32px;
-    }
-    .jg-contrib-bar {
-      height: 6px; border-radius: 3px; overflow: hidden; display: flex;
-      background: rgba(255,255,255,0.06);
-    }
-    .jg-contrib-seg { height: 100%; }
-    .jg-composer {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px 36px; position: relative; z-index: 1;
-    }
-    .jg-input {
-      flex: 1; padding: 9px 14px; border-radius: 22px;
-      background: rgba(40,50,69,0.8);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      color: rgba(193,202,216,0.5); font-size: 13px; letter-spacing: -0.32px;
-    }
-    .jg-send {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: linear-gradient(180deg, rgba(168,224,99,0.85) 0%, rgba(107,207,136,0.85) 100%);
-      border: 0.5px solid rgba(255,255,255,0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: #fff; font-weight: 700;
-    }
-    .jg-home-bar {
-      width: 110px; height: 4px; border-radius: 3px;
-      background: rgba(255,255,255,0.2);
-      margin: 0 auto; position: relative; top: -22px; z-index: 2;
-    }
-    @media (max-width: 600px) {
-      .jg-phone { width: min(280px, 100%); }
-      .jg-mockup-tile { max-width: 100%; }
-      .jg-mockup-row { overflow-x: hidden; }
-    }
-
-    /* ── Prototype tab switcher ── */
-    .jg-proto-tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: var(--space-lg);
-    }
-    .jg-proto-tab {
-      padding: 7px 18px;
-      border-radius: 100px;
-      border: 1px solid var(--color-bg-divider);
-      background: transparent;
-      font-size: var(--text-sm);
-      font-family: var(--font-body);
-      color: var(--color-text-secondary);
-      cursor: pointer;
-      transition: background 320ms, color 320ms, border-color 320ms;
-    }
-    .jg-proto-tab.is-active {
-      background: var(--color-text-primary);
-      color: #fff;
-      border-color: var(--color-text-primary);
-    }
-    .jg-proto-tab:hover:not(.is-active) {
-      border-color: var(--color-text-secondary);
-      color: var(--color-text-primary);
-    }
-    .jg-proto-panel { display: none; }
-    .jg-proto-panel.is-active {
-      display: block;
-      animation: jg-fadein 400ms ease-out;
-    }
-    @keyframes jg-fadein {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Baton passing interactive demo ── */
-    .baton-demo-split {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 36px;
-      align-items: start;
-      margin: var(--space-xl) 0;
-    }
-    .baton-demo-split__text { display: flex; flex-direction: column; }
-    .baton-demo-split__phone {
-      display: flex;
-      flex-direction: column;
+      gap: var(--space-md);
       align-items: center;
     }
-    .baton-demo-split__stage {
-      background: linear-gradient(155deg, #f0ebff 0%, #e8f2ff 100%);
-      border-radius: 20px;
-      padding: 12px 12px 10px;
+    .jg-review-zh img { width: 100%; height: auto; border-radius: 16px; }
+    .jg-review-zh figcaption {
+      font-size: var(--text-sm);
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-text-muted);
+    }
+    @media (max-width: 640px) {
+      .jg-reviews, .jg-review-zh { grid-template-columns: 1fr; }
+      .jg-review-zh { gap: var(--space-sm); }
+    }
+
+    .jg-note { margin-top: var(--space-lg); }
+
+    /* ── Visual layouts: a pair of phones, or text beside one phone ── */
+    .jg-figure { display: flex; flex-direction: column; align-items: center; }
+    .jg-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-style: italic;
+      line-height: 1.5;
+      text-align: center;
+      max-width: 300px;
+      margin-top: 16px;
+    }
+    .jg-tag {
+      display: inline-block;
+      margin-right: 6px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-style: normal;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--color-accent-rose);
+    }
+    .jg-pair {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      overflow: hidden;
-      width: 100%;
+      gap: var(--space-xl) 56px;
+      margin: var(--space-xl) 0 var(--space-2xl);
+    }
+    .jg-split {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 56px;
+      align-items: start;
+      margin: var(--space-lg) 0 var(--space-2xl);
     }
     @media (max-width: 768px) {
-      .baton-demo-split { grid-template-columns: 1fr; }
+      .jg-split { grid-template-columns: 1fr; gap: var(--space-md); }
     }
-    .phone {
-      width: 100%;
-      max-width: 375px;
-      zoom: 0.7;
-      background: #1c1c1e;
-      border-radius: 50px;
-      border: 6px solid #2c2c2e;
-      outline: 1px solid rgba(0,0,0,0.35);
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(255,255,255,0.06);
+
+    /* ── Phone frame: iPhone 15/16 screen (393 × 852 pt), drawn at true size
+          so type matches the JustGrow design system, then scaled as a whole ── */
+    .jg-phone {
+      /* JustGrow design-system tokens (dark mode) */
+      --ds-bg: #191827;
+      --ds-panel-solid: #1F2635;
+      --ds-panel-muted: rgba(40,50,69,0.6);
+      --ds-stroke: rgba(255,255,255,0.10);
+      --ds-stroke-strong: rgba(255,255,255,0.18);
+      --ds-glass: rgba(255,255,255,0.06);
+      --ds-glass-strong: rgba(255,255,255,0.10);
+      --ds-text: #FFFFFF;
+      --ds-text-2: #C1CAD8;
+      --ds-text-3: rgba(255,255,255,0.40);
+      --ds-warm: #FFB05E;
+      --ds-green: #9EEA6A;
+      --ds-success: #30D158;
+      --ds-r-xs: 8px; --ds-r-sm: 12px; --ds-r-md: 16px; --ds-r-lg: 22px;
+      --ds-font: 'Inter', -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+
+      box-sizing: content-box;
+      width: 393px;
+      aspect-ratio: 393 / 852;
+      zoom: 0.75;
+      flex-shrink: 0;
+      position: relative;
+      isolation: isolate;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      border: 6px solid #2A2A2E;
+      border-radius: 58px;
+      background: var(--ds-bg);
+      box-shadow: 0 32px 72px rgba(0,0,0,0.20), 0 0 0 1px rgba(0,0,0,0.05);
+      font-family: var(--ds-font);
+      color: var(--ds-text-2);
+      line-height: 1.33;
+      text-align: left;
+    }
+    @media (max-width: 600px) { .jg-phone { zoom: 0.68; } }
+    .jg-phone::before {
+      content: '';
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 250px 250px at 85% 8%, rgba(255,138,101,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 220px 220px at 10% 30%, rgba(255,213,79,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 230px 230px at 90% 55%, rgba(110,214,193,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 210px 210px at 15% 80%, rgba(143,168,255,0.10) 0%, transparent 70%);
+    }
+
+    /* Device chrome */
+    .jg-statusbar {
       position: relative;
+      flex-shrink: 0;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 30px 0 46px;
+      font-size: 17px; font-weight: 600; letter-spacing: -0.4px;
+      color: var(--ds-text);
+    }
+    .jg-island {
+      position: absolute; top: 11px; left: 50%;
+      transform: translateX(-50%);
+      width: 124px; height: 36px;
+      border-radius: 20px;
+      background: #000;
+    }
+    .jg-status-icons { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+    .jg-signal { display: flex; gap: 2px; align-items: flex-end; }
+    .jg-signal span { width: 3.5px; background: currentColor; border-radius: 1px; }
+    .jg-battery {
+      position: relative;
+      width: 27px; height: 13px;
+      padding: 1.5px;
+      border: 1.5px solid rgba(255,255,255,0.45);
+      border-radius: 4px;
+    }
+    .jg-battery::after {
+      content: '';
+      position: absolute; right: -4.5px; top: 3px;
+      width: 2.5px; height: 4px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 0 1px 1px 0;
+    }
+    .jg-battery span { display: block; width: 80%; height: 100%; background: currentColor; border-radius: 1.5px; }
+    .jg-homebar {
+      position: absolute; bottom: 8px; left: 50%; z-index: 5;
+      transform: translateX(-50%);
+      width: 134px; height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .jg-scroll { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; }
+    .jg-scroll::-webkit-scrollbar { display: none; }
+    .jg-scroll:focus-visible { outline: 2px solid #8FA8FF; outline-offset: -2px; }
+    @media (pointer: fine) {
+      .jg-scroll { cursor: grab; }
+      .jg-scroll.is-dragging { cursor: grabbing; user-select: none; }
+    }
+
+    .jg-fab {
+      position: absolute; right: 20px; bottom: 40px; z-index: 3;
+      width: 54px; height: 54px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--ds-warm); color: #1B1A26;
+      font-size: 30px; font-weight: 300;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    /* ── Chat (shipped layout: user bubbles, plain-text replies) ── */
+    .jg-appbar {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 14px;
+      padding: 6px 22px 10px;
+      color: var(--ds-text);
+    }
+    .jg-appbar-menu { font-size: 22px; line-height: 1; }
+    .jg-appbar-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 30px; font-weight: 700; letter-spacing: -0.4px; line-height: 1;
+    }
+    .jg-chat {
+      display: flex; flex-direction: column; gap: 14px;
+      padding: 12px 20px 18px;
+    }
+    .jg-chat > :first-child { margin-top: auto; }
+    .jg-chat--tight { gap: 10px; padding-top: 6px; }
+    .jg-chat--fill { flex: 1; min-height: 0; overflow: hidden; }
+    .jg-msg-user {
+      align-self: flex-end;
+      max-width: 82%;
+      padding: 9px 16px;
+      border-radius: var(--ds-r-md);
+      background: #92BA78; /* sampled from the App Store screenshot */
+      color: #142010;
+      font-size: 15px; letter-spacing: -0.23px;
+    }
+    .jg-msg-bot { font-size: 15px; line-height: 1.4; letter-spacing: -0.23px; color: var(--ds-text-2); }
+    .jg-msg-bot strong { color: var(--ds-text); font-weight: 600; }
+    .jg-msg-actions { display: flex; gap: 18px; margin-top: 12px; font-size: 14px; color: var(--ds-text-2); }
+    .jg-msg-link {
+      align-self: center;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; letter-spacing: -0.08px;
+      color: var(--ds-text-2);
+    }
+    .jg-composer {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px 40px;
+    }
+    .jg-input {
+      flex: 1;
+      height: 40px;
+      display: flex; align-items: center;
+      padding: 0 16px;
+      border-radius: 100px;
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: var(--ds-panel-muted);
+      font-size: 15px; color: var(--ds-text-3);
+    }
+    .jg-send {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168,224,99,0.85), rgba(107,207,136,0.85));
+      color: #fff; font-size: 17px; font-weight: 700;
+    }
+
+    /* Growth Measurement sheet */
+    .jg-sheet {
+      flex-shrink: 0;
+      padding: 8px 20px 44px;
+      border-radius: var(--ds-r-lg) var(--ds-r-lg) 0 0;
+      background: rgba(36,44,62,0.92);
+      box-shadow: 0 -12px 32px rgba(0,0,0,0.30), inset 0 0.5px 0 rgba(255,255,255,0.12);
+      color: var(--ds-text);
+    }
+    .jg-sheet-handle { width: 36px; height: 5px; margin: 0 auto 18px; border-radius: 3px; background: rgba(255,255,255,0.25); }
+    .jg-sheet-head { display: flex; align-items: center; justify-content: space-between; }
+    .jg-sheet-title { font-size: 20px; font-weight: 600; line-height: 1.2; }
+    .jg-sheet-close {
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--ds-glass-strong); color: var(--ds-text-2);
+      font-size: 14px;
+    }
+    .jg-sheet-divider { height: 0.5px; margin: 14px -20px 12px; background: var(--ds-stroke); }
+    .jg-select {
+      height: 38px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px;
+      border-radius: var(--ds-r-xs);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      font-size: 15px;
+    }
+    .jg-select i { font-size: 12px; color: var(--ds-text-2); }
+    .jg-chips { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+    .jg-chip {
+      height: 34px;
+      padding: 0 16px;
+      border-radius: 100px;
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: var(--ds-glass);
+      color: var(--ds-text-2);
+      font-family: inherit; font-size: 15px; font-weight: 500; letter-spacing: -0.23px;
+      transition: background 150ms, color 150ms, border-color 150ms;
+    }
+    .jg-chip:hover { background: rgba(255,255,255,0.10); color: var(--ds-text); }
+    .jg-chip[aria-pressed="true"] {
+      background: rgba(158,234,106,0.10);
+      border-color: rgba(158,234,106,0.25);
+      color: var(--ds-green);
+    }
+    .jg-measure { position: relative; height: 76px; margin-top: 14px; display: flex; align-items: center; justify-content: center; }
+    .jg-measure-value { font-size: 56px; font-weight: 700; letter-spacing: -1px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .jg-measure-unit {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 12px;
+      border-radius: var(--ds-r-xs);
+      background: var(--ds-glass);
+      font-size: 18px; font-weight: 600;
+    }
+    .jg-measure-unit i { font-size: 11px; }
+    .jg-steppers { display: flex; justify-content: center; gap: 12px; margin: 14px 0 18px; }
+    .jg-step {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.07);
+      color: var(--ds-text);
+      font-family: inherit; font-size: 22px; font-weight: 500; line-height: 1;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10), inset 0 0.5px 0 rgba(255,255,255,0.10);
+    }
+    .jg-step:hover { background: rgba(255,255,255,0.12); }
+    .jg-chip:focus-visible, .jg-step:focus-visible { outline: 2px solid #8FA8FF; outline-offset: 2px; }
+    .jg-measure-info {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      padding: 12px 0;
+      border-radius: var(--ds-r-sm);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      text-align: center;
+    }
+    .jg-measure-info div + div { border-left: 0.5px solid rgba(255,255,255,0.08); }
+    .jg-measure-info span {
+      display: block; margin-bottom: 4px;
+      font-size: 11px; letter-spacing: 0.6px; text-transform: uppercase;
+      color: var(--ds-text-3);
+    }
+    .jg-measure-info b { font-size: 15px; font-weight: 600; }
+    .jg-btn-primary {
+      position: relative; overflow: hidden;
+      height: 44px; margin-top: 16px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(168,224,99,0.85), rgba(107,207,136,0.85));
+      color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -0.23px;
+      box-shadow: 0 12px 32px rgba(107,207,136,0.25), 0 4px 12px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.30);
+    }
+    .jg-btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 14px; border: 1px solid rgba(255,255,255,0.35);
+    }
+    .jg-btn-primary::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.05) 100%);
+    }
+
+    /* Weekly digest cards (proposal) */
+    .jg-card {
+      padding: 12px 16px;
+      border-radius: var(--ds-r-md);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+    .jg-card-label { font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ds-text-2); }
+    .jg-card-sub { font-size: 13px; letter-spacing: -0.08px; color: var(--ds-text-3); }
+    .jg-digest-hero { text-align: center; margin: 4px 0 8px; }
+    .jg-digest-big { font-size: 34px; font-weight: 700; letter-spacing: -0.4px; line-height: 1.18; color: var(--ds-text); }
+    .jg-digest-list { font-size: 15px; line-height: 1.5; letter-spacing: -0.23px; }
+    .jg-digest-list strong { color: var(--ds-text); font-weight: 600; }
+    .jg-digest-note {
+      margin-top: 10px; padding-top: 10px;
+      border-top: 0.5px solid rgba(255,255,255,0.08);
+      font-size: 15px; letter-spacing: -0.23px; color: var(--ds-text);
+    }
+    .jg-only-you {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 100px;
+      background: rgba(158,234,106,0.10);
+      font-size: 12px; font-weight: 500;
+      color: var(--ds-green);
+    }
+    .jg-contrib-head { margin: 8px 0 2px; font-size: 15px; font-weight: 600; color: var(--ds-text); }
+    .jg-contrib-count { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .jg-contrib-count b { font-size: 28px; font-weight: 700; color: var(--ds-text); }
+
+    /* ── Gleam Calendar (rebuilt from the shipped-app screenshot) ── */
+    .gc-top {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px;
+      padding: 4px 18px 12px;
+      color: var(--ds-text);
+    }
+    .gc-back {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--ds-glass-strong);
+      font-size: 24px; line-height: 1;
+    }
+    .gc-title { flex: 1; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    .gc-family {
+      display: flex; align-items: center; gap: 6px;
+      padding: 4px 10px 4px 4px;
+      border: 1px solid var(--ds-stroke-strong);
+      border-radius: 100px;
+      font-size: 15px;
+    }
+    .gc-family-icon {
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--ds-warm);
+      font-size: 12px;
+    }
+    .fm-search { font-size: 20px; }
+    .gc-week {
+      flex-shrink: 0;
+      margin: 0 12px;
+      padding: 12px 14px 14px;
+      border-radius: var(--ds-r-lg);
+      border: 1px solid var(--ds-stroke);
+      background: rgba(255,255,255,0.03);
+    }
+    .gc-week-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .gc-month { display: inline-flex; align-items: center; gap: 6px; color: var(--ds-text); font-size: 17px; font-weight: 600; }
+    .gc-chev { font-size: 11px; color: var(--ds-text-2); }
+    .gc-dwm { display: flex; padding: 2px; border: 1px solid var(--ds-stroke); border-radius: 100px; }
+    .gc-dwm span { padding: 3px 10px; border-radius: 100px; font-size: 13px; }
+    .gc-dwm .is-on { border: 1px solid var(--ds-stroke-strong); color: var(--ds-text); }
+    .gc-days { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; }
+    .gc-days span { display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 0.4px; }
+    .gc-days b {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      font-size: 17px; font-weight: 600; color: var(--ds-text);
+    }
+    .gc-days .is-today span { color: var(--ds-warm); }
+    .gc-days .is-today b { background: var(--ds-success); }
+    .gc-row {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px; font-weight: 700; letter-spacing: 1.2px;
+    }
+    .gc-focus {
+      margin-left: auto;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid rgba(142,124,246,0.5);
+      background: rgba(142,124,246,0.10);
+      font-size: 13px; font-weight: 600; letter-spacing: 0;
+      color: #8E7CF6;
+    }
+    .gc-timeline { position: relative; padding: 14px 0 70px; }
+    .gc-hour { position: relative; height: 58px; margin-left: 62px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .gc-hour span { position: absolute; left: -54px; top: -9px; font-size: 13px; }
+    .gc-now { position: absolute; left: 62px; right: 0; z-index: 2; border-top: 1px solid #E88A7A; }
+    .gc-now span {
+      position: absolute; left: -60px; top: -9px;
+      background: var(--ds-bg);
+      font-size: 12px; font-weight: 600; color: #E88A7A;
+    }
+    .gc-event {
+      position: absolute; left: 66px; right: 10px;
+      display: flex; flex-direction: column; justify-content: flex-start; gap: 2px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(110,190,214,0.7);
+      background: rgba(52,70,90,0.45);
+    }
+    .gc-event b { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.75); }
+    .gc-event small { font-size: 13px; color: rgba(193,202,216,0.6); }
+    .gc-event--solid { justify-content: center; background: rgba(52,70,90,0.7); }
+    .gc-event--solid b { color: var(--ds-text); }
+    /* Logged events (from a shipped-app screenshot): naps span the row,
+       feeds sit in the left half, diaper changes in the right half */
+    .gc-log {
+      position: absolute;
+      display: flex; flex-direction: column; justify-content: center; gap: 3px;
+      padding: 0 10px;
+      border-radius: 9px;
+      border: 1px solid;
+      overflow: hidden;
+    }
+    .gc-log b {
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+      font-size: 14px; font-weight: 600; color: var(--ds-text);
+    }
+    .gc-log b i { width: 16px; margin-right: 4px; font-size: 13px; text-align: center; }
+    .gc-log small { padding-left: 20px; font-size: 12px; color: var(--ds-text-2); }
+    .gc-log--sleep {
+      left: 66px; right: 10px;
+      padding: 0 12px;
+      background: rgba(62,100,128,0.55);
+      border-color: rgba(130,185,205,0.55);
+    }
+    .gc-log--feed, .gc-log--diaper { height: 30px; }
+    .gc-log--feed b, .gc-log--diaper b { font-size: 13px; letter-spacing: -0.08px; }
+    .gc-log--feed { left: 66px; width: 154px; background: rgba(66,96,78,0.80); border-color: rgba(120,160,130,0.55); }
+    .gc-log--diaper { left: 226px; right: 10px; background: rgba(96,78,64,0.80); border-color: rgba(170,140,115,0.60); }
+
+    /* ── Family Memory (rebuilt from the shipped-app screenshot) ── */
+    .fm-scroll { position: relative; padding: 6px 16px 96px 46px; }
+    .fm-scroll::before {
+      content: '';
+      position: absolute; left: 24px; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+    .fm-date { position: relative; margin: 10px 0; font-size: 17px; font-weight: 700; color: var(--ds-text); }
+    .fm-date::before {
+      content: '';
+      position: absolute; left: -27px; top: 5px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      border: 2px solid var(--ds-warm);
+      background: var(--ds-bg);
+    }
+    .fm-card {
+      overflow: hidden;
+      margin-bottom: 18px;
+      border-radius: var(--ds-r-md);
+      border: 0.5px solid var(--ds-stroke);
+      background: var(--ds-panel-solid);
+    }
+    .fm-card img { display: block; width: 100%; height: auto; }
+    .fm-body { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px 14px; }
+    .fm-meta { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.3px; }
+    .fm-like {
+      align-self: flex-start;
+      display: flex; align-items: center; gap: 6px;
+      padding: 2px 0;
+      font-size: 15px; color: var(--ds-text-2);
+    }
+    .fm-heart { font-size: 19px; line-height: 1; transition: transform 200ms; }
+    .fm-like[aria-pressed="true"] { color: #FF6B81; }
+    .fm-like[aria-pressed="true"] .fm-heart { transform: scale(1.15); }
+    .fm-like:focus-visible { outline: 2px solid #8FA8FF; outline-offset: 2px; border-radius: 4px; }
+    .fm-comment {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--ds-r-xs);
+      border: 1px solid var(--ds-stroke-strong);
+      background: transparent;
+      font: inherit; font-size: 15px; color: var(--ds-text);
+    }
+    .fm-comment::placeholder { color: var(--ds-text-2); }
+    .fm-comment:focus-visible { outline: 2px solid #8FA8FF; outline-offset: 1px; }
+    .fm-note { font-size: 17px; color: var(--ds-text); }
+    .fm-tag {
+      align-self: flex-start;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.08);
+      font-size: 13px; color: var(--ds-text);
+    }
+    .fm-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2FD08A; }
+    @media (prefers-reduced-motion: reduce) { .fm-heart { transition: none; } }
+
+    /* ── Baton handoff (retired; pre-design-system styling kept as shipped) ── */
+    .jg-phone--baton {
+      background: #1c1c1e;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       -webkit-user-select: none;
       user-select: none;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
-    .phone-island {
-      width: 110px; height: 32px;
-      background: #000;
-      border-radius: 20px;
-      margin: 12px auto 4px;
-      flex-shrink: 0;
-    }
-    .phone-status {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 22px 6px;
-      font-size: 13px; font-weight: 600;
-      color: rgba(255,255,255,0.9);
-      flex-shrink: 0;
-    }
-    .phone-status-icons { display: flex; align-items: center; gap: 5px; }
-    .phone-signal { display: flex; gap: 1.5px; align-items: flex-end; }
-    .phone-signal span { width: 3px; background: rgba(255,255,255,0.9); border-radius: 1px; }
-    .phone-battery {
-      width: 22px; height: 11px; border: 1.5px solid rgba(255,255,255,0.4);
-      border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1.5px;
-    }
-    .phone-battery::after {
-      content: ''; position: absolute; right: -4px; top: 3px;
-      width: 2px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 0 1px 1px 0;
-    }
-    .phone-battery-fill { width: 75%; height: 100%; background: rgba(255,255,255,0.9); border-radius: 1.5px; }
-    .phone-home-bar {
-      height: 4px; width: 110px;
-      background: rgba(255,255,255,0.28);
-      border-radius: 2px;
-      margin: 8px auto 12px;
-      flex-shrink: 0;
-    }
+    .jg-phone--baton::before { display: none; }
+    .jg-phone--baton .jg-homebar { background: rgba(0,0,0,0.25); }
+    .jg-phone--baton .sheet { flex: 1; min-height: 0; }
+    .jg-phone--baton .sheet-scroll { min-height: 0; padding-bottom: 40px; }
     .chat-bg { background: #1c1c1e; padding: 0; flex-shrink: 0; }
     .app-bar {
       display: flex; align-items: center; justify-content: space-between;
@@ -677,7 +824,7 @@
           <div>
             <p class="case-study__category">CASE STUDY</p>
             <h1 class="case-study__title" id="cs-title">JustGrow: an AI-empowered parenting companion</h1>
-            <p class="case-study__hook">One chat for the whole job of early parenting: tracking, stories, albums, and keeping the family in the loop.</p>
+            <p class="case-study__hook">One app for the whole job of early parenting: tracking, memories, and family planning.</p>
             <div class="case-study__pills">
               <span class="case-study__pill">Flutter</span>
               <span class="case-study__pill">FastAPI</span>
@@ -714,505 +861,408 @@
       </div>
     </header>
 
-    <section class="case-study__section" aria-labelledby="section-in-progress">
-      <h2 class="case-study__section-heading" id="section-in-progress">Case study in progress</h2>
-      <p class="case-study__body">I’m currently revisiting this case study and will be publishing an updated version soon.</p>
+    <!-- == Problem == -->
+    <section class="case-study__section" aria-labelledby="section-problem">
+      <p class="case-study__eyebrow">Problem</p>
+      <h2 class="case-study__section-heading" id="section-problem">Early parenting is split across apps, and each one adds to the mental load</h2>
+      <p class="case-study__body">Tracking in one app, photos in another, updates in group chats. Each is one more thing to keep in sync, for parents who are already stretched thin.</p>
+      <p class="case-study__body">I joined when JustGrow was just an idea. The founder owned direction; I owned UX, the Flutter frontend, parts of the backend, and the agent prompts.</p>
     </section>
 
-    <!-- HIDDEN CASE STUDY: in revision. Delete this line and the matching END line to restore.
-    <section class="case-study__section">
-      <h2 class="case-study__section-heading">The product and my role</h2>
-      <p class="case-study__body">JustGrow is a chat-first AI parenting companion built on a stack of agents (Google ADK) behind a Flutter frontend and Python backend. Parents log baby tracking events in plain language, get personalized bedtime stories, share albums with family, and increasingly use chat as the universal entry point for everything. The product reached 200+ signups and ~50 monthly active users without paid marketing.</p>
-      <p class="case-study__body">The constraint that shapes every product decision: parents are usually holding a baby. One free hand at best. Attention measured in seconds.</p>
-      <p class="case-study__body">I joined as the founding product designer. The founder owned product direction and the major strategic calls; I owned execution end-to-end across UX, frontend, and some backend paths (including AI agent prompts). This case study covers one feature I owned during my nine months on the team.</p>
+    <!-- == Challenge == -->
+    <section class="case-study__section" aria-labelledby="section-challenge">
+      <p class="case-study__eyebrow">Challenge</p>
+      <h2 class="case-study__section-heading" id="section-challenge">Parents had no time to learn a new app, so switching had to cost nothing</h2>
+      <p class="case-study__body">JustGrow asked them to move tracking, photos, and family planning into one app. To be worth switching, it had to be as convenient as the apps they already used, with smoother flows and fewer taps. Every feature, and the screen that came with it, had to earn its place.</p>
     </section>
 
+    <!-- == Solution == -->
+    <section class="case-study__section" aria-labelledby="section-solution">
+      <p class="case-study__eyebrow">Solution</p>
+      <h2 class="case-study__section-heading" id="section-solution">One chat to log everything, and a relay race to hand off care</h2>
+      <p class="case-study__body">Parents log a feed or a nap in plain language, and AI agents turn it into events. Gleam Calendar lists those events and their durations, so parents and caregivers can see the day at a glance.</p>
+      <p class="case-study__credit jg-note">Screens on this page are rebuilt in HTML with JustGrow’s design-system tokens, so retired, shipped, and proposed designs read as one set. Some are interactive; try them.</p>
 
-    == 1. The vision ==
-    <section class="case-study__section" aria-labelledby="section-vision">
-      <h2 class="case-study__section-heading" id="section-vision">The idea: baton passing</h2>
-      <p class="case-study__body">The founder's vision was to create a feature that would make it easier for parents to hand off care responsibilities to each other, and to make the invisible work visible.</p>
-    </section>
-
-
-    == 2. What I built ==
-    <section class="case-study__section" id="baton-demo" aria-labelledby="section-built">
-      <h2 class="case-study__section-heading" id="section-built">What I built</h2>
-      <div class="baton-demo-split">
-        <div class="baton-demo-split__text">
-          <p class="case-study__body">I built it as a relay race: one runner passing the baton to the next. I made it as light as the explicit model allowed and put its entry point, a heart icon, in the top right of the app bar, the most prominent spot in the app. Tap the heart to open the handoff sheet. Pick which children. Pick your partner. Optionally add a note. Tap Hand Over. The receiver gets a notification, opens the app, reviews the recent events, taps Accept or Decline. If accepted, a shift gets created and backdated to the request time.</p>
-        </div>
-        <div class="baton-demo-split__phone">
-          <div class="baton-demo-split__stage" aria-label="Interactive prototype of the original baton passing feature">
-          <div class="phone">
-            <div class="phone-island"></div>
-            <div class="phone-status">
-              <span>9:41</span>
-              <div class="phone-status-icons">
-                <div class="phone-signal">
-                  <span style="height:4px"></span><span style="height:6px"></span><span style="height:8px"></span><span style="height:10px"></span>
+      <div class="jg-pair">
+        <figure class="jg-figure">
+          <div class="jg-phone" id="jg-growth">
+            <div class="jg-statusbar" aria-hidden="true"><span>4:21</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+            <div class="jg-appbar">
+              <span class="jg-appbar-menu" aria-hidden="true">☰</span>
+              <span class="jg-appbar-logo">JustGrow</span>
+            </div>
+            <div class="jg-chat jg-chat--fill">
+              <div class="jg-msg-user">Just Fed Anna 120ml of formula</div>
+              <div class="jg-msg-bot">
+                Logged bottle for Anna • 120ml Formula at Mar 14 4:20 PM.
+                <div class="jg-msg-actions" aria-hidden="true">
+                  <i class="fa-regular fa-thumbs-up"></i><i class="fa-regular fa-thumbs-down"></i><i class="fa-regular fa-copy"></i><i class="fa-solid fa-volume-high"></i><i class="fa-solid fa-arrow-up-from-bracket"></i><i class="fa-regular fa-bookmark"></i>
                 </div>
-                <span style="font-size:10px">WiFi</span>
-                <div class="phone-battery"><div class="phone-battery-fill"></div></div>
+              </div>
+              <div class="jg-msg-link"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> View in Tracking Summary</div>
+              <div class="jg-msg-user">Anna is now 90cm tall!</div>
+            </div>
+            <div class="jg-sheet" role="group" aria-label="Growth Measurement sheet">
+              <div class="jg-sheet-handle" aria-hidden="true"></div>
+              <div class="jg-sheet-head">
+                <span class="jg-sheet-title">Growth Measurement</span>
+                <span class="jg-sheet-close" aria-hidden="true">✕</span>
+              </div>
+              <div class="jg-sheet-divider" aria-hidden="true"></div>
+              <div class="jg-select">Anna <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+              <div class="jg-chips" role="group" aria-label="Measurement type">
+                <button type="button" class="jg-chip" aria-pressed="false" data-unit="kg" data-value="13.0" data-step="0.1">Weight</button>
+                <button type="button" class="jg-chip" aria-pressed="true" data-unit="cm" data-value="90" data-step="1">Height</button>
+                <button type="button" class="jg-chip" aria-pressed="false" data-unit="cm" data-value="49" data-step="1">Head</button>
+              </div>
+              <div class="jg-measure">
+                <span class="jg-measure-value" aria-live="polite">90</span>
+                <span class="jg-measure-unit"><span class="jg-measure-unit-text">cm</span><i class="fa-solid fa-caret-down" aria-hidden="true"></i></span>
+              </div>
+              <div class="jg-steppers">
+                <button type="button" class="jg-step" data-dir="-1" aria-label="Decrease">−</button>
+                <button type="button" class="jg-step" data-dir="1" aria-label="Increase">+</button>
+              </div>
+              <div class="jg-measure-info">
+                <div><span>Date</span><b>Mar 14</b></div>
+                <div><span>Last</span><b>--</b></div>
+                <div><span>Age</span><b>62 months</b></div>
+              </div>
+              <div class="jg-btn-primary" aria-hidden="true">Save</div>
+            </div>
+            <div class="jg-homebar" aria-hidden="true"></div>
+          </div>
+          <figcaption class="jg-label">The chat, rebuilt from the shipped app. One sentence logs a feed; a height opens the growth sheet. Try the buttons.</figcaption>
+        </figure>
+
+        <figure class="jg-figure">
+          <div class="jg-phone">
+            <div class="jg-statusbar" aria-hidden="true"><span>1:12</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+            <div class="gc-top">
+              <span class="gc-back" aria-hidden="true">‹</span>
+              <span class="gc-title">Gleam Calendar</span>
+              <span class="gc-family"><span class="gc-family-icon" aria-hidden="true">👥</span>All <i class="gc-chev fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="gc-week">
+              <div class="gc-week-head">
+                <span class="gc-month">Sep 16 <i class="gc-chev fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                <span class="gc-dwm"><span class="is-on">D</span><span>W</span><span>M</span></span>
+              </div>
+              <div class="gc-days">
+                <div><span>MON</span><b>14</b></div>
+                <div><span>TUE</span><b>15</b></div>
+                <div class="is-today"><span>WED</span><b>16</b></div>
+                <div><span>THU</span><b>17</b></div>
+                <div><span>FRI</span><b>18</b></div>
+                <div><span>SAT</span><b>19</b></div>
+                <div><span>SUN</span><b>20</b></div>
               </div>
             </div>
-            <div class="chat-bg">
-              <div class="app-bar">
-                <span class="app-bar-icon">☰</span>
-                <span class="app-logo">JustGrow</span>
-                <div class="heart-icon-btn">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#e53935"/>
-                  </svg>
+            <div class="gc-row">› GROWTH REMINDERS <span class="gc-focus">This week focus</span></div>
+            <div class="gc-row">› DAILY CHECKLIST</div>
+            <div class="jg-scroll" id="gc-day" tabindex="0" aria-label="Day timeline, scrollable">
+              <div class="gc-timeline">
+                <div class="gc-hour"><span>12 AM</span></div>
+                <div class="gc-hour"><span>1 AM</span></div>
+                <div class="gc-hour"><span>2 AM</span></div>
+                <div class="gc-hour"><span>3 AM</span></div>
+                <div class="gc-hour"><span>4 AM</span></div>
+                <div class="gc-hour"><span>5 AM</span></div>
+                <div class="gc-hour"><span>6 AM</span></div>
+                <div class="gc-hour"><span>7 AM</span></div>
+                <div class="gc-hour"><span>8 AM</span></div>
+                <div class="gc-hour"><span>9 AM</span></div>
+                <div class="gc-hour"><span>10 AM</span></div>
+                <div class="gc-hour"><span>11 AM</span></div>
+                <div class="gc-hour"><span>12 PM</span></div>
+                <div class="gc-hour"></div>
+                <div class="gc-hour"><span>2 PM</span></div>
+                <div class="gc-hour"><span>3 PM</span></div>
+                <div class="gc-hour"><span>4 PM</span></div>
+                <div class="gc-hour"><span>5 PM</span></div>
+                <div class="gc-hour"><span>6 PM</span></div>
+                <div class="gc-hour"><span>7 PM</span></div>
+                <div class="gc-hour"><span>8 PM</span></div>
+                <div class="gc-hour"><span>9 PM</span></div>
+                <div class="gc-hour"><span>10 PM</span></div>
+                <div class="gc-hour"><span>11 PM</span></div>
+                <div class="gc-log gc-log--sleep" style="top: 14px; height: 396px;"><b><i class="fa-regular fa-moon" aria-hidden="true"></i> Sleep · 6h 50m</b><small>12:00 AM – 6:50 AM</small></div>
+                <div class="gc-log gc-log--feed" style="top: 420px;"><b><i class="fa-solid fa-bottle-water" aria-hidden="true"></i> Bottle · 180 mL · Formula</b></div>
+                <div class="gc-log gc-log--diaper" style="top: 434px;"><b><i class="fa-solid fa-baby" aria-hidden="true"></i> Diaper Change · Wet</b></div>
+                <div class="gc-log gc-log--feed" style="top: 492px;"><b><i class="fa-solid fa-bottle-water" aria-hidden="true"></i> Feeding (Other) · Oatmeal</b></div>
+                <div class="gc-log gc-log--sleep" style="top: 546px; height: 72px;"><b><i class="fa-regular fa-moon" aria-hidden="true"></i> Nap · 1h 15m</b><small>9:10 AM – 10:25 AM</small></div>
+                <div class="gc-log gc-log--feed" style="top: 628px;"><b><i class="fa-solid fa-bottle-water" aria-hidden="true"></i> Nursing · L 18m</b></div>
+                <div class="gc-log gc-log--diaper" style="top: 642px;"><b><i class="fa-solid fa-baby" aria-hidden="true"></i> Diaper Change · Dirty</b></div>
+                <div class="gc-log gc-log--feed" style="top: 729px;"><b><i class="fa-solid fa-bottle-water" aria-hidden="true"></i> Bottle · 150 mL</b></div>
+                <div class="gc-now" style="top: 780px;"><span>1:12 PM</span></div>
+                <div class="gc-event" style="top: 778px; height: 87px;"><b>☾ Predicted · Nap 2</b><small>13:10–14:40</small></div>
+                <div class="gc-event gc-event--solid" style="top: 1019px; height: 36px;"><b>☾ Predicted · Nap 3</b></div>
+                <div class="gc-event" style="top: 1219px; height: 140px;"><b>☾ Predicted · Bedtime</b><small>20:47–Tomorrow ~07:32</small></div>
+              </div>
+            </div>
+            <span class="jg-fab" aria-hidden="true">+</span>
+            <div class="jg-homebar" aria-hidden="true"></div>
+          </div>
+          <figcaption class="jg-label">Gleam Calendar, rebuilt from the shipped app. Logged events sit alongside predicted naps. Scroll up for the morning.</figcaption>
+        </figure>
+      </div>
+
+      <div class="jg-split">
+        <div>
+          <p class="case-study__body">Those same events power the handoff. The founder wanted passing care between caregivers to be easy, and invisible work to be visible. I designed the handoff as a relay race: pick the children and your partner, hand over, and the receiver reviews recent events before accepting. I built it end to end, including edge cases such as two simultaneous handoffs and handoffs that expire before anyone accepts them.</p>
+        </div>
+        <figure class="jg-figure">
+          <div class="jg-phone jg-phone--baton">
+            <div class="jg-statusbar" aria-hidden="true"><span>9:41</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+          <div class="chat-bg">
+            <div class="app-bar">
+              <span class="app-bar-icon">☰</span>
+              <span class="app-logo">JustGrow</span>
+              <div class="heart-icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#e53935"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="sheet">
+            <div class="drag-handle"></div>
+            <div class="success-overlay" id="successOverlay">
+              <div class="heart-big">❤️</div>
+              <div class="success-title">Care session complete. Great work!</div>
+              <div class="success-sub" id="successSub">You're now caring for taurus &amp; libra.</div>
+            </div>
+            <div class="sheet-scroll" id="sheetScroll">
+              <div class="sheet-title" id="sheetTitle">I'm passing the care of 2 children to Dad.</div>
+              <div class="section-label">
+                Select children
+                <span class="section-count" id="childCount">(2 selected)</span>
+              </div>
+              <div class="chips-row" id="childChips">
+                <div class="chip child-on" data-child="taurus" onclick="toggleChild(this)">
+                  <div class="chip-icon">✓</div>taurus
+                </div>
+                <div class="chip child-on" data-child="libra" onclick="toggleChild(this)">
+                  <div class="chip-icon">✓</div>libra
+                </div>
+              </div>
+              <div class="section-label">Select family member</div>
+              <div class="chips-row" id="memberChips">
+                <div class="chip member-off" data-member="Grandma" onclick="toggleMember(this)">Grandma</div>
+                <div class="chip member-on"  data-member="Dad"     onclick="toggleMember(this)">Dad</div>
+              </div>
+              <div class="during-row">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div class="during-label">During my turn</div>
+                  <div class="during-badge">⏱ 2h 36m</div>
+                </div>
+                <div class="pagination-dots" id="dots">
+                  <div class="dot on"></div>
+                  <div class="dot off"></div>
+                </div>
+              </div>
+              <div class="activity-card">
+                <div class="activity-child-header" id="activityChildHeader">😊 taurus</div>
+                <div class="swipe-viewport" id="swipeViewport">
+                  <div class="swipe-track" id="swipeTrack">
+                    <div class="swipe-slide" id="slide-taurus">
+                      <div class="event-row">
+                        <div class="event-emoji">🍼</div>
+                        <div class="event-content">
+                          <div class="event-title">Diaper (Dirty)</div>
+                          <div class="event-detail">Dirty | Yellow | Normal</div>
+                        </div>
+                        <div class="event-time">25m ago</div>
+                      </div>
+                      <div class="event-row">
+                        <div class="event-emoji">🍼</div>
+                        <div class="event-content">
+                          <div class="event-title">Feeding (Bottle)</div>
+                          <div class="event-detail">Bottle | Formula | Enfamil NeuroPro</div>
+                        </div>
+                        <div class="event-time">1h ago</div>
+                      </div>
+                      <div class="event-row">
+                        <div class="event-emoji">😴</div>
+                        <div class="event-content">
+                          <div class="event-title">Sleep (Nap)</div>
+                          <div class="event-detail">9h 10m | Crib | Excellent | 1 wake-up</div>
+                        </div>
+                        <div class="event-time">2h ago</div>
+                      </div>
+                    </div>
+                    <div class="swipe-slide" id="slide-libra">
+                      <div class="event-row">
+                        <div class="event-emoji">🤱</div>
+                        <div class="event-content">
+                          <div class="event-title">Feeding (Breast)</div>
+                          <div class="event-detail">Left | 18 min | Good latch</div>
+                        </div>
+                        <div class="event-time">45m ago</div>
+                      </div>
+                      <div class="event-row">
+                        <div class="event-emoji">💧</div>
+                        <div class="event-content">
+                          <div class="event-title">Diaper (Wet)</div>
+                          <div class="event-detail">Wet | Normal</div>
+                        </div>
+                        <div class="event-time">1h 30m ago</div>
+                      </div>
+                      <div class="event-row">
+                        <div class="event-emoji">😴</div>
+                        <div class="event-content">
+                          <div class="event-title">Sleep (Nap)</div>
+                          <div class="event-detail">45m | Contact nap | 0 wake-ups</div>
+                        </div>
+                        <div class="event-time">2h 20m ago</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <textarea class="notes-field" id="notesField" placeholder="Anything worth noting? Words of encouragement works too 😊" rows="2"></textarea>
+              <div class="btn-row">
+                <button class="btn btn-end" onclick="handleEnd()">End My Turn</button>
+                <button class="btn btn-handover-on" id="handoverBtn" onclick="handleHandover()">Hand Over</button>
+              </div>
+            </div>
+          </div>
+            <div class="jg-homebar" aria-hidden="true"></div>
+          </div>
+          <figcaption class="jg-label">The original handoff. Interactive: try the flow.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- == Launch == -->
+    <section class="case-study__section" aria-labelledby="section-launch">
+      <p class="case-study__eyebrow">Launch</p>
+      <h2 class="case-study__section-heading" id="section-launch">We launched a fully functional tracker, in English and Chinese</h2>
+      <p class="case-study__body">The launch included tracking with the chat agent built in, growth charts to visualize the data, and the care handoff. We checked the localization by hand instead of relying on machine translation, so both languages use the words parents actually say. For grandparents abroad, times always show in the baby’s timezone.</p>
+    </section>
+
+    <!-- == Iteration == -->
+    <section class="case-study__section" aria-labelledby="section-iteration">
+      <p class="case-study__eyebrow">Iteration</p>
+      <h2 class="case-study__section-heading" id="section-iteration">I designed a replacement that asks nothing</h2>
+      <p class="case-study__body">In an App Store review, a night nurse called the handoff “perfect for overnight care.” But analytics showed few families used it. Every handoff needed both caregivers to remember a step: one to hand over, the other to accept. I had designed for an idealized parent whose only concerns were the baby and the app. Real parents are juggling far more.</p>
+      <figure class="jg-review">
+        <img src="assets/images/justgrow/review-night-nurse.png" width="795" height="326" loading="lazy" alt="Five-star App Store review titled “night nurse recommendation”: I work as a postpartum night nurse and I recommend JustGrow to every family I work with. The handoff feature is perfect for overnight care. When I arrive I see the full picture. When parents wake up they see everything I did. Win win." />
+      </figure>
+      <p class="case-study__body">A better entry point would have repeated the same mistake, just cheaper. Every tracking event already recorded who did it. The app didn’t need parents to declare a handoff; it could read what they were already logging.</p>
+
+      <div class="jg-split">
+        <div>
+          <p class="case-study__body">I proposed a replacement that lives in chat. Credit comes from existing events, and a weekly digest shows the family total plus a private count of your own. No new screens, no new agents. The founder retired the handoff; I handed off the replacement plan before I left, so I didn’t get to build it myself.</p>
+        </div>
+        <figure class="jg-figure">
+          <div class="jg-phone">
+            <div class="jg-statusbar" aria-hidden="true"><span>8:15</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+            <div class="jg-appbar">
+              <span class="jg-appbar-menu" aria-hidden="true">☰</span>
+              <span class="jg-appbar-logo">JustGrow</span>
+            </div>
+            <div class="jg-chat jg-chat--tight jg-scroll" tabindex="0" aria-label="Weekly digest conversation, scrollable">
+              <div class="jg-card">
+                <div class="jg-card-label">Your family’s week</div>
+                <div class="jg-card-sub">Mar 17 – Mar 23</div>
+                <div class="jg-digest-hero">
+                  <div class="jg-digest-big">70</div>
+                  <div class="jg-card-sub">things handled this week</div>
+                </div>
+                <div class="jg-digest-list">
+                  <div>👶 <strong>30 baby care events</strong></div>
+                  <div>🍳 <strong>7 meals cooked</strong></div>
+                  <div>🧹 <strong>6 tidying sessions</strong></div>
+                  <div>🛒 <strong>3 errands run</strong></div>
+                  <div>🧘 <strong>2 self-care moments</strong></div>
+                </div>
+                <div class="jg-digest-note">A busy week for the family. That’s a lot of invisible work, well done.</div>
+              </div>
+              <div class="jg-card">
+                <span class="jg-only-you">Only you</span>
+                <div class="jg-contrib-head">Your contributions</div>
+                <div class="jg-contrib-count"><b>41</b><span class="jg-card-sub">of 70 family total</span></div>
+                <div class="jg-card-sub">15 diapers · 8 feedings · 5 meals · 3 tidying · 3 errands · 2 self-care</div>
+              </div>
+              <div class="jg-msg-user">What did my partner handle at night this week?</div>
+              <div class="jg-msg-bot">This week there were 10 night wake-ups (10pm–6am). Dad handled 7 of them, his most consistent stretch yet. Want me to break down any other category?</div>
+            </div>
+            <div class="jg-composer" aria-hidden="true">
+              <div class="jg-input">Hold to talk</div>
+              <div class="jg-send">↑</div>
+            </div>
+            <div class="jg-homebar" aria-hidden="true"></div>
+          </div>
+          <figcaption class="jg-label"><span class="jg-tag">Proposal</span>Every Sunday, a family total with no names, then a private count only you see. Recognition, not scorekeeping.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- == Beyond tracking == -->
+    <section class="case-study__section" aria-labelledby="section-after-launch">
+      <p class="case-study__eyebrow">Beyond tracking</p>
+      <h2 class="case-study__section-heading" id="section-after-launch">I consolidated: one place for memories, one design system</h2>
+      <div class="jg-split">
+        <div>
+          <p class="case-study__body">Photo sharing, from uploading to browsing, became Memory: one timeline where the family posts photos, videos, and notes. With privacy settings, it doubles as a private journal.</p>
+          <p class="case-study__body">In addition, tokens, type, and components now live in one system, with a log of deliberate exceptions so no one “fixes” them later.</p>
+        </div>
+        <figure class="jg-figure">
+          <div class="jg-phone">
+            <div class="jg-statusbar" aria-hidden="true"><span>1:12</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+            <div class="gc-top">
+              <span class="gc-back" aria-hidden="true">‹</span>
+              <span class="gc-title">Family Memory</span>
+              <span class="fm-search" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+            <div class="jg-scroll fm-scroll" tabindex="0" aria-label="Memory timeline, scrollable">
+              <div class="fm-date">Sep 5</div>
+              <div class="fm-card">
+                <img src="assets/images/justgrow/memory_photo.jpg" width="560" height="699" loading="lazy" alt="Two deer grazing on a dry hillside, posted by Granny." />
+                <div class="fm-body">
+                  <div class="fm-meta"><span>Granny, 09-05 20:33</span><span aria-hidden="true">•••</span></div>
+                  <button type="button" class="fm-like" aria-pressed="false"><span class="fm-heart" aria-hidden="true">♡</span> Like</button>
+                  <input class="fm-comment" type="text" placeholder="Leave a comment" aria-label="Leave a comment" />
+                </div>
+              </div>
+              <div class="fm-date">Mar 17</div>
+              <div class="fm-card">
+                <div class="fm-body">
+                  <p class="fm-note"><b>Me</b> doesn't feel well</p>
+                  <span class="fm-tag">journal</span>
+                  <div class="fm-meta"><span>Granny, 03-17 20:42</span><span aria-hidden="true">•••</span></div>
                 </div>
               </div>
             </div>
-            <div class="sheet">
-              <div class="drag-handle"></div>
-              <div class="success-overlay" id="successOverlay">
-                <div class="heart-big">❤️</div>
-                <div class="success-title">Care session complete. Great work!</div>
-                <div class="success-sub" id="successSub">You're now caring for taurus &amp; libra.</div>
-              </div>
-              <div class="sheet-scroll" id="sheetScroll">
-                <div class="sheet-title" id="sheetTitle">I'm passing the care of 2 children to Dad.</div>
-                <div class="section-label">
-                  Select children
-                  <span class="section-count" id="childCount">(2 selected)</span>
-                </div>
-                <div class="chips-row" id="childChips">
-                  <div class="chip child-on" data-child="taurus" onclick="toggleChild(this)">
-                    <div class="chip-icon">✓</div>taurus
-                  </div>
-                  <div class="chip child-on" data-child="libra" onclick="toggleChild(this)">
-                    <div class="chip-icon">✓</div>libra
-                  </div>
-                </div>
-                <div class="section-label">Select family member</div>
-                <div class="chips-row" id="memberChips">
-                  <div class="chip member-off" data-member="Grandma" onclick="toggleMember(this)">Grandma</div>
-                  <div class="chip member-on"  data-member="Dad"     onclick="toggleMember(this)">Dad</div>
-                </div>
-                <div class="during-row">
-                  <div style="display:flex;align-items:center;gap:8px">
-                    <div class="during-label">During my turn</div>
-                    <div class="during-badge">⏱ 2h 36m</div>
-                  </div>
-                  <div class="pagination-dots" id="dots">
-                    <div class="dot on"></div>
-                    <div class="dot off"></div>
-                  </div>
-                </div>
-                <div class="activity-card">
-                  <div class="activity-child-header" id="activityChildHeader">😊 taurus</div>
-                  <div class="swipe-viewport" id="swipeViewport">
-                    <div class="swipe-track" id="swipeTrack">
-                      <div class="swipe-slide" id="slide-taurus">
-                        <div class="event-row">
-                          <div class="event-emoji">🍼</div>
-                          <div class="event-content">
-                            <div class="event-title">Diaper (Dirty)</div>
-                            <div class="event-detail">Dirty | Yellow | Normal</div>
-                          </div>
-                          <div class="event-time">25m ago</div>
-                        </div>
-                        <div class="event-row">
-                          <div class="event-emoji">🍼</div>
-                          <div class="event-content">
-                            <div class="event-title">Feeding (Bottle)</div>
-                            <div class="event-detail">Bottle | Formula | Enfamil NeuroPro</div>
-                          </div>
-                          <div class="event-time">1h ago</div>
-                        </div>
-                        <div class="event-row">
-                          <div class="event-emoji">😴</div>
-                          <div class="event-content">
-                            <div class="event-title">Sleep (Nap)</div>
-                            <div class="event-detail">9h 10m | Crib | Excellent | 1 wake-up</div>
-                          </div>
-                          <div class="event-time">2h ago</div>
-                        </div>
-                      </div>
-                      <div class="swipe-slide" id="slide-libra">
-                        <div class="event-row">
-                          <div class="event-emoji">🤱</div>
-                          <div class="event-content">
-                            <div class="event-title">Feeding (Breast)</div>
-                            <div class="event-detail">Left | 18 min | Good latch</div>
-                          </div>
-                          <div class="event-time">45m ago</div>
-                        </div>
-                        <div class="event-row">
-                          <div class="event-emoji">💧</div>
-                          <div class="event-content">
-                            <div class="event-title">Diaper (Wet)</div>
-                            <div class="event-detail">Wet | Normal</div>
-                          </div>
-                          <div class="event-time">1h 30m ago</div>
-                        </div>
-                        <div class="event-row">
-                          <div class="event-emoji">😴</div>
-                          <div class="event-content">
-                            <div class="event-title">Sleep (Nap)</div>
-                            <div class="event-detail">45m | Contact nap | 0 wake-ups</div>
-                          </div>
-                          <div class="event-time">2h 20m ago</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <textarea class="notes-field" id="notesField" placeholder="Anything worth noting? Words of encouragement works too 😊" rows="2"></textarea>
-                <div class="btn-row">
-                  <button class="btn btn-end" onclick="handleEnd()">End My Turn</button>
-                  <button class="btn btn-handover-on" id="handoverBtn" onclick="handleHandover()">Hand Over</button>
-                </div>
-              </div>
-            </div>
-            <div class="phone-home-bar"></div>
+            <span class="jg-fab" aria-hidden="true">+</span>
+            <div class="jg-homebar" aria-hidden="true"></div>
           </div>
-          </div>
-          <p class="jg-label" style="margin-top:14px;margin-bottom:0;">Interactive — Try the flow</p>
-        </div>
-      </div>
-
-      <p class="case-study__body">I designed and built the full feature: API routes, Flutter UI, conflict resolution for two simultaneous handoffs, decline-with-notes flow, animated overlay, haptic feedback. The shift model in the backend was the most complex thing in the codebase outside the agent layer.</p>
-    </section>
-
-
-    == 3. What happened ==
-    <section class="case-study__section" aria-labelledby="section-happened">
-      <h2 class="case-study__section-heading" id="section-happened">What happened</h2>
-      <p class="case-study__body">It worked, but adoption was low. Discoverability wasn't the issue; the handoff was the most visible thing in the app. The cost was having to remember to do it at all, at the moment of transition. On top of that, both parents had to be engaged simultaneously, and the receiver had two hours to respond before the handoff expired.</p>
-      <p class="case-study__body">Wanting an outcome is not the same as being willing to pay for it. I never weighed what my solution asked of parents against what they would actually spend at the moment it asked. The parent we imagined at the planning table was the person we built for. The parent on two seconds of attention with a screaming baby was the person who had to use it. Same name, different people.</p>
-    </section>
-
-
-    == 4. Why we kept the goal ==
-    <section class="case-study__section" aria-labelledby="section-kept">
-      <h2 class="case-study__section-heading" id="section-kept">Why we kept the goal</h2>
-      <p class="case-study__body">Two App Store reviews specifically praised the handoff feature. A postpartum night nurse wrote that she recommends JustGrow to every family she works with because the handoff is "perfect for overnight care." A parent wrote that the handoff "saved our marriage" by ending daily morning arguments about who did what overnight. Neither is a counterexample. A night nurse never has to remember the handoff, because documenting a shift is already the shape of her work. A household fighting every morning was paying more for the argument than the handoff cost to perform. Both were willing to spend what it asked. Most parents were not, and I had not priced that.</p>
-      <p class="case-study__body">The founder ultimately made the call to deprecate baton passing, but not the goal behind it. My job was the replacement. The cost was concrete: most of the shift model became dead weight, and the code I was throwing away was my own.</p>
-    </section>
-
-
-    == 5. The redesign ==
-    <section class="case-study__section" aria-labelledby="section-redesign">
-      <h2 class="case-study__section-heading" id="section-redesign">The redesign</h2>
-      <p class="case-study__body">The temptation was to iterate on the surface. Prefilled slots, better animation, a more discoverable entry point. That approach would have reproduced the same product mistake at a slightly lower cost.</p>
-      <p class="case-study__body">The actual insight: the data about who did what already existed in the app. Every tracking event has a <code>user_id</code>. Every calendar event has an owner. The system did not need an explicit handoff at all. It needed to read the data that was already being written and surface it intelligently.</p>
-
-      <div class="case-study__callout">
-        <p class="case-study__callout-text">Parents do things. They do not declare that they are doing things. Any product model that asks them to declare state will lose to one that infers it.</p>
-      </div>
-
-      <details class="jg-collapse">
-        <summary>Design graveyard: 8 directions explored and rejected before landing on passive tracking</summary>
-        <p class="case-study__body">Most of the work was ruling things out. I ran eight alternative directions to mockup or written-spec stage and rejected each for a specific reason. Every rejection was a product reason, not a resource one.</p>
-        <p class="case-study__body">Several of these options came out of brainstorming with AI. The work is not the brainstorm. It is the rejection with a reason.</p>
-        <div class="jg-graveyard">
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Care strip on home screen</h4>
-            <p>A persistent card between app bar and chat. Stole ~80px of screen real estate permanently. The chat is the home screen and we do not eat into it. Idle state ambiguity: what does the strip show when nothing is happening?</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Explicit "On Duty" / "Off Duty" model</h4>
-            <p>Same bookkeeping problem as the handoff with fewer taps. Parents do not declare state. The tracking events themselves are the proof of who is doing what.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Bottom navigation tab</h4>
-            <p>JustGrow is single-screen, chat-dominant. Tabs imply equal weight between sections. Chat is the primary interface by a wide margin and a tab bar would change the app's navigation paradigm and add complexity.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Per-person profile view</h4>
-            <p>No existing foundation. Every stat the view would surface is answerable by a chat query, which is more flexible and has less UI to maintain. Building a screen on speculation does not pass the bar.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Dedicated Activity screen with three tabs</h4>
-            <p>Log tab and Tasks tab duplicate Calendar. Only Contributions is genuinely new. A single tab does not justify a screen with two redundant ones.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Inline summary card in Calendar</h4>
-            <p>Calendar is already dense. Same idle-state problem as the care strip. What does the card show on a day with no data? An empty bar feels broken.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>Task assignment model</h4>
-            <p>"Assigned to Dad, due tomorrow, status: pending" is Jira for families. Wrong emotional register. Creates a manager-worker dynamic between co-parents.</p>
-          </div>
-          <div class="jg-grave-card">
-            <span class="jg-killed">Killed</span>
-            <h4>App bar pill (revived, killed again)</h4>
-            <p>Risks repeating the original problem. Existing timer pills work because they are time-sensitive and disappear when the session ends. A persistent contribution pill has no urgency signal and would blend into the furniture.</p>
-          </div>
-        </div>
-      </details>
-
-      <p class="case-study__body" style="margin-top: var(--space-xl);">The constraint that came out of the exploration was "zero new screens, zero new agents." It is not minimalism for its own sake. It is the call that fell out of every alternative being worse than reusing the chat surface JustGrow already uses for everything.</p>
-
-    </section>
-
-
-    == 5b. What replaced it ==
-    <section class="case-study__section" aria-labelledby="section-replaced">
-      <h2 class="case-study__section-heading" id="section-replaced">What replaced it</h2>
-      <p class="case-study__body">Three pieces, all in chat.</p>
-
-      <h3 class="case-study__subsection-heading">Passive attribution</h3>
-      <p class="case-study__body">Existing tracking events already carry <code>user_id</code>. No new logging primitives for the user. If they would not have logged it before, they do not log it now.</p>
-
-      <h3 class="case-study__subsection-heading">Past-tense logging via existing agents</h3>
-      <p class="case-study__body">"I went to get groceries at 2pm" said at 4pm used to fall to casual chat because it matched no tracking keyword and no calendar keyword. Two prompt expansions to existing agents close the gap; the backend already accepts past timestamps. Past-tense chore events are stored as calendar events with a source tag so the frontend filters them out of the calendar view; they exist only for contribution counting.</p>
-
-      <h3 class="case-study__subsection-heading">Weekly digest in chat</h3>
-      <p class="case-study__body">A Sunday cron generates a digest message and injects it into each user's chat stream as an assistant message. Two layers: a shared family-wide total with no names ("70 things handled this week") and a private mirror only the individual sees ("you logged 41 of 70"). The app provides both numbers. <strong>It never does the subtraction.</strong></p>
-
-      <div class="case-study__callout">
-        <p class="case-study__callout-text"><strong>The "no subtraction" rule is the product boundary.</strong> JustGrow helps families see the work. It does not referee the argument. The product is built for collaborative families that lack visibility, not for adversarial ones. Designing for the adversarial case would make the product worse for the healthy majority.</p>
-      </div>
-
-      <h3 class="case-study__subsection-heading">From asking too much to asking nothing</h3>
-      <p class="case-study__body">The restraint behind the "no subtraction" rule also shapes how the feature shows up in someone's day. Participation is optional. There is no button on the home screen waiting to be tapped, no streak to keep alive, no pressure to log everything. The feature surfaces when you reach for it and stays quiet otherwise. And because contribution counts include any household work, not just baby care, the feature has reason to live well beyond the infant stage.</p>
-      <p class="case-study__body">The new design does not close off the use cases from those two reviews. Passive attribution still records every event with a <code>user_id</code>, so the data both reviewers valued is still captured automatically. They reach it through chat instead of a handoff form. The parent who was fighting about who fed the baby at 2am can ask "what happened overnight?" and get a summary. The night nurse can ask the agent to recap her shift and the parents see it when they wake up. One extra sentence to type instead of a four-tap handoff, and the majority of parents who never wanted baton passing no longer pay for it.</p>
-
-      <h3 class="case-study__subsection-heading">In two moments</h3>
-
-      <div class="jg-proto-tabs" role="tablist" aria-label="Prototype scenarios">
-        <button class="jg-proto-tab is-active" role="tab" aria-selected="true" aria-controls="proto-panel-1">Weekly Digest</button>
-        <button class="jg-proto-tab" role="tab" aria-selected="false" aria-controls="proto-panel-2">Catch-up &amp; Queries</button>
-      </div>
-
-      <div id="proto-panel-1" class="jg-proto-panel is-active" role="tabpanel">
-        <p class="jg-mockup-caption">Sunday evening, the agent posts a recap card. Two stacked bubbles: a shared family-wide total with no per-person names, then a private "Only you" mirror with the individual's count and category breakdown. Hierarchy is deliberate. The headline number carries weight; the category breakdown is supporting; the closing line reframes effort as recognition rather than scorekeeping.</p>
-
-        <div class="jg-mockup-row">
-          <div class="jg-mockup-tile">
-            <div class="jg-phone">
-              <div class="jg-island"></div>
-              <div class="jg-screen">
-                <div class="jg-status">
-                  <span>8:15</span>
-                  <span class="jg-status-right">
-                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                    <span>WiFi</span>
-                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                  </span>
-                </div>
-                <div class="jg-appbar">
-                  <div class="jg-appbar-menu">☰</div>
-                  <span class="jg-appbar-title">JustGrow</span>
-                  <div class="jg-appbar-actions"></div>
-                </div>
-                <div class="jg-messages">
-                  <div style="max-width: 92%; margin-bottom: 10px;">
-                    <div class="jg-procard" style="background: rgba(143,168,255,0.05); border-color: rgba(143,168,255,0.12);">
-                      <div class="jg-procard-title" style="color: #8FA8FF;">Your Family's Week</div>
-                      <div style="font-size: 11px; color: rgba(193,202,216,0.5); margin-bottom: 8px;">Mar 17 – Mar 23</div>
-                      <div style="text-align: center; margin: 8px 0 12px;">
-                        <div style="font-size: 26px; font-weight: 700; color: #E8E8ED;">70</div>
-                        <div style="font-size: 11px; color: rgba(193,202,216,0.5);">things handled this week</div>
-                      </div>
-                      <div style="font-size: 12.5px; color: #C1CAD8; line-height: 1.7; letter-spacing: -0.32px;">
-                        <div style="margin-bottom: 4px;">👶 <strong style="color: #E8E8ED;">30 baby care events</strong></div>
-                        <div style="margin-bottom: 4px;">🍳 <strong style="color: #E8E8ED;">7 meals cooked</strong></div>
-                        <div style="margin-bottom: 4px;">🧹 <strong style="color: #E8E8ED;">6 tidying sessions</strong></div>
-                        <div style="margin-bottom: 4px;">🛒 <strong style="color: #E8E8ED;">3 errands run</strong></div>
-                        <div>🧘 <strong style="color: #E8E8ED;">2 self-care moments</strong></div>
-                      </div>
-                      <div style="margin-top: 12px; padding-top: 10px; border-top: 0.5px solid rgba(143,168,255,0.08); font-size: 12.5px; color: #E8E8ED; letter-spacing: -0.32px; line-height: 1.4;">
-                        A busy week for the family. That's a lot of invisible work, well done.
-                      </div>
-                    </div>
-                  </div>
-                  <div style="max-width: 92%; margin-bottom: 10px;">
-                    <div class="jg-procard" style="background: rgba(158,234,106,0.04);">
-                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                        <span style="font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(158,234,106,0.10); color: #9EEA6A; font-weight: 600;">Only you</span>
-                      </div>
-                      <div style="font-size: 13px; color: #E8E8ED; font-weight: 500; margin-bottom: 4px;">Your contributions</div>
-                      <div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px;">
-                        <span style="font-size: 20px; font-weight: 700; color: #E8E8ED;">41</span>
-                        <span style="font-size: 11px; color: rgba(193,202,216,0.5);">of 70 family total</span>
-                      </div>
-                      <div style="font-size: 11.5px; color: rgba(193,202,216,0.6); line-height: 1.6;">
-                        15 diapers · 8 feedings · 5 meals · 3 tidying · 3 errands · 2 self-care
-                      </div>
-                    </div>
-                  </div>
-                  <div class="jg-bubble jg-user">What did my partner handle at night this week?</div>
-                  <div class="jg-bubble jg-bot">
-                    This week there were 10 night wake-ups (10pm–6am). Dad handled 7 of them, his most consistent stretch yet. Want me to break down any other category?
-                  </div>
-                </div>
-                <div class="jg-composer">
-                  <div class="jg-input">Hold to talk</div>
-                  <div class="jg-send">↑</div>
-                </div>
-                <div class="jg-home-bar"></div>
-              </div>
-            </div>
-            <p class="jg-label">Weekly digest as agent-posted recap</p>
-          </div>
-        </div>
-      </div>
-
-      <div id="proto-panel-2" class="jg-proto-panel" role="tabpanel">
-        <p class="jg-mockup-caption">When a parent opens the app after several hours away, the agent posts a "since you were last here" card. The same chat surface handles task creation through conversation and contribution queries on demand. Every piece of contribution data a per-person profile screen would show is answerable conversationally, with a proportion bar where comparison is requested but never volunteered.</p>
-
-        <div class="jg-mockup-row">
-          <div class="jg-mockup-tile">
-            <div class="jg-phone">
-              <div class="jg-island"></div>
-              <div class="jg-screen">
-                <div class="jg-status">
-                  <span>2:15</span>
-                  <span class="jg-status-right">
-                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                    <span>WiFi</span>
-                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                  </span>
-                </div>
-                <div class="jg-appbar">
-                  <div class="jg-appbar-menu">☰</div>
-                  <span class="jg-appbar-title">JustGrow</span>
-                  <div class="jg-appbar-actions"></div>
-                </div>
-                <div class="jg-messages">
-                  <div style="max-width: 92%; margin-bottom: 10px;">
-                    <div class="jg-procard">
-                      <div class="jg-procard-title">Since you were last here (4h ago)</div>
-                      <div class="jg-procard-row"><span>🍼</span> Dad gave 4oz formula at 11:30am</div>
-                      <div class="jg-procard-row"><span>🧷</span> Dad changed diaper (wet) at 12:15pm</div>
-                      <div class="jg-procard-row"><span>💤</span> Emma napped 45min in stroller (12:30–1:15pm)</div>
-                      <div class="jg-procard-row" style="color: #FF9F0A;"><span>💊</span> Vitamin D drops, not yet given today</div>
-                    </div>
-                  </div>
-                  <div class="jg-bubble jg-user">Thanks. Can you add "buy more wipes" to our list?</div>
-                  <div class="jg-bubble jg-bot">
-                    Added <strong style="color: #E8E8ED;">"Buy more wipes"</strong> to your family's list. Want me to mention Dad so he sees it?
-                  </div>
-                  <div style="display: flex; gap: 8px; margin: 6px 0 10px;">
-                    <span style="padding: 5px 12px; background: rgba(158,234,106,0.08); border: 0.5px solid rgba(158,234,106,0.22); border-radius: 100px; font-size: 12px; font-weight: 500; color: #9EEA6A;">Mention Dad</span>
-                    <span style="padding: 5px 12px; background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 100px; font-size: 12px; font-weight: 500; color: rgba(193,202,216,0.7);">That's ok</span>
-                  </div>
-                </div>
-                <div class="jg-composer">
-                  <div class="jg-input">Hold to talk</div>
-                  <div class="jg-send">↑</div>
-                </div>
-                <div class="jg-home-bar"></div>
-              </div>
-            </div>
-            <p class="jg-label">Catch-up card and task creation through conversation</p>
-          </div>
-
-          <div class="jg-mockup-tile">
-            <div class="jg-phone">
-              <div class="jg-island"></div>
-              <div class="jg-screen">
-                <div class="jg-status">
-                  <span>8:30</span>
-                  <span class="jg-status-right">
-                    <span class="jg-signal"><span style="height:4px;"></span><span style="height:6px;"></span><span style="height:8px;"></span><span style="height:10px;"></span></span>
-                    <span>WiFi</span>
-                    <span class="jg-battery"><span class="jg-battery-fill"></span></span>
-                  </span>
-                </div>
-                <div class="jg-appbar">
-                  <div class="jg-appbar-menu">☰</div>
-                  <span class="jg-appbar-title">JustGrow</span>
-                  <div class="jg-appbar-actions"></div>
-                </div>
-                <div class="jg-messages">
-                  <div class="jg-bubble jg-user">Who's been doing more night feeds this week?</div>
-                  <div class="jg-bubble jg-bot">
-                    <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Night feeds this week (10pm–6am)</div>
-                    <div style="font-size: 12.5px; margin-bottom: 10px; letter-spacing: -0.32px;">
-                      <div style="margin-bottom: 3px;"><span style="color: #9EEA6A;">Dad</span>, 7 feeds</div>
-                      <div><span style="color: #8FA8FF;">Mom</span>, 3 feeds</div>
-                    </div>
-                    <div class="jg-contrib-bar" style="margin-bottom: 10px;">
-                      <div class="jg-contrib-seg" style="width: 70%; background: #9EEA6A;"></div>
-                      <div class="jg-contrib-seg" style="width: 30%; background: #8FA8FF;"></div>
-                    </div>
-                    <div style="font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
-                      Dad's been covering most nights. Mom handles more during the day with 24 events versus Dad's 17.
-                    </div>
-                  </div>
-                  <div class="jg-bubble jg-user">What's on our plate for tomorrow?</div>
-                  <div class="jg-bubble jg-bot">
-                    <div style="font-weight: 600; margin-bottom: 8px; color: #E8E8ED; font-size: 13px;">Tomorrow (Sunday)</div>
-                    <div style="font-size: 12.5px; line-height: 1.7; letter-spacing: -0.32px;">
-                      <div>📋 Meal prep, week batch <span style="color: #9EEA6A;">(Dad)</span></div>
-                      <div>💊 Vitamin D drops <span style="color: rgba(193,202,216,0.5);">(daily)</span></div>
-                      <div>🧺 Buy more wipes <span style="color: rgba(193,202,216,0.5);">(on the list)</span></div>
-                    </div>
-                    <div style="margin-top: 10px; font-size: 12.5px; color: rgba(193,202,216,0.7); letter-spacing: -0.32px;">
-                      No appointments. Want to add anything?
-                    </div>
-                  </div>
-                </div>
-                <div class="jg-composer">
-                  <div class="jg-input">Hold to talk</div>
-                  <div class="jg-send">↑</div>
-                </div>
-                <div class="jg-home-bar"></div>
-              </div>
-            </div>
-            <p class="jg-label">Chat-native contribution and planning queries</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="jg-mockup-caption">These mockups are not Figma comps. The shipping app is Flutter and Dart; the mockups are HTML and CSS so the spec, the rationale, and the visual live in one document. Color tokens, typography, and spacing are pulled from the JustGrow codebase, so what renders above matches the production design system.</p>
-    </section>
-
-
-    == What else I owned (from justgrow-work-summary.html) ==
-    <section class="case-study__section" aria-labelledby="section-owned">
-      <h2 class="case-study__section-heading" id="section-owned">What else I owned</h2>
-      <p class="case-study__body">Nine months of surface area. Contribution tracking was one piece of it.</p>
-
-      <div class="jg-map">
-        <div class="jg-map-card jg-map-card--wide">
-          <span class="jg-map-tag">Shipped</span>
-          <h4>Design system</h4>
-          <p>Tokens, type, and components. Includes a constraints log so deliberate exceptions don't get "fixed" later.</p>
-        </div>
-        <div class="jg-map-card jg-map-card--visual">
-          <span class="jg-map-tag">Shipped</span>
-          <h4>Memory</h4>
-          <p>Family photo memories — shared albums and the upload manager behind them, now unified as one feature.</p>
-          <div class="jg-map-shot">
-            <img src="assets/images/justgrow/memory_page.jpg" width="1280" height="2774" loading="lazy" alt="Family Memory timeline: a photo posted by a family member with like and comment actions." />
-          </div>
-        </div>
-        <div class="jg-map-card jg-map-card--visual">
-          <span class="jg-map-tag">Shipped</span>
-          <h4>Tracking summary</h4>
-          <p>Logged events turned into a day view: predicted naps, growth reminders, and a daily checklist. Now called Gleam Calendar.</p>
-          <div class="jg-map-shot">
-            <img src="assets/images/justgrow/tracking_system.jpg" width="1280" height="2774" loading="lazy" alt="Gleam Calendar day view: predicted naps, growth reminders, and a daily checklist." />
-          </div>
-        </div>
+          <figcaption class="jg-label">Family Memory, rebuilt from the shipped app. Try Like.</figcaption>
+        </figure>
       </div>
     </section>
 
+    <!-- == Impact == -->
+    <section class="case-study__section" aria-labelledby="section-impact">
+      <p class="case-study__eyebrow">Impact</p>
+      <h2 class="case-study__section-heading" id="section-impact">200+ signups in nine months, with no paid marketing</h2>
+      <div class="jg-reviews">
+        <img src="assets/images/justgrow/review-feels-like-talking.png" width="795" height="327" loading="lazy" alt="Five-star App Store review titled “Finally an app that gets it”: Other tracking apps feel like data entry. JustGrow feels like talking to a friend who happens to be really organized. Say “he ate kinda ok, maybe 3 ounces?” and it logs it. No dropdowns, no categories to select. Revolutionary for sleep deprived parents." />
+        <img src="assets/images/justgrow/review-sleep-regression.png" width="786" height="322" loading="lazy" alt="Five-star App Store review titled “Sleep regression survival guide”: 4 month sleep regression hit us hard. The AI looked at my son’s actual sleep data and pointed out his wake windows were getting too long in the afternoon. Adjusted the last nap timing and within 3 days he was sleeping better. Data driven parenting ftw." />
+        <figure class="jg-review-zh">
+          <img src="assets/images/justgrow/review-zh-family-assistant.png" width="796" height="190" loading="lazy" lang="zh" alt="五星评价，标题“好用的家庭助手”：好用!新版本的成长解读和家庭待办很不错" />
+          <figcaption>From the Chinese App Store: “A handy family assistant. Easy to use! The new version’s growth insights and family to-dos are really good.”</figcaption>
+        </figure>
+      </div>
+    </section>
 
-    == 6. The takeaway ==
+    <!-- == Takeaway == -->
     <section class="case-study__section" aria-labelledby="section-takeaway">
-      <h2 class="case-study__section-heading" id="section-takeaway">What this work taught me</h2>
-      <div class="jg-takeaway">
-        <p><strong>Price what the path asks before scoping it.</strong> Wanting an outcome is not the same as being willing to pay for it. The user a feature is designed for and the user mid-task share a name and are different people, so I weigh what a solution demands against what they will actually spend, before I scope rather than after.</p>
-      </div>
+      <p class="case-study__eyebrow">Takeaway</p>
+      <h2 class="case-study__section-heading" id="section-takeaway">Wanting an outcome isn’t the same as being willing to pay for it</h2>
+      <p class="case-study__body">Parents wanted to share the load, but the handoff asked for their attention at the worst moment. Now I weigh what a design asks of people before I scope it.</p>
     </section>
-    END HIDDEN CASE STUDY -->
 
 
 
@@ -1238,7 +1288,20 @@
   </footer>
 
 
-  <!-- HIDDEN BATON DEMO SCRIPT (case study in revision; restore with the sections above)
+  <script>
+    var toggle = document.querySelector('.nav__toggle'), menu = document.querySelector('.nav__menu');
+    toggle.addEventListener('click', function() {
+      var o = menu.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', o);
+      toggle.setAttribute('aria-expanded', o);
+    });
+  </script>
+  <script>
+    var b = document.getElementById('jg-progress');
+    function u() { b.style.width = Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100) + '%'; }
+    window.addEventListener('scroll', u, { passive: true });
+    u();
+  </script>
   <script>
     /* ── Baton passing demo ── */
     (function() {
@@ -1376,35 +1439,81 @@
       rebuildSwipeSlides(); updateTitle(); updateHandoverBtn();
     })();
   </script>
-  END HIDDEN BATON DEMO SCRIPT -->
   <script>
-    var toggle = document.querySelector('.nav__toggle'), menu = document.querySelector('.nav__menu');
-    toggle.addEventListener('click', function() {
-      var o = menu.classList.toggle('is-open');
-      toggle.classList.toggle('is-open', o);
-      toggle.setAttribute('aria-expanded', o);
+    document.querySelectorAll('.fm-like').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var on = btn.getAttribute('aria-pressed') !== 'true';
+        btn.setAttribute('aria-pressed', on);
+        btn.querySelector('.fm-heart').textContent = on ? '♥' : '♡';
+      });
     });
   </script>
   <script>
-    var b = document.getElementById('jg-progress');
-    function u() { b.style.width = Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100) + '%'; }
-    window.addEventListener('scroll', u, { passive: true });
-    u();
-  </script>
-  <script>
-    var tabs = document.querySelectorAll('.jg-proto-tab'), panels = document.querySelectorAll('.jg-proto-panel');
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        var selectedId = tab.getAttribute('aria-controls');
-        tabs.forEach(function(t) {
-          var selected = t === tab;
-          t.classList.toggle('is-active', selected);
-          t.setAttribute('aria-selected', selected);
-        });
-        panels.forEach(function(panel) {
-          panel.classList.toggle('is-active', panel.id === selectedId);
+    /* ── Growth Measurement sheet: switch type, step the value ── */
+    (function() {
+      var root = document.getElementById('jg-growth');
+      if (!root) return;
+      var valueEl = root.querySelector('.jg-measure-value');
+      var unitEl = root.querySelector('.jg-measure-unit-text');
+      var chips = root.querySelectorAll('.jg-chip');
+      var active = root.querySelector('.jg-chip[aria-pressed="true"]');
+      var values = [];
+
+      function render() {
+        var i = Array.prototype.indexOf.call(chips, active);
+        var step = parseFloat(active.dataset.step);
+        valueEl.textContent = step < 1 ? values[i].toFixed(1) : String(Math.round(values[i]));
+        unitEl.textContent = active.dataset.unit;
+      }
+
+      chips.forEach(function(chip, i) {
+        values[i] = parseFloat(chip.dataset.value);
+        chip.addEventListener('click', function() {
+          active.setAttribute('aria-pressed', 'false');
+          chip.setAttribute('aria-pressed', 'true');
+          active = chip;
+          render();
         });
       });
+
+      root.querySelectorAll('.jg-step').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var i = Array.prototype.indexOf.call(chips, active);
+          var next = values[i] + parseFloat(active.dataset.step) * Number(btn.dataset.dir);
+          values[i] = Math.max(0, Math.round(next * 10) / 10);
+          render();
+        });
+      });
+    })();
+  </script>
+  <script>
+    /* Open the Calendar day at midday, like the shipped screen */
+    (function() {
+      var day = document.getElementById('gc-day');
+      if (day) day.scrollTop = 704;
+    })();
+  </script>
+  <script>
+    /* Phone scroll areas: let mouse users drag them like a touchscreen */
+    document.querySelectorAll('.jg-scroll').forEach(function(el) {
+      var startY = 0, startTop = 0, scale = 1, dragging = false;
+      el.addEventListener('pointerdown', function(e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        if (e.target.closest('button, input, a')) return;
+        dragging = true;
+        startY = e.clientY;
+        startTop = el.scrollTop;
+        scale = el.getBoundingClientRect().height / el.clientHeight || 1; // frames are zoomed
+        try { el.setPointerCapture(e.pointerId); } catch (err) {}
+        el.classList.add('is-dragging');
+        e.preventDefault();
+      });
+      el.addEventListener('pointermove', function(e) {
+        if (dragging) el.scrollTop = startTop - (e.clientY - startY) / scale;
+      });
+      function stop() { dragging = false; el.classList.remove('is-dragging'); }
+      el.addEventListener('pointerup', stop);
+      el.addEventListener('pointercancel', stop);
     });
   </script>
 </body>
