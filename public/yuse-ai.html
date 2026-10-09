@@ -48,7 +48,7 @@
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     /* =============================================
@@ -440,6 +440,9 @@
       color: var(--color-text-muted);
       margin-top: var(--space-sm);
     }
+
+    /* Optical correction: all-lowercase title has no cap height, so the gap below the category reads larger */
+    .case-study__title { margin-top: -0.12em; }
   </style>
 </head>
 <body>

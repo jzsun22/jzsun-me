@@ -973,18 +973,31 @@ button {
 .case-study__header-split {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: var(--space-3xl);
+  column-gap: var(--space-3xl);
+  row-gap: 0;
   align-items: start;
 }
 
+/* Flatten the left column so the category label gets its own row
+   and the meta column can start level with the title (row 2). */
+.case-study__header-split > div:first-child {
+  display: contents;
+}
+
+.case-study__header-split > div:first-child > * {
+  grid-column: 1;
+}
+
 .case-study__header-right {
+  grid-column: 2;
+  grid-row: 2 / span 10;
+  align-self: start;
   font-family: var(--font-mono);
   font-size: var(--text-sm-md);
   color: var(--color-text-muted);
   line-height: 2;
   text-align: right;
   white-space: nowrap;
-  padding-top: 2px;
 }
 
 .case-study__meta-list dt,
@@ -1214,11 +1227,12 @@ button {
 }
 
 .case-study__title {
-  font-family: var(--font-body);
-  font-size: var(--text-4xl);
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 1.4rem + 2.6vw, 56px);
+  font-weight: 400;
   color: var(--color-text-primary);
-  line-height: 1.3;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   margin-bottom: var(--space-sm);
 }
 
@@ -1234,13 +1248,26 @@ button {
   margin: 0 auto var(--space-3xl);
 }
 
+.case-study__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-accent-rose);
+  margin-bottom: var(--space-sm);
+}
+
 .case-study__section-heading {
   font-family: var(--font-body);
-  font-size: var(--text-2xl);
-  font-weight: 700;
+  font-size: var(--text-lg);
+  font-weight: 600;
   color: var(--color-text-primary);
-  line-height: 1.5;
-  margin-bottom: var(--space-md);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  max-width: 34em;
+  text-wrap: balance;
+  margin-bottom: 10px;
 }
 
 .case-study__subsection-heading {
@@ -1801,10 +1828,13 @@ button {
 
   .case-study__header-split {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: 0;
   }
 
   .case-study__header-right {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: var(--space-lg);
     text-align: left;
     white-space: normal;
   }
