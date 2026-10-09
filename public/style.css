@@ -1437,8 +1437,9 @@ button {
   height: 24px;
   flex-shrink: 0;
   color: var(--color-accent-teal);
-  transition: transform 120ms cubic-bezier(0.25, 1, 0.5, 1),
-              filter 150ms ease;
+  /* Tilt and tint share one duration and curve so they read as one motion */
+  transition: transform 180ms cubic-bezier(0.25, 1, 0.5, 1),
+              filter 180ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .about-page__icon-item:hover .about-page__icon {
@@ -1453,13 +1454,135 @@ button {
   filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(500%) hue-rotate(10deg);   /* coffee brown */
 }
 .about-page__icon-item:nth-child(3):hover .about-page__icon {
-  filter: brightness(0) saturate(100%) invert(25%) sepia(80%) saturate(600%) hue-rotate(300deg);  /* wine purple */
+  filter: brightness(0) saturate(100%) invert(35%) sepia(42%) saturate(4611%) hue-rotate(327deg) brightness(68%) contrast(112%);  /* rose red (#b31b3a) */
 }
 .about-page__icon-item:nth-child(4):hover .about-page__icon {
   filter: brightness(0) saturate(100%) invert(45%) sepia(70%) saturate(500%) hue-rotate(170deg);  /* teal */
 }
 .about-page__icon-item:nth-child(5):hover .about-page__icon {
   filter: brightness(0) saturate(100%) invert(40%) sepia(80%) saturate(500%) hue-rotate(250deg);  /* mystical indigo */
+}
+
+/* Musicals line: the mask is a button that swaps lyrics for show names */
+.about-page__reveal {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+/* Invisible padding brings the 24px icon up to a ~44px tap target */
+.about-page__reveal::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+.about-page__icon-item--musicals .about-page__swap {
+  cursor: pointer;
+}
+.about-page__reveal:focus-visible {
+  outline: 2px solid var(--color-accent-rose);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.about-page__reveal[aria-pressed="true"] .about-page__icon {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(42%) saturate(4611%) hue-rotate(327deg) brightness(68%) contrast(112%);
+}
+
+/* Small rose dot marks the only clickable icon; gone after first use */
+.about-page__reveal-dot {
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-rose);
+}
+.about-page__reveal .about-page__reveal-dot {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* Tilt the whole button (icon + dot together) instead of just the icon,
+   so the dot rides along with the mask */
+.about-page__reveal {
+  transition: transform 180ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.about-page__icon-item--musicals:hover .about-page__icon {
+  transform: none;
+}
+.about-page__icon-item--musicals:hover .about-page__reveal {
+  transform: rotate(-8deg) scale(1.18);
+}
+.about-page__reveal.is-seen .about-page__reveal-dot {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.about-page__reveal.is-wiggling {
+  animation: mask-wiggle 600ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+@keyframes mask-wiggle {
+  0%, 100% { transform: rotate(0); }
+  20%      { transform: rotate(-10deg); }
+  45%      { transform: rotate(8deg); }
+  70%      { transform: rotate(-4deg); }
+}
+
+/* Stack both texts in one cell; a moving seam (--peel) wipes the names in
+   left-to-right over the lyrics, and rewinds right-to-left on the way back */
+@property --peel {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+.about-page__icon-item--musicals .about-page__swap {
+  --peel: 0%;
+  position: relative;
+  display: grid;
+  transition: --peel 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.about-page__icon-item--musicals.is-revealed .about-page__swap {
+  --peel: 100%;
+}
+.about-page__swap > span {
+  grid-area: 1 / 1;
+}
+.about-page__swap-lyrics {
+  clip-path: inset(0 0 0 var(--peel));
+}
+.about-page__swap-plain {
+  clip-path: inset(0 calc(100% - var(--peel)) 0 0);
+}
+
+/* Rose edge rides the seam, like a cursor or the lifted corner of a peel */
+.about-page__swap::after {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  bottom: 0.15em;
+  left: var(--peel);
+  width: 1.5px;
+  background: var(--color-accent-rose);
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+.about-page__swap.is-peeling::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page__icon-item--musicals .about-page__swap,
+  .about-page__reveal .about-page__reveal-dot {
+    transition: none;
+  }
+  .about-page__swap::after {
+    display: none;
+  }
 }
 
 /* Subtle text emphasis on hover */

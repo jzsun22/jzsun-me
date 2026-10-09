@@ -43,7 +43,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
@@ -67,6 +67,7 @@
     .about-page__block:nth-child(1)  { animation-delay: 200ms; }
     .about-page__block:nth-child(2)  { animation-delay: 300ms; }
     .about-page__block:nth-child(3)  { animation-delay: 400ms; }
+    .about-page__block:nth-child(4)  { animation-delay: 500ms; }
 
     @keyframes about-enter {
       to {
@@ -77,12 +78,14 @@
 
     /* Mobile scroll-reveal for icon items */
     @media (max-width: 768px) {
+      .about-page__block--otherwise .about-page__label,
       .about-page__icon-item {
         opacity: 0;
         transform: translateY(10px);
         transition: opacity 400ms cubic-bezier(0.25, 1, 0.5, 1),
                     transform 400ms cubic-bezier(0.25, 1, 0.5, 1);
       }
+      .about-page__block--otherwise .about-page__label.is-visible,
       .about-page__icon-item.is-visible {
         opacity: 1;
         transform: translateY(0);
@@ -96,6 +99,7 @@
         transform: none;
         animation: none;
       }
+      .about-page__block--otherwise .about-page__label,
       .about-page__icon-item {
         opacity: 1;
         transform: none;
@@ -209,7 +213,7 @@
 
           <div class="about-page__block">
             <span class="about-page__label">on working /</span>
-            <p class="about-page__prose">I build and iterate, and I can take something from problem to working product directly — fluent in Figma, now prototyping in code.</p>
+            <p class="about-page__prose">I build and iterate, taking ideas from problem to working product directly. I prototype in code: it's the fastest way to get something truly interactive in front of people to test, and it stays true to the real design system and component library.</p>
           </div>
 
           <div class="about-page__block">
@@ -221,24 +225,30 @@
             <span class="about-page__label">otherwise /</span>
             <ul class="about-page__icon-list" role="list">
               <li class="about-page__icon-item">
-                <img src="assets/icons/fire.svg" alt="Languages" class="about-page__icon" aria-label="Cantonese, Mandarin, English, French, Spanish" loading="lazy" />
-                <span>Cantonese, Mandarin, English, French (~B1), Spanish (650 Duolingo days and counting)</span>
+                <img src="assets/icons/translate.svg" alt="Languages" class="about-page__icon" aria-label="Cantonese, Mandarin, English, French, Spanish" loading="lazy" />
+                <span>Cantonese, Mandarin, English, French (~B1), Spanish (650 day Duolingo streaks and counting)</span>
               </li>
               <li class="about-page__icon-item">
-                <img src="assets/icons/coffee.svg" alt="Coffee" class="about-page__icon" aria-label="SCA Barista certified" loading="lazy" />
-                <span>SCA Barista certified because the obsession went that far</span>
+                <img src="assets/icons/coffee.svg" alt="Coffee and wine" class="about-page__icon" aria-label="SCA Barista certified and WSET Level 1 completed" loading="lazy" />
+                <span>SCA Barista certified and WSET Level 1 completed</span>
+              </li>
+              <li class="about-page__icon-item about-page__icon-item--musicals">
+                <button type="button" class="about-page__reveal" aria-pressed="false" aria-label="Reveal the musicals behind these lyrics">
+                  <img src="assets/icons/mask.svg" alt="" class="about-page__icon" loading="lazy" />
+                  <span class="about-page__reveal-dot" aria-hidden="true"></span>
+                </button>
+                <span class="about-page__swap" aria-live="polite">
+                  <span class="about-page__swap-lyrics">still getting lost in the music of the night, finding new ways to dream, and styling everything rainbow high</span>
+                  <span class="about-page__swap-plain" aria-hidden="true">3 of my favorite musicals: The Phantom of the Opera, Sunset Blvd., Evita</span>
+                </span>
               </li>
               <li class="about-page__icon-item">
-                <img src="assets/icons/bottle-wine.svg" alt="Wine" class="about-page__icon" aria-label="WSET Level 1 wine certified" loading="lazy" />
-                <span>WSET Level 1 so to remember the grapes, regions, and characteristics</span>
-              </li>
-              <li class="about-page__icon-item">
-                <img src="assets/icons/cpu.svg" alt="Keyboard" class="about-page__icon" aria-label="Mechanical keyboard builder" loading="lazy" />
+                <img src="assets/icons/keyboard.svg" alt="Keyboard" class="about-page__icon" aria-label="Mechanical keyboard builder" loading="lazy" />
                 <span>built multiple mechanical keyboards, all under 70 keys</span>
               </li>
               <li class="about-page__icon-item">
-                <img src="assets/icons/magic-edit.svg" alt="Tarot" class="about-page__icon" aria-label="Tarot readings" loading="lazy" />
-                <span>people come to me for tarot readings</span>
+                <img src="assets/icons/hexagram.svg" alt="Hexagram" class="about-page__icon" aria-label="Tarot and other esoteric arts" loading="lazy" />
+                <span>occasionally dabbling in the esoteric arts</span>
               </li>
             </ul>
           </div>
@@ -279,7 +289,7 @@
   <script>
     if (window.matchMedia('(max-width: 768px)').matches
         && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var items = document.querySelectorAll('.about-page__icon-item');
+      var items = document.querySelectorAll('.about-page__block--otherwise .about-page__label, .about-page__icon-item');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -293,6 +303,53 @@
         observer.observe(item);
       });
     }
+  </script>
+
+  <!-- Musicals reveal: click the mask to swap lyrics for the show names -->
+  <script>
+    (function () {
+      var item   = document.querySelector('.about-page__icon-item--musicals');
+      var button = item.querySelector('.about-page__reveal');
+      var swap   = item.querySelector('.about-page__swap');
+      var lyrics = swap.querySelector('.about-page__swap-lyrics');
+      var plain  = swap.querySelector('.about-page__swap-plain');
+
+      button.addEventListener('click', function () {
+        var on = button.getAttribute('aria-pressed') !== 'true';
+        button.setAttribute('aria-pressed', on);
+        item.classList.toggle('is-revealed', on);
+        button.classList.add('is-seen');
+        swap.classList.add('is-peeling');
+        // Screen readers only get the text that's showing
+        lyrics.setAttribute('aria-hidden', on);
+        plain.setAttribute('aria-hidden', !on);
+      });
+
+      // Hide the rose edge once the wipe settles
+      swap.addEventListener('transitionend', function (e) {
+        if (e.propertyName === '--peel') swap.classList.remove('is-peeling');
+      });
+
+      // Text is a larger tap target too (not the row's empty space); skip if selecting text
+      swap.addEventListener('click', function () {
+        if (String(window.getSelection())) return;
+        button.click();
+      });
+
+      // One gentle wiggle the first time the mask scrolls into view
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var wiggleObserver = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        wiggleObserver.disconnect();
+        setTimeout(function () {
+          button.classList.add('is-wiggling');
+          button.addEventListener('animationend', function () {
+            button.classList.remove('is-wiggling');
+          }, { once: true });
+        }, 800);
+      }, { threshold: 1 });
+      wiggleObserver.observe(button);
+    })();
   </script>
 
   <!-- Headshot firework easter egg -->
