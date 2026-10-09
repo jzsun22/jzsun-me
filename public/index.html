@@ -43,6 +43,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <!-- Inconsolata's → glyph isn't in Google's Latin subsets; fetch just that character -->
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500&text=%E2%86%92&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/0e778d9aa1.js" crossorigin="anonymous"></script>
@@ -138,7 +140,7 @@
     super(),
     this.name = '<strong>Jocelyn Sun</strong>';
     this.role = ['Product Designer', 'Product/design Engineer'];
-    this.edge = ['0→1 product', 'vibe-coded prototypes', '<strong>spotting AI slop</strong>'];
+    this.edge = ['0 → 1 product', 'vibe-coded prototypes', '<strong>spotting AI slop</strong>'];
     this.domains = ['AI-native tools', '<strong>B2B workflows</strong>', 'consumer apps'];
     this.thinkingStyle = ['pattern-seeking', 'multi-threaded', '<strong>connects unlikely dots</strong>'];
     this.pronoun = 'she/her';
