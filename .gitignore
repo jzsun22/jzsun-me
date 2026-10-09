@@ -16,3 +16,6 @@ export-og.js
 package.json
 package-lock.json
 .npmrc
+
+# working drafts and source material (not for deploy)
+/drafts/
