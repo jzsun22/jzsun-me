@@ -250,6 +250,13 @@ button {
   text-align: center;
 }
 
+/* Link underline rule:
+   - Content links (name a destination: inline, external, project titles)
+     are always underlined; hover darkens to teal.
+   - Wayfinding links (generic label + chevron: back, view all, archives)
+     have no underline at rest; hover adds underline + teal + chevron nudge.
+   - Exception: projects.html titles, which rely on cursor + dimming instead. */
+
 /* Inline links within body text */
 .link--inline {
   color: var(--color-accent-rose);
@@ -267,6 +274,11 @@ button {
   color: var(--color-accent-teal-mid);
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+.link--inline-teal:hover {
+  color: var(--color-accent-teal);
 }
 
 /* External arrow link — subtle underline style */
@@ -929,9 +941,8 @@ button {
 }
 
 .case-study__back-link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  /* Block, not flex: an inline-block chevron stays out of the hover underline */
+  display: block;
   max-width: var(--container-content);
   margin: 0 auto var(--space-xl);
   font-family: var(--font-body);
@@ -945,11 +956,19 @@ button {
 .case-study__back-link::before {
   content: '‹';
   display: inline-block;
+  margin-right: 6px;
   transform: translateY(-1px);
+  transition: transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .case-study__back-link:hover {
   color: var(--color-accent-teal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.case-study__back-link:hover::before {
+  transform: translateY(-1px) translateX(-4px);
 }
 
 .case-study__back-link:focus-visible {
