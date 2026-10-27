@@ -625,6 +625,104 @@
     .fm-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2FD08A; }
     @media (prefers-reduced-motion: reduce) { .fm-heart { transition: none; } }
 
+    /* "Where it lives" tag on captions */
+    .jg-tag--path {
+      background: color-mix(in srgb, var(--color-accent-teal) 9%, transparent);
+      color: var(--color-accent-teal);
+      text-transform: none;
+      letter-spacing: 0.2px;
+    }
+
+    /* ── Journey walkthrough: chat → ☰ → Gleam Calendar, built from the
+          screens above (the calendar is cloned in by script) ── */
+    .jg-journey-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .jg-journey-screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      transition: transform 480ms cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .jg-journey-cal {
+      transform: translateX(100%);
+      background: var(--ds-bg);
+      box-shadow: -12px 0 32px rgba(0,0,0,0.35);
+    }
+    .jg-journey-cal .jg-scroll { overflow: hidden; cursor: default; }
+    .jg-journey[data-step="2"] .jg-journey-chat { transform: translateX(-30%); }
+    .jg-journey[data-step="2"] .jg-journey-cal { transform: none; }
+
+    .jg-journey-sent, .jg-journey-reply {
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 250ms, transform 250ms;
+    }
+    .jg-journey.is-sent .jg-journey-sent,
+    .jg-journey.is-replied .jg-journey-reply { opacity: 1; transform: none; }
+    .jg-journey-typed { color: var(--ds-text); }
+    .jg-journey.is-typing .jg-journey-placeholder { display: none; }
+    .jg-journey.is-typing .jg-journey-typed::after {
+      content: '';
+      display: inline-block;
+      width: 1.5px; height: 18px;
+      margin-left: 1px;
+      vertical-align: -3px;
+      background: currentColor;
+      animation: jg-blink 1s steps(1) infinite;
+    }
+    @keyframes jg-blink { 50% { opacity: 0; } }
+
+    .jg-journey-menu { position: relative; }
+    .jg-journey-tap {
+      position: absolute; left: 50%; top: 50%;
+      width: 44px; height: 44px;
+      margin: -22px 0 0 -22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      opacity: 0; transform: scale(0.4);
+      pointer-events: none;
+    }
+    .jg-journey[data-step="1"] .jg-journey-tap { opacity: 0.5; transform: scale(1); }
+    .jg-journey.is-tapping .jg-journey-tap { animation: jg-tap 700ms ease-out forwards; }
+    @keyframes jg-tap {
+      0%   { opacity: 0.9; transform: scale(0.4); }
+      100% { opacity: 0.5; transform: scale(1); }
+    }
+    .jg-journey-new { animation: jg-new 1.6s ease-out 350ms both; }
+    @keyframes jg-new {
+      0%   { opacity: 0; box-shadow: 0 0 0 0 rgba(158,234,106,0.7); }
+      30%  { opacity: 1; }
+      100% { opacity: 1; box-shadow: 0 0 0 10px rgba(158,234,106,0); }
+    }
+
+    .jg-journey-controls { display: flex; gap: 6px; margin-top: 20px; }
+    .jg-journey-step, .jg-journey-toggle {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 100px;
+      border: 1px solid var(--color-bg-divider);
+      background: var(--color-bg);
+      color: var(--color-text-secondary);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    }
+    .jg-journey-toggle { width: 28px; padding: 0; font-size: 10px; }
+    .jg-journey-step:hover, .jg-journey-toggle:hover { border-color: var(--color-accent-teal-mid); color: var(--color-accent-teal); }
+    .jg-journey-step[aria-current="step"] {
+      border-color: var(--color-accent-teal);
+      background: color-mix(in srgb, var(--color-accent-teal) 8%, transparent);
+      color: var(--color-accent-teal);
+    }
+    .jg-journey-step:focus-visible, .jg-journey-toggle:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .jg-journey-screen, .jg-journey-sent, .jg-journey-reply { transition: none; }
+      .jg-journey.is-typing .jg-journey-typed::after,
+      .jg-journey.is-tapping .jg-journey-tap,
+      .jg-journey-new { animation: none; }
+    }
+
     /* ── Baton handoff (retired; pre-design-system styling kept as shipped) ── */
     .jg-phone--baton {
       background: #1c1c1e;
@@ -872,8 +970,8 @@
     <!-- == Problem == -->
     <section class="case-study__section" aria-labelledby="section-problem">
       <p class="case-study__eyebrow">Problem</p>
-      <h2 class="case-study__section-heading" id="section-problem">Early parenting is split across apps, and each one adds to the mental load</h2>
-      <p class="case-study__body">Tracking in one app, photos in another, updates in group chats. Each is one more thing to keep in sync, for parents who are already stretched thin.</p>
+      <h2 class="case-study__section-heading" id="section-problem">Trackers held the baby’s data, but the advice lived somewhere else</h2>
+      <p class="case-study__body">When a parent wondered “is this a sleep regression?”, the answer came from search engines and forums that had never seen their baby’s logs. Connecting the two was one more job for parents already short on sleep.</p>
       <p class="case-study__body">I joined when JustGrow was just an idea. The founder owned direction; I owned UX, the Flutter frontend, parts of the backend, and the agent prompts.</p>
     </section>
 
@@ -944,7 +1042,7 @@
         </figure>
 
         <figure class="jg-figure">
-          <div class="jg-phone">
+          <div class="jg-phone" id="jg-calendar">
             <div class="jg-statusbar" aria-hidden="true"><span>1:12</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
             <div class="gc-top">
               <span class="gc-back" aria-hidden="true">‹</span>
@@ -1146,7 +1244,42 @@
     <section class="case-study__section" aria-labelledby="section-launch">
       <p class="case-study__eyebrow">Launch</p>
       <h2 class="case-study__section-heading" id="section-launch">We launched a fully functional tracker, in English and Chinese</h2>
-      <p class="case-study__body">The launch included tracking with the chat agent built in, growth charts to visualize the data, and the care handoff. We checked the localization by hand instead of relying on machine translation, so both languages use the words parents actually say. For grandparents abroad, times always show in the baby’s timezone.</p>
+      <div class="jg-split">
+        <div>
+          <p class="case-study__body">The launch included tracking with the chat agent built in, growth charts to visualize the data, and the care handoff. We checked the localization by hand instead of relying on machine translation, so both languages use the words parents actually say. For grandparents abroad, times always show in the baby’s timezone.</p>
+          <p class="case-study__body">Everything starts in chat. One sentence becomes an event, and the ☰ menu or a link in the reply opens it on the calendar, where the rest of the family sees it too.</p>
+        </div>
+        <figure class="jg-figure">
+          <div class="jg-phone jg-journey" id="jg-journey" aria-hidden="true">
+            <div class="jg-statusbar"><span>4:21</span><span class="jg-island"></span><span class="jg-status-icons"><span class="jg-signal"><span style="height:5px"></span><span style="height:7px"></span><span style="height:9px"></span><span style="height:11px"></span></span><i class="fa-solid fa-wifi"></i><span class="jg-battery"><span></span></span></span></div>
+            <div class="jg-journey-stage">
+              <div class="jg-journey-screen jg-journey-chat">
+                <div class="jg-appbar">
+                  <span class="jg-appbar-menu jg-journey-menu">☰<span class="jg-journey-tap"></span></span>
+                  <span class="jg-appbar-logo">JustGrow</span>
+                </div>
+                <div class="jg-chat jg-chat--fill">
+                  <div class="jg-msg-user jg-journey-sent">Just fed Anna 120ml of formula</div>
+                  <div class="jg-msg-bot jg-journey-reply">Logged bottle for Anna • 120ml Formula at 4:20 PM.</div>
+                </div>
+                <div class="jg-composer">
+                  <div class="jg-input"><span class="jg-journey-typed"></span><span class="jg-journey-placeholder">Hold to talk</span></div>
+                  <div class="jg-send">↑</div>
+                </div>
+              </div>
+              <div class="jg-journey-screen jg-journey-cal"></div>
+            </div>
+            <div class="jg-homebar"></div>
+          </div>
+          <div class="jg-journey-controls" role="group" aria-label="Walkthrough steps">
+            <button type="button" class="jg-journey-step" data-step="0" aria-current="step">1 Log</button>
+            <button type="button" class="jg-journey-step" data-step="1">2 Open</button>
+            <button type="button" class="jg-journey-step" data-step="2">3 See it</button>
+            <button type="button" class="jg-journey-toggle" aria-label="Pause walkthrough"><i class="fa-solid fa-pause" aria-hidden="true"></i></button>
+          </div>
+          <figcaption class="jg-label">How the launched app fits together: a parent logs a feed in chat, taps ☰ (or the link in the reply), and finds it on Gleam Calendar.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <!-- == Iteration == -->
@@ -1202,7 +1335,7 @@
             </div>
             <div class="jg-homebar" aria-hidden="true"></div>
           </div>
-          <figcaption class="jg-label"><span class="jg-tag">Proposal</span>Every Sunday, a family total with no names, then a private count only you see. Recognition, not scorekeeping.</figcaption>
+          <figcaption class="jg-label"><span class="jg-tag">Proposal</span><span class="jg-tag jg-tag--path">In chat</span>Every Sunday, a family total with no names, then a private count only you see. Recognition, not scorekeeping.</figcaption>
         </figure>
       </div>
     </section>
@@ -1246,7 +1379,7 @@
             <span class="jg-fab" aria-hidden="true">+</span>
             <div class="jg-homebar" aria-hidden="true"></div>
           </div>
-          <figcaption class="jg-label">Family Memory, rebuilt from the shipped app. Try Like.</figcaption>
+          <figcaption class="jg-label"><span class="jg-tag jg-tag--path">☰ menu or chat link</span>Family Memory, rebuilt from the shipped app. Try Like.</figcaption>
         </figure>
       </div>
     </section>
@@ -1523,6 +1656,119 @@
       el.addEventListener('pointerup', stop);
       el.addEventListener('pointercancel', stop);
     });
+  </script>
+  <script>
+    /* ── Journey walkthrough: log in chat → tap ☰ → see it on Gleam Calendar ── */
+    (function() {
+      var phone = document.getElementById('jg-journey');
+      if (!phone) return;
+      var cal = phone.querySelector('.jg-journey-cal');
+      var typed = phone.querySelector('.jg-journey-typed');
+      var stepBtns = document.querySelectorAll('.jg-journey-step');
+      var toggle = document.querySelector('.jg-journey-toggle');
+      var message = phone.querySelector('.jg-journey-sent').textContent;
+      var src = document.getElementById('jg-calendar');
+      var calScroll = null, newLog = null;
+
+      // Reuse the calendar screen above, moved to 4:21 PM with the new feed on it
+      if (src) {
+        src.querySelectorAll('.gc-top, .gc-week, .gc-row, .jg-scroll').forEach(function(node) {
+          var copy = node.cloneNode(true);
+          ['id', 'tabindex', 'aria-label'].forEach(function(a) { copy.removeAttribute(a); });
+          cal.appendChild(copy);
+        });
+        var timeline = cal.querySelector('.gc-timeline');
+        calScroll = cal.querySelector('.jg-scroll');
+        var now = timeline.querySelector('.gc-now');
+        now.style.top = '962px';
+        now.querySelector('span').textContent = '4:21 PM';
+        var pastNap = timeline.querySelector('.gc-event'); // predicted nap that ended before 4:21
+        if (pastNap) pastNap.remove();
+        newLog = document.createElement('div');
+        newLog.className = 'gc-log gc-log--feed';
+        newLog.style.top = '961px';
+        newLog.innerHTML = '<b><i class="fa-solid fa-bottle-water" aria-hidden="true"></i> Bottle · 120 mL · Formula</b>';
+        timeline.appendChild(newLog);
+      }
+
+      var TYPE_START = 500, TYPE_SPEED = 45;
+      var typeEnd = TYPE_START + message.length * TYPE_SPEED;
+      var durations = [typeEnd + 2200, 1000, 4500];
+      var step = 0, timers = [];
+      var playing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var visible = !('IntersectionObserver' in window);
+
+      function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+      function show(n, animate) {
+        timers.forEach(clearTimeout);
+        timers = [];
+        step = n;
+        phone.dataset.step = n;
+        stepBtns.forEach(function(b, i) {
+          if (i === n) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+        });
+        phone.classList.remove('is-typing', 'is-tapping');
+        typed.textContent = '';
+
+        if (n === 0 && animate) {
+          phone.classList.remove('is-sent', 'is-replied');
+          at(TYPE_START, function() { phone.classList.add('is-typing'); });
+          for (var i = 1; i <= message.length; i++) {
+            (function(len) { at(TYPE_START + len * TYPE_SPEED, function() { typed.textContent = message.slice(0, len); }); })(i);
+          }
+          at(typeEnd + 300, function() {
+            phone.classList.remove('is-typing');
+            typed.textContent = '';
+            phone.classList.add('is-sent');
+          });
+          at(typeEnd + 1000, function() { phone.classList.add('is-replied'); });
+        } else {
+          phone.classList.add('is-sent', 'is-replied');
+        }
+
+        if (n === 1 && animate) {
+          void phone.offsetWidth; // restart the tap animation
+          phone.classList.add('is-tapping');
+        }
+
+        if (n === 2 && newLog) {
+          calScroll.scrollTop = 781;
+          newLog.classList.remove('jg-journey-new');
+          void newLog.offsetWidth;
+          newLog.classList.add('jg-journey-new');
+        }
+
+        if (animate) at(durations[n], function() { show((n + 1) % 3, true); });
+      }
+
+      function setToggle() {
+        toggle.setAttribute('aria-label', playing ? 'Pause walkthrough' : 'Play walkthrough');
+        toggle.innerHTML = '<i class="fa-solid ' + (playing ? 'fa-pause' : 'fa-play') + '" aria-hidden="true"></i>';
+      }
+
+      stepBtns.forEach(function(b) {
+        b.addEventListener('click', function() { show(Number(b.dataset.step), playing && visible); });
+      });
+      toggle.addEventListener('click', function() {
+        playing = !playing;
+        setToggle();
+        show(step, playing && visible);
+      });
+
+      // Only run while the phone is on screen
+      if (!visible) {
+        new IntersectionObserver(function(entries) {
+          var v = entries[0].isIntersecting;
+          if (v === visible) return;
+          visible = v;
+          if (playing) show(step, visible);
+        }, { threshold: 0.4 }).observe(phone);
+      }
+
+      setToggle();
+      show(0, playing && visible);
+    })();
   </script>
 </body>
 </html>
